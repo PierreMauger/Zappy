@@ -7,7 +7,7 @@
 
 #include "nlib.h"
 
-socket_t *create_socket(void)
+socket_t *nlib_create_socket(void)
 {
     socket_t *sock = calloc(1, sizeof(socket_t));
 
@@ -19,4 +19,18 @@ socket_t *create_socket(void)
         return NULL;
     }
     return sock;
+}
+
+void nlib_destroy_socket(socket_t *sock)
+{
+    if (sock == NULL)
+        return;
+    if (sock->addr != NULL) {
+        free(sock->addr);
+    }
+    if (sock->fd != -1) {
+        close(sock->fd);
+        shutdown(sock->fd, SHUT_RDWR);
+    }
+    free(sock);
 }

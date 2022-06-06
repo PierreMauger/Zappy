@@ -1,32 +1,37 @@
 ##
 ## EPITECH PROJECT, 2022
-## Makefile
+## Base
 ## File description:
-## Makefile
+## Main Makefile
 ##
 
+#################### PATH #####################
+PATH_LIBS		=	./libs/
+
+PATH_AI			=	./ai/
+
+PATH_SERVER		=	./server/
+
+
+################# COMPILATION #################
 all:
-	make -C ./server
-	make -C ./ai
-	make -C ./gui
+	make -C	$(PATH_LIBS)
+	make -C	$(PATH_AI)
+	make -C	$(PATH_SERVER)
 
-server:
-	make -C ./server
-
-ai:
-	make -C ./ai
-
-gui:
-	make -C ./gui
+re:	fclean all
 
 clean:
-	make clean -C ./server
-	make clean -C ./ai
-	make clean -C ./gui
+	@(make clean -C $(PATH_LIBS)) > /dev/null
+	@(make clean -C $(PATH_AI)) > /dev/null
+	@(make clean -C $(PATH_SERVER)) > /dev/null
 
-fclean: clean
-	make fclean -C ./server
-	make fclean -C ./ai
-	make fclean -C ./gui
+fclean:	clean
+	@(make fclean -C $(PATH_LIBS)) > /dev/null
+	@(make fclean -C $(PATH_AI)) > /dev/null
+	@(make fclean -C $(PATH_SERVER)) > /dev/null
 
-re: fclean all
+debug:
+	@(make debug -C $(PATH_LIBS)) > /dev/null
+	@(make debug -C $(PATH_AI)) > /dev/null
+	@(make debug -C $(PATH_SERVER)) > /dev/null

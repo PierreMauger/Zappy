@@ -5,21 +5,20 @@
 ## Makefile
 ##
 
-SRC		=	socket/create_socket.c				\
+SRC		=	socket/manage_socket.c				\
 			socket/init_socket.c				\
-			socket/destroy_socket.c				\
 			socket/read_socket.c				\
 			select/select.c						\
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS	=	-I ./include -W
+CFLAGS	=	-I include -W -Wall -Wextra -shared -g -fPIC
 
-NAME	=	libmy.a
+NAME	=	libnlib.so
 
 $(NAME):	$(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@cp -r include/* ../include
+	@gcc -o $(NAME) $(OBJ) $(CFLAGS)
+	@cp -r include/ ../../
 	@cp $(NAME) ../
 
 all:	$(NAME)

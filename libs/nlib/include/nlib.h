@@ -8,7 +8,8 @@
 #ifndef NLIB_H
     #define NLIB_H
 
-    #define READ_SIZE (1024)
+    #define READ_SIZE (4096)
+
     #include <sys/socket.h>
     #include <sys/select.h>
     #include <sys/time.h>
@@ -29,20 +30,13 @@ typedef struct {
     sockaddr_in_t *addr;
 } socket_t;
 
-socket_t *create_socket(void);
-socket_t *init_socket(socket_t *sock, int port, size_t nbr_connection);
-void destroy_socket(socket_t *sock);
+socket_t *nlib_create_socket(void);
+socket_t *nlib_init_socket(socket_t *sock, int port, size_t nbr_connection);
+void nlib_destroy_socket(socket_t *sock);
 
-int select_fds(fd_set *readfds, fd_set *writefds);
-int select_fds_time(fd_set *readfd, fd_set *writefds, double time);
+int nlib_select_fds(fd_set *readfds, fd_set *writefds);
+int nlib_select_fds_time(fd_set *readfd, fd_set *writefds, double time);
 
-/**
-* @brief Read a socket and return the buffer.
-*
-* @param fd The socket to read.
-* @param buffer_size Send your size_t address to get the size of the buffer.
-* @return The socket content.
-*/
-char *read_socket(int fd);
+char *nlib_read_socket(int fd);
 
 #endif // NLIB_H

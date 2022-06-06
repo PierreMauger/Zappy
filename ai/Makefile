@@ -1,33 +1,80 @@
+
 ##
-## EPITECH PROJECT, 2022
-## Makefile
+## EPITECH PROJECT, 2020
+## Base
 ## File description:
-## Makefile
+## Main Makefile
 ##
 
-SRCS =  src/main.c				\
+##################### SRC #######################
+SRC				=
 
-OBJS = $(SRCS:.c=.o)
+SRC				+=	./src/main.c
 
-CDEBUG = -g
+SRC_TEST		=
 
-CWARN = -W -Wall -Wextra
+#################### NAMES ######################
+NAME			=	zappy_ai
 
-CFLAGS  = -L ../nlib/ -lmy -I ../include -g $(CWARN)
+NAME_TEST		=	unit_tests
 
-NAME = ./zappy_ai
 
-all : $(NAME)
+##################### OBJ #######################
+OBJ				=	$(SRC:.c=.o)
 
-$(NAME) : $(OBJS)
-		make -C ../nlib/
-		gcc -o ../$(NAME) $(OBJS) $(CFLAGS)
-		make fclean -C ../nlib/
+OBJ_TEST		=	$(SRC_TEST:.c=.o)
 
-clean :
-	rm -f $(OBJS)
 
-fclean : clean
-	rm -f ../$(NAME)
+##################### FLAGS #####################
+INCLUDES		=	-I include -I ../include
 
-re : fclean all
+LIBS			=	-L ../libs -llist -lnlib
+
+CFLAGS			=	$(INCLUDES) $(LIBS) -Wall -Wextra -W -fPIC
+
+CFLAGS_TEST		=	--coverage -lcriterion
+
+CFLAGS_DEBUG	=	-g
+
+
+################## COMPILATION ##################
+$(NAME):	$(OBJ)
+	@(gcc $(OBJ) -o $(NAME) $(CFLAGS)) > /dev/null
+	@(cp $(NAME) ../)
+
+all:	$(NAME)
+
+debug:	CFLAGS += $(CFLAGS_DEBUG)
+debug:	re
+
+re:	fclean all
+
+clean:
+	@(rm -f $(OBJ)) > /dev/null
+	@find . -name "*.gcno" -delete
+	@find . -name "*.gcda" -delete
+	@find . -name "*.o" -delete
+
+fclean:	clean
+	@rm -f $(NAME)
+	@rm -f ../$(NAME)
+	@(rm -f $(NAME) $(NAME_TEST)) > /dev/null
+	@(rm -rf tests/coverage) > /dev/null
+
+unit_tests:	$(OBJ_TEST)
+	gcc -o $(NAME_TEST) $(OBJ_TEST) $(SRC) $(CFLAGS_TEST) $(CFLAGS)
+	./$(NAME_TEST)
+
+tests_run:	clean unit_tests
+
+gcovr:	tests_run
+	@gcovr --exclude tests
+	@gcovr --exclude tests --branch
+
+gen_html:	unit_tests
+	@(mkdir -p tests/coverage) > /dev/null
+	@(lcov -c -d . --output-file tests/coverage/lcov) > /dev/null
+	@(genhtml tests/coverage/lcov --output-directory tests/coverage) > /dev/null
+
+html_run:	gen_html
+	@(firefox tests/coverage/index.html) > /dev/null

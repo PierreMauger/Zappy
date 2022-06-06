@@ -1,5 +1,15 @@
+*.o
+*.out
+*.so*
+*.a
+*.gcda
+*.gcno
+.vscode
+bootstrap
+Dockerfile
+test*
+lol
 zappy_server_test
 zappy_server
 zappy_gui
 zappy_ai
-*.o

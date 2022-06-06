@@ -7,7 +7,7 @@
 
 #include "nlib.h"
 
-int select_fds(fd_set *readfds, fd_set *writefds)
+int nlib_select_fds(fd_set *readfds, fd_set *writefds)
 {
     int ret_val = 0;
 
@@ -19,7 +19,7 @@ int select_fds(fd_set *readfds, fd_set *writefds)
     return ret_val;
 }
 
-int select_fds_time(fd_set *readfd, fd_set *writefds, double time)
+int nlib_select_fds_time(fd_set *readfd, fd_set *writefds, double time)
 {
     int ret_val = 0;
     struct timeval tv = {
