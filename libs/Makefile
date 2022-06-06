@@ -8,20 +8,20 @@
 #################### PATH #####################
 PATH_NLIB			=	./nlib/
 
-PATH_LINKED_LIST	=	./list/
+PATH_LIST	=	./list/
 
 
 ################# COMPILATION #################
 all:
 	make -C	$(PATH_NLIB)
-	make -C	$(PATH_LINKED_LIST)
+	make -C	$(PATH_LIST)
 
 re:	fclean all
 
 clean:
 	@(make clean -C $(PATH_NLIB)) > /dev/null
-	@(make clean -C $(PATH_LINKED_LIST)) > /dev/null
+	@(make clean -C $(PATH_LIST)) > /dev/null
 
 fclean:	clean
 	@(make fclean -C $(PATH_NLIB)) > /dev/null
-	@(make fclean -C $(PATH_LINKED_LIST)) > /dev/null
+	@(make fclean -C $(PATH_LIST)) > /dev/null

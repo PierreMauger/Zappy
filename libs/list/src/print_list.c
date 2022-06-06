@@ -1,6 +1,6 @@
 /*
-** EPITECH PROJECT, 2021
-** corewar
+** EPITECH PROJECT, 2022
+** zappy
 ** File description:
 ** main
 */
