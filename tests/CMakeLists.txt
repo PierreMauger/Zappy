@@ -14,9 +14,14 @@ add_executable(unit-tests
   src/test_random.cpp
 )
 
+target_sources(unit-tests INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../zappy_server
+)
+
 target_include_directories(unit-tests PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/include/
   ${CMAKE_CURRENT_SOURCE_DIR}/../server/include/
+  ${CMAKE_CURRENT_SOURCE_DIR}/../include/
 )
 
 set(CMAKE_INSTALL_RPATH "${CMAKE_CURRENT_SOURCE_DIR}/../libs/")

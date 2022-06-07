@@ -16,7 +16,7 @@ static void *free_socket(socket_t *sock)
     return NULL;
 }
 
-socket_t *init_socket(socket_t *sock, int port, size_t nbr_connection)
+socket_t *nlib_init_socket(socket_t *sock, int port, size_t nbr_connection)
 {
     sock->fd = socket(AF_INET, SOCK_STREAM, 0);
     if (sock->fd < 0) {

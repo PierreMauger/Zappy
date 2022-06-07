@@ -6,7 +6,14 @@
 ##
 
 ##################### SRC #######################
-SRC				=
+SRC				=	src/manage_struct/manage_client.c						\
+					src/manage_struct/manage_core.c							\
+					src/manage_struct/manage_game.c							\
+					src/manage_struct/manage_inventory.c					\
+					src/manage_struct/manage_map.c							\
+					src/manage_struct/manage_server.c						\
+					src/manage_struct/manage_team.c							\
+					src/manage_struct/manage_trantorian.c					\
 
 SRC				+=	./src/main.c
 
@@ -27,7 +34,7 @@ OBJ_TEST		=	$(SRC_TEST:.c=.o)
 ##################### FLAGS #####################
 INCLUDES		=	-I include -I ../include
 
-LIBS			=	-L ../libs -llist -lnlib
+LIBS			=	-L ../libs -llist -lnlib -luuid
 
 CFLAGS			=	$(INCLUDES) $(LIBS) -Wall -Wextra -W -fPIC
 
