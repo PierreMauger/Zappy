@@ -8,6 +8,7 @@
 SRC		=	socket/manage_socket.c				\
 			socket/init_socket.c				\
 			socket/read_socket.c				\
+			socket/write_socket.c				\
 			select/select.c						\
 
 OBJ		=	$(SRC:.c=.o)

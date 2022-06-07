@@ -16,12 +16,14 @@
     #include <netinet/in.h>
     #include <arpa/inet.h>
     #include <linux/limits.h>
+
     #include <stdlib.h>
     #include <stdio.h>
     #include <stdbool.h>
     #include <unistd.h>
     #include <errno.h>
     #include <string.h>
+    #include <stdarg.h>
 
 typedef struct sockaddr_in sockaddr_in_t;
 
@@ -38,5 +40,6 @@ int nlib_select_fds(fd_set *readfds, fd_set *writefds);
 int nlib_select_fds_time(fd_set *readfd, fd_set *writefds, double time);
 
 char *nlib_read_socket(int fd);
+int nlib_write_socket(const socket_t *sock, const char *format, ...);
 
 #endif // NLIB_H
