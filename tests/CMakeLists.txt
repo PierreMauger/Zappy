@@ -14,10 +14,6 @@ add_executable(unit-tests
   src/test_random.cpp
 )
 
-target_sources(unit-tests INTERFACE
-    ${CMAKE_CURRENT_SOURCE_DIR}/../zappy_server
-)
-
 target_include_directories(unit-tests PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/include/
   ${CMAKE_CURRENT_SOURCE_DIR}/../server/include/
@@ -30,6 +26,7 @@ set(
   -L${CMAKE_CURRENT_SOURCE_DIR}/../libs/
   -llist
   -lnlib
+  -lzappy_server
 )
 
 target_link_libraries(unit-tests PRIVATE ${LIBS})
