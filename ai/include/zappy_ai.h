@@ -5,8 +5,8 @@
 ** include
 */
 
-#ifndef SERVER_H
-    #define SERVER_H
+#ifndef ZAPPY_AI_H
+    #define ZAPPY_AI_H
 
     #define _GNU_SOURCE
 
@@ -34,4 +34,4 @@
     #include "list.h"
     #include "nlib.h"
 
-#endif // SERVER_H
+#endif // ZAPPY_AI_H

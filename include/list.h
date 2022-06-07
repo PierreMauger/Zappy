@@ -1,12 +1,12 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2022
 ** list
 ** File description:
 ** include
 */
 
-#ifndef LINKED_LIST_H
-    #define LINKED_LIST_H
+#ifndef LIST_H
+    #define LIST_H
 
     #define LIST_SUCCESS (0)
     #define LIST_FAILURE (-1)
@@ -45,4 +45,4 @@ void list_destroy_node(node_t *node, void (*destroy_data)(void *data));
 
 void list_print_list(list_t *list, void (*print_data)(void *));
 
-#endif // LINKED_LIST_H
+#endif // LIST_H
