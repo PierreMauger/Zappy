@@ -14,15 +14,17 @@ add_executable(unit-tests
   src/test_random.cpp
 )
 
-target_include_directories(unit-tests PUBLIC
+target_include_directories(unit-tests PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/include/
   ${CMAKE_CURRENT_SOURCE_DIR}/../server/include/
 )
 
-set(LIBS
-    -L${CMAKE_CURRENT_SOURCE_DIR}/../libs/
-    -llist
-    -lnlib
+set(CMAKE_INSTALL_RPATH "${CMAKE_CURRENT_SOURCE_DIR}/../libs/")
+
+set(
+  -L${CMAKE_CURRENT_SOURCE_DIR}/../libs/
+  -llist
+  -lnlib
 )
 
 target_link_libraries(unit-tests PRIVATE ${LIBS})
