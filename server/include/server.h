@@ -24,14 +24,22 @@ response_t *response_create(int fd, char *buffer);
 void response_destroy(response_t *response);
 
 typedef struct {
+    int fd;
+    char *buffer;
+} request_t;
+
+request_t *request_create(int fd, char *buffer);
+void request_destroy(request_t *request);
+
+typedef struct {
     int port;
     socket_t *socket;
-    size_t max_client;
     list_t *clients;
-    list_t *reponses;
+    list_t *requests;
+    list_t *responses;
 } server_t;
 
-server_t *server_create(int port, size_t max_client, size_t team_nbr);
+server_t *server_create(int port, size_t cli_per_team, size_t team_nbr);
 void server_destroy(server_t *server);
 
 #endif // SERVER_H

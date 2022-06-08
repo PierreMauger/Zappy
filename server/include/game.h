@@ -17,12 +17,14 @@
     #include "team.h"
 
 typedef struct {
+    size_t cli_per_team;
     list_t *teams;
     list_t *trantorians;
     map_t *map;
 } game_t;
 
-game_t *game_create(char **teams, size_t width, size_t height);
+game_t *game_create(char **teams, size_t width, size_t height,
+    size_t cli_per_team);
 void game_destroy(game_t *game);
 
 #endif // GAME_H

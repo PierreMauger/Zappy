@@ -15,12 +15,20 @@
 
     #include "inventory.h"
 
+typedef enum {
+    DIR_UP,
+    DIR_DOWN,
+    DIR_LEFT,
+    DIR_RIGHT
+} direction_e;
+
 typedef struct {
     uuid_t id_team;
-    size_t x;
-    size_t y;
     inventory_t *inventory;
     size_t level;
+    size_t x;
+    size_t y;
+    direction_e direction;
 } trantorian_t;
 
 trantorian_t *trantorian_create(uuid_t id_team, size_t x, size_t y);

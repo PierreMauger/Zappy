@@ -7,13 +7,15 @@
 
 #include "game.h"
 
-game_t *game_create(char **teams, size_t width, size_t height)
+game_t *game_create(char **teams, size_t width, size_t height,
+    size_t cli_per_team)
 {
     game_t *game = calloc(1, sizeof(game_t));
     team_t *team = NULL;
 
     if (game == NULL)
         return NULL;
+    game->cli_per_team = cli_per_team;
     game->teams = list_create();
     game->trantorians = list_create();
     game->map = map_create(width, height);

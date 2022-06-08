@@ -17,6 +17,7 @@
 typedef struct {
     char *name;
     uuid_t id;
+    size_t cli_sub;
 } team_t;
 
 team_t *team_create(char *name);

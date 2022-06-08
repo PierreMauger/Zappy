@@ -22,6 +22,7 @@ trantorian_t *trantorian_create(uuid_t id_team, size_t x, size_t y)
         return NULL;
     }
     trantorian->level = 1;
+    trantorian->direction = rand() % 4;
     return trantorian;
 }
 
