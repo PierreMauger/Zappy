@@ -7,7 +7,9 @@
 ##
 
 ##################### SRC #######################
-SRC				=
+SRC				=	./src/init_client.c				\
+					./src/create_client.c			\
+					./src/parse_ret.c				\
 
 SRC				+=	./src/main.c
 
@@ -28,7 +30,8 @@ OBJ_TEST		=	$(SRC_TEST:.c=.o)
 ##################### FLAGS #####################
 INCLUDES		=	-I include -I ../include
 
-LIBS			=	-L ../libs -llist -lnlib
+LIBS			=	-L ../libs -llist -lnlib -luuid							\
+					-Wl,-rpath=$(shell readlink -f "../libs/")				\
 
 CFLAGS			=	$(INCLUDES) $(LIBS) -Wall -Wextra -W -fPIC
 
