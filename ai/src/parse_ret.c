@@ -34,6 +34,6 @@ bool parse_return(client_t *client, char *str)
         return (init_header(client, str));
     if (client->size_map.x == -1 && client->size_map.y == -1)
         return true;
-    check_command();
+    //check_command();
     return true;
 }
