@@ -32,6 +32,7 @@ int main(int argc, char **argv)
         destroy_args(args);
         return ERROR_EXIT;
     }
+    srand(time(NULL));
     if (server_start(args) == ERROR) {
         destroy_args(args);
         return ERROR_EXIT;

@@ -12,6 +12,27 @@ conan_basic_setup()
 add_executable(unit-tests
   src/main.cpp
   src/test_random.cpp
+  src/TestInitClient.cpp
+  src/TestInitCore.cpp
+  src/TestInitGame.cpp
+  src/TestInitInventory.cpp
+  src/TestInitMap.cpp
+  src/TestInitServer.cpp
+  src/TestInitTeam.cpp
+  src/TestInitTrantorian.cpp
+
+  ../server/src/manage_struct/manage_client.c
+  ../server/src/manage_struct/manage_core.c
+  ../server/src/manage_struct/manage_game.c
+  ../server/src/manage_struct/manage_inventory.c
+  ../server/src/manage_struct/manage_map.c
+  ../server/src/manage_struct/manage_server.c
+  ../server/src/manage_struct/manage_team.c
+  ../server/src/manage_struct/manage_trantorian.c
+  ../server/src/server_handling/server_handling.c
+  ../server/src/server_handling/start_server.c
+  ../server/src/utils/parse_params.c
+  ../server/src/utils/set_fds.c
 )
 
 target_include_directories(unit-tests PRIVATE
@@ -20,16 +41,17 @@ target_include_directories(unit-tests PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/../include/
 )
 
-set(CMAKE_INSTALL_RPATH "${CMAKE_CURRENT_SOURCE_DIR}/../libs/")
-
-set(
-  -L${CMAKE_CURRENT_SOURCE_DIR}/../libs/
-  -llist
-  -lnlib
-  -lzappy_server
+target_link_directories(unit-tests
+  PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/../libs
 )
 
-target_link_libraries(unit-tests PRIVATE ${LIBS})
+target_link_libraries(unit-tests
+  PRIVATE
+  list
+  nlib
+  uuid
+)
 target_link_libraries(unit-tests PRIVATE ${CONAN_LIBS})
 target_link_libraries(unit-tests PRIVATE ${CMAKE_DL_LIBS})
 
