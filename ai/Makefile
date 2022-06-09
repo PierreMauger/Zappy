@@ -7,7 +7,8 @@
 ##
 
 ##################### SRC #######################
-SRC				=
+SRC				=	./src/init_client.c				\
+					./src/create_client.c			\
 
 SRC				+=	./src/main.c
 
