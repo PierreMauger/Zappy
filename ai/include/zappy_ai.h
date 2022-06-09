@@ -43,10 +43,18 @@ typedef struct arg_s {
     char *machine;
 } arg_t;
 
+typedef struct pos_s {
+    int x;
+    int y;
+} pos_t;
+
 typedef struct client_s {
-    char *user_name;
+    char *team_name;
     char *machine;
     int sockfd;
+    pos_t pos;
+    bool init;
+    bool client_connected;
     struct sockaddr_in servaddr;
     fd_set readfds;
     fd_set writefds;
@@ -62,5 +70,6 @@ typedef struct client_s {
 
 client_t *create_client(arg_t *arg);
 int init_client(arg_t *arg);
+bool parse_return(client_t *client, char *str);
 
 #endif // ZAPPY_AI_H

@@ -20,18 +20,21 @@ void sig_handler_c(__attribute__((unused)) int signum)
     (*is_end) = true;
 }
 
-bool split_loop_client(client_t *client)
+bool check_fd_isset(client_t *client)
 {
     char *temp = NULL;
 
     if (FD_ISSET(client->sockfd, &client->readfds)) {
-        temp = read_socket(client->sockfd);
+        temp = nlib_read_socket(client->sockfd);
         if (temp == NULL) {
-            printf("Error malloc buffer\n");
+            fprintf(stderr, "%s[ERROR]%s malloc buffer\n", R, W);
             return true;
         }
-        //parse_return(temp);
+        if (!parse_return(client, temp))
+            return true;
+        free(temp);
     }
+    return false;
 }
 
 bool loop_client(client_t *client)
@@ -46,7 +49,7 @@ bool loop_client(client_t *client)
         sel = nlib_select_fds(&client->readfds, &client->writefds);
         if (sel == -1 || *(get_value()))
             break;
-        if (split_loop_client(client))
+        if (check_fd_isset(client))
             break;
     }
     return true;
@@ -58,7 +61,7 @@ int init_client(arg_t *arg)
 
     if (connect(client->sockfd,
         (struct sockaddr *)&client->servaddr, sizeof(client->servaddr)) < 0) {
-        printf("Error : Connect Failed \n");
+        printf("%s[ERROR]%s Connect Failed \n", R, W);
         close(client->sockfd);
         free(client);
         free(arg);
