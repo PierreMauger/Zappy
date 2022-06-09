@@ -53,7 +53,9 @@ core_t *core_create(void);
 void core_destroy(core_t *core);
 
 args_t *init_args(void);
-void free_args(args_t *args);
+void destroy_args(args_t *args);
+
+int verif_params(args_t *args);
 int parse_params(int argc, char **argv, args_t *args);
 
 #endif // CORE_H
