@@ -20,6 +20,20 @@ void sig_handler_c(__attribute__((unused)) int signum)
     (*is_end) = true;
 }
 
+bool split_loop_client(client_t *client)
+{
+    char *temp = NULL;
+
+    if (FD_ISSET(client->sockfd, &client->readfds)) {
+        temp = read_socket(client->sockfd);
+        if (temp == NULL) {
+            printf("Error malloc buffer\n");
+            return true;
+        }
+        //parse_return(temp);
+    }
+}
+
 bool loop_client(client_t *client)
 {
     int sel = 0;
@@ -31,6 +45,8 @@ bool loop_client(client_t *client)
         FD_SET(client->sockfd, &client->writefds);
         sel = nlib_select_fds(&client->readfds, &client->writefds);
         if (sel == -1 || *(get_value()))
+            break;
+        if (split_loop_client(client))
             break;
     }
     return true;
