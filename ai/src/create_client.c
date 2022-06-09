@@ -24,5 +24,7 @@ client_t *create_client(arg_t *arg)
     client->team_name = arg->name;
     client->init = false;
     client->client_connected = false;
+    client->size_map.x = -1;
+    client->size_map.y = -1;
     return client;
 }

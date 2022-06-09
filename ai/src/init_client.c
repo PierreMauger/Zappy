@@ -55,9 +55,10 @@ bool loop_client(client_t *client)
     return true;
 }
 
-int init_client(arg_t *arg)
+bool init_client(arg_t *arg)
 {
     client_t *client = create_client(arg);
+    bool ret = false;
 
     if (connect(client->sockfd,
         (struct sockaddr *)&client->servaddr, sizeof(client->servaddr)) < 0) {
@@ -67,9 +68,9 @@ int init_client(arg_t *arg)
         free(arg);
         exit(ERROR_EXIT);
     }
-    loop_client(client);
+    ret = loop_client(client);
     close(client->sockfd);
     shutdown(client->sockfd, SHUT_RDWR);
     free(client);
-    return 0;
+    return ret;
 }

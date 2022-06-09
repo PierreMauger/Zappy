@@ -83,11 +83,14 @@ bool get_arg(arg_t *arg, int ac, char **av)
 int main(int ac, char **av)
 {
     arg_t *arg = malloc(sizeof(arg_t));
+    bool ret = 0;
 
     if (!arg || !get_arg(arg, ac, av))
         return (ERROR_EXIT);
     printf("%d %s %s\n", arg->port, arg->name, arg->machine);
-    init_client(arg);
+    ret = init_client(arg);
     free(arg);
+    if (!ret)
+        return (ERROR_EXIT);
     return (EXIT_SUCCESS);
 }

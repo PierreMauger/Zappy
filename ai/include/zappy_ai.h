@@ -48,16 +48,21 @@ typedef struct pos_s {
     int y;
 } pos_t;
 
+typedef struct player_s {
+    pos_t pos;
+} player_t;
+
 typedef struct client_s {
     char *team_name;
     char *machine;
     int sockfd;
-    pos_t pos;
+    pos_t size_map;
     bool init;
     bool client_connected;
     struct sockaddr_in servaddr;
     fd_set readfds;
     fd_set writefds;
+    player_t *player;
 } client_t;
 
 #define R "\033[1;31m"
@@ -69,7 +74,7 @@ typedef struct client_s {
 #define W "\033[1;0m"
 
 client_t *create_client(arg_t *arg);
-int init_client(arg_t *arg);
+bool init_client(arg_t *arg);
 bool parse_return(client_t *client, char *str);
 
 #endif // ZAPPY_AI_H
