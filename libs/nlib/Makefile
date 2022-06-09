@@ -10,10 +10,12 @@ SRC		=	socket/manage_socket.c				\
 			socket/read_socket.c				\
 			socket/write_socket.c				\
 			select/select.c						\
+			queue/update_command.c				\
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS	=	-I include -W -Wall -Wextra -shared -g -fPIC
+CFLAGS	=	-I include -I ../../include -W -Wall -Wextra			\
+			-shared -g -fPIC -L ../ -llist
 
 NAME	=	libnlib.so
 

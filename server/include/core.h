@@ -12,9 +12,15 @@
         #define _GNU_SOURCE
     #endif
 
-    #define SUCCESS (0)
-    #define ERROR (1)
-    #define EXIT (2)
+    #ifndef SUCCESS
+        #define SUCCESS (0)
+    #endif
+    #ifndef ERROR
+        #define ERROR (1)
+    #endif
+    #ifndef EXIT
+        #define EXIT (2)
+    #endif
 
     #define ERROR_EXIT (84)
 
@@ -57,5 +63,11 @@ void destroy_args(args_t *args);
 
 int verif_params(args_t *args);
 int parse_params(int argc, char **argv, args_t *args);
+
+void set_read_fds(server_t *serv, fd_set *fds);
+void set_write_fds(server_t *serv, fd_set *fds);
+
+int server_start(args_t *args);
+int server_loop(core_t *core);
 
 #endif // CORE_H

@@ -14,18 +14,20 @@
     #include <stdlib.h>
     #include <unistd.h>
 
+    #include "nlib.h"
+
 typedef enum {
     CLI_DEFAULT,
     CLI_GUI,
 } client_type_e;
 
 typedef struct {
-    int fd;
+    socket_t *sock;
     uuid_t id_team;
     client_type_e type;
 } client_t;
 
-client_t *client_create(int fd, uuid_t id_team);
+client_t *client_create(int fd);
 void client_destroy(client_t *client);
 
 #endif // CLIENT_H

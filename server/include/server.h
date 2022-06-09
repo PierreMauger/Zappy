@@ -18,14 +18,6 @@
 typedef struct {
     int fd;
     char *buffer;
-} response_t;
-
-response_t *response_create(int fd, char *buffer);
-void response_destroy(response_t *response);
-
-typedef struct {
-    int fd;
-    char *buffer;
 } request_t;
 
 request_t *request_create(int fd, char *buffer);
@@ -35,8 +27,7 @@ typedef struct {
     int port;
     socket_t *socket;
     list_t *clients;
-    list_t *requests;
-    list_t *responses;
+    list_t *commands;
 } server_t;
 
 server_t *server_create(int port, size_t cli_per_team, size_t team_nbr);

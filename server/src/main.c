@@ -9,7 +9,7 @@
 
 static void print_usage(void)
 {
-    printf("USAGE: ");
+    printf("USAGE:\n");
     printf("./zappy_server -p port -x width -y height -n name1 name2 ... "
         "-c clientsNb -f freq\n");
     printf("   -p | --port\t\tport number\t\t\t(8080 by default)\n");
@@ -32,6 +32,10 @@ int main(int argc, char **argv)
         destroy_args(args);
         return ERROR_EXIT;
     }
-
+    if (server_start(args) == ERROR) {
+        destroy_args(args);
+        return ERROR_EXIT;
+    }
+    destroy_args(args);
     return 0;
 }

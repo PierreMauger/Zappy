@@ -15,6 +15,9 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/manage_struct/manage_team.c							\
 					src/manage_struct/manage_trantorian.c					\
 					src/utils/parse_params.c								\
+					src/utils/set_fds.c										\
+					src/server_handling/server_handling.c					\
+					src/server_handling/start_server.c						\
 
 SRC				+=	./src/main.c
 

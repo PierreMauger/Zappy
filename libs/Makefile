@@ -13,15 +13,15 @@ PATH_LIST	=	./list/
 
 ################# COMPILATION #################
 all:
-	make -C	$(PATH_NLIB)
 	make -C	$(PATH_LIST)
+	make -C	$(PATH_NLIB)
 
 re:	fclean all
 
 clean:
-	@(make clean -C $(PATH_NLIB)) > /dev/null
 	@(make clean -C $(PATH_LIST)) > /dev/null
+	@(make clean -C $(PATH_NLIB)) > /dev/null
 
 fclean:	clean
-	@(make fclean -C $(PATH_NLIB)) > /dev/null
 	@(make fclean -C $(PATH_LIST)) > /dev/null
+	@(make fclean -C $(PATH_NLIB)) > /dev/null
