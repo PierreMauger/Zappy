@@ -8,6 +8,16 @@
 #ifndef GAME_H
     #define GAME_H
 
+    #ifndef SUCCESS
+        #define SUCCESS (0)
+    #endif
+    #ifndef ERROR
+        #define ERROR (1)
+    #endif
+    #ifndef EXIT
+        #define EXIT (2)
+    #endif
+
     #include <stdio.h>
 
     #include "list.h"
