@@ -1,4 +1,3 @@
-
 ##
 ## EPITECH PROJECT, 2022
 ## Base
@@ -13,19 +12,11 @@ SRC				=	./src/init_client.c				\
 
 SRC				+=	./src/main.c
 
-SRC_TEST		=
-
 #################### NAMES ######################
 NAME			=	zappy_ai
 
-NAME_TEST		=	unit_tests
-
-
 ##################### OBJ #######################
 OBJ				=	$(SRC:.c=.o)
-
-OBJ_TEST		=	$(SRC_TEST:.c=.o)
-
 
 ##################### FLAGS #####################
 INCLUDES		=	-I include -I ../include
@@ -34,8 +25,6 @@ LIBS			=	-L ../libs -llist -lnlib -luuid							\
 					-Wl,-rpath=$(shell readlink -f "../libs/")				\
 
 CFLAGS			=	$(INCLUDES) $(LIBS) -Wall -Wextra -W -fPIC
-
-CFLAGS_TEST		=	--coverage -lcriterion
 
 CFLAGS_DEBUG	=	-g
 
@@ -61,23 +50,5 @@ clean:
 fclean:	clean
 	@rm -f $(NAME)
 	@rm -f ../$(NAME)
-	@(rm -f $(NAME) $(NAME_TEST)) > /dev/null
+	@(rm -f $(NAME)) > /dev/null
 	@(rm -rf tests/coverage) > /dev/null
-
-unit_tests:	$(OBJ_TEST)
-	gcc -o $(NAME_TEST) $(OBJ_TEST) $(SRC) $(CFLAGS_TEST) $(CFLAGS)
-	./$(NAME_TEST)
-
-tests_run:	clean unit_tests
-
-gcovr:	tests_run
-	@gcovr --exclude tests
-	@gcovr --exclude tests --branch
-
-gen_html:	unit_tests
-	@(mkdir -p tests/coverage) > /dev/null
-	@(lcov -c -d . --output-file tests/coverage/lcov) > /dev/null
-	@(genhtml tests/coverage/lcov --output-directory tests/coverage) > /dev/null
-
-html_run:	gen_html
-	@(firefox tests/coverage/index.html) > /dev/null
