@@ -7,7 +7,7 @@
 
 #include "team.h"
 
-team_t *team_create(char *name)
+team_t *team_create(const char *name)
 {
     team_t *team = calloc(1, sizeof(team_t));
 

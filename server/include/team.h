@@ -20,7 +20,7 @@ typedef struct {
     size_t cli_sub;
 } team_t;
 
-team_t *team_create(char *name);
+team_t *team_create(const char *name);
 void team_destroy(team_t *team);
 
 #endif // TEAM_H
