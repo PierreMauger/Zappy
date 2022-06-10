@@ -33,6 +33,7 @@
     #include <stdbool.h>
     #include <regex.h>
     #include <fcntl.h>
+    #include <signal.h>
 
     #include "list.h"
     #include "nlib.h"
@@ -74,7 +75,11 @@ typedef struct client_s {
 #define W "\033[1;0m"
 
 client_t *create_client(arg_t *arg);
+void free_client(client_t *client);
 bool init_client(arg_t *arg);
+
 bool parse_return(client_t *client, char *str);
+
+void sig_handler(int signum);
 
 #endif // ZAPPY_AI_H

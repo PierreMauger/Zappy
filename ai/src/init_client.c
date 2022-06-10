@@ -14,13 +14,13 @@ bool *get_value(void)
     return (&value);
 }
 
-void sig_handler_c(__attribute__((unused)) int signum)
+void sig_handler(__attribute__((unused)) int signum)
 {
     bool *is_end = get_value();
     (*is_end) = true;
 }
 
-bool check_fd_isset(client_t *client)
+static bool check_fd_isset(client_t *client)
 {
     char *temp = NULL;
 
@@ -37,7 +37,7 @@ bool check_fd_isset(client_t *client)
     return false;
 }
 
-bool loop_client(client_t *client)
+static bool loop_client(client_t *client)
 {
     int sel = 0;
 
@@ -62,7 +62,7 @@ bool init_client(arg_t *arg)
     bool ret = false;
 
     if (connect(client->socket->fd, (struct sockaddr *)
-            &client->socket->addr, sizeof(client->socket->addr)) < 0) {
+            client->socket->addr, sizeof(*(client->socket->addr))) < 0) {
         printf("%s[ERROR]%s Connect Failed \n", R, W);
         close(client->socket->fd);
         free(client);
@@ -70,8 +70,6 @@ bool init_client(arg_t *arg)
         exit(ERROR_EXIT);
     }
     ret = loop_client(client);
-    close(client->socket->fd);
-    shutdown(client->socket->fd, SHUT_RDWR);
-    free(client);
+    free_client(client);
     return ret;
 }

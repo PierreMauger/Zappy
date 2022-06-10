@@ -88,6 +88,7 @@ int main(int ac, char **av)
     if (!arg || !get_arg(arg, ac, av))
         return (ERROR_EXIT);
     printf("%d %s %s\n", arg->port, arg->name, arg->machine);
+    signal(SIGINT, sig_handler);
     ret = init_client(arg);
     free(arg);
     if (!ret)

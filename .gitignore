@@ -5,6 +5,7 @@
 *.gcda
 *.gcno
 .vscode
+vg*
 bootstrap
 Dockerfile
 lol

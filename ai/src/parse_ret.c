@@ -11,8 +11,10 @@ static bool init_header(client_t *client, char *str)
 {
     client->init = true;
     if (strcmp(str, "WELCOME\n") == 0) {
+        printf("la\n");
         list_push_data(client->command, (void *)nlib_command_create("test"));
-        list_push_data(client->command->head->data, client->socket);
+        list_push_node(client->command->head->data, (node_t *)client->socket);
+        printf("%s\n", (char *)client->command->head->data);
         return true;
     }
     if (atoi(str) < 1 && !client->client_connected) {
