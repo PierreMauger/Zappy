@@ -52,16 +52,21 @@ typedef struct player_s {
     pos_t pos;
 } player_t;
 
+typedef struct socket_s {
+    int sockfd;
+    struct sockaddr_in servaddr;
+} socket_t;
+
 typedef struct client_s {
+    socket_t *socket;
     char *team_name;
     char *machine;
-    int sockfd;
     pos_t size_map;
     bool init;
     bool client_connected;
-    struct sockaddr_in servaddr;
     fd_set readfds;
     fd_set writefds;
+    list_t *command;
     player_t *player;
 } client_t;
 

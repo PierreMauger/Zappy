@@ -13,14 +13,16 @@ client_t *create_client(arg_t *arg)
 
     if (!client)
         return NULL;
-    if ((client->sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+    if ((client->socket->sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         fprintf(stderr, "%s[ERROR]%s socket creation failed\n", R, W);
         exit(ERROR_EXIT);
     }
-    memset(&client->servaddr, 0, sizeof(client->servaddr));
-    client->servaddr.sin_family = AF_INET;
-    client->servaddr.sin_port = htons(arg->port);
-    client->servaddr.sin_addr.s_addr = inet_addr(arg->machine);
+    memset(&client->socket->servaddr, 0, sizeof(client->socket->servaddr));
+    if (!(client->command = list_create()))
+        return NULL;
+    client->socket->servaddr.sin_family = AF_INET;
+    client->socket->servaddr.sin_port = htons(arg->port);
+    client->socket->servaddr.sin_addr.s_addr = inet_addr(arg->machine);
     client->team_name = arg->name;
     client->init = false;
     client->client_connected = false;

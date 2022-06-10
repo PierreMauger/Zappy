@@ -11,7 +11,8 @@ static bool init_header(client_t *client, char *str)
 {
     client->init = true;
     if (strcmp(str, "WELCOME\n") == 0) {
-        //send_message(client->team_name);
+        list_push_data(client->command, (void *)nlib_command_create("test"));
+        list_push_data(client->command->head->data, client->socket);
         return true;
     }
     if (atoi(str) < 1 && !client->client_connected) {
