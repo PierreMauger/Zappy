@@ -55,8 +55,8 @@ static int write_command_all(command_t *command, fd_set *writefds)
         list_destroy_node(node, NULL);
     }
     if (command->socks->lenght == 0)
-        return ERROR;
-    return SUCCESS;
+        return SUCCESS;
+    return ERROR;
 }
 
 void nlib_commands_update(list_t *commands, fd_set *writefds)
@@ -69,7 +69,7 @@ void nlib_commands_update(list_t *commands, fd_set *writefds)
         return;
     foreach_safe(commands->head, node, temp) {
         command = (command_t *)node->data;
-        if (write_command_all(command, writefds) != ERROR)
+        if (write_command_all(command, writefds) == ERROR)
             continue;
         list_remove_node(commands, node);
         list_destroy_node(node, (void (*)(void *))nlib_command_destroy);

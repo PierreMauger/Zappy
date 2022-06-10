@@ -12,7 +12,7 @@ client_t *client_create(int fd)
     client_t *client = calloc(1, sizeof(client_t));
 
     if (client == NULL)
-        return (NULL);
+        return NULL;
     client->sock = nlib_create_socket();
     if (client->sock == NULL)
         return NULL;

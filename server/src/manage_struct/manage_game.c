@@ -11,7 +11,6 @@ game_t *game_create(char **teams, size_t width, size_t height,
     size_t cli_per_team)
 {
     game_t *game = calloc(1, sizeof(game_t));
-    team_t *team = NULL;
 
     if (game == NULL)
         return NULL;
@@ -19,13 +18,13 @@ game_t *game_create(char **teams, size_t width, size_t height,
     game->teams = list_create();
     game->trantorians = list_create();
     game->map = map_create(width, height);
-    if (!game->teams || !game->trantorians || !game->map)
-        return (NULL);
-    for (size_t i = 0; teams && teams[i]; i++) {
-        team = team_create(teams[i]);
-        if (!team)
-            return (NULL);
-        list_push_data(game->teams, team);
+    if (!game->teams || !game->trantorians || !game->map) {
+        game_destroy(game);
+        return NULL;
+    }
+    if (team_init(game->teams, teams) == ERROR) {
+        game_destroy(game);
+        return NULL;
     }
     return game;
 }

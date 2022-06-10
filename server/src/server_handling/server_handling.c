@@ -21,7 +21,7 @@ static int setup_new_client(server_t *serv, int fd)
         close(fd);
         return ERROR;
     }
-    if (list_push_data(serv->clients, (void *)client) == false) {
+    if (list_push_data(serv->clients, (void *)client) == LIST_FAILURE) {
         printf("[ERROR] Insertion of new client failed\n");
         close(fd);
         client_destroy(client);
