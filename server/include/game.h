@@ -8,16 +8,6 @@
 #ifndef GAME_H
     #define GAME_H
 
-    #ifndef SUCCESS
-        #define SUCCESS (0)
-    #endif
-    #ifndef ERROR
-        #define ERROR (1)
-    #endif
-    #ifndef EXIT
-        #define EXIT (2)
-    #endif
-
     #include <stdio.h>
 
     #include "list.h"
@@ -25,6 +15,7 @@
     #include "map.h"
     #include "trantorian.h"
     #include "team.h"
+    #include "utils.h"
 
 typedef struct {
     size_t cli_per_team;
