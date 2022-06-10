@@ -17,6 +17,7 @@ add_executable(unit-tests
 target_include_directories(unit-tests PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/include/
   ${CMAKE_CURRENT_SOURCE_DIR}/../server/include/
+  ${CMAKE_CURRENT_SOURCE_DIR}/../include/
 )
 
 set(CMAKE_INSTALL_RPATH "${CMAKE_CURRENT_SOURCE_DIR}/../libs/")
@@ -25,6 +26,7 @@ set(
   -L${CMAKE_CURRENT_SOURCE_DIR}/../libs/
   -llist
   -lnlib
+  -lzappy_server
 )
 
 target_link_libraries(unit-tests PRIVATE ${LIBS})

@@ -8,6 +8,16 @@
 #ifndef NLIB_H
     #define NLIB_H
 
+    #ifndef SUCCESS
+        #define SUCCESS (0)
+    #endif
+    #ifndef ERROR
+        #define ERROR (1)
+    #endif
+    #ifndef EXIT
+        #define EXIT (2)
+    #endif
+
     #define READ_SIZE (4096)
 
     #include <sys/socket.h>
@@ -25,6 +35,8 @@
     #include <string.h>
     #include <stdarg.h>
 
+    #include "list.h"
+
 typedef struct sockaddr_in sockaddr_in_t;
 
 typedef struct {
@@ -41,5 +53,15 @@ int nlib_select_fds_time(fd_set *readfd, fd_set *writefds, double time);
 
 char *nlib_read_socket(int fd);
 int nlib_write_socket(const socket_t *sock, const char *format, ...);
+
+typedef struct {
+    list_t *socks;
+    char *to_write;
+} command_t;
+
+command_t *nlib_command_create(char *buffer);
+void nlib_command_destroy(command_t *command);
+
+void nlib_commands_update(list_t *commands, fd_set *writefds);
 
 #endif // NLIB_H
