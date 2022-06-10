@@ -46,6 +46,7 @@ clean:
 	@find . -name "*.gcno" -delete
 	@find . -name "*.gcda" -delete
 	@find . -name "*.o" -delete
+	@find . -name "*.so" -delete
 
 fclean:	clean
 	@rm -f $(NAME)
