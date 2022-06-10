@@ -9,15 +9,16 @@
 
 static int parse_teams(char **argv, args_t *args)
 {
-    size_t team_nbr = 0;
+    size_t team_nbr = 1;
 
     for (; argv[optind] != NULL && argv[optind][0] != '-'; optind++) {
-        args->teams = realloc(args->teams, sizeof(char *) * (++team_nbr + 1));
+        args->teams = realloc(args->teams, sizeof(char *) * (team_nbr + 1));
         if (args->teams == NULL)
             return ERROR;
-        args->teams[team_nbr] = argv[optind];
-        args->teams[team_nbr + 1] = NULL;
+        args->teams[team_nbr - 1] = argv[optind];
+        team_nbr++;
     }
+    args->teams[team_nbr - 1] = NULL;
     return SUCCESS;
 }
 

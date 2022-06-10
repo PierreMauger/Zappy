@@ -9,7 +9,7 @@
 
 list_t *list_create(void)
 {
-    return calloc(sizeof(list_t), 1);
+    return calloc(1, sizeof(list_t));
 }
 
 void list_destroy(list_t *list, void (*destroy_data)(void *data))
