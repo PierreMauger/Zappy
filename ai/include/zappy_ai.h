@@ -80,8 +80,6 @@ bool init_client(arg_t *arg);
 
 bool parse_return(client_t *client, char *str);
 
-int send_message(client_t *client);
-
 void sig_handler(int signum);
 
 #endif // ZAPPY_AI_H

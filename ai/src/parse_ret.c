@@ -11,7 +11,8 @@ static bool init_header(client_t *client, char *str)
 {
     client->init = true;
     if (strcmp(str, "WELCOME") == 0)
-        return (send_message(client));
+        return (nlib_send_message(
+            client->command, client->socket, client->player->team_name));
     if (atoi(str) < 1 && !client->client_connected) {
         fprintf(stderr, "%s[ERROR]%s too many clients in this team", R, W);
         return false;

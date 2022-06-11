@@ -64,4 +64,6 @@ void nlib_command_destroy(command_t *command);
 
 void nlib_commands_update(list_t *commands, fd_set *writefds);
 
+bool nlib_send_message(list_t *list, socket_t *socket, char *message);
+
 #endif // NLIB_H

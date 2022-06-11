@@ -9,7 +9,6 @@
 SRC				=	./src/init_client.c				\
 					./src/create_client.c			\
 					./src/parse_ret.c				\
-					./src/send_message.c 			\
 
 SRC				+=	./src/main.c
 
