@@ -15,6 +15,7 @@
     #include "map.h"
     #include "trantorian.h"
     #include "team.h"
+    #include "utils.h"
 
 typedef struct {
     size_t cli_per_team;

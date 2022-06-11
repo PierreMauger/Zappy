@@ -14,13 +14,18 @@
     #include <stdlib.h>
     #include <string.h>
 
+    #include "list.h"
+    #include "utils.h"
+
 typedef struct {
     char *name;
     uuid_t id;
     size_t cli_sub;
 } team_t;
 
-team_t *team_create(char *name);
+team_t *team_create(const char *name);
 void team_destroy(team_t *team);
+
+int team_init(list_t *teams_list, char **teams);
 
 #endif // TEAM_H

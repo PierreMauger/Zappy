@@ -7,7 +7,47 @@
 
 #include "team.h"
 
-team_t *team_create(char *name)
+static int is_team_same(char **teams, size_t to_comp)
+{
+    for (size_t j = 0; teams != NULL && teams[j] != NULL; j++) {
+        if (strcmp(teams[to_comp], teams[j]) == 0) {
+            return ERROR;
+        }
+    }
+    return SUCCESS;
+}
+
+static int team_compare(char **teams)
+{
+    size_t i = 0;
+
+    for (; teams != NULL && teams[i] != NULL; i++) {
+        if (is_team_same(teams, i) == ERROR) {
+            return ERROR;
+        }
+    }
+    if (i < 1)
+        return ERROR;
+    return SUCCESS;
+}
+
+int team_init(list_t *teams_list, char **teams)
+{
+    team_t *team = NULL;
+
+    if (team_compare(teams) == ERROR)
+        return ERROR;
+    for (size_t i = 0; teams && teams[i]; i++) {
+        team = team_create(teams[i]);
+        if (team == NULL)
+            return ERROR;
+        if (list_push_data(teams_list, team) == LIST_FAILURE)
+            return ERROR;
+    }
+    return SUCCESS;
+}
+
+team_t *team_create(const char *name)
 {
     team_t *team = calloc(1, sizeof(team_t));
 
