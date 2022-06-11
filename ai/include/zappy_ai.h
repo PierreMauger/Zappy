@@ -50,12 +50,12 @@ typedef struct pos_s {
 } pos_t;
 
 typedef struct player_s {
+    char *team_name;
     pos_t pos;
 } player_t;
 
 typedef struct client_s {
     socket_t *socket;
-    char *team_name;
     char *machine;
     pos_t size_map;
     bool init;
@@ -79,6 +79,8 @@ void free_client(client_t *client);
 bool init_client(arg_t *arg);
 
 bool parse_return(client_t *client, char *str);
+
+int send_message(client_t *client);
 
 void sig_handler(int signum);
 

@@ -26,12 +26,15 @@ static bool check_fd_isset(client_t *client)
 
     if (FD_ISSET(client->socket->fd, &client->readfds)) {
         temp = nlib_read_socket(client->socket->fd);
+        printf("commande reçu : %s\n", temp);
         if (temp == NULL) {
             fprintf(stderr, "%s[ERROR]%s malloc buffer read socket\n", R, W);
             return true;
         }
-        if (!parse_return(client, temp))
+        if (!parse_return(client, temp)) {
+            free(temp);
             return true;
+        }
         free(temp);
     }
     return false;
@@ -61,13 +64,15 @@ bool init_client(arg_t *arg)
     client_t *client = create_client(arg);
     bool ret = false;
 
+    if (!client) {
+        printf("%s[ERROR]%s Can't malloc client\n", R, W);
+        return false;
+    }
     if (connect(client->socket->fd, (struct sockaddr *)
             client->socket->addr, sizeof(*(client->socket->addr))) < 0) {
-        printf("%s[ERROR]%s Connect Failed \n", R, W);
-        close(client->socket->fd);
-        free(client);
-        free(arg);
-        exit(ERROR_EXIT);
+        printf("%s[ERROR]%s Connect Failed\n", R, W);
+        free_client(client);
+        return false;
     }
     ret = loop_client(client);
     free_client(client);

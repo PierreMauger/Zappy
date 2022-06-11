@@ -36,8 +36,11 @@ static void server_accept_connection(server_t *serv)
     int fd_temp = accept(serv->socket->fd,
         (struct sockaddr *)serv->socket->addr, &socket_size);
 
-    if (setup_new_client(serv, fd_temp) == SUCCESS)
+    if (setup_new_client(serv, fd_temp) == SUCCESS) {
         printf("[INFO] New client connected.\n");
+        //send_message()
+        dprintf(fd_temp, "WELCOME\n");
+    }
 }
 
 int server_loop(core_t *core)
@@ -49,10 +52,10 @@ int server_loop(core_t *core)
         set_read_fds(core->server, &readfds);
         set_write_fds(core->server, &writefds);
         nlib_select_fds(&readfds, &writefds);
-        nlib_commands_update(core->server->commands, &writefds);
         // clients_update(core->server, &readfds);
         if (FD_ISSET(core->server->socket->fd, &readfds) == 0)
             continue;
         server_accept_connection(core->server);
+        nlib_commands_update(core->server->commands, &writefds);
     }
 }

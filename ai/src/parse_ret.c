@@ -10,13 +10,8 @@
 static bool init_header(client_t *client, char *str)
 {
     client->init = true;
-    if (strcmp(str, "WELCOME\n") == 0) {
-        printf("la\n");
-        list_push_data(client->command, (void *)nlib_command_create("test"));
-        list_push_node(client->command->head->data, (node_t *)client->socket);
-        printf("%s\n", (char *)client->command->head->data);
-        return true;
-    }
+    if (strcmp(str, "WELCOME") == 0)
+        return (send_message(client));
     if (atoi(str) < 1 && !client->client_connected) {
         fprintf(stderr, "%s[ERROR]%s too many clients in this team", R, W);
         return false;
@@ -33,7 +28,7 @@ static bool init_header(client_t *client, char *str)
 
 bool parse_return(client_t *client, char *str)
 {
-    if (strcmp(str, "WELCOME\n") == 0 || client->init)
+    if (strcmp(str, "WELCOME") == 0 || client->init)
         return (init_header(client, str));
     if (client->size_map.x == -1 && client->size_map.y == -1)
         return true;
