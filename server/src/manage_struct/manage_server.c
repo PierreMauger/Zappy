@@ -20,8 +20,8 @@ server_t *server_create(int port, size_t cli_per_team, size_t team_nbr)
             cli_per_team * team_nbr) == NULL)
         return NULL;
     server->clients = list_create();
-    server->commands = list_create();
-    if (server->clients == NULL || server->commands == NULL)
+    server->commands_to_send = list_create();
+    if (server->clients == NULL || server->commands_to_send == NULL)
         return NULL;
     return server;
 }
@@ -34,7 +34,8 @@ void server_destroy(server_t *server)
         nlib_destroy_socket(server->socket);
     if (server->clients)
         list_destroy(server->clients, (void (*)(void *))client_destroy);
-    if (server->commands)
-        list_destroy(server->commands, (void (*)(void *))nlib_command_destroy);
+    if (server->commands_to_send)
+        list_destroy(server->commands_to_send,
+            (void (*)(void *))nlib_command_destroy);
     free(server);
 }

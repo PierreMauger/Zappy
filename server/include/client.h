@@ -23,10 +23,12 @@ typedef enum {
 
 typedef struct {
     socket_t *sock;
+    list_t *exec_commands;
     uuid_t id_team;
     client_type_e type;
 } client_t;
 
+void client_destroy_command(char *command);
 client_t *client_create(int fd);
 void client_destroy(client_t *client);
 
