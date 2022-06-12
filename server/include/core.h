@@ -24,6 +24,7 @@
 
     #include "server.h"
     #include "game.h"
+    #include "client.h"
     #include "utils.h"
 
 typedef struct {
@@ -51,6 +52,10 @@ int parse_params(int argc, char **argv, args_t *args);
 
 void set_read_fds(server_t *serv, fd_set *fds);
 void set_write_fds(server_t *serv, fd_set *fds);
+
+void client_push_exec_command(client_t *client, char *buffer);
+int client_get_command(client_t *client);
+void clients_update(core_t *core, fd_set *readfds);
 
 int server_start(args_t *args);
 int server_loop(core_t *core);

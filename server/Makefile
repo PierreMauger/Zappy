@@ -18,6 +18,7 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/utils/set_fds.c										\
 					src/server_handling/server_handling.c					\
 					src/server_handling/start_server.c						\
+					src/client_handling/client_update.c						\
 
 SRC				+=	./src/main.c
 
