@@ -10,7 +10,7 @@
 static bool init_header(client_t *client, char *str)
 {
     client->init = true;
-    if (strcmp(str, "WELCOME") == 0)
+    if (strcmp(str, "WELCOME\n") == 0)
         return (nlib_send_message(
             client->command, client->socket, client->player->team_name));
     if (atoi(str) < 1 && !client->client_connected) {
@@ -29,7 +29,7 @@ static bool init_header(client_t *client, char *str)
 
 bool parse_return(client_t *client, char *str)
 {
-    if (strcmp(str, "WELCOME") == 0 || client->init)
+    if (strcmp(str, "WELCOME\n") == 0 || client->init)
         return (init_header(client, str));
     if (client->size_map.x == -1 && client->size_map.y == -1)
         return true;
