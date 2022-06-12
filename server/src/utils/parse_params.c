@@ -11,7 +11,8 @@ static int parse_teams(char **argv, args_t *args)
 {
     size_t team_nbr = 1;
 
-    for (; argv[optind] != NULL && argv[optind][0] != '-'; optind++) {
+    for (optind--; argv != NULL && argv[optind] != NULL &&
+            argv[optind][0] != '-'; optind++) {
         args->teams = realloc(args->teams, sizeof(char *) * (team_nbr + 1));
         if (args->teams == NULL)
             return ERROR;

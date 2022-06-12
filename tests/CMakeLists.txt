@@ -20,6 +20,7 @@ add_executable(unit-tests
   src/TestInitServer.cpp
   src/TestInitTeam.cpp
   src/TestInitTrantorian.cpp
+  src/TestParseParams.cpp
 
   ../server/src/manage_struct/manage_client.c
   ../server/src/manage_struct/manage_core.c
@@ -33,6 +34,7 @@ add_executable(unit-tests
   ../server/src/server_handling/start_server.c
   ../server/src/utils/parse_params.c
   ../server/src/utils/set_fds.c
+  ../server/src/client_handling/client_update.c
 )
 
 target_include_directories(unit-tests PRIVATE
