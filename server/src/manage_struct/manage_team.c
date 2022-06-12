@@ -10,7 +10,7 @@
 static int is_team_same(char **teams, size_t to_comp)
 {
     for (size_t j = 0; teams != NULL && teams[j] != NULL; j++) {
-        if (strcmp(teams[to_comp], teams[j]) == 0) {
+        if (j != to_comp && strcmp(teams[to_comp], teams[j]) == 0) {
             return ERROR;
         }
     }
