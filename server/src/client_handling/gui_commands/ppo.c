@@ -8,8 +8,7 @@
 #include "utils.h"
 #include "core.h"
 
-void command_ppo(UNUSED core_t *core, UNUSED client_t *client,
-    UNUSED char *command)
+void command_ppo(core_t *core, client_t *client, char *command)
 {
 
 }
