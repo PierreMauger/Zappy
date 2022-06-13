@@ -62,3 +62,17 @@ TEST(TestTeamInit, NoTeam)
     EXPECT_TRUE(team_init(teams_list, NULL) == ERROR);
     list_destroy(teams_list, (void (*)(void *))team_destroy);
 }
+
+TEST(TestTeamInit, SameTeamOnly)
+{
+    const char *teams[] = {
+        "team1",
+        "team1",
+        NULL
+    };
+    list_t *teams_list = list_create();
+
+    ASSERT_TRUE(teams_list != nullptr);
+    EXPECT_TRUE(team_init(teams_list, (char **)teams) == ERROR);
+    list_destroy(teams_list, (void (*)(void *))team_destroy);
+}
