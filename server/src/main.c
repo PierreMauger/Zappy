@@ -38,5 +38,5 @@ int main(int argc, char **argv)
         return ERROR_EXIT;
     }
     destroy_args(args);
-    return 0;
+    return SUCCESS;
 }

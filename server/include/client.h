@@ -17,16 +17,20 @@
     #include "nlib.h"
 
 typedef enum {
+    CLI_UNKNOWN,
+
     CLI_DEFAULT,
     CLI_GUI,
 } client_type_e;
 
 typedef struct {
     socket_t *sock;
+    list_t *command_list;
     uuid_t id_team;
     client_type_e type;
 } client_t;
 
+void client_destroy_command(char *command);
 client_t *client_create(int fd);
 void client_destroy(client_t *client);
 

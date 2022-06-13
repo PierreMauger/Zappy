@@ -25,3 +25,15 @@ void list_remove_node(list_t *list, node_t *node)
     node->prev = NULL;
     node->next = NULL;
 }
+
+void *list_pop_last(list_t *list)
+{
+    node_t *node = list->tail;
+    void *data = node->data;
+
+    if (!list)
+        return (NULL);
+    list_remove_node(list, node);
+    list_destroy_node(node, NULL);
+    return data;
+}

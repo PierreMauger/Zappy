@@ -24,7 +24,7 @@
 
     #include "server.h"
     #include "game.h"
-    #include "utils.h"
+    #include "client.h"
 
 typedef struct {
     int port;
@@ -51,6 +51,47 @@ int parse_params(int argc, char **argv, args_t *args);
 
 void set_read_fds(server_t *serv, fd_set *fds);
 void set_write_fds(server_t *serv, fd_set *fds);
+
+typedef struct {
+    char *name;
+    void (*func)(core_t *core, client_t *client);
+} method_t;
+
+void command_msz(core_t *core, client_t *client);
+void command_bct(core_t *core, client_t *client);
+void command_mct(core_t *core, client_t *client);
+void command_tna(core_t *core, client_t *client);
+void command_ppo(core_t *core, client_t *client);
+void command_plv(core_t *core, client_t *client);
+void command_pin(core_t *core, client_t *client);
+void command_sgt(core_t *core, client_t *client);
+void command_sst(core_t *core, client_t *client);
+
+void client_gui_search_command(core_t *core, client_t *client, char *command);
+
+void command_forward(core_t *core, client_t *client);
+void command_right(core_t *core, client_t *client);
+void command_left(core_t *core, client_t *client);
+void command_look(core_t *core, client_t *client);
+void command_inventory(core_t *core, client_t *client);
+void command_broadcast(core_t *core, client_t *client);
+void command_connect_nbr(core_t *core, client_t *client);
+void command_fork(core_t *core, client_t *client);
+void command_eject(core_t *core, client_t *client);
+void command_take(core_t *core, client_t *client);
+void command_set(core_t *core, client_t *client);
+void command_incantation(core_t *core, client_t *client);
+
+void client_def_search_command(core_t *core, client_t *client, char *command);
+
+void client_define_type(core_t *core, client_t *client);
+
+void client_push_command(server_t *serv, client_t *client,
+    char *buff, bool broadcast);
+void client_exec_command(core_t *core, client_t *client);
+void client_push_exec_command(client_t *client, char *buffer);
+int client_get_command(client_t *client);
+void clients_update(core_t *core, fd_set *readfds);
 
 int server_start(args_t *args);
 int server_loop(core_t *core);

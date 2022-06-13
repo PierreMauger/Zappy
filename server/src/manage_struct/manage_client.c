@@ -7,6 +7,12 @@
 
 #include "client.h"
 
+void client_destroy_command(char *command)
+{
+    if (command != NULL)
+        free(command);
+}
+
 client_t *client_create(int fd)
 {
     client_t *client = calloc(1, sizeof(client_t));
@@ -14,7 +20,8 @@ client_t *client_create(int fd)
     if (client == NULL)
         return NULL;
     client->sock = nlib_create_socket();
-    if (client->sock == NULL)
+    client->command_list = list_create();
+    if (client->sock == NULL || client->command_list == NULL)
         return NULL;
     client->sock->fd = fd;
     return client;
@@ -28,5 +35,8 @@ void client_destroy(client_t *client)
         nlib_destroy_socket(client->sock);
     if (client->id_team != NULL)
         uuid_clear(client->id_team);
+    if (client->command_list != NULL)
+        list_destroy(client->command_list,
+            (void (*)(void *))client_destroy_command);
     free(client);
 }
