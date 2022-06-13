@@ -91,8 +91,11 @@ void client_def_search_command(core_t *core, client_t *client, char *command);
 
 void client_define_type(core_t *core, client_t *client, char *command);
 
-void client_push_command(server_t *serv, client_t *client,
-    char *buff, bool broadcast);
+void client_push_command(server_t *serv, client_t *client, char *buff);
+void client_def_broadcast_command(server_t *serv, client_t *client,
+    char *buff);
+void client_gui_broadcast_command(server_t *serv, client_t *client,
+    char *buff);
 void client_exec_command(core_t *core, client_t *client);
 void client_push_exec_command(client_t *client, char *buffer);
 int client_get_command(client_t *client);

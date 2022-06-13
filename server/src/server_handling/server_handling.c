@@ -39,7 +39,7 @@ static void server_accept_connection(server_t *serv)
 
     if (client != NULL) {
         printf("[INFO] New client connected.\n");
-        client_push_command(serv, client, strdup("WELCOME\n"), false);
+        client_push_command(serv, client, strdup("WELCOME\n"));
     }
 }
 

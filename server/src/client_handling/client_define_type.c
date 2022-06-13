@@ -43,9 +43,9 @@ static void client_define_default(core_t *core, client_t *client,
     client->team = team;
     client->team->cli_sub++;
     client_push_command(core->server, client,
-        get_client_num(core, team), false);
+        get_client_num(core, team));
     client_push_command(core->server, client,
-        get_map_size(core->game->map), false);
+        get_map_size(core->game->map));
 }
 
 void client_define_type(core_t *core, client_t *client, char *command)
