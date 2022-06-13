@@ -7,7 +7,7 @@
 
 #include "core.h"
 
-void command_fork(UNUSED core_t *core, UNUSED client_t *client)
+void command_fork(UNUSED core_t *core, UNUSED client_t *client, UNUSED char *command)
 {
 
 }

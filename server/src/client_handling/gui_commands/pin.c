@@ -5,9 +5,11 @@
 ** main server
 */
 
+#include "utils.h"
 #include "core.h"
 
-void command_pin(UNUSED core_t *core, UNUSED client_t *client)
+void command_pin(UNUSED core_t *core, UNUSED client_t *client,
+    UNUSED char *command)
 {
 
 }

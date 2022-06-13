@@ -23,7 +23,7 @@ void client_gui_search_command(core_t *core, client_t *client, char *command)
 {
     for (size_t i = 0; i < sizeof(methods) / sizeof(method_t); i++) {
         if (strcmp(command, methods[i].name) == 0) {
-            methods[i].func(core, client);
+            methods[i].func(core, client, command);
             return;
         }
     }
