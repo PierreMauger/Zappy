@@ -7,6 +7,23 @@
 
 #include "core.h"
 
+void client_exec_command(core_t *core, client_t *client)
+{
+    char *command = list_pop_last(client->command_list);
+
+    if (command == NULL) {
+        printf("[ERROR] Cannot get command\n");
+        return;
+    }
+    if (client->type == CLI_DEFAULT) {
+        client_def_search_command(core, client, command);
+    } else if (client->type == CLI_GUI) {
+        client_gui_search_command(core, client, command);
+    } else {
+        client_define_type(core, client);
+    }
+}
+
 void client_push_exec_command(client_t *client, char *buffer)
 {
     char *command = strtok(buffer, "\n");
@@ -16,6 +33,10 @@ void client_push_exec_command(client_t *client, char *buffer)
         return;
     }
     for (; command != NULL; command = strtok(NULL, "\n")) {
+        if (client->command_list->lenght >= 10) {
+            printf("[ERROR] Command list is full\n");
+            return;
+        }
         if (list_push_data(client->command_list, (void *)strdup(command)) ==
             LIST_FAILURE) {
             printf("[ERROR] Insertion of command failed\n");

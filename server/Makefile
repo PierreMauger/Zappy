@@ -19,20 +19,32 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/server_handling/server_handling.c					\
 					src/server_handling/start_server.c						\
 					src/client_handling/client_update.c						\
-					src/client_handling/client_exec_command.c				\
-					src/client_handling/commands/forward.c					\
-					src/client_handling/commands/right.c					\
-					src/client_handling/commands/left.c						\
-					src/client_handling/commands/look.c						\
-					src/client_handling/commands/inventory.c				\
-					src/client_handling/commands/broadcast.c				\
-					src/client_handling/commands/connect_nbr.c				\
-					src/client_handling/commands/fork.c						\
-					src/client_handling/commands/eject.c					\
-					src/client_handling/commands/take.c						\
-					src/client_handling/commands/set.c						\
-					src/client_handling/commands/incantation.c				\
-					src/utils/command_utils.c							\
+					src/client_handling/client_def_exec_command.c			\
+					src/client_handling/default_commands/forward.c			\
+					src/client_handling/default_commands/right.c			\
+					src/client_handling/default_commands/left.c				\
+					src/client_handling/default_commands/look.c				\
+					src/client_handling/default_commands/inventory.c		\
+					src/client_handling/default_commands/broadcast.c		\
+					src/client_handling/default_commands/connect_nbr.c		\
+					src/client_handling/default_commands/fork.c				\
+					src/client_handling/default_commands/eject.c			\
+					src/client_handling/default_commands/take.c				\
+					src/client_handling/default_commands/set.c				\
+					src/client_handling/default_commands/incantation.c		\
+					src/utils/command_utils.c								\
+					src/client_handling/client_command_utils.c				\
+					src/client_handling/gui_commands/msz.c					\
+					src/client_handling/gui_commands/bct.c					\
+					src/client_handling/gui_commands/mct.c					\
+					src/client_handling/gui_commands/tna.c					\
+					src/client_handling/gui_commands/ppo.c					\
+					src/client_handling/gui_commands/plv.c					\
+					src/client_handling/gui_commands/pin.c					\
+					src/client_handling/gui_commands/sgt.c					\
+					src/client_handling/gui_commands/sst.c					\
+					src/client_handling/client_define_type.c				\
+					src/client_handling/client_gui_exec_command.c			\
 
 SRC				+=	./src/main.c
 

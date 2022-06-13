@@ -57,6 +57,18 @@ typedef struct {
     void (*func)(core_t *core, client_t *client);
 } method_t;
 
+void command_msz(core_t *core, client_t *client);
+void command_bct(core_t *core, client_t *client);
+void command_mct(core_t *core, client_t *client);
+void command_tna(core_t *core, client_t *client);
+void command_ppo(core_t *core, client_t *client);
+void command_plv(core_t *core, client_t *client);
+void command_pin(core_t *core, client_t *client);
+void command_sgt(core_t *core, client_t *client);
+void command_sst(core_t *core, client_t *client);
+
+void client_gui_search_command(core_t *core, client_t *client, char *command);
+
 void command_forward(core_t *core, client_t *client);
 void command_right(core_t *core, client_t *client);
 void command_left(core_t *core, client_t *client);
@@ -70,7 +82,12 @@ void command_take(core_t *core, client_t *client);
 void command_set(core_t *core, client_t *client);
 void command_incantation(core_t *core, client_t *client);
 
-void client_unknown_command(server_t *serv, client_t *client);
+void client_def_search_command(core_t *core, client_t *client, char *command);
+
+void client_define_type(core_t *core, client_t *client);
+
+void client_push_command(server_t *serv, client_t *client,
+    char *buff, bool broadcast);
 void client_exec_command(core_t *core, client_t *client);
 void client_push_exec_command(client_t *client, char *buffer);
 int client_get_command(client_t *client);
