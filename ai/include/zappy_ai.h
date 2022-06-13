@@ -38,6 +38,13 @@
     #include "list.h"
     #include "nlib.h"
 
+enum direction {
+    North,
+    South,
+    East,
+    West
+};
+
 typedef struct arg_s {
     int port;
     char *name;
@@ -69,6 +76,7 @@ typedef struct player_s {
     char *team_name;
     inventory_t inv;
     pos_t pos;
+    enum direction dir;
 } player_t;
 
 typedef struct client_s {
@@ -85,13 +93,13 @@ typedef struct client_s {
     map_t *map;
 } client_t;
 
-int forward_movement(char *str);
-int right_movement(char *str);
-int left_movement(char *str);
+int forward_movement(client_t *client, char *str);
+int right_movement(client_t *client, char *str);
+int left_movement(client_t *client, char *str);
 
 typedef struct com_s {
     const char *cmd;
-    int (*func_ptr)(char *str);
+    int (*func_ptr)(client_t *client, char *str);
 } com_t;
 
 static const com_t com[] =

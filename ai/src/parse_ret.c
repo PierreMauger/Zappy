@@ -53,7 +53,7 @@ bool parse_return(client_t *client, char *str)
         return true;
     for (int i = 0; com[i].cmd != NULL; i++) {
         if (strcmp(com[i].cmd, command) == 0) {
-            com[i].func_ptr(str);
+            com[i].func_ptr(client, str);
             break;
         }
     }
