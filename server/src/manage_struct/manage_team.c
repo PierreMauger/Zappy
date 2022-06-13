@@ -56,7 +56,6 @@ team_t *team_create(const char *name)
     team->name = strdup(name);
     if (team->name == NULL)
         return NULL;
-    uuid_generate(team->id);
     return team;
 }
 

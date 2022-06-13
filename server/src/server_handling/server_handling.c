@@ -7,27 +7,27 @@
 
 #include "core.h"
 
-static int setup_new_client(server_t *serv, int fd)
+static client_t *setup_new_client(server_t *serv, int fd)
 {
     client_t *client = NULL;
 
     if (fd < 0) {
-        printf("[ERROR] Creation of new connection failed\n");
-        return ERROR;
+        fprintf(stderr, "[ERROR] Creation of new connection failed\n");
+        return NULL;
     }
     client = client_create(fd);
     if (client == NULL) {
-        printf("[ERROR] Creation of new client failed\n");
+        fprintf(stderr, "[ERROR] Creation of new client failed\n");
         close(fd);
-        return ERROR;
+        return NULL;
     }
     if (list_push_data(serv->clients, (void *)client) == LIST_FAILURE) {
-        printf("[ERROR] Insertion of new client failed\n");
+        fprintf(stderr, "[ERROR] Insertion of new client failed\n");
         close(fd);
         client_destroy(client);
-        return ERROR;
+        return NULL;
     }
-    return SUCCESS;
+    return client;
 }
 
 static void server_accept_connection(server_t *serv)
@@ -35,9 +35,12 @@ static void server_accept_connection(server_t *serv)
     socklen_t socket_size = sizeof(sockaddr_in_t);
     int fd_temp = accept(serv->socket->fd,
         (struct sockaddr *)serv->socket->addr, &socket_size);
+    client_t *client = setup_new_client(serv, fd_temp);
 
-    if (setup_new_client(serv, fd_temp) == SUCCESS)
+    if (client != NULL) {
         printf("[INFO] New client connected.\n");
+        client_push_command(serv, client, strdup("WELCOME\n"));
+    }
 }
 
 int server_loop(core_t *core)

@@ -7,15 +7,15 @@
 
 #include "trantorian.h"
 
-trantorian_t *trantorian_create(uuid_t id_team, size_t x, size_t y)
+trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y)
 {
     trantorian_t *trantorian = calloc(1, sizeof(trantorian_t));
 
     if (!trantorian)
         return NULL;
-    uuid_copy(trantorian->id_team, id_team);
-    trantorian->x = x;
-    trantorian->y = y;
+    trantorian->team = team;
+    trantorian->x = rand() % map_x;
+    trantorian->y = rand() % map_y;
     trantorian->inventory = inventory_create();
     if (!trantorian->inventory) {
         free(trantorian);

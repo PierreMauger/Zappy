@@ -30,6 +30,6 @@ void client_def_search_command(core_t *core, client_t *client, char *command)
             return;
         }
     }
-    printf("[ERROR] Unknown command\n");
-    client_push_command(core->server, client, strdup("ko\n"), false);
+    fprintf(stderr, "[ERROR] Unknown command\n");
+    client_push_command(core->server, client, strdup("ko\n"));
 }

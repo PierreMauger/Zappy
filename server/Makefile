@@ -33,6 +33,7 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/client_handling/default_commands/set.c				\
 					src/client_handling/default_commands/incantation.c		\
 					src/utils/command_utils.c								\
+					src/utils/is_uuid.c										\
 					src/client_handling/client_command_utils.c				\
 					src/client_handling/gui_commands/msz.c					\
 					src/client_handling/gui_commands/bct.c					\
@@ -45,6 +46,8 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/client_handling/gui_commands/sst.c					\
 					src/client_handling/client_define_type.c				\
 					src/client_handling/client_gui_exec_command.c			\
+					src/game_handling/team_get_obj.c						\
+					src/game_handling/game_update.c							\
 
 SRC				+=	./src/main.c
 

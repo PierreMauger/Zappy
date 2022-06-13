@@ -31,10 +31,10 @@ void client_destroy(client_t *client)
 {
     if (client == NULL)
         return;
+    if (client->team != NULL)
+        client->team->cli_sub--;
     if (client->sock != NULL)
         nlib_destroy_socket(client->sock);
-    if (client->id_team != NULL)
-        uuid_clear(client->id_team);
     if (client->command_list != NULL)
         list_destroy(client->command_list,
             (void (*)(void *))client_destroy_command);

@@ -11,7 +11,6 @@ conan_basic_setup()
 
 add_executable(unit-tests
   src/main.cpp
-  src/test_random.cpp
   src/TestInitClient.cpp
   src/TestInitCore.cpp
   src/TestInitGame.cpp
@@ -21,6 +20,7 @@ add_executable(unit-tests
   src/TestInitTeam.cpp
   src/TestInitTrantorian.cpp
   src/TestParseParams.cpp
+  src/TestClientLogin.cpp
 
   ../server/src/manage_struct/manage_client.c
   ../server/src/manage_struct/manage_core.c
@@ -49,6 +49,7 @@ add_executable(unit-tests
   ../server/src/client_handling/default_commands/set.c
   ../server/src/client_handling/default_commands/incantation.c
   ../server/src/utils/command_utils.c
+  ../server/src/utils/is_uuid.c
   ../server/src/client_handling/client_command_utils.c
   ../server/src/client_handling/gui_commands/msz.c
   ../server/src/client_handling/gui_commands/bct.c
@@ -61,6 +62,8 @@ add_executable(unit-tests
   ../server/src/client_handling/gui_commands/sst.c
   ../server/src/client_handling/client_define_type.c
   ../server/src/client_handling/client_gui_exec_command.c
+  ../server/src/game_handling/team_get_obj.c
+  ../server/src/game_handling/game_update.c
 )
 
 target_include_directories(unit-tests PRIVATE

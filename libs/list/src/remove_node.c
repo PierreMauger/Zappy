@@ -37,3 +37,20 @@ void *list_pop_last(list_t *list)
     list_destroy_node(node, NULL);
     return data;
 }
+
+void list_destroy_data_node(list_t *list, void *data,
+    void (*destroy_data)(void *))
+{
+    node_t *node = NULL;
+    node_t *safe = NULL;
+
+    if (!list)
+        return;
+    foreach_safe(list->head, node, safe) {
+        if (node->data == data) {
+            list_remove_node(list, node);
+            list_destroy_node(node, destroy_data);
+            return;
+        }
+    }
+}

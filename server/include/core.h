@@ -18,6 +18,8 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <unistd.h>
+    #include <string.h>
+    #include <regex.h>
 
     #include "list.h"
     #include "nlib.h"
@@ -48,6 +50,9 @@ void destroy_args(args_t *args);
 
 int verif_params(args_t *args);
 int parse_params(int argc, char **argv, args_t *args);
+
+bool is_uuid(char *str);
+team_t *team_get_obj(list_t *teams, char *to_comp);
 
 void set_read_fds(server_t *serv, fd_set *fds);
 void set_write_fds(server_t *serv, fd_set *fds);
@@ -84,10 +89,13 @@ void command_incantation(core_t *core, client_t *client);
 
 void client_def_search_command(core_t *core, client_t *client, char *command);
 
-void client_define_type(core_t *core, client_t *client);
+void client_define_type(core_t *core, client_t *client, char *command);
 
-void client_push_command(server_t *serv, client_t *client,
-    char *buff, bool broadcast);
+void client_push_command(server_t *serv, client_t *client, char *buff);
+void client_def_broadcast_command(server_t *serv, client_t *client,
+    char *buff);
+void client_gui_broadcast_command(server_t *serv, client_t *client,
+    char *buff);
 void client_exec_command(core_t *core, client_t *client);
 void client_push_exec_command(client_t *client, char *buffer);
 int client_get_command(client_t *client);
