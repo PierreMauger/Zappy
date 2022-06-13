@@ -13,6 +13,14 @@ SRC				=	./src/loop_client.c				\
 					./src/send_message.c 			\
 					./src/if_forest.c 				\
 					./src/command/movement.c 		\
+					./src/command/look_around.c 	\
+					./src/command/broadcast.c	 	\
+					./src/command/connect_nbr.c 	\
+					./src/command/eject_player.c 	\
+					./src/command/fork_player.c 	\
+					./src/command/incantation.c 	\
+					./src/command/inventory.c 		\
+					./src/command/take_set_object.c \
 
 SRC				+=	./src/main.c
 

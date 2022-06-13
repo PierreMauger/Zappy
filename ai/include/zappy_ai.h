@@ -37,6 +37,7 @@
 
     #include "list.h"
     #include "nlib.h"
+    #include "command.h"
 
 enum direction {
     North,
@@ -92,21 +93,6 @@ typedef struct client_s {
     player_t *player;
     map_t *map;
 } client_t;
-
-int forward_movement(client_t *client, char *str);
-int right_movement(client_t *client, char *str);
-int left_movement(client_t *client, char *str);
-
-typedef struct com_s {
-    const char *cmd;
-    int (*func_ptr)(client_t *client, char *str);
-} com_t;
-
-static const com_t com[] =
-{
-    {"Forward\0", &forward_movement},
-    {NULL, NULL}
-};
 
 #define R "\033[1;31m"
 #define G "\033[1;32m"
