@@ -7,7 +7,7 @@
 
 #include "core.h"
 
-void command_left(UNUSED core_t *core, UNUSED client_t *client)
+void command_left(UNUSED core_t *core, UNUSED client_t *client, UNUSED char *command)
 {
 
 }

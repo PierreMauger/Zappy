@@ -59,33 +59,36 @@ void set_write_fds(server_t *serv, fd_set *fds);
 
 typedef struct {
     char *name;
-    void (*func)(core_t *core, client_t *client);
+    void (*func)(core_t *core, client_t *client, char *command);
 } method_t;
 
-void command_msz(core_t *core, client_t *client);
-void command_bct(core_t *core, client_t *client);
-void command_mct(core_t *core, client_t *client);
-void command_tna(core_t *core, client_t *client);
-void command_ppo(core_t *core, client_t *client);
-void command_plv(core_t *core, client_t *client);
-void command_pin(core_t *core, client_t *client);
-void command_sgt(core_t *core, client_t *client);
-void command_sst(core_t *core, client_t *client);
+void command_write_tile_content(core_t *core, client_t *client,
+    size_t x, size_t y);
+
+void command_msz(core_t *core, client_t *client, char *command);
+void command_bct(core_t *core, client_t *client, char *command);
+void command_mct(core_t *core, client_t *client, char *command);
+void command_tna(core_t *core, client_t *client, char *command);
+void command_ppo(core_t *core, client_t *client, char *command);
+void command_plv(core_t *core, client_t *client, char *command);
+void command_pin(core_t *core, client_t *client, char *command);
+void command_sgt(core_t *core, client_t *client, char *command);
+void command_sst(core_t *core, client_t *client, char *command);
 
 void client_gui_search_command(core_t *core, client_t *client, char *command);
 
-void command_forward(core_t *core, client_t *client);
-void command_right(core_t *core, client_t *client);
-void command_left(core_t *core, client_t *client);
-void command_look(core_t *core, client_t *client);
-void command_inventory(core_t *core, client_t *client);
-void command_broadcast(core_t *core, client_t *client);
-void command_connect_nbr(core_t *core, client_t *client);
-void command_fork(core_t *core, client_t *client);
-void command_eject(core_t *core, client_t *client);
-void command_take(core_t *core, client_t *client);
-void command_set(core_t *core, client_t *client);
-void command_incantation(core_t *core, client_t *client);
+void command_forward(core_t *core, client_t *client, char *command);
+void command_right(core_t *core, client_t *client, char *command);
+void command_left(core_t *core, client_t *client, char *command);
+void command_look(core_t *core, client_t *client, char *command);
+void command_inventory(core_t *core, client_t *client, char *command);
+void command_broadcast(core_t *core, client_t *client, char *command);
+void command_connect_nbr(core_t *core, client_t *client, char *command);
+void command_fork(core_t *core, client_t *client, char *command);
+void command_eject(core_t *core, client_t *client, char *command);
+void command_take(core_t *core, client_t *client, char *command);
+void command_set(core_t *core, client_t *client, char *command);
+void command_incantation(core_t *core, client_t *client, char *command);
 
 void client_def_search_command(core_t *core, client_t *client, char *command);
 

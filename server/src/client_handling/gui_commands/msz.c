@@ -5,9 +5,17 @@
 ** main server
 */
 
+#include "utils.h"
 #include "core.h"
 
-void command_msz(UNUSED core_t *core, UNUSED client_t *client)
+void command_msz(core_t *core, client_t *client, UNUSED char *command)
 {
+    char *buffer = NULL;
 
+    if (asprintf(&buffer, "msz %ld %ld\n", core->game->map->width,
+            core->game->map->height) == -1) {
+        fprintf(stderr, "[ERROR] Unable to allocate memory\n");
+        return;
+    }
+    client_push_command(core->server, client, buffer);
 }

@@ -7,7 +7,7 @@
 
 #include "core.h"
 
-void command_look(UNUSED core_t *core, UNUSED client_t *client)
+void command_look(UNUSED core_t *core, UNUSED client_t *client, UNUSED char *command)
 {
 
 }
