@@ -8,7 +8,7 @@
 #include "utils.h"
 #include "core.h"
 
-static command_tna_write_team_name(core_t *core, client_t *client,
+static void command_tna_write_team_name(core_t *core, client_t *client,
     char *team_name)
 {
     char *buff = NULL;
@@ -17,6 +17,7 @@ static command_tna_write_team_name(core_t *core, client_t *client,
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
         client_push_command(core->server, client, strdup("suc\n"));
     }
+    client_push_command(core->server, client, buff);
 }
 
 void command_tna(core_t *core, client_t *client, UNUSED char *command)

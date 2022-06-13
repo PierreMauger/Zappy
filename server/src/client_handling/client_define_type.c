@@ -27,6 +27,19 @@ static char *get_map_size(map_t *map)
     return buffer;
 }
 
+static int client_create_new_trantorian(core_t *core, client_t *client,
+    team_t *team)
+{
+    client->type = CLI_DEFAULT;
+    client->trantorian = trantorian_create(team,
+        core->game->map->width, core->game->map->height);
+    if (client->trantorian == NULL)
+        return ERROR;
+    client->trantorian->team = team;
+    client->trantorian->team->cli_sub++;
+    return SUCCESS;
+}
+
 static void client_define_default(core_t *core, client_t *client,
     char *command)
 {
@@ -39,9 +52,13 @@ static void client_define_default(core_t *core, client_t *client,
             (void (*)(void *))client_destroy);
         return;
     }
-    client->type = CLI_DEFAULT;
-    client->team = team;
-    client->team->cli_sub++;
+    if (client_create_new_trantorian(core, client, team) == ERROR) {
+        fprintf(stderr, "[ERROR] Can't create trantorian\n");
+        printf("[INFO] Client connection closed\n");
+        list_destroy_data_node(core->server->clients, client,
+            (void (*)(void *))client_destroy);
+        return;
+    }
     client_push_command(core->server, client,
         get_client_num(core, team));
     client_push_command(core->server, client,

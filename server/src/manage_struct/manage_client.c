@@ -31,8 +31,6 @@ void client_destroy(client_t *client)
 {
     if (client == NULL)
         return;
-    if (client->team != NULL)
-        client->team->cli_sub--;
     if (client->sock != NULL)
         nlib_destroy_socket(client->sock);
     if (client->command_list != NULL)
