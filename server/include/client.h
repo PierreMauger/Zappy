@@ -16,6 +16,8 @@
 
     #include "nlib.h"
 
+    #include "team.h"
+
 typedef enum {
     CLI_UNKNOWN,
 
@@ -26,7 +28,7 @@ typedef enum {
 typedef struct {
     socket_t *sock;
     list_t *command_list;
-    uuid_t id_team;
+    team_t *team;
     client_type_e type;
 } client_t;
 

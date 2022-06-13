@@ -12,7 +12,7 @@ void client_exec_command(core_t *core, client_t *client)
     char *command = list_pop_last(client->command_list);
 
     if (command == NULL) {
-        printf("[ERROR] Cannot get command\n");
+        fprintf(stderr, "[ERROR] Cannot get command\n");
         return;
     }
     if (client->type == CLI_DEFAULT) {
@@ -20,7 +20,7 @@ void client_exec_command(core_t *core, client_t *client)
     } else if (client->type == CLI_GUI) {
         client_gui_search_command(core, client, command);
     } else {
-        client_define_type(core, client);
+        client_define_type(core, client, command);
     }
 }
 
@@ -29,17 +29,17 @@ void client_push_exec_command(client_t *client, char *buffer)
     char *command = strtok(buffer, "\n");
 
     if (command == NULL) {
-        printf("[ERROR] Command is not valid\n");
+        fprintf(stderr, "[ERROR] Command is not valid\n");
         return;
     }
     for (; command != NULL; command = strtok(NULL, "\n")) {
         if (client->command_list->lenght >= 10) {
-            printf("[ERROR] Command list is full\n");
+            fprintf(stderr, "[ERROR] Command list is full\n");
             return;
         }
         if (list_push_data(client->command_list, (void *)strdup(command)) ==
             LIST_FAILURE) {
-            printf("[ERROR] Insertion of command failed\n");
+            fprintf(stderr, "[ERROR] Insertion of command failed\n");
             return;
         }
         printf("[INFO] Command %s pushed\n", command);

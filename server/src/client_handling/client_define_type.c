@@ -5,9 +5,53 @@
 ** main server
 */
 
+#include "utils.h"
 #include "core.h"
 
-void client_define_type(core_t *core, client_t *client)
+static char *get_client_num(core_t *core, team_t *team)
 {
+    char *buffer = NULL;
+    int nb = core->game->cli_per_team - team->cli_sub;
 
+    if (asprintf(&buffer, "%d", nb) == -1)
+        return NULL;
+    return buffer;
+}
+
+static char *get_map_size(map_t *map)
+{
+    char *buffer = NULL;
+
+    if (asprintf(&buffer, " %ld %ld", map->height, map->width) == -1)
+        return NULL;
+    return buffer;
+}
+
+static void client_define_default(core_t *core, client_t *client, char *command)
+{
+    team_t *team = team_get_obj(core->game->teams, command);
+
+    if (team != NULL) {
+        fprintf(stderr, "[ERROR] Team %s does not exist\n", command);
+        printf("[INFO] Client kick\n");
+        list_destroy_data_node(core->server->clients, client,
+            (void (*)(void *))client_destroy);
+        return;
+    }
+    client->type = CLI_DEFAULT;
+    client->team = team;
+    client->team->cli_sub++;
+    client_push_command(core->server, client,
+        get_client_num(core, team), false);
+    client_push_command(core->server, client,
+        get_map_size(core->game->map), false);
+}
+
+void client_define_type(core_t *core, client_t *client, char *command)
+{
+    if (is_uuid(command)) {
+        client->type = CLI_GUI;
+        return;
+    }
+    client_define_default(core, client, command);
 }

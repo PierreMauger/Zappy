@@ -13,12 +13,12 @@ void client_push_command(server_t *serv, client_t *client,
     command_t *command = NULL;
 
     if (buff == NULL || serv == NULL || client == NULL) {
-        printf("[ERROR] Cannot create command\n");
+        fprintf(stderr, "[ERROR] Cannot create command\n");
         return;
     }
     command = nlib_command_create(buff);
     if (command == NULL) {
-        printf("[ERROR] Cannot create command\n");
+        fprintf(stderr, "[ERROR] Cannot create command\n");
         return;
     }
     if (broadcast == true) {
