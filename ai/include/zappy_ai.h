@@ -49,8 +49,25 @@ typedef struct pos_s {
     int y;
 } pos_t;
 
+typedef struct {
+    size_t food;
+    size_t linemate;
+    size_t deraumere;
+    size_t sibur;
+    size_t mendiane;
+    size_t phiras;
+    size_t thystame;
+} inventory_t;
+
+typedef struct map_s {
+    inventory_t inv;
+    bool view;
+    pos_t pos;
+} map_t;
+
 typedef struct player_s {
     char *team_name;
+    inventory_t inv;
     pos_t pos;
 } player_t;
 
@@ -63,8 +80,25 @@ typedef struct client_s {
     fd_set readfds;
     fd_set writefds;
     list_t *command;
+    list_t *pending_commands;
     player_t *player;
+    map_t *map;
 } client_t;
+
+int forward_movement(char *str);
+int right_movement(char *str);
+int left_movement(char *str);
+
+typedef struct com_s {
+    const char *cmd;
+    int (*func_ptr)(char *str);
+} com_t;
+
+static const com_t com[] =
+{
+    {"Forward\0", &forward_movement},
+    {NULL, NULL}
+};
 
 #define R "\033[1;31m"
 #define G "\033[1;32m"
@@ -78,12 +112,14 @@ client_t *create_client(arg_t *arg);
 void free_client(client_t *client);
 bool init_client(arg_t *arg);
 
-bool send_message(list_t *list, socket_t *socket, char *message);
+bool send_message(list_t *pending, list_t *list, socket_t *socket, char *mess);
 
 int read_stdin(client_t *client);
 
 bool parse_return(client_t *client, char *str);
 
 void sig_handler(int signum);
+
+bool ai(client_t *client);
 
 #endif // ZAPPY_AI_H

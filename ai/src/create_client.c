@@ -14,6 +14,7 @@ void free_client(client_t *client)
     free(client->socket->addr);
     free(client->socket);
     list_destroy(client->command, (void (*)(void *))nlib_command_destroy);
+    list_destroy(client->pending_commands, free);
     free(client->player);
     free(client);
 }
@@ -41,7 +42,9 @@ client_t *create_client(arg_t *arg)
         fprintf(stderr, "%s[ERROR]%s socket creation failed\n", R, W);
         exit(ERROR_EXIT);
     }
-    if (!(client->command = list_create()) || !(client->player = crt_play(arg)))
+    if (!(client->command = list_create()) ||
+        !(client->pending_commands = list_create()) ||
+        !(client->player = crt_play(arg)))
         return NULL;
     client->socket->addr->sin_family = AF_INET;
     client->socket->addr->sin_port = htons(arg->port);

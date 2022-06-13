@@ -30,7 +30,8 @@ int read_stdin(client_t *client)
 
     if (!input)
         return 1;
-    send_message(client->command, client->socket, strdup(input));
+    send_message(
+        client->pending_commands, client->command, client->socket, input);
     free(input);
     return 1;
 }

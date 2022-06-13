@@ -31,7 +31,7 @@ static bool check_fd_isset(client_t *client)
     if (FD_ISSET(client->socket->fd, &client->readfds)) {
         temp = nlib_read_socket(client->socket->fd);
         if (temp == NULL) {
-            fprintf(stderr, "%s[ERROR]%s malloc buffer read socket\n", R, W);
+            fprintf(stderr, "%s[ERROR]%s can't read socket\n", R, W);
             return true;
         }
         if (!parse_return(client, temp)) {

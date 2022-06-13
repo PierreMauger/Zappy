@@ -6,11 +6,13 @@
 ##
 
 ##################### SRC #######################
-SRC				=	./src/init_client.c				\
+SRC				=	./src/loop_client.c				\
 					./src/create_client.c			\
 					./src/parse_ret.c				\
 					./src/stdin.c 					\
 					./src/send_message.c 			\
+					./src/if_forest.c 				\
+					./src/command/movement.c 		\
 
 SRC				+=	./src/main.c
 

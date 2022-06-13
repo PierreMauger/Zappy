@@ -7,17 +7,29 @@
 
 #include "zappy_ai.h"
 
-void forward_movement(void)
+int forward_movement(char *str)
 {
-
+    if (strcmp(str, "ok\n") == 0) {
+        printf("%s[COMMAND]%s Forward\n", G, W);
+        return 0;
+    }
+    return 1;
 }
 
-void right_movement(void)
+int right_movement(char *str)
 {
-
+    if (strcmp(str, "ok\n") == 0) {
+        printf("%s[COMMAND]%s Right\n", G, W);
+        return 0;
+    }
+    return 1;
 }
 
-void left_movement(void)
+int left_movement(char *str)
 {
-
+    if (strcmp(str, "ok\n") == 0) {
+        printf("%s[COMMAND]%s Left\n", G, W);
+        return 0;
+    }
+    return 1;
 }
