@@ -36,11 +36,8 @@ static void server_accept_connection(server_t *serv)
     int fd_temp = accept(serv->socket->fd,
         (struct sockaddr *)serv->socket->addr, &socket_size);
 
-    if (setup_new_client(serv, fd_temp) == SUCCESS) {
+    if (setup_new_client(serv, fd_temp) == SUCCESS)
         printf("[INFO] New client connected.\n");
-        //send_message()
-        dprintf(fd_temp, "WELCOME\n");
-    }
 }
 
 int server_loop(core_t *core)

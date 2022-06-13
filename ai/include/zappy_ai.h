@@ -78,6 +78,10 @@ client_t *create_client(arg_t *arg);
 void free_client(client_t *client);
 bool init_client(arg_t *arg);
 
+bool send_message(list_t *list, socket_t *socket, char *message);
+
+int read_stdin(client_t *client);
+
 bool parse_return(client_t *client, char *str);
 
 void sig_handler(int signum);

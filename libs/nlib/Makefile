@@ -11,7 +11,6 @@ SRC		=	socket/manage_socket.c				\
 			socket/write_socket.c				\
 			select/select.c						\
 			queue/update_command.c				\
-			queue/send_message.c				\
 
 OBJ		=	$(SRC:.c=.o)
 
