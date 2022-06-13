@@ -12,12 +12,12 @@ static void print_usage(void)
     printf("USAGE:\n");
     printf("./zappy_server -p port -x width -y height -n name1 name2 ... "
         "-c clientsNb -f freq\n");
-    printf("   -p | --port\t\tport number\t\t\t(8080 by default)\n");
-    printf("   -x | --width\t\tmap width\t\t\t(10 by default)\n");
-    printf("   -y | --height\tmap height\t\t\t(10 by default)\n");
-    printf("   -n | --name\t\tname of the team\n");
-    printf("   -c | --clients\tnumber of client per team\t(1 by default)\n");
-    printf("   -f | --freq\t\tcycle frequency\t\t\t(100 by default)\n");
+    printf("\t-p\tport number\t\t\t(8080 by default)\n");
+    printf("\t-x\tmap width\t\t\t(10 by default)\n");
+    printf("\t-y\ttmap height\t\t\t(10 by default)\n");
+    printf("\t-n\tname of the team\n");
+    printf("\t-c\tnumber of client per team\t(1 by default)\n");
+    printf("\t-f\tcycle frequency\t\t\t(100 by default)\n");
 }
 
 int main(int argc, char **argv)
