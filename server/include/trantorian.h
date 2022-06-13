@@ -14,6 +14,7 @@
     #include <stdlib.h>
 
     #include "inventory.h"
+    #include "team.h"
 
 typedef enum {
     DIR_UP,
@@ -23,7 +24,7 @@ typedef enum {
 } direction_e;
 
 typedef struct {
-    uuid_t id_team;
+    team_t *team;
     inventory_t *inventory;
     size_t level;
     size_t x;
@@ -31,7 +32,7 @@ typedef struct {
     direction_e direction;
 } trantorian_t;
 
-trantorian_t *trantorian_create(uuid_t id_team, size_t x, size_t y);
+trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y);
 void trantorian_destroy(trantorian_t *trantorian);
 
 #endif // TRANTORIAN_H

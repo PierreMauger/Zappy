@@ -27,13 +27,14 @@ static char *get_map_size(map_t *map)
     return buffer;
 }
 
-static void client_define_default(core_t *core, client_t *client, char *command)
+static void client_define_default(core_t *core, client_t *client,
+    char *command)
 {
     team_t *team = team_get_obj(core->game->teams, command);
 
     if (team != NULL) {
         fprintf(stderr, "[ERROR] Team %s does not exist\n", command);
-        printf("[INFO] Client kick\n");
+        printf("[INFO] Client kicked\n");
         list_destroy_data_node(core->server->clients, client,
             (void (*)(void *))client_destroy);
         return;

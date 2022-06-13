@@ -10,12 +10,15 @@
 TEST(TestTrantorianAlloc, Test1)
 {
     team_t *team = team_create("team1");
-    trantorian_t *trantorian = nullptr;
 
     ASSERT_TRUE(team != nullptr);
-    trantorian = trantorian_create(team->id, 0, 0);
+
+    trantorian_t *trantorian = trantorian_create(team, 10, 10);
     EXPECT_TRUE(trantorian != nullptr);
-    EXPECT_TRUE(uuid_compare(team->id, trantorian->id_team) == false);
+    EXPECT_TRUE(trantorian->team == team);
+    EXPECT_TRUE(trantorian->x < 10);
+    EXPECT_TRUE(trantorian->y < 10);
+
     trantorian_destroy(trantorian);
     team_destroy(team);
 }
