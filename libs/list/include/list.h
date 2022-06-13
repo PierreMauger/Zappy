@@ -41,6 +41,7 @@ void list_push_node(list_t *list, node_t *node);
 
 void list_remove_node(list_t *list, node_t *node);
 void *list_pop_last(list_t *list);
+void *list_pop_head(list_t *list);
 void list_destroy_data_node(list_t *list, void *data,
     void (*destroy_data)(void *));
 

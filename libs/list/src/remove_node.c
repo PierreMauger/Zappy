@@ -38,6 +38,18 @@ void *list_pop_last(list_t *list)
     return data;
 }
 
+void *list_pop_head(list_t *list)
+{
+    node_t *node = list->head;
+    void *data = node->data;
+
+    if (!list)
+        return (NULL);
+    list_remove_node(list, node);
+    list_destroy_node(node, NULL);
+    return data;
+}
+
 void list_destroy_data_node(list_t *list, void *data,
     void (*destroy_data)(void *))
 {
