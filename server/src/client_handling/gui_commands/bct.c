@@ -32,13 +32,13 @@ void command_write_tile_content(core_t *core, client_t *client,
 
     if (asprintf(&buffer, "bct %ld %ld %ld %ld %ld %ld %ld %ld %ld\n",
             x, y,
-            core->game->map->map[y][x].food,
-            core->game->map->map[y][x].linemate,
-            core->game->map->map[y][x].deraumere,
-            core->game->map->map[y][x].sibur,
-            core->game->map->map[y][x].mendiane,
-            core->game->map->map[y][x].phiras,
-            core->game->map->map[y][x].thystame) == -1) {
+            GET_CELL(core->game->map, x, y)->food,
+            GET_CELL(core->game->map, x, y)->linemate,
+            GET_CELL(core->game->map, x, y)->deraumere,
+            GET_CELL(core->game->map, x, y)->sibur,
+            GET_CELL(core->game->map, x, y)->mendiane,
+            GET_CELL(core->game->map, x, y)->phiras,
+            GET_CELL(core->game->map, x, y)->thystame) == -1) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
         client_push_command(core->server, client, strdup("suc\n"));
     }
@@ -50,7 +50,8 @@ void command_bct(core_t *core, client_t *client, char *command)
     size_t x = 0;
     size_t y = 0;
 
-    if (get_x_y(command, &x, &y) == ERROR) {
+    if (get_x_y(command, &x, &y) == ERROR || x >= core->game->map->width ||
+            y >= core->game->map->height) {
         fprintf(stderr, "[ERROR] GUI Bad params\n");
         client_push_command(core->server, client, strdup("sbp\n"));
         return;

@@ -45,6 +45,8 @@ typedef struct {
 core_t *core_create(void);
 void core_destroy(core_t *core);
 
+int core_init(core_t *core, args_t *args);
+
 args_t *init_args(void);
 void destroy_args(args_t *args);
 

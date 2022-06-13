@@ -25,7 +25,7 @@ void command_tna(core_t *core, client_t *client, UNUSED char *command)
     node_t *node = NULL;
     team_t *team = NULL;
 
-    foreach(node, core->game->teams->head) {
+    foreach(core->game->teams->head, node) {
         team = (team_t *)node->data;
         command_tna_write_team_name(core, client, team->name);
     }

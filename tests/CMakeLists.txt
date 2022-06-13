@@ -21,6 +21,7 @@ add_executable(unit-tests
   src/TestInitTrantorian.cpp
   src/TestParseParams.cpp
   src/TestClientLogin.cpp
+  src/TestGUIProtocol.cpp
 
   ../server/src/manage_struct/manage_client.c
   ../server/src/manage_struct/manage_core.c
