@@ -16,7 +16,7 @@ void client_push_exec_command(client_t *client, char *buffer)
         return;
     }
     for (; command != NULL; command = strtok(NULL, "\n")) {
-        if (list_push_data(client->exec_commands, (void *)strdup(command)) ==
+        if (list_push_data(client->command_list, (void *)strdup(command)) ==
             LIST_FAILURE) {
             printf("[ERROR] Insertion of command failed\n");
             return;
@@ -46,12 +46,14 @@ void clients_update(core_t *core, fd_set *readfds)
 
     foreach_safe(core->server->clients->head, node, safe) {
         client = (client_t *)node->data;
-        if (FD_ISSET(client->sock->fd, readfds) == 0)
-            continue;
-        if (client_get_command(client) == EXIT) {
+        if (FD_ISSET(client->sock->fd, readfds) &&
+            client_get_command(client) == EXIT) {
             list_remove_node(core->server->clients, node);
             list_destroy_node(node, (void (*)(void *))client_destroy);
             printf("[INFO] Client disconnected\n");
+        }
+        if (client->command_list->lenght > 0) {
+            client_exec_command(core, client);
         }
     }
 }

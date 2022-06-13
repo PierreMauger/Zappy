@@ -35,6 +35,7 @@ add_executable(unit-tests
   ../server/src/utils/parse_params.c
   ../server/src/utils/set_fds.c
   ../server/src/client_handling/client_update.c
+  ../src/client_handling/client_exec_command.c
 )
 
 target_include_directories(unit-tests PRIVATE

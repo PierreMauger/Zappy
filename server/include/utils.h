@@ -5,8 +5,8 @@
 ** include
 */
 
-#ifndef SERVER_H
-    #define SERVER_H
+#ifndef UTILS_H
+    #define UTILS_H
 
     #ifndef _GNU_SOURCE
         #define _GNU_SOURCE
@@ -24,4 +24,4 @@
 
     #define UNUSED __attribute__((unused))
 
-#endif // SERVER_H
+#endif // UTILS_H

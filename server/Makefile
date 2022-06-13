@@ -19,6 +19,20 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/server_handling/server_handling.c					\
 					src/server_handling/start_server.c						\
 					src/client_handling/client_update.c						\
+					src/client_handling/client_exec_command.c				\
+					src/client_handling/commands/forward.c					\
+					src/client_handling/commands/right.c					\
+					src/client_handling/commands/left.c						\
+					src/client_handling/commands/look.c						\
+					src/client_handling/commands/inventory.c				\
+					src/client_handling/commands/broadcast.c				\
+					src/client_handling/commands/connect_nbr.c				\
+					src/client_handling/commands/fork.c						\
+					src/client_handling/commands/eject.c					\
+					src/client_handling/commands/take.c						\
+					src/client_handling/commands/set.c						\
+					src/client_handling/commands/incantation.c				\
+					src/utils/command_utils.c							\
 
 SRC				+=	./src/main.c
 

@@ -25,7 +25,6 @@
     #include "server.h"
     #include "game.h"
     #include "client.h"
-    #include "utils.h"
 
 typedef struct {
     int port;
@@ -53,6 +52,26 @@ int parse_params(int argc, char **argv, args_t *args);
 void set_read_fds(server_t *serv, fd_set *fds);
 void set_write_fds(server_t *serv, fd_set *fds);
 
+typedef struct {
+    char *name;
+    void (*func)(core_t *core, client_t *client);
+} method_t;
+
+void command_forward(core_t *core, client_t *client);
+void command_right(core_t *core, client_t *client);
+void command_left(core_t *core, client_t *client);
+void command_look(core_t *core, client_t *client);
+void command_inventory(core_t *core, client_t *client);
+void command_broadcast(core_t *core, client_t *client);
+void command_connect_nbr(core_t *core, client_t *client);
+void command_fork(core_t *core, client_t *client);
+void command_eject(core_t *core, client_t *client);
+void command_take(core_t *core, client_t *client);
+void command_set(core_t *core, client_t *client);
+void command_incantation(core_t *core, client_t *client);
+
+void client_unknown_command(server_t *serv, client_t *client);
+void client_exec_command(core_t *core, client_t *client);
 void client_push_exec_command(client_t *client, char *buffer);
 int client_get_command(client_t *client);
 void clients_update(core_t *core, fd_set *readfds);
