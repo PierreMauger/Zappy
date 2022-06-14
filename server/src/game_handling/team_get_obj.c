@@ -7,7 +7,7 @@
 
 #include "core.h"
 
-team_t *team_get_obj(list_t *teams, char *to_comp)
+team_t *team_get_obj(list_t *teams, const char *to_comp)
 {
     node_t *node = NULL;
     team_t *team = NULL;
