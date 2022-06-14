@@ -11,16 +11,16 @@ conan_basic_setup()
 
 add_executable(unit-tests
   src/main.cpp
-  src/TestInitClient.cpp
-  src/TestInitCore.cpp
-  src/TestInitGame.cpp
-  src/TestInitInventory.cpp
-  src/TestInitMap.cpp
-  src/TestInitServer.cpp
-  src/TestInitTeam.cpp
-  src/TestInitTrantorian.cpp
+  src/TestClient.cpp
+  src/TestCore.cpp
+  src/TestGame.cpp
+  src/TestInventory.cpp
+  src/TestMap.cpp
+  src/TestServer.cpp
+  src/TestTeams.cpp
+  src/TestTrantorian.cpp
   src/TestParseParams.cpp
-  src/TestClientLogin.cpp
+  src/TestGUIProtocol.cpp
 
   ../server/src/manage_struct/manage_client.c
   ../server/src/manage_struct/manage_core.c

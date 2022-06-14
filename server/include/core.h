@@ -45,6 +45,8 @@ typedef struct {
 core_t *core_create(void);
 void core_destroy(core_t *core);
 
+int core_init(core_t *core, args_t *args);
+
 args_t *init_args(void);
 void destroy_args(args_t *args);
 
@@ -52,7 +54,7 @@ int verif_params(args_t *args);
 int parse_params(int argc, char **argv, args_t *args);
 
 bool is_uuid(char *str);
-team_t *team_get_obj(list_t *teams, char *to_comp);
+team_t *team_get_obj(list_t *teams, const char *to_comp);
 
 void set_read_fds(server_t *serv, fd_set *fds);
 void set_write_fds(server_t *serv, fd_set *fds);

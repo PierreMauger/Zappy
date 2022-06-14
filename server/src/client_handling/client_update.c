@@ -22,6 +22,7 @@ void client_exec_command(core_t *core, client_t *client)
     } else {
         client_define_type(core, client, command);
     }
+    free(command);
 }
 
 void client_push_exec_command(client_t *client, char *buffer)
@@ -68,12 +69,13 @@ void clients_update(core_t *core, fd_set *readfds)
     foreach_safe(core->server->clients->head, node, safe) {
         client = (client_t *)node->data;
         if (FD_ISSET(client->sock->fd, readfds) &&
-            client_get_command(client) == EXIT) {
+                client_get_command(client) == EXIT) {
+            list_destroy_data_node(core->game->trantorians, client->trantorian,
+                (void (*)(void *))trantorian_destroy);
             list_remove_node(core->server->clients, node);
             list_destroy_node(node, (void (*)(void *))client_destroy);
             printf("[INFO] Client disconnected\n");
-        }
-        if (client->command_list->lenght > 0) {
+        } else if (client->command_list->lenght > 0) {
             client_exec_command(core, client);
         }
     }

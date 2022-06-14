@@ -8,8 +8,38 @@
 #include "utils.h"
 #include "core.h"
 
-void command_pin(UNUSED core_t *core, UNUSED client_t *client,
-    UNUSED char *command)
+static char *command_pin_get_buff(core_t *core, client_t *client, char *uuid)
 {
+    char *buff = NULL;
 
+    if (asprintf(&buff, "pin %s %ld %ld %ld %ld %ld %ld %ld %ld %ld\n", uuid,
+            core->game->map->width, core->game->map->height,
+            client->trantorian->inventory->food,
+            client->trantorian->inventory->linemate,
+            client->trantorian->inventory->deraumere,
+            client->trantorian->inventory->sibur,
+            client->trantorian->inventory->mendiane,
+            client->trantorian->inventory->phiras,
+            client->trantorian->inventory->thystame) == -1)
+        return NULL;
+    return buff;
+}
+
+void command_pin(core_t *core, client_t *client, char *command)
+{
+    char *uuid = strtok(command, " \t");
+    char *buff = NULL;
+
+    if (uuid == NULL || strcmp(uuid, client->trantorian->uuid) != 0) {
+        fprintf(stderr, "[ERROR] GUI unknown parameter\n");
+        client_push_command(core->server, client, strdup("sbp\n"));
+        return;
+    }
+    buff = command_pin_get_buff(core, client, uuid);
+    if (buff == NULL) {
+        fprintf(stderr, "[ERROR] GUI Can't malloc\n");
+        client_push_command(core->server, client, strdup("suc\n"));
+        return;
+    }
+    client_push_command(core->server, client, buff);
 }

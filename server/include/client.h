@@ -16,7 +16,7 @@
 
     #include "nlib.h"
 
-    #include "team.h"
+    #include "trantorian.h"
 
 typedef enum {
     CLI_UNKNOWN,
@@ -28,8 +28,8 @@ typedef enum {
 typedef struct {
     socket_t *sock;
     list_t *command_list;
-    team_t *team;
     client_type_e type;
+    trantorian_t *trantorian;
 } client_t;
 
 void client_destroy_command(char *command);

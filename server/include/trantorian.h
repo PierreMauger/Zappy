@@ -18,12 +18,15 @@
 
 typedef enum {
     DIR_UP,
+    DIR_RIGHT,
     DIR_DOWN,
     DIR_LEFT,
-    DIR_RIGHT
+
+    DIR_SIZE
 } direction_e;
 
 typedef struct {
+    char *uuid;
     team_t *team;
     inventory_t *inventory;
     size_t level;

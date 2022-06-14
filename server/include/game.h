@@ -19,6 +19,7 @@
 
 typedef struct {
     size_t cli_per_team;
+    size_t freq;
     list_t *teams;
     list_t *trantorians;
     map_t *map;

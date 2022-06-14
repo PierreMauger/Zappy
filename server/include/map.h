@@ -8,6 +8,8 @@
 #ifndef MAP_H
     #define MAP_H
 
+    #define GET_CELL(map_ptr, x, y) (map_ptr->map[y * map_ptr->width + x])
+
     #include <stdio.h>
 
     #include "inventory.h"
