@@ -52,6 +52,20 @@ static char *GenericTest(const char *command, void (*func)(core_t *, client_t *,
     return strdup(buffer);
 }
 
+TEST(TestGUIProtocol, suc)
+{
+    char *rep = GenericTest(NULL, command_suc);
+
+    ASSERT_EQ(strcmp(rep, "suc\n"), 0);
+}
+
+TEST(TestGUIProtocol, sbp)
+{
+    char *rep = GenericTest(NULL, command_sbp);
+
+    ASSERT_EQ(strcmp(rep, "sbp\n"), 0);
+}
+
 TEST(TestGUIProtocol, msz)
 {
     char *rep = GenericTest(NULL, command_msz);

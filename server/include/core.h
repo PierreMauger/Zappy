@@ -76,6 +76,23 @@ void command_plv(core_t *core, client_t *client, char *command);
 void command_pin(core_t *core, client_t *client, char *command);
 void command_sgt(core_t *core, client_t *client, char *command);
 void command_sst(core_t *core, client_t *client, char *command);
+void command_pwn(core_t *core, trantorian_t *trantorian);
+void command_pex(core_t *core, trantorian_t *trantorian);
+void command_pbc(core_t *core, trantorian_t *trantorian, char *message);
+void command_pic(core_t *core, trantorian_t *trantorian, list_t *uuids);
+void command_pie(core_t *core, trantorian_t *trantorian);
+void command_pfk(core_t *core, trantorian_t *trantorian);
+void command_pdr(core_t *core, trantorian_t *trantorian);
+void command_pgt(core_t *core, trantorian_t *trantorian);
+void command_pdi(core_t *core, trantorian_t *trantorian);
+void command_enw(core_t *core, trantorian_t *trantorian, trantorian_t *egg);
+void command_eht(core_t *core, trantorian_t *egg);
+void command_ebo(core_t *core, trantorian_t *egg);
+void command_edi(core_t *core, trantorian_t *egg);
+void command_seg(core_t *core, team_t *team_winner);
+void command_smg(core_t *core, char *message);
+void command_suc(core_t *core, client_t *client);
+void command_sbp(core_t *core, client_t *client);
 
 void client_gui_search_command(core_t *core, client_t *client, char *command);
 
@@ -97,10 +114,8 @@ void client_def_search_command(core_t *core, client_t *client, char *command);
 void client_define_type(core_t *core, client_t *client, char *command);
 
 void client_push_command(server_t *serv, client_t *client, char *buff);
-void client_def_broadcast_command(server_t *serv, client_t *client,
-    char *buff);
-void client_gui_broadcast_command(server_t *serv, client_t *client,
-    char *buff);
+void client_def_broadcast_command(server_t *serv, char *buff);
+void client_gui_broadcast_command(server_t *serv, char *buff);
 void client_exec_command(core_t *core, client_t *client);
 void client_push_exec_command(client_t *client, char *buffer);
 int client_get_command(client_t *client);

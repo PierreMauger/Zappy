@@ -15,7 +15,8 @@ static void command_tna_write_team_name(core_t *core, client_t *client,
 
     if (asprintf(&buff, "tna %s\n", team_name) == -1) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
-        client_push_command(core->server, client, strdup("suc\n"));
+        command_suc(core, client);
+        return;
     }
     client_push_command(core->server, client, buff);
 }

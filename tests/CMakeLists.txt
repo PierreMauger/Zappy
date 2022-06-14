@@ -60,6 +60,23 @@ add_executable(unit-tests
   ../server/src/client_handling/gui_commands/pin.c
   ../server/src/client_handling/gui_commands/sgt.c
   ../server/src/client_handling/gui_commands/sst.c
+  ../server/src/client_handling/gui_commands/pnw.c
+  ../server/src/client_handling/gui_commands/pex.c
+  ../server/src/client_handling/gui_commands/pbc.c
+  ../server/src/client_handling/gui_commands/pic.c
+  ../server/src/client_handling/gui_commands/pie.c
+  ../server/src/client_handling/gui_commands/pfk.c
+  ../server/src/client_handling/gui_commands/pdr.c
+  ../server/src/client_handling/gui_commands/pgt.c
+  ../server/src/client_handling/gui_commands/pdi.c
+  ../server/src/client_handling/gui_commands/enw.c
+  ../server/src/client_handling/gui_commands/eht.c
+  ../server/src/client_handling/gui_commands/ebo.c
+  ../server/src/client_handling/gui_commands/edi.c
+  ../server/src/client_handling/gui_commands/seg.c
+  ../server/src/client_handling/gui_commands/smg.c
+  ../server/src/client_handling/gui_commands/suc.c
+  ../server/src/client_handling/gui_commands/sbp.c
   ../server/src/client_handling/client_define_type.c
   ../server/src/client_handling/client_gui_exec_command.c
   ../server/src/game_handling/team_get_obj.c

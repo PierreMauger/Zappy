@@ -24,11 +24,11 @@ void client_push_command(server_t *serv, client_t *client, char *buff)
     list_push_data(serv->commands_to_send, command);
 }
 
-void client_def_broadcast_command(server_t *serv, client_t *client, char *buff)
+void client_def_broadcast_command(server_t *serv, char *buff)
 {
     command_t *command = NULL;
 
-    if (buff == NULL || serv == NULL || client == NULL) {
+    if (buff == NULL || serv == NULL) {
         fprintf(stderr, "[ERROR] Cannot create command\n");
         return;
     }
@@ -41,11 +41,11 @@ void client_def_broadcast_command(server_t *serv, client_t *client, char *buff)
     list_push_data(serv->commands_to_send, command);
 }
 
-void client_gui_broadcast_command(server_t *serv, client_t *client, char *buff)
+void client_gui_broadcast_command(server_t *serv, char *buff)
 {
     command_t *command = NULL;
 
-    if (buff == NULL || serv == NULL || client == NULL) {
+    if (buff == NULL || serv == NULL) {
         fprintf(stderr, "[ERROR] Cannot create command\n");
         return;
     }

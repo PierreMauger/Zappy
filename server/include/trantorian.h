@@ -12,6 +12,7 @@
 
     #include <stdio.h>
     #include <stdlib.h>
+    #include <stdbool.h>
 
     #include "inventory.h"
     #include "team.h"
@@ -28,6 +29,7 @@ typedef enum {
 typedef struct {
     char *uuid;
     team_t *team;
+    bool hatched;
     inventory_t *inventory;
     size_t level;
     size_t x;
