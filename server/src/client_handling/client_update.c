@@ -43,7 +43,7 @@ void client_push_exec_command(client_t *client, char *buffer)
             fprintf(stderr, "[ERROR] Insertion of command failed\n");
             return;
         }
-        printf("[INFO] Command %s pushed\n", command);
+        printf("[INFO] Command \"%s\" pushed in command list\n", command);
     }
 }
 

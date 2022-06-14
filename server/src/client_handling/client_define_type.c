@@ -11,7 +11,7 @@
 static char *get_client_num(core_t *core, team_t *team)
 {
     char *buffer = NULL;
-    int nb = core->game->cli_per_team - team->cli_sub;
+    int nb = (core->game->cli_per_team - team->cli_sub) + 1;
 
     if (asprintf(&buffer, "%d", nb) == -1)
         return NULL;
@@ -35,8 +35,6 @@ static int client_create_new_trantorian(core_t *core, client_t *client,
         core->game->map->width, core->game->map->height);
     if (client->trantorian == NULL)
         return ERROR;
-    client->trantorian->team = team;
-    client->trantorian->team->cli_sub++;
     return SUCCESS;
 }
 
