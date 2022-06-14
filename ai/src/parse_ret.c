@@ -10,7 +10,7 @@
 static bool get_number_client(client_t *client, char *str)
 {
     if (atoi(str) < 1 && !client->client_connected) {
-        fprintf(stderr, "%s[ERROR]%s too many clients in this team", R, W);
+        fprintf(stderr, "%s[ERROR]%s too many clients in this team\n", R, W);
         return false;
     }
     if (atoi(str) >= 1 && !client->client_connected)
@@ -45,7 +45,7 @@ bool parse_return(client_t *client, char *str)
 {
     char *command = NULL;
 
-    printf("commande reçu : %s\n", str);
+    printf("command received : %s\n", str);
     if (strcmp(str, "WELCOME\n") == 0 || client->init)
         return (init_header(client, str));
     command = list_pop_head(client->pending_commands);
