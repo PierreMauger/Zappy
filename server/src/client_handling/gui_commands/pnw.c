@@ -8,7 +8,7 @@
 #include "utils.h"
 #include "core.h"
 
-void command_pwn(core_t *core, trantorian_t *trantorian)
+void command_pnw(core_t *core, trantorian_t *trantorian)
 {
     char *buff = NULL;
 

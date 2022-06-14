@@ -11,6 +11,7 @@ conan_basic_setup()
 
 add_executable(unit-tests
   src/main.cpp
+  src/Utils.cpp
   src/TestClient.cpp
   src/TestCore.cpp
   src/TestGame.cpp
@@ -21,6 +22,7 @@ add_executable(unit-tests
   src/TestTrantorian.cpp
   src/TestParseParams.cpp
   src/TestGUIProtocol.cpp
+  src/TestGUIEvent.cpp
 
   ../server/src/manage_struct/manage_client.c
   ../server/src/manage_struct/manage_core.c

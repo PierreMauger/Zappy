@@ -76,7 +76,7 @@ void command_plv(core_t *core, client_t *client, char *command);
 void command_pin(core_t *core, client_t *client, char *command);
 void command_sgt(core_t *core, client_t *client, char *command);
 void command_sst(core_t *core, client_t *client, char *command);
-void command_pwn(core_t *core, trantorian_t *trantorian);
+void command_pnw(core_t *core, trantorian_t *trantorian);
 void command_pex(core_t *core, trantorian_t *trantorian);
 void command_pbc(core_t *core, trantorian_t *trantorian, char *message);
 void command_pic(core_t *core, trantorian_t *trantorian, list_t *uuids);
