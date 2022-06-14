@@ -8,6 +8,8 @@
 #ifndef SERVER_H
     #define SERVER_H
 
+    #define MAX_CLI 512
+
     #include <stdio.h>
 
     #include "list.h"

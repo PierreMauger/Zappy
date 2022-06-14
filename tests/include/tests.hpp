@@ -27,6 +27,8 @@ class SimulateCommand
         SimulateCommand();
         ~SimulateCommand();
 
+        void coreCreate(args_t *args);
+
         void startTest(void);
         void endTest(void);
 
@@ -41,6 +43,7 @@ class SimulateCommand
 
         int pipefd[2] = {0};
         fd_set writefds = {0};
+        fd_set readfds = {0};
         std::string res;
 };
 
