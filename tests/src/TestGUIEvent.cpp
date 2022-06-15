@@ -9,7 +9,7 @@
 
 static SimulateCommand sc;
 
-TEST(TestGUIProtocol, pnw)
+TEST(TestGUIEvent, pnw)
 {
     char *buff = nullptr;
 
@@ -28,7 +28,7 @@ TEST(TestGUIProtocol, pnw)
     ASSERT_EQ(sc.getRes(), buff);
 }
 
-TEST(TestGUIProtocol, pex)
+TEST(TestGUIEvent, pex)
 {
     char *buff = nullptr;
 
@@ -42,7 +42,7 @@ TEST(TestGUIProtocol, pex)
     ASSERT_EQ(sc.getRes(), buff);
 }
 
-TEST(TestGUIProtocol, pbc)
+TEST(TestGUIEvent, pbc)
 {
     char *buff = nullptr;
     char *msg = strdup("MESSAGE");
@@ -61,7 +61,7 @@ TEST(TestGUIProtocol, pbc)
     free(msg);
 }
 
-TEST(TestGUIProtocol, pic)
+TEST(TestGUIEvent, pic)
 {
     char *buff = nullptr;
     list_t *list = list_create();
@@ -82,7 +82,7 @@ TEST(TestGUIProtocol, pic)
     list_destroy(list, NULL);
 }
 
-TEST(TestGUIProtocol, pie)
+TEST(TestGUIEvent, pie)
 {
     char *buff = nullptr;
 
@@ -98,7 +98,7 @@ TEST(TestGUIProtocol, pie)
     ASSERT_EQ(sc.getRes(), buff);
 }
 
-TEST(TestGUIProtocol, pfk)
+TEST(TestGUIEvent, pfk)
 {
     char *buff = nullptr;
 
@@ -112,7 +112,7 @@ TEST(TestGUIProtocol, pfk)
     ASSERT_EQ(sc.getRes(), buff);
 }
 
-TEST(TestGUIProtocol, pdi)
+TEST(TestGUIEvent, pdi)
 {
     char *buff = nullptr;
 
@@ -126,7 +126,7 @@ TEST(TestGUIProtocol, pdi)
     ASSERT_EQ(sc.getRes(), buff);
 }
 
-TEST(TestGUIProtocol, enw)
+TEST(TestGUIEvent, enw)
 {
     char *buff = nullptr;
     trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3);
@@ -147,7 +147,7 @@ TEST(TestGUIProtocol, enw)
     trantorian_destroy(egg);
 }
 
-TEST(TestGUIProtocol, eht)
+TEST(TestGUIEvent, eht)
 {
     char *buff = nullptr;
     trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3);
@@ -164,7 +164,7 @@ TEST(TestGUIProtocol, eht)
     trantorian_destroy(egg);
 }
 
-TEST(TestGUIProtocol, ebo)
+TEST(TestGUIEvent, ebo)
 {
     char *buff = nullptr;
     trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3);
@@ -181,7 +181,7 @@ TEST(TestGUIProtocol, ebo)
     trantorian_destroy(egg);
 }
 
-TEST(TestGUIProtocol, edi)
+TEST(TestGUIEvent, edi)
 {
     char *buff = nullptr;
     trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3);
@@ -198,7 +198,7 @@ TEST(TestGUIProtocol, edi)
     trantorian_destroy(egg);
 }
 
-TEST(TestGUIProtocol, seg)
+TEST(TestGUIEvent, seg)
 {
     char *buff = nullptr;
 
@@ -212,7 +212,7 @@ TEST(TestGUIProtocol, seg)
     ASSERT_EQ(sc.getRes(), buff);
 }
 
-TEST(TestGUIProtocol, smg)
+TEST(TestGUIEvent, smg)
 {
     char *buff = nullptr;
     char *msg = strdup("MESSAGE");
