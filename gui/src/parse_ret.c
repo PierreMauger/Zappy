@@ -7,57 +7,71 @@
 
 #include "zappy_gui.h"
 
-static bool get_number_client(client_t *client, char *str)
+static bool init_header(client_t *client)
 {
-    if (atoi(str) < 1 && !client->client_connected) {
-        fprintf(stderr, "%s[ERROR]%s too many clients in this team\n", R, W);
-        return false;
-    }
-    if (atoi(str) >= 1 && !client->client_connected)
-        client->client_connected = true;
-    if (client->size_map.x != -1)
-        client->init = false;
-    return true;
+    return (send_message(NULL,
+        client->command, client->socket, client->uuid));
 }
 
-static bool init_header(client_t *client, char *str)
+static char *get_command_arg(char *str)
 {
-    client->init = true;
-    if (strcmp(str, "WELCOME\n") == 0)
-        return (send_message(NULL,
-            client->command, client->socket, client->uuid));
-    if (!(strchr(str, ' ')))
-        return get_number_client(client, str);
-    else {
-        client->size_map.x = atoi(str);
-        client->size_map.y = atoi(strchr(str, ' '));
-        if (client->size_map.x <= 0 || client->size_map.y <= 0) {
-            fprintf(stderr, "%s[ERROR]%s bad size map", R, W);
-            return false;
-        }
-        if (client->client_connected)
-            client->init = false;
+    char *arg = NULL;
+    size_t i = 0;
+    size_t n = 0;
+    size_t j = 0;
+
+    for (; str[i] != '\0' && str[i] != ' '; i++);
+    if (str[i] == '\0')
+        return NULL;
+    for (n = i; str[n] != '\0'; n++);
+    arg = malloc(sizeof(char) * (n + 1));
+    if (!arg) {
+        fprintf(stderr, "%s[ERROR]%s can't malloc\n", R, W);
+        return NULL;
     }
-    return true;
+    for (n = i; str[n] != '\0' && str[n] != ' '; n++, j++)
+        arg[j] = str[n];
+    arg[j] = '\0';
+    printf("str <%s> arg <%s>\n", str, arg);
+    return arg;
+}
+
+static char *get_command_name(char *str)
+{
+    char *command_name = NULL;
+    size_t i = 0;
+    size_t n = 0;
+
+    for (; str[i] != '\0' && str[i] != ' '; i++);
+    command_name = malloc(sizeof(char) * (i + 1));
+    if (!command_name) {
+        fprintf(stderr, "%s[ERROR]%s can't malloc\n", R, W);
+        return NULL;
+    }
+    for (n = 0; str[n] != '\0' && str[n] != ' '; n++)
+        command_name[n] = str[n];
+    command_name[n] = '\0';
+    return command_name;
 }
 
 bool parse_return(client_t *client, char *str)
 {
-    char *command = NULL;
+    char *command_name = NULL;
+    char *arg = NULL;
 
-    printf("command received : %s\n", str);
-    if (strcmp(str, "WELCOME\n") == 0 || client->init) {
-        return (init_header(client, str));
-    }
-    command = list_pop_head(client->pending_commands);
-    if (!command)
-        return true;
+    printf("response [%s]\n", str);
+    if (strcmp(str, "WELCOME\n") == 0)
+        return (init_header(client));
+    if (!(command_name = get_command_name(str)))
+        return false;
+    arg = get_command_arg(str);
     for (int i = 0; com[i].cmd != NULL; i++) {
-        if (strcmp(com[i].cmd, command) == 0) {
-            com[i].func_ptr(client, str);
+        if (strcmp(com[i].cmd, command_name) == 0) {
+            com[i].func_ptr(client, arg);
             break;
         }
     }
-    free(command);
+    free(command_name);
+    free(arg);
     return true;
 }

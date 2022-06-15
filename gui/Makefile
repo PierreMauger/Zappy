@@ -12,6 +12,8 @@ SRC				=	./src/stdin.c				\
 					./src/parse_ret.c			\
 					./src/send_message.c		\
 					./src/command_gui/bct.c		\
+					./src/command_gui/mct.c		\
+					./src/command_gui/msz.c		\
 
 SRC				+=	./src/main.c
 

@@ -39,6 +39,13 @@
     #include "list.h"
     #include "nlib.h"
 
+enum direction {
+    North,
+    South,
+    East,
+    West
+};
+
 typedef struct arg_s {
     int port;
     char *machine;
@@ -49,20 +56,44 @@ typedef struct pos_s {
     int y;
 } pos_t;
 
+typedef struct {
+    size_t food;
+    size_t linemate;
+    size_t deraumere;
+    size_t sibur;
+    size_t mendiane;
+    size_t phiras;
+    size_t thystame;
+} inventory_t;
+
+typedef struct player_s {
+    char *team_name;
+    inventory_t inv;
+    pos_t pos;
+    enum direction dir;
+    char *uuid;
+} player_t;
+
+typedef struct map_s {
+    inventory_t *inv;
+    player_t *player;
+} map_t;
+
 typedef struct client_s {
     socket_t *socket;
     char *machine;
-    bool init;
-    bool client_connected;
     char *uuid;
     pos_t size_map;
     fd_set readfds;
     fd_set writefds;
     list_t *command;
     list_t *pending_commands;
+    map_t **map;
 } client_t;
 
 int bct(client_t *client, char *str);
+int mct(client_t *client, char *str);
+int msz(client_t *client, char *str);
 
 typedef struct com_s {
     const char *cmd;
@@ -72,6 +103,8 @@ typedef struct com_s {
 static const com_t com[] =
 {
     {"bct\0", &bct},
+    {"mct\0", &mct},
+    {"msz\0", &msz},
     {NULL, NULL}
 };
 

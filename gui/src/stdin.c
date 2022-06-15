@@ -30,11 +30,6 @@ int read_stdin(client_t *client)
 
     if (!input)
         return 1;
-    if (strcmp(input, "print\n") == 0) {
-        printf("%s %d %d\n", (client->client_connected ? "true" : "false"),
-            client->size_map.x, client->size_map.y);
-        return 0;
-    }
     send_message(
         client->pending_commands, client->command, client->socket, input);
     free(input);

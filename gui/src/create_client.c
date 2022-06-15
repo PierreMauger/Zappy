@@ -48,8 +48,6 @@ client_t *create_client(arg_t *arg)
     client->socket->addr->sin_family = AF_INET;
     client->socket->addr->sin_port = htons(arg->port);
     client->socket->addr->sin_addr.s_addr = inet_addr(arg->machine);
-    client->init = false;
-    client->client_connected = false;
     client->size_map.x = -1;
     client->size_map.y = -1;
     return client;
