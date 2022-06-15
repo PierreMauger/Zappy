@@ -99,6 +99,7 @@ int mct(client_t *client, char *str);
 int msz(client_t *client, char *str);
 int ppo(client_t *client, char *str);
 int pnw(client_t *client, char *str);
+int plv(client_t *client, char *str);
 
 typedef struct com_s {
     const char *cmd;
@@ -112,6 +113,7 @@ static const com_t com[] =
     {"msz\0", &msz},
     {"ppo\0", &ppo},
     {"pnw\0", &pnw},
+    {"plv\0", &plv},
     {NULL, NULL}
 };
 
@@ -140,5 +142,6 @@ bool loop_command(client_t *client);
 
 char *create_uuid();
 char *get_one_word(char *str);
+char *move_str(char *str);
 
 #endif // ZAPPY_AI_H

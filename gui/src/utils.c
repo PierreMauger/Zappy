@@ -7,6 +7,17 @@
 
 #include "zappy_gui.h"
 
+char *move_str(char *str)
+{
+    size_t i = 0;
+
+    while (str[i] == ' ')
+        i++;
+    while (str[i] != '\0' && str[i] != ' ' && str[i] != '\n')
+        i++;
+    return &str[i];
+}
+
 char *get_one_word(char *str)
 {
     char *word = NULL;

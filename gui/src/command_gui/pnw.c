@@ -7,17 +7,6 @@
 
 #include "zappy_gui.h"
 
-static char *move_str(char *str)
-{
-    size_t i = 0;
-
-    while (str[i] == ' ')
-        i++;
-    while (str[i] != '\0' && str[i] != ' ' && str[i] != '\n')
-        i++;
-    return &str[i];
-}
-
 static player_t *split_create_player(player_t *player, char *save)
 {
     char *temp = NULL;

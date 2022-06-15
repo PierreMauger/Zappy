@@ -20,6 +20,7 @@ static char *get_command_arg(char *str)
     size_t n = 0;
     size_t j = 0;
 
+    for (; str[i] == ' '; i++);
     for (; str[i] != '\0' && str[i] != ' '; i++);
     if (str[i] == '\0')
         return NULL;
