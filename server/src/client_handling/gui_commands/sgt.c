@@ -14,7 +14,8 @@ void command_sgt(core_t *core, client_t *client, UNUSED char *command)
 
     if (asprintf(&buff, "sgt %ld\n", core->game->freq) == -1) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
-        client_push_command(core->server, client, strdup("suc\n"));
+        command_suc(core, client);
+        return;
     }
     client_push_command(core->server, client, buff);
 }

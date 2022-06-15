@@ -28,5 +28,5 @@ void client_gui_search_command(core_t *core, client_t *client, char *command)
         }
     }
     fprintf(stderr, "[ERROR] GUI unknown command\n");
-    client_push_command(core->server, client, strdup("suc\n"));
+    command_suc(core, client);
 }

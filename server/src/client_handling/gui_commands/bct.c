@@ -40,7 +40,8 @@ void command_write_tile_content(core_t *core, client_t *client,
             GET_CELL(core->game->map, x, y)->phiras,
             GET_CELL(core->game->map, x, y)->thystame) == -1) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
-        client_push_command(core->server, client, strdup("suc\n"));
+        command_suc(core, client);
+        return;
     }
     client_push_command(core->server, client, buffer);
 }
@@ -53,7 +54,7 @@ void command_bct(core_t *core, client_t *client, char *command)
     if (get_x_y(command, &x, &y) == ERROR || x >= core->game->map->width ||
             y >= core->game->map->height) {
         fprintf(stderr, "[ERROR] GUI Bad params\n");
-        client_push_command(core->server, client, strdup("sbp\n"));
+        command_sbp(core, client);
         return;
     }
     command_write_tile_content(core, client, x, y);
