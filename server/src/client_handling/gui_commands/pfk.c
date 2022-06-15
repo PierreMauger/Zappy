@@ -12,7 +12,7 @@ void command_pfk(core_t *core, trantorian_t *trantorian)
 {
     char *buff = NULL;
 
-    if (asprintf(&buff, "pfk %s", trantorian->uuid) == -1) {
+    if (asprintf(&buff, "pfk %s\n", trantorian->uuid) == -1) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
         return;
     }

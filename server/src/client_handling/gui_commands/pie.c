@@ -12,7 +12,7 @@ void command_pie(core_t *core, trantorian_t *trantorian)
 {
     char *buff = NULL;
 
-    if (asprintf(&buff, "pie %ld %ld %ld",
+    if (asprintf(&buff, "pie %ld %ld %ld\n",
             trantorian->x,
             trantorian->y,
             trantorian->level) == -1) {
