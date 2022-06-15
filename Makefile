@@ -34,10 +34,10 @@ fclean:	clean
 	@(make fclean -C $(PATH_LIBS)) > /dev/null
 	@(make fclean -C $(PATH_AI)) > /dev/null
 	@(make fclean -C $(PATH_SERVER)) > /dev/null
-	@(make clean -C $(PATH_GUI)) > /dev/null
+	@(make fclean -C $(PATH_GUI)) > /dev/null
 
 debug:
-	@(make debug -C $(PATH_LIBS)) > /dev/null
+	@(make -C $(PATH_LIBS)) > /dev/null
 	@(make debug -C $(PATH_AI)) > /dev/null
 	@(make debug -C $(PATH_SERVER)) > /dev/null
-	@(make clean -C $(PATH_GUI)) > /dev/null
+	@(make debug -C $(PATH_GUI)) > /dev/null

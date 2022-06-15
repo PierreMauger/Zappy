@@ -50,5 +50,7 @@ client_t *create_client(arg_t *arg)
     client->socket->addr->sin_addr.s_addr = inet_addr(arg->machine);
     client->size_map.x = -1;
     client->size_map.y = -1;
+    client->map = NULL;
+    client->player = list_create();
     return client;
 }

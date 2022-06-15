@@ -40,9 +40,10 @@
     #include "nlib.h"
 
 enum direction {
+    Nothing,
     North,
-    South,
     East,
+    South,
     West
 };
 
@@ -67,6 +68,7 @@ typedef struct {
 } inventory_t;
 
 typedef struct player_s {
+    int level;
     char *team_name;
     inventory_t inv;
     pos_t pos;
@@ -88,12 +90,15 @@ typedef struct client_s {
     fd_set writefds;
     list_t *command;
     list_t *pending_commands;
+    list_t *player;
     map_t **map;
 } client_t;
 
 int bct(client_t *client, char *str);
 int mct(client_t *client, char *str);
 int msz(client_t *client, char *str);
+int ppo(client_t *client, char *str);
+int pnw(client_t *client, char *str);
 
 typedef struct com_s {
     const char *cmd;
@@ -105,6 +110,8 @@ static const com_t com[] =
     {"bct\0", &bct},
     {"mct\0", &mct},
     {"msz\0", &msz},
+    {"ppo\0", &ppo},
+    {"pnw\0", &pnw},
     {NULL, NULL}
 };
 
@@ -116,6 +123,8 @@ static const com_t com[] =
 #define C "\033[1;36m"
 #define W "\033[1;0m"
 
+void sig_handler(int signum);
+
 bool send_message(list_t *pending, list_t *list, socket_t *socket, char *mess);
 
 int read_stdin(client_t *client);
@@ -126,6 +135,10 @@ bool init_client(arg_t *arg);
 client_t *create_client(arg_t *arg);
 void free_client(client_t *client);
 
+bool first_command(client_t *client);
+bool loop_command(client_t *client);
+
 char *create_uuid();
+char *get_one_word(char *str);
 
 #endif // ZAPPY_AI_H

@@ -59,6 +59,7 @@ static bool loop_client(client_t *client)
         if (check_fd_isset(client))
             break;
         nlib_commands_update(client->command, &client->writefds);
+        
     }
     return true;
 }

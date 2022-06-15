@@ -77,6 +77,7 @@ int main(int ac, char **av)
 
     if (!arg || !get_arg(arg, ac, av))
         return (ERROR_EXIT);
+    signal(SIGINT, sig_handler);
     ret = init_client(arg);
     free(arg);
     if (!ret)
