@@ -11,6 +11,7 @@ conan_basic_setup()
 
 add_executable(unit-tests
   src/main.cpp
+  src/Utils.cpp
   src/TestClient.cpp
   src/TestCore.cpp
   src/TestGame.cpp
@@ -21,6 +22,7 @@ add_executable(unit-tests
   src/TestTrantorian.cpp
   src/TestParseParams.cpp
   src/TestGUIProtocol.cpp
+  src/TestGUIEvent.cpp
 
   ../server/src/manage_struct/manage_client.c
   ../server/src/manage_struct/manage_core.c
@@ -60,6 +62,23 @@ add_executable(unit-tests
   ../server/src/client_handling/gui_commands/pin.c
   ../server/src/client_handling/gui_commands/sgt.c
   ../server/src/client_handling/gui_commands/sst.c
+  ../server/src/client_handling/gui_commands/pnw.c
+  ../server/src/client_handling/gui_commands/pex.c
+  ../server/src/client_handling/gui_commands/pbc.c
+  ../server/src/client_handling/gui_commands/pic.c
+  ../server/src/client_handling/gui_commands/pie.c
+  ../server/src/client_handling/gui_commands/pfk.c
+  ../server/src/client_handling/gui_commands/pdr.c
+  ../server/src/client_handling/gui_commands/pgt.c
+  ../server/src/client_handling/gui_commands/pdi.c
+  ../server/src/client_handling/gui_commands/enw.c
+  ../server/src/client_handling/gui_commands/eht.c
+  ../server/src/client_handling/gui_commands/ebo.c
+  ../server/src/client_handling/gui_commands/edi.c
+  ../server/src/client_handling/gui_commands/seg.c
+  ../server/src/client_handling/gui_commands/smg.c
+  ../server/src/client_handling/gui_commands/suc.c
+  ../server/src/client_handling/gui_commands/sbp.c
   ../server/src/client_handling/client_define_type.c
   ../server/src/client_handling/client_gui_exec_command.c
   ../server/src/game_handling/team_get_obj.c

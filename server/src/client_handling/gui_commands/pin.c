@@ -32,13 +32,13 @@ void command_pin(core_t *core, client_t *client, char *command)
 
     if (uuid == NULL || strcmp(uuid, client->trantorian->uuid) != 0) {
         fprintf(stderr, "[ERROR] GUI unknown parameter\n");
-        client_push_command(core->server, client, strdup("sbp\n"));
+        command_sbp(core, client);
         return;
     }
     buff = command_pin_get_buff(core, client, uuid);
     if (buff == NULL) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
-        client_push_command(core->server, client, strdup("suc\n"));
+        command_suc(core, client);
         return;
     }
     client_push_command(core->server, client, buff);

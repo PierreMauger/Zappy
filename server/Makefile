@@ -44,6 +44,23 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/client_handling/gui_commands/pin.c					\
 					src/client_handling/gui_commands/sgt.c					\
 					src/client_handling/gui_commands/sst.c					\
+					src/client_handling/gui_commands/pnw.c					\
+					src/client_handling/gui_commands/pex.c					\
+					src/client_handling/gui_commands/pbc.c					\
+					src/client_handling/gui_commands/pic.c					\
+					src/client_handling/gui_commands/pie.c					\
+					src/client_handling/gui_commands/pfk.c					\
+					src/client_handling/gui_commands/pdr.c					\
+					src/client_handling/gui_commands/pgt.c					\
+					src/client_handling/gui_commands/pdi.c					\
+					src/client_handling/gui_commands/enw.c					\
+					src/client_handling/gui_commands/eht.c					\
+					src/client_handling/gui_commands/ebo.c					\
+					src/client_handling/gui_commands/edi.c					\
+					src/client_handling/gui_commands/seg.c					\
+					src/client_handling/gui_commands/smg.c					\
+					src/client_handling/gui_commands/suc.c					\
+					src/client_handling/gui_commands/sbp.c					\
 					src/client_handling/client_define_type.c				\
 					src/client_handling/client_gui_exec_command.c			\
 					src/game_handling/team_get_obj.c						\

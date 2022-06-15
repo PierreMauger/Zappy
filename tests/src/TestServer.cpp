@@ -9,10 +9,10 @@
 
 TEST(TestServerAlloc, Test1)
 {
-    server_t *server = server_create(8080, 4, 5);
+    server_t *server = server_create(3000, 4, 5);
 
-    EXPECT_TRUE(server != nullptr);
-    EXPECT_TRUE(server->port == 8080);
+    ASSERT_TRUE(server != nullptr);
+    EXPECT_TRUE(server->port == 3000);
     EXPECT_TRUE(server->socket != nullptr);
     server_destroy(server);
 }
