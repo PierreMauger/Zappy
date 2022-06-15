@@ -7,7 +7,7 @@
 
 #include "tests.hpp"
 
-static SimulateCommand sc;
+static CommandFixture sc;
 
 TEST(TestGUIProtocol, suc)
 {

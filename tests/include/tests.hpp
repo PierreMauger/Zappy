@@ -21,11 +21,11 @@
         #include "trantorian.h"
     }
 
-class SimulateCommand
+class CommandFixture
 {
     public:
-        SimulateCommand();
-        ~SimulateCommand();
+        CommandFixture();
+        ~CommandFixture();
 
         void coreCreate(args_t *args);
 
