@@ -57,16 +57,17 @@ static void client_define_default(core_t *core, client_t *client,
             (void (*)(void *))client_destroy);
         return;
     }
-    client_push_command(core->server, client,
-        get_client_num(core, team));
-    client_push_command(core->server, client,
-        get_map_size(core->game->map));
+    client_push_command(core->server, client, get_client_num(core, team));
+    client_push_command(core->server, client, get_map_size(core->game->map));
+    printf("[INFO] Default client detected\n");
+    command_pnw(core, client->trantorian);
 }
 
 void client_define_type(core_t *core, client_t *client, char *command)
 {
     if (is_uuid(command)) {
         client->type = CLI_GUI;
+        printf("[INFO] GUI client detected\n");
         return;
     }
     client_define_default(core, client, command);
