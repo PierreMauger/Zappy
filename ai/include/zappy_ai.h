@@ -39,12 +39,12 @@
     #include "nlib.h"
     #include "command.h"
 
-enum direction {
+typedef enum {
     North,
-    South,
     East,
+    South,
     West
-};
+} direction_e;
 
 typedef struct arg_s {
     int port;
@@ -77,7 +77,7 @@ typedef struct player_s {
     char *team_name;
     inventory_t inv;
     pos_t pos;
-    enum direction dir;
+    direction_e dir;
 } player_t;
 
 typedef struct client_s {

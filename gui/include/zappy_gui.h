@@ -39,13 +39,12 @@
     #include "list.h"
     #include "nlib.h"
 
-enum direction {
-    Nothing,
+typedef enum {
     North,
     East,
     South,
     West
-};
+} direction_e;
 
 typedef struct arg_s {
     int port;
@@ -72,7 +71,7 @@ typedef struct player_s {
     char *team_name;
     inventory_t inv;
     pos_t pos;
-    enum direction dir;
+    direction_e dir;
     char *uuid;
 } player_t;
 
@@ -99,6 +98,7 @@ int bct(client_t *client, char *str);
 int mct(client_t *client, char *str);
 int msz(client_t *client, char *str);
 int ppo(client_t *client, char *str);
+int pin(client_t *client, char *str);
 int pnw(client_t *client, char *str);
 int plv(client_t *client, char *str);
 int tna(client_t *client, char *str);
@@ -114,8 +114,9 @@ static const com_t com[] =
     {"mct\0", &mct},
     {"msz\0", &msz},
     {"ppo\0", &ppo},
-    {"pnw\0", &pnw},
     {"plv\0", &plv},
+    {"pin\0", &pin},
+    {"pnw\0", &pnw},
     {"tna\0", &tna},
     {NULL, NULL}
 };
