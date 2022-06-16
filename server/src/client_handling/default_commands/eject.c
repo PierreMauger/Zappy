@@ -7,7 +7,18 @@
 
 #include "core.h"
 
-void command_eject(UNUSED core_t *core, UNUSED client_t *client, UNUSED char *command)
+void eject_e(UNUSED core_t *core, UNUSED client_t *client, UNUSED char *command)
 {
+    // TODO
+}
 
+void command_eject(core_t *core, client_t *client, UNUSED char *command)
+{
+    if (client == NULL || client->trantorian == NULL) {
+        fprintf(stderr, "[ERROR] Invalid client\n");
+        client_push_command(core->server, client, strdup("ko\n"));
+        return;
+    }
+    client->handler->command = eject_e;
+    client->handler->command_it = 7;
 }
