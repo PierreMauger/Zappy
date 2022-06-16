@@ -7,6 +7,23 @@
 
 #include "zappy_gui.h"
 
+static void free_map(client_t *client)
+{
+    size_t max_y = client->size_map.y;
+    size_t max_x = client->size_map.x;
+
+    for (size_t y = 0; y < max_y; y++) {
+        for (size_t x = 0; x < max_x; x++) {
+            free(client->map[y][x].inv);
+            free(client->map[y][x].player->inv);
+            free(client->map[y][x].player);
+        }
+        free(client->map[y]);
+    }
+    free(client->map);
+
+}
+
 char *create_uuid()
 {
     uuid_t binuuid;
@@ -25,6 +42,8 @@ void free_client(client_t *client)
     shutdown(client->socket->fd, SHUT_RDWR);
     free(client->socket->addr);
     free(client->socket);
+    if (client->map)
+        free_map(client);
     list_destroy(client->command, (void (*)(void *))nlib_command_destroy);
     list_destroy(client->pending_commands, free);
     list_destroy(client->player, free);

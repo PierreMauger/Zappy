@@ -7,10 +7,21 @@
 
 #include "zappy_gui.h"
 
+char *go_next_space(char *str)
+{
+    while (str[0] == ' ') {
+        (char *)((size_t)(str)++);
+    }
+    str = strchr(str, ' ');
+    return str;
+}
+
 char *go_next_command(char *save, char *research)
 {
     size_t i = 0;
 
+    if (strncmp(&save[i], research, strlen(research)) == 0)
+        i++;
     while (save[i] != '\0'
         && strncmp(&save[i], research, strlen(research)) != 0)
         i++;

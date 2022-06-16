@@ -9,21 +9,21 @@
 
 static void fill_inv_player(node_t *node, char *save)
 {
-    save = strchr(save, ' ');
-    save = strchr(save, ' ');
-    save = strchr(save, ' ');
+    save = go_next_space(save);
+    save = go_next_space(save);
+    save = go_next_space(save);
     ((player_t *)node->data)->inv->food = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     ((player_t *)node->data)->inv->linemate = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     ((player_t *)node->data)->inv->deraumere = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     ((player_t *)node->data)->inv->sibur = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     ((player_t *)node->data)->inv->mendiane = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     ((player_t *)node->data)->inv->phiras = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     ((player_t *)node->data)->inv->thystame = atoi(save);
     free(save);
 }

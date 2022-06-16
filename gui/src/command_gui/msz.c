@@ -45,7 +45,9 @@ static bool create_map(client_t *client)
 
 int msz(client_t *client, char *str)
 {
-    if (!str) {
+    char *save = NULL;
+
+    if (!str || strcmp(str, "sbp\n") == 0) {
         fprintf(stderr, "%s[ERROR]%s bad arg", R, W);
         return 1;
     }
@@ -53,16 +55,13 @@ int msz(client_t *client, char *str)
         fprintf(stderr, "%s[ERROR]%s suc command received", R, W);
         return 1;
     }
-    if (strcmp(str, "sbp\n") == 0) {
-        fprintf(stderr, "%s[ERROR]%s bad arguments", R, W);
-        return 1;
-    }
     client->size_map.x = atoi(str);
-    client->size_map.y = atoi(strchr(str, ' '));
+    save = go_next_space(str);
+    client->size_map.y = atoi(save);
     if (!create_map(client)) {
         fprintf(stderr, "%s[ERROR]%s can't create map (malloc error)", R, W);
         return 1;
     }
-    printf("x = %d y = %d\n", client->size_map.x, client->size_map.y);
+    printf("%d %d\n", client->size_map.x, client->size_map.y);
     return 0;
 }

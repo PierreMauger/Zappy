@@ -7,26 +7,28 @@
 
 #include "zappy_gui.h"
 
-static void fill_inventory(client_t *client, char *str)
+static char *fill_inventory(client_t *client, char *str)
 {
     size_t x = atoi(str);
-    char *save = strchr(str, ' ');
+    char *save = go_next_space(str);
     size_t y = atoi(save);
 
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     client->map[y][x].inv->food = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     client->map[y][x].inv->linemate = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     client->map[y][x].inv->deraumere = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     client->map[y][x].inv->sibur = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     client->map[y][x].inv->mendiane = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     client->map[y][x].inv->phiras = atoi(save);
-    save = strchr(save, ' ');
+    save = go_next_space(save);
     client->map[y][x].inv->thystame = atoi(save);
+    save = go_next_space(save);
+    return save;
 }
 
 int bct(client_t *client, char *str)
@@ -42,7 +44,8 @@ int bct(client_t *client, char *str)
         return 1;
     }
     do {
-        fill_inventory(client, save);
-    } while ((save = go_next_command(save, "bct")));
+        save = fill_inventory(client, save);
+    } while (save);
+    print_inventory_map(client);
     return 0;
 }

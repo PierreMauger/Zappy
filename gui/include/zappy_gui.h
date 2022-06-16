@@ -148,8 +148,10 @@ char *create_uuid();
 char *get_one_word(char *str);
 char *move_str(char *str);
 char *go_next_command(char *save, char *research);
+char *go_next_space(char *str);
 
 void print_player(player_t *player);
 void print_inventory(inventory_t *inv);
+void print_inventory_map(client_t *client);
 
 #endif // ZAPPY_AI_H
