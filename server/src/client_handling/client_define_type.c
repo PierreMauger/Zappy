@@ -13,7 +13,7 @@ static char *get_client_num(core_t *core, team_t *team)
     char *buffer = NULL;
     int nb = (core->game->cli_per_team - team->cli_sub) + 1;
 
-    if (asprintf(&buffer, "%d", nb) == -1)
+    if (asprintf(&buffer, "%d\n", nb) == -1)
         return NULL;
     return buffer;
 }
@@ -22,7 +22,7 @@ static char *get_map_size(map_t *map)
 {
     char *buffer = NULL;
 
-    if (asprintf(&buffer, " %ld %ld", map->height, map->width) == -1)
+    if (asprintf(&buffer, " %ld %ld\n", map->height, map->width) == -1)
         return NULL;
     return buffer;
 }
