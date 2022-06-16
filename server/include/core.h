@@ -73,7 +73,7 @@ typedef struct {
     void (*func)(core_t *core, client_t *client, char *command);
 } method_t;
 
-void command_write_tile_content(core_t *core, client_t *client,
+char *command_write_tile_content(core_t *core, client_t *client,
     size_t x, size_t y);
 
 void command_msz(core_t *core, client_t *client, char *command);
@@ -91,8 +91,8 @@ void command_pbc(core_t *core, trantorian_t *trantorian, char *message);
 void command_pic(core_t *core, trantorian_t *trantorian, list_t *uuids);
 void command_pie(core_t *core, trantorian_t *trantorian);
 void command_pfk(core_t *core, trantorian_t *trantorian);
-void command_pdr(core_t *core, trantorian_t *trantorian);
-void command_pgt(core_t *core, trantorian_t *trantorian);
+void command_pdr(core_t *core, trantorian_t *trantorian, size_t nb_drop);
+void command_pgt(core_t *core, trantorian_t *trantorian, size_t nb_get);
 void command_pdi(core_t *core, trantorian_t *trantorian);
 void command_enw(core_t *core, trantorian_t *trantorian, trantorian_t *egg);
 void command_eht(core_t *core, trantorian_t *egg);
@@ -158,5 +158,7 @@ void clients_update(core_t *core, fd_set *readfds);
 
 int server_start(args_t *args);
 int server_loop(core_t *core);
+
+void game_update(core_t *core);
 
 #endif // CORE_H

@@ -25,7 +25,7 @@ static int get_x_y(char *command, size_t *x, size_t *y)
     return SUCCESS;
 }
 
-void command_write_tile_content(core_t *core, client_t *client,
+char *command_write_tile_content(core_t *core, client_t *client,
     size_t x, size_t y)
 {
     char *buffer = NULL;
@@ -41,15 +41,16 @@ void command_write_tile_content(core_t *core, client_t *client,
             GET_CELL(core->game->map, x, y)->thystame) == -1) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
         command_suc(core, client);
-        return;
+        return NULL;
     }
-    client_push_command(core->server, client, buffer);
+    return buffer;
 }
 
 void command_bct(core_t *core, client_t *client, char *command)
 {
     size_t x = 0;
     size_t y = 0;
+    char *buffer = NULL;
 
     if (get_x_y(command, &x, &y) == ERROR || x >= core->game->map->width ||
             y >= core->game->map->height) {
@@ -57,5 +58,8 @@ void command_bct(core_t *core, client_t *client, char *command)
         command_sbp(core, client);
         return;
     }
-    command_write_tile_content(core, client, x, y);
+    buffer = command_write_tile_content(core, client, x, y);
+    if (buffer == NULL)
+        return;
+    client_push_command(core->server, client, buffer);
 }

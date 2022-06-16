@@ -49,6 +49,7 @@ int server_loop(core_t *core)
     fd_set writefds = {0};
 
     while (1) {
+        game_update(core);
         set_read_fds(core->server, &readfds);
         set_write_fds(core->server, &writefds);
         nlib_select_fds(&readfds, &writefds);
