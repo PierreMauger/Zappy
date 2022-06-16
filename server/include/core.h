@@ -47,6 +47,15 @@ void core_destroy(core_t *core);
 
 int core_init(core_t *core, args_t *args);
 
+typedef struct command_handler_s {
+    char *params;
+    void (*command)(core_t *core, client_t *client, char *command);
+    size_t command_it;
+} command_handler_t;
+
+command_handler_t *handler_create(void);
+void handler_clear(command_handler_t *handler);
+
 args_t *init_args(void);
 void destroy_args(args_t *args);
 
@@ -97,17 +106,42 @@ void command_sbp(core_t *core, client_t *client);
 void client_gui_search_command(core_t *core, client_t *client, char *command);
 
 void command_forward(core_t *core, client_t *client, char *command);
+void forward_e(core_t *core, client_t *client, char *command);
+
 void command_right(core_t *core, client_t *client, char *command);
+void right_e(core_t *core, client_t *client, char *command);
+
 void command_left(core_t *core, client_t *client, char *command);
+void left_e(core_t *core, client_t *client, char *command);
+
 void command_look(core_t *core, client_t *client, char *command);
+void look_e(core_t *core, client_t *client, char *command);
+
 void command_inventory(core_t *core, client_t *client, char *command);
+void inventory_e(core_t *core, client_t *client, char *command);
+
 void command_broadcast(core_t *core, client_t *client, char *command);
+void broadcast_e(core_t *core, client_t *client, char *command);
+
 void command_connect_nbr(core_t *core, client_t *client, char *command);
+
 void command_fork(core_t *core, client_t *client, char *command);
+void fork_e(core_t *core, client_t *client, char *command);
+
 void command_eject(core_t *core, client_t *client, char *command);
+void eject_e(core_t *core, client_t *client, char *command);
+
 void command_take(core_t *core, client_t *client, char *command);
+void take_e(core_t *core, client_t *client, char *command);
+
 void command_set(core_t *core, client_t *client, char *command);
+void set_e(core_t *core, client_t *client, char *command);
+
 void command_incantation(core_t *core, client_t *client, char *command);
+void incantation_e(core_t *core, client_t *client, char *command);
+
+void command_death(core_t *core, client_t *client, char *command);
+
 
 void client_def_search_command(core_t *core, client_t *client, char *command);
 

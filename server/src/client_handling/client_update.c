@@ -54,7 +54,7 @@ int client_get_command(client_t *client)
     buffer = nlib_read_socket(client->sock->fd);
     if (buffer == NULL)
         return EXIT;
-    printf("[INFO] received command: %s\n", buffer);
+    printf("[INFO] received command: \"%s\"", buffer);
     client_push_exec_command(client, buffer);
     free(buffer);
     return SUCCESS;

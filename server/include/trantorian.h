@@ -30,6 +30,7 @@ typedef struct {
     char *uuid;
     team_t *team;
     bool hatched;
+    size_t live_it;
     inventory_t *inventory;
     size_t level;
     size_t x;

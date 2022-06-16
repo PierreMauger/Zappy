@@ -32,6 +32,7 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/client_handling/default_commands/take.c				\
 					src/client_handling/default_commands/set.c				\
 					src/client_handling/default_commands/incantation.c		\
+					src/client_handling/default_commands/death.c			\
 					src/utils/command_utils.c								\
 					src/utils/is_uuid.c										\
 					src/client_handling/client_command_utils.c				\
