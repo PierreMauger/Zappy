@@ -24,18 +24,6 @@ static void free_map(client_t *client)
 
 }
 
-char *create_uuid()
-{
-    uuid_t binuuid;
-    char *uuid = malloc(UUID_STR_LEN);
-
-    if (!uuid)
-        return NULL;
-    uuid_generate_random(binuuid);
-    uuid_unparse(binuuid, uuid);
-    return uuid;
-}
-
 void free_client(client_t *client)
 {
     close(client->socket->fd);
@@ -52,6 +40,16 @@ void free_client(client_t *client)
     free(client);
 }
 
+static void split_create_client(client_t *client, arg_t *arg)
+{
+    client->socket->addr->sin_family = AF_INET;
+    client->socket->addr->sin_port = htons(arg->port);
+    client->socket->addr->sin_addr.s_addr = inet_addr(arg->machine);
+    client->size_map.x = -1;
+    client->size_map.y = -1;
+    client->map = NULL;
+}
+
 client_t *create_client(arg_t *arg)
 {
     client_t *client = malloc(sizeof(client_t));
@@ -66,13 +64,8 @@ client_t *create_client(arg_t *arg)
     if (!(client->command = list_create()) ||
         !(client->pending_commands = list_create()))
         return NULL;
-    client->socket->addr->sin_family = AF_INET;
-    client->socket->addr->sin_port = htons(arg->port);
-    client->socket->addr->sin_addr.s_addr = inet_addr(arg->machine);
-    client->size_map.x = -1;
-    client->size_map.y = -1;
-    client->map = NULL;
     if (!(client->player = list_create()) || !(client->team = list_create()))
         return NULL;
+    split_create_client(client, arg);
     return client;
 }

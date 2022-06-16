@@ -29,15 +29,17 @@ void client_push_exec_command(client_t *client, char *buffer)
     }
 }
 
-bool loop_parse_return(client_t *client)
+bool loop_parse_return(client_t *client, char *temp)
 {
     node_t *node = NULL;
     node_t *node_save = NULL;
 
+    client_push_exec_command(client, temp);
+    free(temp);
     foreach_safe (client->received_commands->head, node, node_save) {
         if (!parse_return(client, (char *)node->data))
-            return true;
+            return false;
         list_destroy_data_node(client->received_commands, node->data, free);
     }
-    return false;
+    return true;
 }

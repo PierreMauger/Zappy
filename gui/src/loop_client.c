@@ -29,9 +29,7 @@ static bool check_fd_isset(client_t *client)
         return false;
     }
     if (FD_ISSET(client->socket->fd, &client->readfds)) {
-        usleep(5000);
         temp = nlib_read_socket(client->socket->fd);
-        printf("Command reçu ICI\n");
         if (temp == NULL) {
             fprintf(stderr, "%s[ERROR]%s can't read socket\n", R, W);
             return true;
