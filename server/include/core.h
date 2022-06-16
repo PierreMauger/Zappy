@@ -73,7 +73,7 @@ typedef struct {
     void (*func)(core_t *core, client_t *client, char *command);
 } method_t;
 
-void command_write_tile_content(core_t *core, client_t *client,
+char *command_write_tile_content(core_t *core, client_t *client,
     size_t x, size_t y);
 
 void command_msz(core_t *core, client_t *client, char *command);
@@ -158,5 +158,7 @@ void clients_update(core_t *core, fd_set *readfds);
 
 int server_start(args_t *args);
 int server_loop(core_t *core);
+
+void game_update(core_t *core);
 
 #endif // CORE_H
