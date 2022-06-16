@@ -50,7 +50,7 @@ int core_init(core_t *core, args_t *args);
 typedef struct command_handler_s {
     char *params;
     void (*command)(core_t *core, client_t *client, char *command);
-    size_t command_it;
+    int command_it;
 } command_handler_t;
 
 command_handler_t *handler_create(void);
@@ -153,6 +153,7 @@ void client_gui_broadcast_command(server_t *serv, char *buff);
 void client_exec_command(core_t *core, client_t *client);
 void client_push_exec_command(client_t *client, char *buffer);
 int client_get_command(client_t *client);
+void client_update_pending_command(core_t *core, client_t *client);
 void clients_update(core_t *core, fd_set *readfds);
 
 int server_start(args_t *args);
