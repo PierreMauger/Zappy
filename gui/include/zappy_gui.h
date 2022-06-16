@@ -140,6 +140,7 @@ bool parse_return(client_t *client, char *str);
 bool init_client(arg_t *arg);
 client_t *create_client(arg_t *arg);
 void free_client(client_t *client);
+void free_player(void *data);
 
 bool first_command(client_t *client);
 bool loop_command(client_t *client);
@@ -153,5 +154,6 @@ char *go_next_space(char *str);
 void print_player(player_t *player);
 void print_inventory(inventory_t *inv);
 void print_inventory_map(client_t *client);
+void print_team(list_t *team);
 
 #endif // ZAPPY_AI_H

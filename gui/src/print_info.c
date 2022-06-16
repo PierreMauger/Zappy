@@ -7,6 +7,15 @@
 
 #include "zappy_gui.h"
 
+void print_team(list_t *team)
+{
+    node_t *node;
+
+    foreach (team->head, node)
+        printf("[%s] ", (char *)node->data);
+    printf("\n");
+}
+
 void print_inventory_map(client_t *client)
 {
     for (int y = 0; y != client->size_map.y; y++) {
