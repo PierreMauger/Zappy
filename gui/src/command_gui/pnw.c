@@ -39,7 +39,7 @@ static player_t *create_player(client_t *client, char *str)
 
     if (!player)
         return NULL;
-    player->uuid = get_one_word(save);
+    player->uuid = get_one_word((char *)((size_t)(++save)));
     save = move_str(save);
     temp = get_one_word(save);
     player->pos.x = atoi(temp);
