@@ -59,7 +59,7 @@ bool parse_return(client_t *client, char *str)
     char *command_name = NULL;
     char *arg = NULL;
 
-    printf("response [%s]!!!!!\n", str);
+    printf("response [%s]\n", str);
     if (strcmp(str, "WELCOME\n") == 0)
         return (init_header(client));
     if (!(command_name = get_command_name(str)))

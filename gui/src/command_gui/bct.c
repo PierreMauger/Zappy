@@ -7,8 +7,12 @@
 
 #include "zappy_gui.h"
 
-static void fill_inventory(client_t *client, char *save, size_t x, size_t y)
+static void fill_inventory(client_t *client, char *str)
 {
+    size_t x = atoi(str);
+    char *save = strchr(str, ' ');
+    size_t y = atoi(save);
+
     save = strchr(save, ' ');
     client->map[y][x].inv->food = atoi(save);
     save = strchr(save, ' ');
@@ -27,10 +31,7 @@ static void fill_inventory(client_t *client, char *save, size_t x, size_t y)
 
 int bct(client_t *client, char *str)
 {
-    size_t x = atoi(str);
-    char *save = strchr(str, ' ');
-    size_t y = atoi(save);
-
+    char *save = str;
 
     if (strcmp(str, "suc\n") == 0) {
         fprintf(stderr, "%s[ERROR]%s suc command received", R, W);
@@ -40,6 +41,8 @@ int bct(client_t *client, char *str)
         fprintf(stderr, "%s[ERROR]%s bad arguments", R, W);
         return 1;
     }
-    fill_inventory(client, save, x, y);
+    do {
+        fill_inventory(client, save);
+    } while ((save = go_next_command(save, "bct")));
     return 0;
 }

@@ -7,6 +7,18 @@
 
 #include "zappy_gui.h"
 
+char *go_next_command(char *save, char *research)
+{
+    size_t i = 0;
+
+    while (save[i] != '\0'
+        && strncmp(&save[i], research, strlen(research)) != 0)
+        i++;
+    if (save[i] == '\0')
+        return NULL;
+    return &save[i];
+}
+
 char *move_str(char *str)
 {
     size_t i = 0;

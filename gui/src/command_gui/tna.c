@@ -10,6 +10,8 @@
 int tna(client_t *client, char *str)
 {
     char *team_name = NULL;
+    char *save = str;
+
     if (strcmp(str, "suc\n") == 0) {
         fprintf(stderr, "%s[ERROR]%s suc command received", R, W);
         return 1;
@@ -18,7 +20,9 @@ int tna(client_t *client, char *str)
         fprintf(stderr, "%s[ERROR]%s bad arguments", R, W);
         return 1;
     }
-    team_name = get_one_word(str);
-    list_push_data(client->team, team_name);
+    do {
+        team_name = get_one_word(save);
+        list_push_data(client->team, team_name);
+    } while ((save = go_next_command(save, "tna")));
     return 0;
 }

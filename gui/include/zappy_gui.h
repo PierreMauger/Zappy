@@ -69,7 +69,7 @@ typedef struct {
 typedef struct player_s {
     int level;
     char *team_name;
-    inventory_t inv;
+    inventory_t *inv;
     pos_t pos;
     direction_e dir;
     char *uuid;
@@ -147,5 +147,9 @@ bool loop_command(client_t *client);
 char *create_uuid();
 char *get_one_word(char *str);
 char *move_str(char *str);
+char *go_next_command(char *save, char *research);
+
+void print_player(player_t *player);
+void print_inventory(inventory_t *inv);
 
 #endif // ZAPPY_AI_H
