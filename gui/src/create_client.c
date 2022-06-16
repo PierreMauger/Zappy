@@ -27,6 +27,8 @@ void free_client(client_t *client)
     free(client->socket);
     list_destroy(client->command, (void (*)(void *))nlib_command_destroy);
     list_destroy(client->pending_commands, free);
+    list_destroy(client->player, free);
+    list_destroy(client->team, free);
     free(client->uuid);
     free(client);
 }
@@ -51,6 +53,7 @@ client_t *create_client(arg_t *arg)
     client->size_map.x = -1;
     client->size_map.y = -1;
     client->map = NULL;
-    client->player = list_create();
+    if (!(client->player = list_create()) || !(client->team = list_create()))
+        return NULL;
     return client;
 }

@@ -7,7 +7,7 @@
 
 #include "zappy_ai.h"
 
-int connect_nbr(client_t *client, char *str)
+int connect_nbr(UNUSED client_t *client, UNUSED char *str)
 {
     return 0;
 }

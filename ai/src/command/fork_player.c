@@ -7,7 +7,7 @@
 
 #include "zappy_ai.h"
 
-int fork_player(client_t *client, char *str)
+int fork_player(UNUSED client_t *client, UNUSED char *str)
 {
     return 0;
 }

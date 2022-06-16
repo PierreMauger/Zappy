@@ -7,12 +7,12 @@
 
 #include "zappy_ai.h"
 
-int take_object(client_t *client, char *str)
+int take_object(UNUSED client_t *client, UNUSED char *str)
 {
     return 0;
 }
 
-int set_object(client_t *client, char *str)
+int set_object(UNUSED client_t *client, UNUSED char *str)
 {
     return 0;
 }

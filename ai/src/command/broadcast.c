@@ -7,7 +7,7 @@
 
 #include "zappy_ai.h"
 
-int broadcast(client_t *client, char *str)
+int broadcast(UNUSED client_t *client, UNUSED char *str)
 {
     return 0;
 }

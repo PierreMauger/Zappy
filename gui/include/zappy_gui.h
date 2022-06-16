@@ -91,6 +91,7 @@ typedef struct client_s {
     list_t *command;
     list_t *pending_commands;
     list_t *player;
+    list_t *team;
     map_t **map;
 } client_t;
 
@@ -100,6 +101,7 @@ int msz(client_t *client, char *str);
 int ppo(client_t *client, char *str);
 int pnw(client_t *client, char *str);
 int plv(client_t *client, char *str);
+int tna(client_t *client, char *str);
 
 typedef struct com_s {
     const char *cmd;
@@ -114,6 +116,7 @@ static const com_t com[] =
     {"ppo\0", &ppo},
     {"pnw\0", &pnw},
     {"plv\0", &plv},
+    {"tna\0", &tna},
     {NULL, NULL}
 };
 

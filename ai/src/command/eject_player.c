@@ -7,7 +7,7 @@
 
 #include "zappy_ai.h"
 
-int eject_player(client_t *client, char *str)
+int eject_player(UNUSED client_t *client, UNUSED char *str)
 {
     return 0;
 }

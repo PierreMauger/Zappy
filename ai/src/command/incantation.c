@@ -7,7 +7,7 @@
 
 #include "zappy_ai.h"
 
-int incantation(client_t *client, char *str)
+int incantation(UNUSED client_t *client, UNUSED char *str)
 {
     return 0;
 }

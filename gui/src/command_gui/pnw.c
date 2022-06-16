@@ -7,25 +7,31 @@
 
 #include "zappy_gui.h"
 
-static player_t *split_create_player(player_t *player, char *save)
+static player_t *split_create_play(client_t *cli, player_t *player, char *save)
 {
     char *temp = NULL;
+    char *team_name = NULL;
+    node_t *node;
 
-    save = move_str(save);
-    temp = get_one_word(save);
-    player->dir = atoi(temp);
-    free(temp);
     save = move_str(save);
     temp = get_one_word(save);
     player->level = atoi(temp);
     free(temp);
     save = move_str(save);
-    player->team_name = get_one_word(save);
+    team_name = get_one_word(save);
+    foreach(cli->team->head, node)
+        if (strcmp(node->data, team_name) == 0) {
+            player->team_name = node->data;
+            break;
+        }
+    if (strcmp(node->data, team_name) != 0)
+        player->team_name = "null";
+    free(team_name);
     free(save);
     return player;
 }
 
-static player_t *create_player(char *str)
+static player_t *create_player(client_t *client, char *str)
 {
     char *save = strdup(str);
     char *temp = NULL;
@@ -42,7 +48,11 @@ static player_t *create_player(char *str)
     temp = get_one_word(save);
     player->pos.y = atoi(temp);
     free(temp);
-    return (split_create_player(player, save));
+    save = move_str(save);
+    temp = get_one_word(save);
+    player->dir = atoi(temp);
+    free(temp);
+    return (split_create_play(client, player, save));
 }
 
 int pnw(client_t *client, char *str)
@@ -57,7 +67,7 @@ int pnw(client_t *client, char *str)
         fprintf(stderr, "%s[ERROR]%s bad arguments", R, W);
         return 1;
     }
-    player = create_player(str);
+    player = create_player(client, str);
     if (!player) {
         fprintf(stderr, "%s[ERROR]%s can't malloc player", R, W);
         return 1;
