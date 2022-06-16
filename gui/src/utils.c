@@ -7,6 +7,18 @@
 
 #include "zappy_gui.h"
 
+char *create_uuid(void)
+{
+    uuid_t binuuid;
+    char *uuid = malloc(UUID_STR_LEN);
+
+    if (!uuid)
+        return NULL;
+    uuid_generate_random(binuuid);
+    uuid_unparse(binuuid, uuid);
+    return uuid;
+}
+
 char *go_next_space(char *str)
 {
     while (str[0] == ' ') {

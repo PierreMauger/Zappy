@@ -32,6 +32,17 @@ static player_t *crt_play(arg_t *arg)
     return player;
 }
 
+static void split_create_client(client_t *client, arg_t *arg)
+{
+    client->socket->addr->sin_family = AF_INET;
+    client->socket->addr->sin_port = htons(arg->port);
+    client->socket->addr->sin_addr.s_addr = inet_addr(arg->machine);
+    client->init = false;
+    client->client_connected = false;
+    client->size_map.x = -1;
+    client->size_map.y = -1;
+}
+
 client_t *create_client(arg_t *arg)
 {
     client_t *client = malloc(sizeof(client_t));
@@ -48,12 +59,6 @@ client_t *create_client(arg_t *arg)
         !(client->player = crt_play(arg)) ||
         !(client->received_commands = list_create()))
         return NULL;
-    client->socket->addr->sin_family = AF_INET;
-    client->socket->addr->sin_port = htons(arg->port);
-    client->socket->addr->sin_addr.s_addr = inet_addr(arg->machine);
-    client->init = false;
-    client->client_connected = false;
-    client->size_map.x = -1;
-    client->size_map.y = -1;
+    split_create_client(client, arg);
     return client;
 }
