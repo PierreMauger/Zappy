@@ -35,6 +35,7 @@ static int client_create_new_trantorian(core_t *core, client_t *client,
         core->game->map->width, core->game->map->height);
     if (client->trantorian == NULL)
         return ERROR;
+    list_push_data(core->game->trantorians, client->trantorian);
     return SUCCESS;
 }
 
