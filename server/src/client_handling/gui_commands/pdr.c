@@ -8,7 +8,13 @@
 #include "utils.h"
 #include "core.h"
 
-void command_pdr(UNUSED core_t *core, UNUSED trantorian_t *trantorian)
+void command_pdr(core_t *core, trantorian_t *trantorian, size_t nb_drop)
 {
-    // TODO
+    char *buff = NULL;
+
+    if (asprintf(&buff, "pdr %s %ld\n", trantorian->uuid, nb_drop) == -1) {
+        fprintf(stderr, "[ERROR] GUI Can't malloc\n");
+        return;
+    }
+    client_gui_broadcast_command(core->server, buff);
 }
