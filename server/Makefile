@@ -66,6 +66,8 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/client_handling/client_gui_exec_command.c			\
 					src/game_handling/team_get_obj.c						\
 					src/game_handling/game_update.c							\
+					src/game_handling/game_update_handler.c					\
+					src/game_handling/game_update_trantorians.c				\
 
 SRC				+=	./src/main.c
 

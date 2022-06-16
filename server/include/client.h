@@ -26,13 +26,14 @@ typedef enum {
 } client_type_e;
 
 struct command_handler_s;
+struct trantorian_s;
 
-typedef struct {
+typedef struct client_s {
     socket_t *sock;
     struct command_handler_s *handler;
     list_t *command_list;
     client_type_e type;
-    trantorian_t *trantorian;
+    struct trantorian_s *trantorian;
 } client_t;
 
 void client_destroy_command(char *command);

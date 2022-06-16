@@ -28,45 +28,11 @@ bool game_clock_update(size_t freq)
     return ret;
 }
 
-void game_update_trantorian(core_t *core, client_t *client)
-{
-    if (client->handler->command_it > 0) {
-        client->handler->command_it--;
-    } else if (client->handler->command != NULL) {
-        client->handler->command(core, client, client->handler->params);
-        handler_clear(client->handler);
-    }
-    if (client->trantorian->live_it > 0) {
-        client->trantorian->live_it--;
-    } else if (client->trantorian->inventory->food > 0) {
-        client->trantorian->inventory->food--;
-        client->trantorian->live_it = 126;
-    } else {
-        command_pdi(core, client->trantorian);
-        command_death(core, client, NULL);
-        list_destroy_data_node(core->server->clients, client,
-            (void (*)(void *))client_destroy);
-    }
-}
-
-void game_update_trantorians(core_t *core)
-{
-    node_t *node = NULL;
-    node_t *safe = NULL;
-    client_t *client = NULL;
-
-    foreach_safe(core->server->clients->head, node, safe) {
-        client = (client_t *)node->data;
-        if (client->type == CLI_DEFAULT) {
-            game_update_trantorian(core, client);
-        }
-    }
-}
-
 void game_update(core_t *core)
 {
-    // if (game_clock_update(core->game->freq)) {
-    //     game_update_trantorians(core);
-    //     // game_update_map(core->game->map);
-    // }
+    if (game_clock_update(core->game->freq)) {
+        game_update_handlers(core);
+        game_update_trantorians(core);
+        // game_update_map(core->game->map);
+    }
 }

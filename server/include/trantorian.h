@@ -16,6 +16,7 @@
 
     #include "inventory.h"
     #include "team.h"
+    #include "client.h"
 
 typedef enum {
     DIR_UP,
@@ -26,9 +27,12 @@ typedef enum {
     DIR_SIZE
 } direction_e;
 
-typedef struct {
+struct client_s;
+
+typedef struct trantorian_s {
     char *uuid;
     team_t *team;
+    struct client_s *client;
     bool hatched;
     size_t live_it;
     inventory_t *inventory;

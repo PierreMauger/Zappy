@@ -36,6 +36,7 @@ static int client_create_new_trantorian(core_t *core, client_t *client,
     if (client->trantorian == NULL)
         return ERROR;
     list_push_data(core->game->trantorians, client->trantorian);
+    client->trantorian->client = client;
     return SUCCESS;
 }
 

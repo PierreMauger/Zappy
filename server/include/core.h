@@ -160,7 +160,8 @@ int server_loop(core_t *core);
 
 bool game_clock_update(size_t freq);
 
-void game_update_trantorian(core_t *core, client_t *client);
+void game_update_handler(core_t *core, client_t *client);
+void game_update_handlers(core_t *core);
 void game_update_trantorians(core_t *core);
 void game_update(core_t *core);
 
