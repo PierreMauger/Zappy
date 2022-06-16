@@ -153,12 +153,15 @@ void client_gui_broadcast_command(server_t *serv, char *buff);
 void client_exec_command(core_t *core, client_t *client);
 void client_push_exec_command(client_t *client, char *buffer);
 int client_get_command(client_t *client);
-void client_update_pending_command(core_t *core, client_t *client);
 void clients_update(core_t *core, fd_set *readfds);
 
 int server_start(args_t *args);
 int server_loop(core_t *core);
 
+bool game_clock_update(size_t freq);
+
+void game_update_trantorian(core_t *core, client_t *client);
+void game_update_trantorians(core_t *core);
 void game_update(core_t *core);
 
 #endif // CORE_H
