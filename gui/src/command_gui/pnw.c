@@ -19,27 +19,27 @@ static player_t *split_create_play(client_t *cli, player_t *player, char *save)
     free(temp);
     save = move_str(save);
     team_name = get_one_word(save);
-    foreach(cli->team->head, node)
+    foreach(cli->team->head, node) {
         if (strcmp(node->data, team_name) == 0) {
             player->team_name = node->data;
             break;
         }
-    if (strcmp(node->data, team_name) != 0)
+    }
+    if (!node)
         player->team_name = "null";
     free(team_name);
-    free(save);
     return player;
 }
 
 static player_t *create_player(client_t *client, char *str)
 {
-    char *save = strdup(str);
+    char *save = str;
     char *temp = NULL;
     player_t *player = malloc(sizeof(player_t));
 
     if (!player)
         return NULL;
-    player->uuid = get_one_word(save);
+    player->uuid = get_one_word((char *)((size_t)(++save)));
     save = move_str(save);
     temp = get_one_word(save);
     player->pos.x = atoi(temp);

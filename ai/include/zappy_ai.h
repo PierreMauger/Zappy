@@ -90,6 +90,7 @@ typedef struct client_s {
     fd_set writefds;
     list_t *command;
     list_t *pending_commands;
+    list_t *received_commands;
     player_t *player;
     map_t *map;
 } client_t;
@@ -111,6 +112,8 @@ bool send_message(list_t *pending, list_t *list, socket_t *socket, char *mess);
 int read_stdin(client_t *client);
 
 bool parse_return(client_t *client, char *str);
+bool loop_parse_return(client_t *client);
+void client_push_exec_command(client_t *client, char *buffer);
 
 void sig_handler(int signum);
 

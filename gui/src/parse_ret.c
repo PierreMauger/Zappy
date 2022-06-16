@@ -30,6 +30,7 @@ static char *get_command_arg(char *str)
         fprintf(stderr, "%s[ERROR]%s can't malloc\n", R, W);
         return NULL;
     }
+    for (; str[i] == ' '; i++);
     for (n = i; str[n] != '\0'; n++, j++)
         arg[j] = str[n];
     arg[j] = '\0';

@@ -46,7 +46,7 @@ int ppo(client_t *client, char *str)
         return 1;
     }
     uuid = get_one_word(save);
-    foreach(client->player->head, node) {
+    foreach (client->player->head, node) {
         if (strcmp(((player_t *)node->data)->uuid, uuid) == 0)
             break;
     }

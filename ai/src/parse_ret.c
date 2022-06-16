@@ -23,9 +23,10 @@ static bool get_number_client(client_t *client, char *str)
 static bool init_header(client_t *client, char *str)
 {
     client->init = true;
-    if (strcmp(str, "WELCOME\n") == 0)
+    if (strcmp(str, "WELCOME") == 0)
         return (send_message(NULL,
             client->command, client->socket, client->player->team_name));
+    for (; str[0] == ' '; (char *)((size_t)(str++)));
     if (!(strchr(str, ' ')))
         return get_number_client(client, str);
     else {
@@ -46,7 +47,7 @@ bool parse_return(client_t *client, char *str)
     char *command = NULL;
 
     printf("command received : %s\n", str);
-    if (strcmp(str, "WELCOME\n") == 0 || client->init)
+    if (strcmp(str, "WELCOME") == 0 || client->init)
         return (init_header(client, str));
     command = list_pop_head(client->pending_commands);
     if (!command)

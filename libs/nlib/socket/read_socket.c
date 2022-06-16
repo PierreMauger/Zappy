@@ -9,7 +9,7 @@
 
 char *nlib_read_socket(int fd)
 {
-    char *buffer = calloc(READ_SIZE, sizeof(char));
+    char *buffer = calloc(READ_SIZE * 10, sizeof(char));
     ssize_t size_read = 0;
 
     if (buffer == NULL)

@@ -16,6 +16,7 @@ static bool split_create_map(map_t *map, size_t x)
         map[i].inv = malloc(sizeof(inventory_t));
         if (!map[i].inv || !map[i].player)
             return false;
+        map[i].player->uuid = NULL;
         map[i].player->inv = malloc(sizeof(inventory_t));
         if (!map[i].player->inv)
             return false;

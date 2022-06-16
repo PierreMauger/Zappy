@@ -46,7 +46,7 @@ void free_client(client_t *client)
         free_map(client);
     list_destroy(client->command, (void (*)(void *))nlib_command_destroy);
     list_destroy(client->pending_commands, free);
-    list_destroy(client->player, free);
+    list_destroy(client->player, (void (*)(void *))free_player);
     list_destroy(client->team, free);
     free(client->uuid);
     free(client);

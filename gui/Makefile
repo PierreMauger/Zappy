@@ -14,6 +14,7 @@ SRC				=	./src/stdin.c				\
 					./src/utils.c 				\
 					./src/loop_command.c 		\
 					./src/print_info.c 			\
+					./src/free_player.c 		\
 					./src/command_gui/bct.c		\
 					./src/command_gui/mct.c		\
 					./src/command_gui/msz.c		\

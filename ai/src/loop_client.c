@@ -34,10 +34,9 @@ static bool check_fd_isset(client_t *client)
             fprintf(stderr, "%s[ERROR]%s can't read socket\n", R, W);
             return true;
         }
-        if (!parse_return(client, temp)) {
-            free(temp);
+        client_push_exec_command(client, temp);
+        if (loop_parse_return(client))
             return true;
-        }
         free(temp);
     }
     return false;

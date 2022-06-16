@@ -24,5 +24,6 @@ int tna(client_t *client, char *str)
         team_name = get_one_word(save);
         list_push_data(client->team, team_name);
     } while ((save = go_next_command(save, "tna")));
+    print_team(client->team);
     return 0;
 }

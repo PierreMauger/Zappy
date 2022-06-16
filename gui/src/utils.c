@@ -56,7 +56,7 @@ char *get_one_word(char *str)
     word = malloc(sizeof(char) * (len + 1));
     if (!word)
         return NULL;
-    for (; str[i] != '\0' && str[i] != ' ' && str[n] != '\n'; i++, s++)
+    for (; str[i] != '\0' && str[i] != ' ' && str[i] != '\n'; i++, s++)
         word[s] = str[i];
     word[s] = '\0';
     return word;

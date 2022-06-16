@@ -12,6 +12,7 @@ SRC				=	./src/loop_client.c				\
 					./src/stdin.c 					\
 					./src/send_message.c 			\
 					./src/if_forest.c 				\
+					./src/client_push_command.c 	\
 					./src/command/movement.c 		\
 					./src/command/look_around.c 	\
 					./src/command/broadcast.c	 	\

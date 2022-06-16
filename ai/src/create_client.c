@@ -15,6 +15,7 @@ void free_client(client_t *client)
     free(client->socket);
     list_destroy(client->command, (void (*)(void *))nlib_command_destroy);
     list_destroy(client->pending_commands, free);
+    list_destroy(client->received_commands, free);
     free(client->player);
     free(client);
 }
@@ -44,7 +45,7 @@ client_t *create_client(arg_t *arg)
     }
     if (!(client->command = list_create()) ||
         !(client->pending_commands = list_create()) ||
-        !(client->player = crt_play(arg)))
+        !(client->player = crt_play(arg)) || !(client->received_commands = list_create()))
         return NULL;
     client->socket->addr->sin_family = AF_INET;
     client->socket->addr->sin_port = htons(arg->port);
