@@ -7,7 +7,7 @@
 
 #include "tests.hpp"
 
-SimulateCommand::SimulateCommand(void)
+CommandFixture::CommandFixture(void)
 {
     args_t *args = init_args();
 
@@ -28,12 +28,12 @@ SimulateCommand::SimulateCommand(void)
     list_push_data(core->server->clients, this->client);
 }
 
-SimulateCommand::~SimulateCommand(void)
+CommandFixture::~CommandFixture(void)
 {
     core_destroy(this->core);
 }
 
-void SimulateCommand::coreCreate(args_t *args)
+void CommandFixture::coreCreate(args_t *args)
 {
     this->core = core_create();
     if (this->core == nullptr)
@@ -56,13 +56,13 @@ void SimulateCommand::coreCreate(args_t *args)
     this->core->server->socket->fd = -1;
 }
 
-void SimulateCommand::startTest(void)
+void CommandFixture::startTest(void)
 {
     pipe(this->pipefd);
     this->client->sock->fd = this->pipefd[1];
 }
 
-void SimulateCommand::endTest(void)
+void CommandFixture::endTest(void)
 {
     char buffer[1024] = {0};
 
@@ -80,17 +80,17 @@ void SimulateCommand::endTest(void)
     close(pipefd[1]);
 }
 
-std::string SimulateCommand::getRes(void)
+std::string CommandFixture::getRes(void)
 {
     return this->res;
 }
 
-core_t *SimulateCommand::getCore(void)
+core_t *CommandFixture::getCore(void)
 {
     return this->core;
 }
 
-client_t *SimulateCommand::getClient(void)
+client_t *CommandFixture::getClient(void)
 {
     return this->client;
 }

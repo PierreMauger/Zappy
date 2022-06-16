@@ -7,7 +7,45 @@
 
 #include "core.h"
 
-void command_forward(UNUSED core_t *core, UNUSED client_t *client, UNUSED char *command)
+static size_t control_dir(size_t last_pos, size_t max_pos, bool incr)
 {
+    if (incr)
+        return (last_pos + 1) % max_pos;
+    return (last_pos + max_pos - 1) % max_pos;
+}
 
+void forward_e(core_t *core, client_t *client, UNUSED char *command)
+{
+    switch (client->trantorian->direction) {
+        case DIR_UP:
+            client->trantorian->y = control_dir(client->trantorian->y,
+                core->game->map->height, false);
+            break;
+        case DIR_RIGHT:
+            client->trantorian->x = control_dir(client->trantorian->x,
+                core->game->map->width, true);
+            break;
+        case DIR_DOWN:
+            client->trantorian->y = control_dir(client->trantorian->y,
+                core->game->map->height, true);
+            break;
+        case DIR_LEFT:
+            client->trantorian->x = control_dir(client->trantorian->x,
+                core->game->map->width, false);
+            break;
+        default:
+            return;
+    }
+    client_push_command(core->server, client, strdup("ok\n"));
+}
+
+void command_forward(core_t *core, client_t *client, UNUSED char *command)
+{
+    if (client == NULL || client->trantorian == NULL) {
+        fprintf(stderr, "[ERROR] Invalid client\n");
+        client_push_command(core->server, client, strdup("ko\n"));
+        return;
+    }
+    client->handler->command = forward_e;
+    client->handler->command_it = 7;
 }

@@ -54,10 +54,24 @@ int client_get_command(client_t *client)
     buffer = nlib_read_socket(client->sock->fd);
     if (buffer == NULL)
         return EXIT;
-    printf("[INFO] received command: %s\n", buffer);
+    printf("[INFO] received command: \"%s\"", buffer);
     client_push_exec_command(client, buffer);
     free(buffer);
     return SUCCESS;
+}
+
+void client_update_pending_command(core_t *core, client_t *client)
+{
+    if (client->handler->command_it > 0) {
+        // Descrease it with clock
+        return;
+    }
+    if (client->handler->command) {
+        client->handler->command(core, client, client->handler->params);
+        handler_clear(client->handler);
+    } else if (client->command_list->lenght > 0) {
+        client_exec_command(core, client);
+    }
 }
 
 void clients_update(core_t *core, fd_set *readfds)
@@ -75,8 +89,8 @@ void clients_update(core_t *core, fd_set *readfds)
             list_remove_node(core->server->clients, node);
             list_destroy_node(node, (void (*)(void *))client_destroy);
             printf("[INFO] Client disconnected\n");
-        } else if (client->command_list->lenght > 0) {
-            client_exec_command(core, client);
+        } else {
+            client_update_pending_command(core, client);
         }
     }
 }

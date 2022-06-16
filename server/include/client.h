@@ -25,8 +25,11 @@ typedef enum {
     CLI_GUI,
 } client_type_e;
 
+struct command_handler_s;
+
 typedef struct {
     socket_t *sock;
+    struct command_handler_s *handler;
     list_t *command_list;
     client_type_e type;
     trantorian_t *trantorian;
