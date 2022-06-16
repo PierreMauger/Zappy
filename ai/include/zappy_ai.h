@@ -112,7 +112,7 @@ bool send_message(list_t *pending, list_t *list, socket_t *socket, char *mess);
 int read_stdin(client_t *client);
 
 bool parse_return(client_t *client, char *str);
-bool loop_parse_return(client_t *client);
+bool loop_parse_return(client_t *client, char *temp);
 void client_push_exec_command(client_t *client, char *buffer);
 
 void sig_handler(int signum);

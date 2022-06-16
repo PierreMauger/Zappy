@@ -29,5 +29,5 @@ bool loop_command(client_t *client)
         fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
         return false;
     }
-    return true;  
+    return true;
 }

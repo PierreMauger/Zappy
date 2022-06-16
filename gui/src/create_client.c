@@ -24,7 +24,7 @@ static void free_map(client_t *client)
 
 }
 
-char *create_uuid()
+char *create_uuid(void)
 {
     uuid_t binuuid;
     char *uuid = malloc(UUID_STR_LEN);

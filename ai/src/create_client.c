@@ -45,7 +45,8 @@ client_t *create_client(arg_t *arg)
     }
     if (!(client->command = list_create()) ||
         !(client->pending_commands = list_create()) ||
-        !(client->player = crt_play(arg)) || !(client->received_commands = list_create()))
+        !(client->player = crt_play(arg)) ||
+        !(client->received_commands = list_create()))
         return NULL;
     client->socket->addr->sin_family = AF_INET;
     client->socket->addr->sin_port = htons(arg->port);
