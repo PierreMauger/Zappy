@@ -17,12 +17,16 @@ server_t *server_create(int port, size_t cli_per_team, size_t team_nbr)
     server->socket = nlib_create_socket();
     if (server->socket == NULL ||
         nlib_init_socket(server->socket, port,
-            cli_per_team * team_nbr) == NULL)
+            cli_per_team * team_nbr) == NULL) {
+        server_destroy(server);
         return NULL;
+    }
     server->clients = list_create();
     server->commands_to_send = list_create();
-    if (server->clients == NULL || server->commands_to_send == NULL)
+    if (server->clients == NULL || server->commands_to_send == NULL) {
+        server_destroy(server);
         return NULL;
+    }
     return server;
 }
 

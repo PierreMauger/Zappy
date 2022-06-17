@@ -34,5 +34,6 @@ void map_destroy(map_t *map)
         if (map->map[i])
             inventory_destroy(map->map[i]);
     }
+    free(map->map);
     free(map);
 }
