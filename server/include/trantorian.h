@@ -8,6 +8,8 @@
 #ifndef TRANTORIAN_H
     #define TRANTORIAN_H
 
+    #define TRANT_LIVE_IT 126
+
     #include <uuid/uuid.h>
 
     #include <stdio.h>
@@ -27,13 +29,19 @@ typedef enum {
     DIR_SIZE
 } direction_e;
 
+typedef enum {
+    TRANT_HATCHING,
+    TRANT_LIVING,
+    TRANT_DEAD,
+} trant_state_e;
+
 struct client_s;
 
 typedef struct trantorian_s {
     char *uuid;
     team_t *team;
     struct client_s *client;
-    bool hatched;
+    trant_state_e state;
     size_t live_it;
     inventory_t *inventory;
     size_t level;

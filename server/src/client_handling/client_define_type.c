@@ -59,6 +59,7 @@ static void client_define_default(core_t *core, client_t *client,
             (void (*)(void *))client_destroy);
         return;
     }
+    client->trantorian->state = TRANT_LIVING;
     client_push_command(core->server, client, get_client_num(core, team));
     client_push_command(core->server, client, get_map_size(core->game->map));
     printf("[INFO] Default client detected\n");

@@ -31,6 +31,7 @@ trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y)
     trantorian->team->cli_sub++;
     trantorian->x = rand() % map_x;
     trantorian->y = rand() % map_y;
+    trantorian->live_it = TRANT_LIVE_IT;
     trantorian->inventory = inventory_create();
     if (trantorian->inventory == NULL || trantorian->uuid == NULL) {
         trantorian_destroy(trantorian);

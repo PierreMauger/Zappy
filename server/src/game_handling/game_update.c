@@ -30,9 +30,9 @@ bool game_clock_update(size_t freq)
 
 void game_update(core_t *core)
 {
-    // if (game_clock_update(core->game->freq)) {
-    //     game_update_handlers(core);
-    //     game_update_trantorians(core);
-    //     // game_update_map(core->game->map);
-    // }
+    if (game_clock_update(core->game->freq)) {
+        game_update_handlers(core);
+        game_update_trantorians(core);
+        // game_update_map(core->game->map);
+    }
 }

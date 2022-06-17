@@ -158,11 +158,12 @@ void clients_update(core_t *core, fd_set *readfds);
 int server_start(args_t *args);
 int server_loop(core_t *core);
 
-bool game_clock_update(size_t freq);
+void game_remove_trantorian(core_t *core, trantorian_t *trantorian);
 
 void game_update_handler(core_t *core, client_t *client);
 void game_update_handlers(core_t *core);
 void game_update_trantorians(core_t *core);
+bool game_clock_update(size_t freq);
 void game_update(core_t *core);
 
 #endif // CORE_H
