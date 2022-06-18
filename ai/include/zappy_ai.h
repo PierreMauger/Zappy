@@ -126,6 +126,7 @@ void free_map(client_t *client);
 char *go_next_chr(char *str, char chr);
 char *get_one_word(char *str);
 char *get_cell(char *tab);
+char *add_newline(char *str);
 size_t change_pos(client_t *client, size_t v, size_t change_v, bool is_x);
 int my_getnbr(char *str);
 

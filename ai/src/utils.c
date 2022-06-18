@@ -7,6 +7,16 @@
 
 #include "zappy_ai.h"
 
+char *add_newline(char *str)
+{
+    char *new_str = malloc(sizeof(char) * (strlen(str) + 2));
+
+    if (!new_str)
+        return NULL;
+    strcat(strcpy(new_str, str), "\n");
+    return (new_str);
+}
+
 char *get_one_word(char *str)
 {
     char *word = NULL;

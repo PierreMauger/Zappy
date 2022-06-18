@@ -41,8 +41,8 @@ static const com_t com[] =
     {"Connect_nbr\n\0", &connect_nbr},
     {"Fork\n\0", &fork_player},
     {"Eject\n\0", &eject_player},
-    {"Take object\n\0", &take_object},
-    {"Set object\n\0", &set_object},
+    {"Take\0", &take_object},
+    {"Set\0", &set_object},
     {"Incantation\n\0", &incantation},
     {NULL, NULL}
 };

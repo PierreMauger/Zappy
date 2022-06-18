@@ -16,7 +16,8 @@ void free_client(client_t *client)
     list_destroy(client->command, (void (*)(void *))nlib_command_destroy);
     list_destroy(client->pending_commands, free);
     list_destroy(client->received_commands, free);
-    free_map(client);
+    if (client->map)
+        free_map(client);
     free(client->player->inv);
     free(client->player);
     free(client);
@@ -43,6 +44,7 @@ static void split_create_client(client_t *client, arg_t *arg)
     client->socket->addr->sin_port = htons(arg->port);
     client->socket->addr->sin_addr.s_addr = inet_addr(arg->machine);
     client->init = false;
+    client->map = NULL;
     client->client_connected = false;
     client->size_map.x = -1;
     client->size_map.y = -1;
