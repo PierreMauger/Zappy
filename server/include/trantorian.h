@@ -8,6 +8,7 @@
 #ifndef TRANTORIAN_H
     #define TRANTORIAN_H
 
+    #define TRANT_INIT_FOOD 10
     #define TRANT_LIVE_IT 126
 
     #include <uuid/uuid.h>
