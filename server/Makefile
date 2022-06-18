@@ -64,7 +64,8 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/client_handling/gui_commands/sbp.c					\
 					src/client_handling/client_define_type.c				\
 					src/client_handling/client_gui_exec_command.c			\
-					src/game_handling/game_utils.c							\
+					src/game_handling/game_utils/game_calc.c				\
+					src/game_handling/game_utils/game_utils.c				\
 					src/game_handling/game_update.c							\
 					src/game_handling/game_update_handler.c					\
 					src/game_handling/game_update_trantorians.c				\

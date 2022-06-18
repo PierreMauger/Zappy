@@ -59,8 +59,10 @@ void trantorian_destroy(trantorian_t *trantorian)
 {
     if (trantorian == NULL)
         return;
-    if (trantorian->uuid != NULL)
+    if (trantorian->uuid != NULL) {
+        printf("[INFO] Trantorian %s destroyed\n", trantorian->uuid);
         free(trantorian->uuid);
+    }
     if (trantorian->team != NULL)
         trantorian->team->cli_sub--;
     if (trantorian->inventory)

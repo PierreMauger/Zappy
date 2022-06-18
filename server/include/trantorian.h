@@ -11,6 +11,10 @@
     #define TRANT_INIT_FOOD 10
     #define TRANT_LIVE_IT 126
 
+    #define TRANT_ANGLE 37
+
+    #define IDX 1
+
     #include <uuid/uuid.h>
 
     #include <stdio.h>
@@ -30,6 +34,20 @@ typedef enum {
 
     DIR_SIZE
 } direction_e;
+
+typedef enum {
+    TILE_ONE = 1,
+    TILE_THREE = 3,
+    TILE_FIVE = 5,
+    TILE_SEVEN = 7,
+
+    TILE_TWO = 2,
+    TILE_FOUR = 4,
+    TILE_SIX = 6,
+    TILE_EIGHT = 8,
+
+    TILE_NONE = 0,
+} dir_tile_e;
 
 typedef enum {
     TRANT_HATCHING,

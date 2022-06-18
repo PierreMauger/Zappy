@@ -165,7 +165,8 @@ void game_update_trantorians(core_t *core);
 bool game_clock_update(size_t freq);
 void game_update(core_t *core);
 
-vector_t *game_calc_vector_norm(size_t map_x, size_t map_y,
+vector_t *game_calc_vector(size_t map_x, size_t map_y,
     pos_t *a, pos_t *b);
+size_t game_calc_angle_degrees(vector_t *vector);
 
 #endif // CORE_H

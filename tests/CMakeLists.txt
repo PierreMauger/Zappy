@@ -83,7 +83,8 @@ add_executable(unit-tests
   ../server/src/client_handling/gui_commands/sbp.c
   ../server/src/client_handling/client_define_type.c
   ../server/src/client_handling/client_gui_exec_command.c
-  ../server/src/game_handling/game_utils.c
+  ../server/src/game_handling/game_utils/game_calc.c
+  ../server/src/game_handling/game_utils/game_utils.c
   ../server/src/game_handling/game_update.c
   ../server/src/game_handling/game_update_handler.c
   ../server/src/game_handling/game_update_trantorians.c
