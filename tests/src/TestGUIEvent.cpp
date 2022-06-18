@@ -129,7 +129,7 @@ TEST(TestGUIEvent, pdi)
 TEST(TestGUIEvent, enw)
 {
     char *buff = nullptr;
-    trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3);
+    trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3, true);
 
     ASSERT_TRUE(egg != nullptr);
 
@@ -150,7 +150,7 @@ TEST(TestGUIEvent, enw)
 TEST(TestGUIEvent, eht)
 {
     char *buff = nullptr;
-    trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3);
+    trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3, true);
 
     ASSERT_TRUE(egg != nullptr);
 
@@ -167,7 +167,7 @@ TEST(TestGUIEvent, eht)
 TEST(TestGUIEvent, ebo)
 {
     char *buff = nullptr;
-    trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3);
+    trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3, true);
 
     ASSERT_TRUE(egg != nullptr);
 
@@ -184,7 +184,7 @@ TEST(TestGUIEvent, ebo)
 TEST(TestGUIEvent, edi)
 {
     char *buff = nullptr;
-    trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3);
+    trantorian_t *egg = trantorian_create(sc.getClient()->trantorian->team, 3, 3, true);
 
     ASSERT_TRUE(egg != nullptr);
 

@@ -13,7 +13,7 @@ TEST(TestTrantorianAlloc, Test1)
 
     ASSERT_TRUE(team != nullptr);
 
-    trantorian_t *trantorian = trantorian_create(team, 10, 10);
+    trantorian_t *trantorian = trantorian_create(team, 10, 10, true);
     EXPECT_TRUE(trantorian != nullptr);
     EXPECT_TRUE(trantorian->team == team);
     EXPECT_TRUE(trantorian->x < 10);

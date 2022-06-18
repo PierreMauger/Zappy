@@ -19,6 +19,7 @@
         #include "server.h"
         #include "team.h"
         #include "trantorian.h"
+        #include "utils.h"
     }
 
 class CommandFixture

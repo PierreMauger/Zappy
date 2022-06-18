@@ -37,8 +37,8 @@ void command_pic(core_t *core, trantorian_t *trantorian, list_t *uuids)
     char *buff = NULL;
 
     if (asprintf(&buff, "pic %ld %ld %ld %s",
-            trantorian->x,
-            trantorian->y,
+            trantorian->pos.x,
+            trantorian->pos.y,
             trantorian->level,
             trantorian->uuid) == -1) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");

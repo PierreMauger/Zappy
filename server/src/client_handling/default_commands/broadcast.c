@@ -28,8 +28,8 @@ void broadcast_e(core_t *core, client_t *client, char *command)
         return;
     }
     if (asprintf(&broad, "mesage %ld %ld, %s\n",
-            client->trantorian->x,
-            client->trantorian->y,
+            client->trantorian->pos.x,
+            client->trantorian->pos.y,
             msg) == -1) {
         fprintf(stderr, "[ERROR] Failed to malloc text\n");
         return;

@@ -14,8 +14,8 @@ void command_pnw(core_t *core, trantorian_t *trantorian)
 
     if (asprintf(&buff, "pnw #%s %ld %ld %d %ld %s\n",
             trantorian->uuid,
-            trantorian->x,
-            trantorian->y,
+            trantorian->pos.x,
+            trantorian->pos.y,
             (int)trantorian->direction,
             trantorian->level,
             trantorian->team->name) == -1) {

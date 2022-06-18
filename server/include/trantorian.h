@@ -20,6 +20,7 @@
     #include "inventory.h"
     #include "team.h"
     #include "client.h"
+    #include "utils.h"
 
 typedef enum {
     DIR_UP,
@@ -46,6 +47,7 @@ typedef struct trantorian_s {
     size_t live_it;
     inventory_t *inventory;
     size_t level;
+    pos_t pos;
     size_t x;
     size_t y;
     direction_e direction;

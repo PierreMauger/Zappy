@@ -80,7 +80,7 @@ OBJ				=	$(SRC:.c=.o)
 ##################### FLAGS #####################
 INCLUDES		=	-I include -I ../include
 
-LIBS			=	-L ../libs -llist -lnlib -luuid							\
+LIBS			=	-L ../libs -llist -lnlib -luuid	-lm						\
 					-Wl,-rpath=$(shell readlink -f "../libs/")				\
 
 CFLAGS			=	$(INCLUDES) $(LIBS) -Wall -Wextra -W -fPIC

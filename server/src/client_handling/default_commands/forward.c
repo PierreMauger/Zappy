@@ -18,19 +18,19 @@ void forward_e(core_t *core, client_t *client, UNUSED char *command)
 {
     switch (client->trantorian->direction) {
         case DIR_UP:
-            client->trantorian->y = control_dir(client->trantorian->y,
+            client->trantorian->pos.y = control_dir(client->trantorian->pos.y,
                 core->game->map->height, false);
             break;
         case DIR_RIGHT:
-            client->trantorian->x = control_dir(client->trantorian->x,
+            client->trantorian->pos.x = control_dir(client->trantorian->pos.x,
                 core->game->map->width, true);
             break;
         case DIR_DOWN:
-            client->trantorian->y = control_dir(client->trantorian->y,
+            client->trantorian->pos.y = control_dir(client->trantorian->pos.y,
                 core->game->map->height, true);
             break;
         case DIR_LEFT:
-            client->trantorian->x = control_dir(client->trantorian->x,
+            client->trantorian->pos.x = control_dir(client->trantorian->pos.x,
                 core->game->map->width, false);
             break;
         default:

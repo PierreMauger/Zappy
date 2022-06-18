@@ -13,8 +13,8 @@ void command_pie(core_t *core, trantorian_t *trantorian)
     char *buff = NULL;
 
     if (asprintf(&buff, "pie %ld %ld %ld\n",
-            trantorian->x,
-            trantorian->y,
+            trantorian->pos.x,
+            trantorian->pos.y,
             trantorian->level) == -1) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
         return;

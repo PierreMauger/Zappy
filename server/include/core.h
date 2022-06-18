@@ -142,7 +142,6 @@ void incantation_e(core_t *core, client_t *client, char *command);
 
 void command_death(core_t *core, client_t *client, char *command);
 
-
 void client_def_search_command(core_t *core, client_t *client, char *command);
 
 void client_define_type(core_t *core, client_t *client, char *command);
@@ -165,5 +164,8 @@ void game_update_handlers(core_t *core);
 void game_update_trantorians(core_t *core);
 bool game_clock_update(size_t freq);
 void game_update(core_t *core);
+
+vector_t *game_calc_vector_norm(size_t map_x, size_t map_y,
+    pos_t *a, pos_t *b);
 
 #endif // CORE_H

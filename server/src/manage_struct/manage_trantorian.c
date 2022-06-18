@@ -24,11 +24,11 @@ static void trantorian_set_pos(trantorian_t *trantorian, size_t map_x,
     size_t map_y, bool rand_pos)
 {
     if (rand_pos) {
-        trantorian->x = rand() % map_x;
-        trantorian->y = rand() % map_y;
+        trantorian->pos.x = rand() % map_x;
+        trantorian->pos.y = rand() % map_y;
     } else {
-        trantorian->x = map_x;
-        trantorian->y = map_y;
+        trantorian->pos.x = map_x;
+        trantorian->pos.y = map_y;
     }
 }
 
