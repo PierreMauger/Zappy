@@ -104,7 +104,7 @@ int look_around(client_t *client, char *str)
         free(content);
         save = go_next_chr(save, ',');
         if (save)
-            (char*)((size_t)save++);
+            (char *)((size_t)save++);
     }
     client->player->level = save_level;
     return 0;
