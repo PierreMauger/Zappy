@@ -20,7 +20,20 @@ static char *trantorian_get_uuid(void)
     return buff;
 }
 
-trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y)
+static void trantorian_set_pos(trantorian_t *trantorian, size_t map_x,
+    size_t map_y, bool rand_pos)
+{
+    if (rand_pos) {
+        trantorian->x = rand() % map_x;
+        trantorian->y = rand() % map_y;
+    } else {
+        trantorian->x = map_x;
+        trantorian->y = map_y;
+    }
+}
+
+trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y,
+    bool rand_pos)
 {
     trantorian_t *trantorian = calloc(1, sizeof(trantorian_t));
 
@@ -29,8 +42,7 @@ trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y)
     trantorian->uuid = trantorian_get_uuid();
     trantorian->team = team;
     trantorian->team->cli_sub++;
-    trantorian->x = rand() % map_x;
-    trantorian->y = rand() % map_y;
+    trantorian_set_pos(trantorian, map_x, map_y, rand_pos);
     trantorian->inventory = inventory_create();
     if (trantorian->inventory == NULL || trantorian->uuid == NULL) {
         trantorian_destroy(trantorian);

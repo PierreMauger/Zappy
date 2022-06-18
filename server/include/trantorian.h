@@ -51,7 +51,8 @@ typedef struct trantorian_s {
     direction_e direction;
 } trantorian_t;
 
-trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y);
+trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y,
+    bool rand_pos);
 void trantorian_destroy(trantorian_t *trantorian);
 
 #endif // TRANTORIAN_H

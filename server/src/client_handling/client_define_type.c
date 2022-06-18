@@ -32,7 +32,7 @@ static int client_create_new_trantorian(core_t *core, client_t *client,
 {
     client->type = CLI_DEFAULT;
     client->trantorian = trantorian_create(team,
-        core->game->map->width, core->game->map->height);
+        core->game->map->width, core->game->map->height, true);
     if (client->trantorian == NULL)
         return ERROR;
     list_push_data(core->game->trantorians, client->trantorian);
