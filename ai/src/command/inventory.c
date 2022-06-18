@@ -9,7 +9,7 @@
 
 void fill_inventory_player(player_t *player, char *content)
 {
-    for (char *stone; stone = get_cell(content); free(stone)) {
+    for (char *stone; (stone = get_cell(content)); free(stone)) {
         if (strstr(stone, "food") != NULL)
             player->inv->food = my_getnbr(stone);
         if (strstr(stone, "deraumere") != NULL)
