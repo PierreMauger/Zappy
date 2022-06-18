@@ -25,8 +25,13 @@ static bool get_size_map(client_t *client, char *str)
         fprintf(stderr, "%s[ERROR]%s bad size map", R, W);
         return false;
     }
+    if (!create_map(client)) {
+        fprintf(stderr, "%s[ERROR]%s can't malloc map\n", R, W);
+        return false;
+    }
     if (client->client_connected)
         client->init = false;
+    return true;
 }
 
 static bool get_number_client(client_t *client, char *str)
@@ -73,6 +78,7 @@ bool parse_return(client_t *client, char *str)
     command = list_pop_head(client->pending_commands);
     if (!command)
         return true;
+    printf("command = <%s>\n", command);
     for (int i = 0; com[i].cmd != NULL; i++) {
         if (strcmp(com[i].cmd, command) == 0) {
             com[i].func_ptr(client, str);

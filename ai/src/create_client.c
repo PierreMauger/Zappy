@@ -16,6 +16,8 @@ void free_client(client_t *client)
     list_destroy(client->command, (void (*)(void *))nlib_command_destroy);
     list_destroy(client->pending_commands, free);
     list_destroy(client->received_commands, free);
+    free_map(client);
+    free(client->player->inv);
     free(client->player);
     free(client);
 }
@@ -27,8 +29,11 @@ static player_t *crt_play(arg_t *arg)
     if (!player)
         return NULL;
     player->team_name = arg->name;
-    player->pos.x = -1;
-    player->pos.y = -1;
+    player->pos.x = 0;
+    player->pos.y = 0;
+    player->dir = North;
+    player->level = 1;
+    player->inv = malloc(sizeof(inventory_t));
     return player;
 }
 

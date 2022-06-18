@@ -32,18 +32,18 @@ typedef struct com_s {
 
 static const com_t com[] =
 {
-    {"Forward\0", &forward_movement},
-    {"Right\0", &right_movement},
-    {"Left\0", &left_movement},
-    {"Look\0", &look_around},
-    {"Inventory\0", &inventory},
-    {"Broadcast text\0", &broadcast},
-    {"Connect_nbr\0", &connect_nbr},
-    {"Fork\0", &fork_player},
-    {"Eject\0", &eject_player},
-    {"Take object\0", &take_object},
-    {"Set object\0", &set_object},
-    {"Incantation\0", &incantation},
+    {"Forward\n\0", &forward_movement},
+    {"Right\n\0", &right_movement},
+    {"Left\n\0", &left_movement},
+    {"Look\n\0", &look_around},
+    {"Inventory\n\0", &inventory},
+    {"Broadcast text\n\0", &broadcast},
+    {"Connect_nbr\n\0", &connect_nbr},
+    {"Fork\n\0", &fork_player},
+    {"Eject\n\0", &eject_player},
+    {"Take object\n\0", &take_object},
+    {"Set object\n\0", &set_object},
+    {"Incantation\n\0", &incantation},
     {NULL, NULL}
 };
 

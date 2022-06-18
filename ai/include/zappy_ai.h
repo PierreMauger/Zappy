@@ -67,18 +67,19 @@ typedef struct {
     size_t thystame;
 } inventory_t;
 
-typedef struct map_s {
-    inventory_t inv;
-    bool view;
-    pos_t pos;
-} map_t;
-
 typedef struct player_s {
     char *team_name;
-    inventory_t inv;
+    char *uuid;
+    size_t level;
+    inventory_t *inv;
     pos_t pos;
     direction_e dir;
 } player_t;
+
+typedef struct map_s {
+    inventory_t *inv;
+    player_t *player;
+} map_t;
 
 typedef struct client_s {
     socket_t *socket;
@@ -92,16 +93,16 @@ typedef struct client_s {
     list_t *pending_commands;
     list_t *received_commands;
     player_t *player;
-    map_t *map;
+    map_t **map;
 } client_t;
 
-#define R "\033[1;31m"
-#define G "\033[1;32m"
-#define Y "\033[1;33m"
-#define B "\033[1;34m"
-#define M "\033[1;35m"
-#define C "\033[1;36m"
-#define W "\033[1;0m"
+    #define R "\033[1;31m"
+    #define G "\033[1;32m"
+    #define Y "\033[1;33m"
+    #define B "\033[1;34m"
+    #define M "\033[1;35m"
+    #define C "\033[1;36m"
+    #define W "\033[1;0m"
 
 client_t *create_client(arg_t *arg);
 void free_client(client_t *client);
@@ -118,5 +119,16 @@ void client_push_exec_command(client_t *client, char *buffer);
 void sig_handler(int signum);
 
 bool ai(client_t *client);
+
+bool create_map(client_t *client);
+void free_map(client_t *client);
+
+char *go_next_chr(char *str, char chr);
+char *get_one_word(char *str);
+char *get_cell(char *tab);
+size_t change_pos(client_t *client, size_t v, size_t change_v, bool is_x);
+
+void print_inventory(inventory_t *inv);
+void print_inventory_map(client_t *client);
 
 #endif // ZAPPY_AI_H

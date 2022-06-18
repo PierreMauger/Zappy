@@ -21,7 +21,6 @@ static void free_map(client_t *client)
         free(client->map[y]);
     }
     free(client->map);
-
 }
 
 void free_client(client_t *client)

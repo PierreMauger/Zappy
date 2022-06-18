@@ -9,6 +9,7 @@ vg*
 bootstrap
 Dockerfile
 lol
+test_zappy_server
 zappy_server_test
 zappy_server
 zappy_gui

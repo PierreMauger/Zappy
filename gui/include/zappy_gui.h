@@ -121,13 +121,13 @@ static const com_t com[] =
     {NULL, NULL}
 };
 
-#define R "\033[1;31m"
-#define G "\033[1;32m"
-#define Y "\033[1;33m"
-#define B "\033[1;34m"
-#define M "\033[1;35m"
-#define C "\033[1;36m"
-#define W "\033[1;0m"
+    #define R "\033[1;31m"
+    #define G "\033[1;32m"
+    #define Y "\033[1;33m"
+    #define B "\033[1;34m"
+    #define M "\033[1;35m"
+    #define C "\033[1;36m"
+    #define W "\033[1;0m"
 
 void sig_handler(int signum);
 
