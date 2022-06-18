@@ -39,6 +39,7 @@ trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y)
     trantorian->inventory->food = TRANT_INIT_FOOD;
     trantorian->level = 1;
     trantorian->direction = rand() % DIR_SIZE;
+    printf("[INFO] Trantorian %s created\n", trantorian->uuid);
     return trantorian;
 }
 
