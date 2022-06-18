@@ -52,7 +52,7 @@ int take_object(client_t *client, char *str)
     return (split_take_object(client, str, x, y));
 }
 
-static split_set_object(client_t *client, char *str, size_t x, size_t y)
+static int split_set_object(client_t *client, char *str, size_t x, size_t y)
 {
     if (strcmp(str, "linemate") == 0) {
         client->map[y][x].inv->linemate++;

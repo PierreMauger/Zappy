@@ -34,7 +34,7 @@ static player_t *crt_play(arg_t *arg)
     player->pos.y = 0;
     player->dir = North;
     player->level = 1;
-    player->inv = malloc(sizeof(inventory_t));
+    player->inv = NULL;
     return player;
 }
 

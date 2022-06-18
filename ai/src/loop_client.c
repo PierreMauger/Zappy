@@ -35,6 +35,7 @@ static bool check_fd_isset(client_t *client)
             return true;
         }
         if (strcmp(temp, "dead\n") == 0) {
+            printf("%s[INFO]%s Player dead\n", G, W);
             free(temp);
             return true;
         }
@@ -59,6 +60,9 @@ static bool loop_client(client_t *client)
             break;
         if (check_fd_isset(client))
             break;
+        if (client->pending_commands->lenght == 0 && !client->init)
+            if (!ai(client))
+                break;
         nlib_commands_update(client->command, &client->writefds);
     }
     return true;

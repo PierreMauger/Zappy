@@ -58,13 +58,13 @@ typedef struct pos_s {
 } pos_t;
 
 typedef struct {
-    size_t food;
-    size_t linemate;
-    size_t deraumere;
-    size_t sibur;
-    size_t mendiane;
-    size_t phiras;
-    size_t thystame;
+    int food;
+    int linemate;
+    int deraumere;
+    int sibur;
+    int mendiane;
+    int phiras;
+    int thystame;
 } inventory_t;
 
 typedef struct player_s {

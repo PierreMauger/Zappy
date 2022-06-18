@@ -9,8 +9,8 @@
 
 void print_inventory(inventory_t *inv)
 {
-    printf("food = %ld linemate = %ld deraumere = %ld sibur = %ld mendiane"
-        " = %ld phiras = %ld thystame = %ld\n", inv->food, inv->linemate,
+    printf("food = %d linemate = %d deraumere = %d sibur = %d mendiane"
+        " = %d phiras = %d thystame = %d\n", inv->food, inv->linemate,
         inv->deraumere, inv->sibur, inv->mendiane, inv->phiras, inv->thystame);
 }
 

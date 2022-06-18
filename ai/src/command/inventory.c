@@ -33,6 +33,12 @@ int inventory(client_t *client, char *str)
 {
     char *save = str;
 
+    if (!client->player->inv)
+        client->player->inv = malloc(sizeof(inventory_t));
+    if (!client->player->inv) {
+        fprintf(stderr, "%s[ERROR]%s Can't malloc player inv", R, W);
+        return 1;
+    }
     fill_inventory_player(client->player, save);
     print_inventory(client->player->inv);
     return 0;
