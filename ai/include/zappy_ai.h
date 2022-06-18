@@ -127,6 +127,7 @@ char *go_next_chr(char *str, char chr);
 char *get_one_word(char *str);
 char *get_cell(char *tab);
 size_t change_pos(client_t *client, size_t v, size_t change_v, bool is_x);
+int my_getnbr(char *str);
 
 void print_inventory(inventory_t *inv);
 void print_inventory_map(client_t *client);

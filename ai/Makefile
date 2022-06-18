@@ -16,6 +16,7 @@ SRC				=	./src/loop_client.c				\
 					./src/utils.c 					\
 					./src/gest_map.c 				\
 					./src/print_info.c 				\
+					./src/my_getnbr.c 				\
 					./src/command/movement.c 		\
 					./src/command/look_around.c 	\
 					./src/command/broadcast.c	 	\
