@@ -119,9 +119,13 @@ void client_push_exec_command(client_t *client, char *buffer);
 void sig_handler(int signum);
 
 bool ai(client_t *client);
+bool path_finding_object(client_t *client, char *object);
+bool go_to_next_object(client_t *client, size_t dest_x, size_t dest_y);
 
 bool create_map(client_t *client);
+map_t **copy_double_tab(map_t **map, size_t x, size_t y);
 void free_map(client_t *client);
+void free_map_copy(map_t **map, size_t x, size_t y);
 
 char *go_next_chr(char *str, char chr);
 char *get_one_word(char *str);

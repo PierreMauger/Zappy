@@ -13,10 +13,7 @@ bool find_path_object(client_t *client)
     size_t x = client->player->pos.x;
     size_t nb_food = client->map[y][x].inv->food;
 
-    //while (client->map[y][x].inv->food == 0) {
-    //    //path_finding();
-    //}
-    if (nb_food == 0)
+    if (!path_finding_object(client, "food"))
         return false;
     while (nb_food != 0 && client->pending_commands->lenght < 10) {
         if (!send_message(client->pending_commands,
@@ -31,6 +28,7 @@ bool find_path_object(client_t *client)
 
 bool ai(client_t *client)
 {
+    usleep(10000);
     if (!send_message(client->pending_commands,
         client->command, client->socket, "Look\n")) {
         fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
