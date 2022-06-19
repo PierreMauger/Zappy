@@ -159,18 +159,24 @@ int server_loop(core_t *core);
 
 void game_remove_trantorian(core_t *core, trantorian_t *trantorian);
 
+void game_update_map(map_t *map);
 void game_update_handler(core_t *core, client_t *client);
 void game_update_handlers(core_t *core);
 void game_update_trantorians(core_t *core);
 bool game_clock_update(size_t freq);
 void game_update(core_t *core);
 
-vector_t *game_calc_vector(size_t map_x, size_t map_y,
-    pos_t *a, pos_t *b);
-
+vector_t *game_calc_vector(size_t map_x, size_t map_y, pos_t *a, pos_t *b);
 size_t game_calc_angle_degrees(vector_t *vector);
 
 dir_tile_e game_calc_direction(map_t *map, direction_e dir, pos_t *a,
     pos_t *b);
+
+void game_dispatch_ressources(map_t *map);
+
+void game_map_dup_delete_idx(pos_t **map_dup, int idx, size_t remaining_tiles);
+void game_destroy_map_dup(map_t *map, pos_t **map_dup);
+pos_t **game_reset_map_dup(map_t *map, pos_t **map_dup);
+pos_t **game_init_map_dup(map_t *map);
 
 #endif // CORE_H

@@ -9,6 +9,11 @@
     #define MAP_H
 
     #define GET_CELL(map_ptr, x, y) (map_ptr->map[y * map_ptr->width + x])
+    #define GET_COORD(map_ptr, x, y) (y * map_ptr->width + x)
+
+    #define MAP_REFRESH (20)
+
+    #define RESSOURCES_NBR (7)
 
     #include <stdio.h>
 
