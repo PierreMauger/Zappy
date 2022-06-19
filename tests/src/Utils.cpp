@@ -19,13 +19,15 @@ CommandFixture::CommandFixture(void)
     this->coreCreate(args);
     destroy_args(args);
 
-    list_push_data(core->game->trantorians, trantorian_create((team_t *)this->core->game->teams->head->data, 1, 1, true));
+    list_push_data(core->game->trantorians, trantorian_create((team_t *)this->core->game->teams->head->data, 1, 1, false));
 
     this->client = client_create(0);
     this->client->trantorian = (trantorian_t *)this->core->game->trantorians->head->data;
     this->client->type = CLI_GUI;
 
     list_push_data(core->server->clients, this->client);
+
+    this->addClient();
 }
 
 CommandFixture::~CommandFixture(void)
@@ -56,10 +58,16 @@ void CommandFixture::coreCreate(args_t *args)
     this->core->server->socket->fd = -1;
 }
 
+void CommandFixture::startTestSingleClient(client_t *cli, int pipeCli[2])
+{
+    pipe(pipeCli);
+    cli->sock->fd = pipeCli[1];
+}
+
 void CommandFixture::startTest(void)
 {
-    pipe(this->pipefd);
-    this->client->sock->fd = this->pipefd[1];
+    this->startTestSingleClient(this->client, this->pipefd);
+    this->startTestSingleClient(this->otherPlayer, this->pipefdOther);
 }
 
 void CommandFixture::endTest(void)
@@ -68,6 +76,8 @@ void CommandFixture::endTest(void)
 
     FD_SET(pipefd[1], &writefds);
     FD_SET(pipefd[0], &readfds);
+    FD_SET(pipefdOther[1], &writefds);
+    FD_SET(pipefdOther[0], &readfds);
 
     nlib_select_fds(nullptr, &this->writefds);
     nlib_commands_update(this->core->server->commands_to_send, &this->writefds);
@@ -76,13 +86,25 @@ void CommandFixture::endTest(void)
         read(this->pipefd[0], buffer, 1024);
         this->res = buffer;
     }
+    memset(buffer, 0, 1024);
+    if (FD_ISSET(this->pipefdOther[0], &readfds)) {
+        read(this->pipefdOther[0], buffer, 1024);
+        this->resOtherCli = buffer;
+    }
     close(pipefd[0]);
     close(pipefd[1]);
+    close(pipefdOther[0]);
+    close(pipefdOther[1]);
 }
 
 std::string CommandFixture::getRes(void)
 {
     return this->res;
+}
+
+std::string CommandFixture::getResOtherCli(void)
+{
+    return this->resOtherCli;
 }
 
 core_t *CommandFixture::getCore(void)
@@ -93,4 +115,23 @@ core_t *CommandFixture::getCore(void)
 client_t *CommandFixture::getClient(void)
 {
     return this->client;
+}
+
+client_t *CommandFixture::getOtherCli(void)
+{
+    return this->otherPlayer;
+}
+
+void CommandFixture::addClient(void)
+{
+    client_t *new_cli = client_create(0);
+    trantorian_t *trantorian = trantorian_create((team_t *)this->core->game->teams->head->data, 2, 2, false);
+
+    list_push_data(this->core->game->trantorians, trantorian);
+
+    new_cli->trantorian = trantorian;
+    new_cli->type = CLI_DEFAULT;
+
+    list_push_data(this->core->server->clients, new_cli);
+    this->otherPlayer = new_cli;
 }

@@ -216,3 +216,17 @@ TEST(TestGameCalcDirSound, SameAxe4)
     core->game->map->width = 0;
     core->game->map->height = 0;
 }
+
+TEST(TestCommandBroadCast, Basic)
+{
+    char *msg = strdup("MESSAGE");
+
+    sc.startTest();
+    broadcast_e(sc.getCore(), sc.getClient(), msg);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+    EXPECT_EQ(sc.getResOtherCli(), "message 4, MESSAGE\n");
+
+    free(msg);
+}

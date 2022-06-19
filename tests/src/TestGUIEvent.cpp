@@ -26,6 +26,8 @@ TEST(TestGUIEvent, pnw)
         sc.getClient()->trantorian->team->name) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
 }
 
 TEST(TestGUIEvent, pex)
@@ -40,6 +42,8 @@ TEST(TestGUIEvent, pex)
         sc.getClient()->trantorian->uuid) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
 }
 
 TEST(TestGUIEvent, pbc)
@@ -58,6 +62,8 @@ TEST(TestGUIEvent, pbc)
         msg) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
     free(msg);
 }
 
@@ -79,6 +85,8 @@ TEST(TestGUIEvent, pic)
         sc.getClient()->trantorian->uuid) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
     list_destroy(list, NULL);
 }
 
@@ -96,6 +104,8 @@ TEST(TestGUIEvent, pie)
         sc.getClient()->trantorian->level) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
 }
 
 TEST(TestGUIEvent, pfk)
@@ -110,6 +120,8 @@ TEST(TestGUIEvent, pfk)
         sc.getClient()->trantorian->uuid) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
 }
 
 TEST(TestGUIEvent, pdi)
@@ -124,6 +136,8 @@ TEST(TestGUIEvent, pdi)
         sc.getClient()->trantorian->uuid) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
 }
 
 TEST(TestGUIEvent, enw)
@@ -144,6 +158,8 @@ TEST(TestGUIEvent, enw)
         egg->pos.y) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
     trantorian_destroy(egg);
 }
 
@@ -161,6 +177,8 @@ TEST(TestGUIEvent, eht)
     ASSERT_TRUE(asprintf(&buff, "eht %s\n",
         egg->uuid) != -1);
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
     trantorian_destroy(egg);
 }
 
@@ -178,6 +196,8 @@ TEST(TestGUIEvent, ebo)
     ASSERT_TRUE(asprintf(&buff, "ebo %s\n",
         egg->uuid) != -1);
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
     trantorian_destroy(egg);
 }
 
@@ -195,6 +215,8 @@ TEST(TestGUIEvent, edi)
     ASSERT_TRUE(asprintf(&buff, "edi %s\n",
         egg->uuid) != -1);
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
     trantorian_destroy(egg);
 }
 
@@ -210,6 +232,8 @@ TEST(TestGUIEvent, seg)
         sc.getClient()->trantorian->team->name) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
 }
 
 TEST(TestGUIEvent, smg)
@@ -227,5 +251,7 @@ TEST(TestGUIEvent, smg)
         msg) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
+
+    free(buff);
     free(msg);
 }

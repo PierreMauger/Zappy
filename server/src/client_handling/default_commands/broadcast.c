@@ -31,7 +31,7 @@ static void send_msg(core_t *core, client_t *client, client_t *to_send,
             client->trantorian->uuid, to_send->trantorian->uuid);
         return;
     }
-    if (asprintf(&broad, "mesage %d, %s\n", dir_tile, msg) == -1) {
+    if (asprintf(&broad, "message %d, %s\n", dir_tile, msg) == -1) {
         fprintf(stderr, "[ERROR] Failed to malloc text\n");
         return;
     }
