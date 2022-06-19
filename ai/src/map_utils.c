@@ -7,6 +7,25 @@
 
 #include "zappy_ai.h"
 
+int string_to_number_object(map_t map, char *object_name)
+{
+    if (strcmp(object_name, "food") == 0)
+        return map.inv->food;
+    if (strcmp(object_name, "deraumere") == 0)
+        return map.inv->deraumere;
+    if (strcmp(object_name, "linemate") == 0)
+        return map.inv->linemate;
+    if (strcmp(object_name, "mendiane") == 0)
+        return map.inv->mendiane;
+    if (strcmp(object_name, "phiras") == 0)
+        return map.inv->phiras;
+    if (strcmp(object_name, "sibur") == 0)
+        return map.inv->sibur;
+    if (strcmp(object_name, "thystame") == 0)
+        return map.inv->thystame;
+    return 0;
+}
+
 void free_map_copy(map_t **map, size_t x, size_t y)
 {
     size_t max_x = x;

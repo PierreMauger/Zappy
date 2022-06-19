@@ -105,20 +105,16 @@ static bool go_to_good_direction_x(client_t *client, size_t dest, size_t src)
 
 bool go_to_next_object(client_t *client, size_t dest_x, size_t dest_y)
 {
-    printf("dest_x %ld dest_y %ld\n", dest_x, dest_y);
     if (!go_to_good_direction_x(client, dest_x, client->player->pos.x))
         return false;
-    printf("dest_x %ld dest_y %ld\n", dest_x, dest_y);
     for (size_t srx_x = client->player->pos.x; srx_x != dest_x;) {
         if (!send_message(client->pending_commands,
             client->command, client->socket, "Forward\n")) {
             fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
             return false;
         }
-        printf("src_x %ld dest_x %ld\n", srx_x, dest_x);
-        exit(0);
+        exit(4);
     }
-    printf("dest_x %ld dest_y %ld\n", dest_x, dest_y);
     if (!go_to_good_direction_y(client, dest_y, client->player->pos.y))
         return false;
     for (size_t srx_y = client->player->pos.y; srx_y != dest_y; srx_y++) {
@@ -127,7 +123,7 @@ bool go_to_next_object(client_t *client, size_t dest_x, size_t dest_y)
             fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
             return false;
         }
-        exit(0);
+        exit(5);
     }
     return true;
 }

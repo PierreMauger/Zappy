@@ -132,6 +132,7 @@ bool create_map(client_t *client);
 map_t **copy_double_tab(map_t **map, size_t x, size_t y);
 void free_map(client_t *client);
 void free_map_copy(map_t **map, size_t x, size_t y);
+int string_to_number_object(map_t map, char *object_name);
 
 char *go_next_chr(char *str, char chr);
 char *get_one_word(char *str);
