@@ -8,14 +8,16 @@
 #include "utils.h"
 #include "core.h"
 
-static pos_t **game_fill_map_dup(map_t *map, pos_t **pos)
+size_t game_fill_map_dup(map_t *map, pos_t **pos)
 {
     size_t x = 0;
     size_t y = 0;
+    size_t remaining = 0;
 
     for (size_t i = 0; i < map->height * map->width; i++) {
-        pos[i]->x = x;
-        pos[i]->y = y;
+        pos[remaining]->x = x;
+        pos[remaining]->y = y;
+        remaining++;
         if (x == map->width - 1) {
             x = 0;
             y++;
@@ -23,7 +25,30 @@ static pos_t **game_fill_map_dup(map_t *map, pos_t **pos)
             x++;
         }
     }
-    return pos;
+    return remaining;
+}
+
+size_t game_fill_map_dup_remaining(map_t *map, pos_t **pos,
+    size_t idx_ressource)
+{
+    size_t x = 0;
+    size_t y = 0;
+    size_t remaining = 0;
+
+    for (size_t i = 0; i < map->height * map->width; i++) {
+        if (((size_t *)(map->map[i]))[idx_ressource] == 0) {
+            pos[remaining]->x = x;
+            pos[remaining]->y = y;
+            remaining++;
+        }
+        if (x == map->width - 1) {
+            x = 0;
+            y++;
+        } else {
+            x++;
+        }
+    }
+    return remaining;
 }
 
 void game_destroy_map_dup(map_t *map, pos_t **map_dup)
@@ -31,11 +56,6 @@ void game_destroy_map_dup(map_t *map, pos_t **map_dup)
     for (size_t i = 0; i < map->height * map->width; i++)
         free(map_dup[i]);
     free(map_dup);
-}
-
-pos_t **game_reset_map_dup(map_t *map, pos_t **map_dup)
-{
-    return game_fill_map_dup(map, map_dup);
 }
 
 pos_t **game_init_map_dup(map_t *map)
@@ -49,7 +69,7 @@ pos_t **game_init_map_dup(map_t *map)
         if (pos[i] == NULL)
             return NULL;
     }
-    return game_fill_map_dup(map, pos);
+    return pos;
 }
 
 void game_map_dup_delete_idx(pos_t **map_dup, int idx, size_t remaining_tiles)

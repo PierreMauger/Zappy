@@ -174,9 +174,11 @@ dir_tile_e game_calc_direction(map_t *map, direction_e dir, pos_t *a,
 
 void game_dispatch_ressources(map_t *map);
 
+size_t game_fill_map_dup(map_t *map, pos_t **pos);
+size_t game_fill_map_dup_remaining(map_t *map, pos_t **pos,
+    size_t idx_ressource);
 void game_map_dup_delete_idx(pos_t **map_dup, int idx, size_t remaining_tiles);
 void game_destroy_map_dup(map_t *map, pos_t **map_dup);
-pos_t **game_reset_map_dup(map_t *map, pos_t **map_dup);
 pos_t **game_init_map_dup(map_t *map);
 
 #endif // CORE_H

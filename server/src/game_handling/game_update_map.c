@@ -30,30 +30,31 @@ static void game_map_add_ressource(map_t *map, size_t ressource, size_t tile)
 }
 
 static void game_dispatch(map_t *map, pos_t **map_content,
-    size_t remaining_tiles, inventory_t *nb_ressources)
+    inventory_t *nb_ressources)
 {
-    size_t amount = 0;
+    size_t total = 0;
     int random_idx = 0;
+    size_t cells_rem = 0;
 
     for (size_t ressource = 0; ressource < RESSOURCES_NBR; ressource++) {
-        amount = ((size_t *)(nb_ressources))[ressource];
-        for (size_t remain = 0; remain < amount; remain++) {
-            random_idx = rand() % remaining_tiles;
+        total = ((size_t *)(nb_ressources))[ressource];
+        cells_rem = game_fill_map_dup_remaining(map, map_content, ressource);
+        for (size_t to_dispatch = 0; to_dispatch < total; to_dispatch++) {
+            if (cells_rem == 0)
+                cells_rem = game_fill_map_dup(map, map_content);
+            random_idx = rand() % cells_rem;
             game_map_add_ressource(map, ressource, GET_COORD(map,
                 map_content[random_idx]->x, map_content[random_idx]->y));
-            game_map_dup_delete_idx(map_content, random_idx, remaining_tiles);
-            remaining_tiles--;
+            game_map_dup_delete_idx(map_content, random_idx, cells_rem);
+            cells_rem--;
         }
-        map_content = game_reset_map_dup(map, map_content);
-        remaining_tiles = map->width * map->height;
+        cells_rem = map->width * map->height;
     }
-    game_destroy_map_dup(map, map_content);
 }
 
 void game_dispatch_ressources(map_t *map)
 {
     pos_t **map_content = game_init_map_dup(map);
-    size_t remaining_tiles = map->width * map->height;
     inventory_t nb_ressources = {0};
 
     if (map_content == NULL) {
@@ -61,7 +62,8 @@ void game_dispatch_ressources(map_t *map)
         return;
     }
     game_init_map_content(map, &nb_ressources);
-    game_dispatch(map, map_content, remaining_tiles, &nb_ressources);
+    game_dispatch(map, map_content, &nb_ressources);
+    game_destroy_map_dup(map, map_content);
 }
 
 void game_update_map(map_t *map)
@@ -72,6 +74,14 @@ void game_update_map(map_t *map)
     if (refresh > 0)
         return;
     refresh = MAP_REFRESH;
-    printf("[INFO] Updating map\n");
     game_dispatch_ressources(map);
+
+    for (size_t i = 0; i < map->height * map->width; i++) {
+        printf("[DEBUG] tile: %ld => %ld\t%ld\t%ld\t%ld\t%ld\t%ld\t%ld\n", i, map->map[i]->food, map->map[i]->linemate, map->map[i]->deraumere, map->map[i]->sibur, map->map[i]->mendiane, map->map[i]->phiras, map->map[i]->thystame);
+    }
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
+    printf("\n");
 }
