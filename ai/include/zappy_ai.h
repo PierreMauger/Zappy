@@ -52,6 +52,11 @@ typedef struct arg_s {
     char *machine;
 } arg_t;
 
+typedef struct pps_s {
+    int *x;
+    int *y;
+} pps_t;
+
 typedef struct pos_s {
     int x;
     int y;
@@ -122,6 +127,7 @@ bool ai(client_t *client);
 bool path_finding_object(client_t *client, char *object);
 bool go_to_next_object(client_t *client, size_t dest_x, size_t dest_y);
 
+int round_map(client_t *client, int pos, bool is_x);
 bool create_map(client_t *client);
 map_t **copy_double_tab(map_t **map, size_t x, size_t y);
 void free_map(client_t *client);
