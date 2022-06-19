@@ -14,12 +14,13 @@ SRC				=	./src/loop_client.c				\
 					./src/if_forest.c 				\
 					./src/client_push_command.c 	\
 					./src/utils.c 					\
-					./src/gest_map.c 				\
+					./src/handle_map.c 				\
 					./src/path_finding_object.c 	\
 					./src/change_direction.c 		\
 					./src/print_info.c 				\
 					./src/map_utils.c 				\
 					./src/my_getnbr.c 				\
+					./src/round_pos_map.c 			\
 					./src/command/movement.c 		\
 					./src/command/look_around.c 	\
 					./src/command/broadcast.c	 	\

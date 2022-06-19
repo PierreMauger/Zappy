@@ -105,6 +105,7 @@ static bool go_to_good_direction_x(client_t *client, size_t dest, size_t src)
 
 bool go_to_next_object(client_t *client, size_t dest_x, size_t dest_y)
 {
+    find_closest_round(client, &dest_x, &dest_y);
     if (!go_to_good_direction_x(client, dest_x, client->player->pos.x))
         return false;
     for (size_t srx_x = client->player->pos.x; srx_x != dest_x;) {
@@ -113,7 +114,6 @@ bool go_to_next_object(client_t *client, size_t dest_x, size_t dest_y)
             fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
             return false;
         }
-        exit(4);
     }
     if (!go_to_good_direction_y(client, dest_y, client->player->pos.y))
         return false;
@@ -123,7 +123,6 @@ bool go_to_next_object(client_t *client, size_t dest_x, size_t dest_y)
             fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
             return false;
         }
-        exit(5);
     }
     return true;
 }

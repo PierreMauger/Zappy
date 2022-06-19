@@ -7,23 +7,6 @@
 
 #include "zappy_ai.h"
 
-int round_map(client_t *client, int pos, bool is_x)
-{
-    if (is_x) {
-        if (pos >= client->size_map.x)
-            return pos - client->size_map.x;
-        if (pos < 0)
-            return pos + client->size_map.x;
-        return pos;
-    } else {
-        if (pos >= client->size_map.y)
-            return pos - client->size_map.y;
-        if (pos < 0)
-            return pos + client->size_map.y;
-    }
-    return pos;
-}
-
 size_t change_pos(client_t *client, size_t v, size_t change_v, bool is_x)
 {
     int ret = v + change_v;
