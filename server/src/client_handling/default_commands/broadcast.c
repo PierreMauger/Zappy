@@ -18,24 +18,42 @@ static char *get_msg(char *command)
     return NULL;
 }
 
+static void send_msg(core_t *core, client_t *client, client_t *to_send,
+    char *msg)
+{
+    dir_tile_e dir_tile = game_calc_direction(core->game->map,
+        client->trantorian->direction, &client->trantorian->pos,
+        &to_send->trantorian->pos);
+    char *broad = NULL;
+
+    if (dir_tile == TILE_NONE) {
+        fprintf(stderr, "[ERROR] Client %s tried to send a message to %s\n",
+            client->trantorian->uuid, to_send->trantorian->uuid);
+        return;
+    }
+    if (asprintf(&broad, "mesage %d, %s\n", dir_tile, msg) == -1) {
+        fprintf(stderr, "[ERROR] Failed to malloc text\n");
+        return;
+    }
+    client_push_command(core->server, to_send, broad);
+}
+
 void broadcast_e(core_t *core, client_t *client, char *command)
 {
     char *msg = get_msg(command);
-    char *broad = NULL;
+    node_t *node = NULL;
+    client_t *temp = NULL;
 
     if (msg == NULL) {
         fprintf(stderr, "[ERROR] Invalid broadcast text\n");
         return;
     }
-    if (asprintf(&broad, "mesage %ld %ld, %s\n",
-            client->trantorian->pos.x,
-            client->trantorian->pos.y,
-            msg) == -1) {
-        fprintf(stderr, "[ERROR] Failed to malloc text\n");
-        return;
-    }
     client->type = CLI_UNKNOWN;
-    client_def_broadcast_command(core->server, broad);
+    foreach(core->server->clients->head, node) {
+        temp = (client_t *)node->data;
+        if (temp->type == CLI_DEFAULT)
+            send_msg(core, client, temp, command);
+    }
     client->type = CLI_DEFAULT;
     client_push_command(core->server, client, strdup("ok\n"));
 }

@@ -69,6 +69,7 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/game_handling/game_update.c							\
 					src/game_handling/game_update_handler.c					\
 					src/game_handling/game_update_trantorians.c				\
+					src/game_handling/game_utils/game_calc_sound_dir.c		\
 
 SRC				+=	./src/main.c
 

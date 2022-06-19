@@ -152,8 +152,8 @@ TEST(TestGUIProtocol, ppo)
 
     ASSERT_TRUE(asprintf(&expected, "ppo %s %ld %ld %d\n",
         sc.getClient()->trantorian->uuid,
-        sc.getClient()->trantorian->x,
-        sc.getClient()->trantorian->y,
+        sc.getClient()->trantorian->pos.x,
+        sc.getClient()->trantorian->pos.y,
         (int)sc.getClient()->trantorian->direction
     ) != -1);
 

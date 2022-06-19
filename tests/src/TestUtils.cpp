@@ -22,6 +22,15 @@ TEST(TestGameCalcVectorCoord, SimpleTest)
     free(res);
 }
 
+TEST(TestGameCalcAngle, Basic)
+{
+    vector_t vect = {-5, 1};
+
+    size_t res = game_calc_angle_degrees(&vect);
+
+    EXPECT_EQ(res, 11);
+}
+
 TEST(TestGameCalcVectorCoord, DifferentPathTest)
 {
     pos_t map_size = {10, 10};
@@ -88,7 +97,7 @@ TEST(TestGameCalcAngle, RightUp)
 
     size_t res = game_calc_angle_degrees(&vect);
 
-    EXPECT_EQ(res, 64);
+    EXPECT_EQ(res, 26);
 }
 
 TEST(TestGameCalcAngle, RightDown)
@@ -97,7 +106,7 @@ TEST(TestGameCalcAngle, RightDown)
 
     size_t res = game_calc_angle_degrees(&vect);
 
-    EXPECT_EQ(res, 64);
+    EXPECT_EQ(res, 26);
 }
 
 TEST(TestGameCalcAngle, LeftDown)
@@ -106,7 +115,7 @@ TEST(TestGameCalcAngle, LeftDown)
 
     size_t res = game_calc_angle_degrees(&vect);
 
-    EXPECT_EQ(res, 64);
+    EXPECT_EQ(res, 26);
 }
 
 TEST(TestGameCalcAngle, LeftUp)
@@ -115,5 +124,5 @@ TEST(TestGameCalcAngle, LeftUp)
 
     size_t res = game_calc_angle_degrees(&vect);
 
-    EXPECT_EQ(res, 64);
+    EXPECT_EQ(res, 26);
 }

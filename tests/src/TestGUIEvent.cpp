@@ -19,8 +19,8 @@ TEST(TestGUIEvent, pnw)
 
     ASSERT_TRUE(asprintf(&buff, "pnw #%s %ld %ld %d %ld %s\n",
         sc.getClient()->trantorian->uuid,
-        sc.getClient()->trantorian->x,
-        sc.getClient()->trantorian->y,
+        sc.getClient()->trantorian->pos.x,
+        sc.getClient()->trantorian->pos.y,
         (int)sc.getClient()->trantorian->direction,
         sc.getClient()->trantorian->level,
         sc.getClient()->trantorian->team->name) != -1);
@@ -73,8 +73,8 @@ TEST(TestGUIEvent, pic)
     sc.endTest();
 
     ASSERT_TRUE(asprintf(&buff, "pic %ld %ld %ld %s\n",
-        sc.getClient()->trantorian->x,
-        sc.getClient()->trantorian->y,
+        sc.getClient()->trantorian->pos.x,
+        sc.getClient()->trantorian->pos.y,
         sc.getClient()->trantorian->level,
         sc.getClient()->trantorian->uuid) != -1);
 
@@ -91,8 +91,8 @@ TEST(TestGUIEvent, pie)
     sc.endTest();
 
     ASSERT_TRUE(asprintf(&buff, "pie %ld %ld %ld\n",
-        sc.getClient()->trantorian->x,
-        sc.getClient()->trantorian->y,
+        sc.getClient()->trantorian->pos.x,
+        sc.getClient()->trantorian->pos.y,
         sc.getClient()->trantorian->level) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
@@ -140,8 +140,8 @@ TEST(TestGUIEvent, enw)
     ASSERT_TRUE(asprintf(&buff, "enw %s %s %ld %ld\n",
         egg->uuid,
         sc.getClient()->trantorian->uuid,
-        egg->x,
-        egg->y) != -1);
+        egg->pos.x,
+        egg->pos.y) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
     trantorian_destroy(egg);

@@ -24,6 +24,7 @@ add_executable(unit-tests
   src/TestGUIProtocol.cpp
   src/TestGUIEvent.cpp
   src/TestUtils.cpp
+  src/TestDefaultProtocol.cpp
 
   ../server/src/manage_struct/manage_client.c
   ../server/src/manage_struct/manage_core.c
@@ -88,6 +89,7 @@ add_executable(unit-tests
   ../server/src/game_handling/game_update.c
   ../server/src/game_handling/game_update_handler.c
   ../server/src/game_handling/game_update_trantorians.c
+  ../server/src/game_handling/game_utils/game_calc_sound_dir.c
 )
 
 target_include_directories(unit-tests PRIVATE

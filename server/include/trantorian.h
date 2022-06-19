@@ -46,6 +46,7 @@ typedef enum {
     TILE_SIX = 6,
     TILE_EIGHT = 8,
 
+    TILE_ZERO,
     TILE_NONE = 0,
 } dir_tile_e;
 
@@ -66,8 +67,6 @@ typedef struct trantorian_s {
     inventory_t *inventory;
     size_t level;
     pos_t pos;
-    size_t x;
-    size_t y;
     direction_e direction;
 } trantorian_t;
 
