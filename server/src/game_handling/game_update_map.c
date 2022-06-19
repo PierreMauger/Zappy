@@ -75,13 +75,4 @@ void game_update_map(map_t *map)
         return;
     refresh = MAP_REFRESH;
     game_dispatch_ressources(map);
-
-    for (size_t i = 0; i < map->height * map->width; i++) {
-        printf("[DEBUG] tile: %ld => %ld\t%ld\t%ld\t%ld\t%ld\t%ld\t%ld\n", i, map->map[i]->food, map->map[i]->linemate, map->map[i]->deraumere, map->map[i]->sibur, map->map[i]->mendiane, map->map[i]->phiras, map->map[i]->thystame);
-    }
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
 }
