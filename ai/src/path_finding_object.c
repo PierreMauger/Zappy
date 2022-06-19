@@ -26,11 +26,54 @@ int string_to_number_object(map_t map, char *object_name)
     return 0;
 }
 
-bool recursive_path_finding(map_t **map, size_t *x, size_t *y, char *obj)
+bool scan_path_finding(client_t *client, size_t *x, size_t *y, char *obj)
 {
-    if (string_to_number_object(map[*x][*y], obj) > 0)
-        return true;
-    if (string_to_number_object(map[*x][*y], obj) == -1)
+    size_t s_x = *x;
+    size_t s_y = *y;
+    size_t n = 1;
+    size_t size = ((client->size_map.x > client->size_map.y)
+        ? client->size_map.x : client->size_map.y);
+
+    while (n < (size / 2)) {
+        if (string_to_number_object(client->map[s_y + n][s_x], obj) != 0) {
+            *y = s_y + n;
+            break;
+        }
+        if (string_to_number_object(client->map[s_y][s_x + n], obj) != 0) {
+            *x = s_x + n;
+            break;
+        }
+        if (string_to_number_object(client->map[s_y - n][s_x], obj) != 0) {
+            *y = s_y - n;
+            break;
+        }
+        if (string_to_number_object(client->map[s_y][s_x - n], obj) != 0) {
+            *x = s_x - n;
+            break;
+        }
+        if (string_to_number_object(client->map[s_y + n][s_x + n], obj) != 0) {
+            *y = s_y + n;
+            *x = s_x + n;
+            break;
+        }
+        if (string_to_number_object(client->map[s_y - n][s_x - n], obj) != 0) {
+            *x = s_x - n;
+            *y = s_y - n;
+            break;
+        }
+        if (string_to_number_object(client->map[s_y - n][s_x + n], obj) != 0) {
+            *y = s_y - n;
+            *x = s_x + n;
+            break;
+        }
+        if (string_to_number_object(client->map[s_y + n][s_x - n], obj) != 0) {
+            *x = s_x - n;
+            *y = s_y + n;
+            break;
+        }
+        n++;
+    }
+    if (n == (size / 2))
         return false;
     return true;
 }
@@ -42,7 +85,7 @@ bool path_finding_object(client_t *client, char *object)
     map_t **map = copy_double_tab(client->map,
         client->size_map.x, client->size_map.y);
 
-    if (!recursive_path_finding(map, &x, &y, object)) {
+    if (!scan_path_finding(client, &x, &y, object)) {
         free_map_copy(map, client->size_map.x, client->size_map.y);
         return false;
     }
