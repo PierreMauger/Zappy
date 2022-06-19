@@ -29,7 +29,7 @@ static bool check_fd_isset(client_t *client)
         return false;
     }
     if (FD_ISSET(client->socket->fd, &client->readfds)) {
-        temp = nlib_read_socket(client->socket->fd);
+        temp = nlib_read_socket(client->socket);
         if (temp == NULL) {
             fprintf(stderr, "%s[ERROR]%s can't read socket\n", R, W);
             return true;

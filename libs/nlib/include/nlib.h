@@ -51,7 +51,7 @@ void nlib_destroy_socket(socket_t *sock);
 int nlib_select_fds(fd_set *readfds, fd_set *writefds);
 int nlib_select_fds_time(fd_set *readfd, fd_set *writefds, double time);
 
-char *nlib_read_socket(int fd);
+char *nlib_read_socket(const socket_t *sock);
 int nlib_write_socket(const socket_t *sock, const char *format, ...);
 
 typedef struct {
