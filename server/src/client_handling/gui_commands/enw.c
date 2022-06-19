@@ -15,8 +15,8 @@ void command_enw(core_t *core, trantorian_t *trantorian, trantorian_t *egg)
     if (asprintf(&buff, "enw %s %s %ld %ld\n",
             egg->uuid,
             trantorian->uuid,
-            egg->x,
-            egg->y) == -1) {
+            egg->pos.x,
+            egg->pos.y) == -1) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
         return;
     }

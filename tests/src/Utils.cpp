@@ -19,7 +19,7 @@ CommandFixture::CommandFixture(void)
     this->coreCreate(args);
     destroy_args(args);
 
-    list_push_data(core->game->trantorians, trantorian_create((team_t *)this->core->game->teams->head->data, 1, 1));
+    list_push_data(core->game->trantorians, trantorian_create((team_t *)this->core->game->teams->head->data, 1, 1, true));
 
     this->client = client_create(0);
     this->client->trantorian = (trantorian_t *)this->core->game->trantorians->head->data;

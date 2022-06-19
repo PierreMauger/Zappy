@@ -12,6 +12,9 @@
         #define _GNU_SOURCE
     #endif
 
+    #include <math.h>
+    #include <stdio.h>
+
     #ifndef SUCCESS
         #define SUCCESS (0)
     #endif
@@ -23,5 +26,15 @@
     #endif
 
     #define UNUSED __attribute__((unused))
+
+typedef struct {
+    size_t x;
+    size_t y;
+} pos_t;
+
+typedef struct {
+    ssize_t x;
+    ssize_t y;
+} vector_t;
 
 #endif // UTILS_H

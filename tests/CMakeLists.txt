@@ -23,6 +23,8 @@ add_executable(unit-tests
   src/TestParseParams.cpp
   src/TestGUIProtocol.cpp
   src/TestGUIEvent.cpp
+  src/TestUtils.cpp
+  src/TestDefaultProtocol.cpp
 
   ../server/src/manage_struct/manage_client.c
   ../server/src/manage_struct/manage_core.c
@@ -50,6 +52,7 @@ add_executable(unit-tests
   ../server/src/client_handling/default_commands/take.c
   ../server/src/client_handling/default_commands/set.c
   ../server/src/client_handling/default_commands/incantation.c
+  ../server/src/client_handling/default_commands/death.c
   ../server/src/utils/command_utils.c
   ../server/src/utils/is_uuid.c
   ../server/src/client_handling/client_command_utils.c
@@ -81,8 +84,12 @@ add_executable(unit-tests
   ../server/src/client_handling/gui_commands/sbp.c
   ../server/src/client_handling/client_define_type.c
   ../server/src/client_handling/client_gui_exec_command.c
-  ../server/src/game_handling/team_get_obj.c
+  ../server/src/game_handling/game_utils/game_calc.c
+  ../server/src/game_handling/game_utils/game_utils.c
   ../server/src/game_handling/game_update.c
+  ../server/src/game_handling/game_update_handler.c
+  ../server/src/game_handling/game_update_trantorians.c
+  ../server/src/game_handling/game_utils/game_calc_sound_dir.c
 )
 
 target_include_directories(unit-tests PRIVATE
@@ -102,6 +109,7 @@ target_link_libraries(unit-tests
   nlib
   uuid
 )
+target_link_libraries(unit-tests PRIVATE m)
 target_link_libraries(unit-tests PRIVATE ${CONAN_LIBS})
 target_link_libraries(unit-tests PRIVATE ${CMAKE_DL_LIBS})
 

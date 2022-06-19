@@ -32,7 +32,7 @@ static int client_create_new_trantorian(core_t *core, client_t *client,
 {
     client->type = CLI_DEFAULT;
     client->trantorian = trantorian_create(team,
-        core->game->map->width, core->game->map->height);
+        core->game->map->width, core->game->map->height, true);
     if (client->trantorian == NULL)
         return ERROR;
     list_push_data(core->game->trantorians, client->trantorian);
@@ -59,6 +59,7 @@ static void client_define_default(core_t *core, client_t *client,
             (void (*)(void *))client_destroy);
         return;
     }
+    client->trantorian->state = TRANT_LIVING;
     client_push_command(core->server, client, get_client_num(core, team));
     client_push_command(core->server, client, get_map_size(core->game->map));
     printf("[INFO] Default client detected\n");

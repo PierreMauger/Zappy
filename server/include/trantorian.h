@@ -8,6 +8,13 @@
 #ifndef TRANTORIAN_H
     #define TRANTORIAN_H
 
+    #define TRANT_INIT_FOOD 10
+    #define TRANT_LIVE_IT 126
+
+    #define TRANT_ANGLE 37
+
+    #define IDX 1
+
     #include <uuid/uuid.h>
 
     #include <stdio.h>
@@ -17,6 +24,7 @@
     #include "inventory.h"
     #include "team.h"
     #include "client.h"
+    #include "utils.h"
 
 typedef enum {
     DIR_UP,
@@ -27,22 +35,43 @@ typedef enum {
     DIR_SIZE
 } direction_e;
 
+typedef enum {
+    TILE_ONE = 1,
+    TILE_THREE = 3,
+    TILE_FIVE = 5,
+    TILE_SEVEN = 7,
+
+    TILE_TWO = 2,
+    TILE_FOUR = 4,
+    TILE_SIX = 6,
+    TILE_EIGHT = 8,
+
+    TILE_ZERO,
+    TILE_NONE = 0,
+} dir_tile_e;
+
+typedef enum {
+    TRANT_HATCHING,
+    TRANT_LIVING,
+    TRANT_DEAD,
+} trant_state_e;
+
 struct client_s;
 
 typedef struct trantorian_s {
     char *uuid;
     team_t *team;
     struct client_s *client;
-    bool hatched;
+    trant_state_e state;
     size_t live_it;
     inventory_t *inventory;
     size_t level;
-    size_t x;
-    size_t y;
+    pos_t pos;
     direction_e direction;
 } trantorian_t;
 
-trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y);
+trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y,
+    bool rand_pos);
 void trantorian_destroy(trantorian_t *trantorian);
 
 #endif // TRANTORIAN_H

@@ -7,21 +7,12 @@
 
 #include "nlib.h"
 
-static void *free_socket(socket_t *sock)
-{
-    if (sock->addr)
-        free(sock->addr);
-    if (sock)
-        free(sock);
-    return NULL;
-}
-
 socket_t *nlib_init_socket(socket_t *sock, int port, size_t nbr_connection)
 {
     sock->fd = socket(AF_INET, SOCK_STREAM, 0);
     if (sock->fd < 0) {
         fprintf(stderr, "[ERROR] %s\n", (strerror(errno)));
-        return (free_socket(sock));
+        return NULL;
     }
     sock->addr->sin_family = AF_INET;
     sock->addr->sin_port = htons(port);
@@ -29,11 +20,11 @@ socket_t *nlib_init_socket(socket_t *sock, int port, size_t nbr_connection)
     if (bind(sock->fd, (struct sockaddr *)sock->addr,
                         sizeof(sockaddr_in_t)) < 0) {
         fprintf(stderr, "[ERROR] %s\n", (strerror(errno)));
-        return (free_socket(sock));
+        return NULL;
     }
     if (listen(sock->fd, nbr_connection) < 0) {
         fprintf(stderr, "[ERROR] %s\n", (strerror(errno)));
-        return (free_socket(sock));
+        return NULL;
     }
     return sock;
 }
