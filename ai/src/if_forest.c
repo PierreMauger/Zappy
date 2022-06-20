@@ -28,7 +28,6 @@ bool find_path_object(client_t *client)
 
 bool ai(client_t *client)
 {
-    usleep(10000);
     if (!send_message(client->pending_commands,
         client->command, client->socket, "Look\n")) {
         fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
