@@ -105,8 +105,7 @@ bool path_finding_object(client_t *client, char *object)
         return false;
     }
     client->player->level = save;
-    printf("GO NEXT OBJ %ld %ld\n", x, y);
-    if (!go_to_next_object(client, x, y))
+    if (!go_to_next_object(client, (int)x, (int)y))
         return false;
     return true;
 }

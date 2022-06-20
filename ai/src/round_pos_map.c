@@ -24,15 +24,49 @@ int round_map(client_t *client, int pos, bool is_x)
     return pos;
 }
 
-void find_closest_round(client_t *client, size_t *dest_x, size_t *dest_y)
+static void split_find_closest_round(client_t *client, int *dest_x, int *dest_y)
 {
-    size_t src_x = client->player->pos.x;
-    size_t src_y = client->player->pos.y;
+    int src_x = (int)client->player->pos.x;
+    int src_y = (int)client->player->pos.y;
+
+    if (*dest_x < src_x && *dest_x > 0) {
+        if (client->player->dir == West
+            && src_x - *dest_x > ((*dest_x + client->size_map.x) - src_x) + 2)
+            *dest_x = client->size_map.x + *dest_x;
+        if (client->player->dir != West
+            && src_x - *dest_x > ((*dest_x + client->size_map.x) - src_x))
+            *dest_x = client->size_map.x + *dest_x;
+    }
+    if (*dest_y < src_y && *dest_y > 0) {
+        if (client->player->dir == North
+            && src_y - *dest_y > ((*dest_y + client->size_map.y) - src_y) + 2)
+            *dest_y = client->size_map.y + *dest_y;
+        if (client->player->dir != North
+            && src_y - *dest_y > ((*dest_y + client->size_map.y) - src_y))
+            *dest_y = client->size_map.y + *dest_y;
+    }
+}
+
+void find_closest_round(client_t *client, int *dest_x, int *dest_y)
+{
+    int src_x = (int)client->player->pos.x;
+    int src_y = (int)client->player->pos.y;
 
     if (*dest_x > src_x) {
-        if (*dest_x - src_x > (client->size_map.x - *dest_x))
-            *dest_x = client->size_map.x - *dest_x;
+        if (client->player->dir == East
+            && *dest_x - src_x > ((client->size_map.x - *dest_x) + src_x) + 2)
+            *dest_x = *dest_x - client->size_map.x;
+        if (client->player->dir != East
+            && *dest_x - src_x > ((client->size_map.x - *dest_x) + src_x))
+            *dest_x = *dest_x - client->size_map.x;
     }
-    if (client->size_map.y - *dest_y < *dest_y)
-        *dest_y = client->size_map.y - *dest_y;
+    if (*dest_y > src_y) {
+        if (client->player->dir == South
+            && *dest_y - src_y > ((client->size_map.y - *dest_y) + src_y) + 2)
+            *dest_y = *dest_y - client->size_map.y;
+        if (client->player->dir != South
+            && *dest_y - src_y > ((client->size_map.y - *dest_y) + src_y))
+            *dest_y = *dest_y - client->size_map.y;
+    }
+    split_find_closest_round(client, dest_x, dest_y);
 }
