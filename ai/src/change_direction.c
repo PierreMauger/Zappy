@@ -106,6 +106,7 @@ static bool go_to_good_direction_x(client_t *client, int dest, int src)
 bool go_to_next_object(client_t *client, int dest_x, int dest_y)
 {
     find_closest_round(client, &dest_x, &dest_y);
+    printf("src_y %d src_x %d dest_y %d dest_x%d\n", client->player->pos.y, client->player->pos.x, dest_y, dest_x);
     if (!go_to_good_direction_x(client, dest_x, client->player->pos.x))
         return false;
     for (int srx_x = (int)client->player->pos.x; srx_x != dest_x;

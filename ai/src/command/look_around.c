@@ -11,6 +11,7 @@ void fill_cell_map(map_t *map, char *content)
 {
     char *stone = NULL;
 
+    memset(map->inv, 0, sizeof(inventory_t));
     while ((stone = get_one_word(content))) {
         if (strcmp(stone, "food") == 0)
             map->inv->food++;

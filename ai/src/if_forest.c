@@ -28,6 +28,10 @@ bool find_path_object(client_t *client)
 
 bool ai(client_t *client)
 {
+    if (client->player->inv && client->player->inv->food < 5) {
+        if (!find_path_object(client))
+            return true;
+    }
     if (!send_message(client->pending_commands,
         client->command, client->socket, "Look\n")) {
         fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
@@ -37,10 +41,6 @@ bool ai(client_t *client)
         client->command, client->socket, "Inventory\n")) {
         fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
         return false;
-    }
-    if (client->player->inv && client->player->inv->food < 5) {
-        if (!find_path_object(client))
-            return true;
     }
     return true;
 }
