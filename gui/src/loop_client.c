@@ -59,7 +59,7 @@ static bool loop_client(client_t *client)
             break;
         if (check_fd_isset(client))
             break;
-        if (clock_update(client->time_unit))
+        if (client->time_unit != 0 && clock_update(client->time_unit))
             loop_command(client);
         draw_map(client);
         nlib_commands_update(client->command, &client->writefds);
