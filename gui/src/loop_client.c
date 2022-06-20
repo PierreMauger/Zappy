@@ -61,7 +61,7 @@ static bool loop_client(client_t *client)
             break;
         if (client->time_unit != 0 && clock_update(client->time_unit))
             loop_command(client);
-        draw_map(client);
+        draw_all(client);
         nlib_commands_update(client->command, &client->writefds);
     }
     return true;

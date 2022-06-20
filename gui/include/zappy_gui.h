@@ -163,7 +163,7 @@ void print_inventory(inventory_t *inv);
 void print_inventory_map(client_t *client);
 void print_team(list_t *team);
 
-void draw_map(client_t *client);
+void draw_all(client_t *client);
 Texture *get_textures();
 void unload_textures(Texture *textures);
 
