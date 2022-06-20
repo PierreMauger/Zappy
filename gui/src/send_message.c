@@ -20,7 +20,7 @@ bool send_message(list_t *pending, list_t *list, socket_t *socket, char *mess)
     if (pending && list_push_data(pending, strdup(mess)) == -1)
         return false;
     printf("message send [%s] to fd [%d]\n",
-        ((command_t *)list->head->data)->to_write,
+        mess,
         ((socket_t *)((command_t *)list->head->data)->socks->head->data)->fd);
     return true;
 }
