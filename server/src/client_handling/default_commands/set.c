@@ -21,7 +21,7 @@ static char *get_obj(char *command)
 {
     for (size_t i = 0; i < strlen(command); i++) {
         if (command[i] != ' ') {
-            return &command[i + 1];
+            return &command[i];
         }
     }
     return NULL;
@@ -43,13 +43,13 @@ void set_e(core_t *core, client_t *client, char *command)
     int obj_idx = 0;
 
     if (obj == NULL) {
-        fprintf(stderr, "[ERROR] Invalid set obj\n");
+        fprintf(stderr, "[ERROR] Missing argument\n");
         client_push_command(core->server, client, strdup("ko\n"));
         return;
     }
     obj_idx = is_obj(obj);
     if (obj_idx == -1 || ((size_t *)inv)[obj_idx] == 0) {
-        fprintf(stderr, "[ERROR] Invalid set obj\n");
+        fprintf(stderr, "[ERROR] Invalid obj\n");
         client_push_command(core->server, client, strdup("ko\n"));
         return;
     }

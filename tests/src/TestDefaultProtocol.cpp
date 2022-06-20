@@ -230,3 +230,85 @@ TEST(TestCommandBroadCast, Basic)
 
     free(msg);
 }
+
+TEST(TestTakeCast, Basic)
+{
+    char *param = strdup(" food");
+
+    GET_CELL(sc.getCore()->game->map, sc.getClient()->trantorian->pos.x, sc.getClient()->trantorian->pos.y)->food = 1;
+
+    sc.startTest();
+    take_e(sc.getCore(), sc.getClient(), param);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+
+    free(param);
+}
+
+TEST(TestTakeCast, Error1)
+{
+    char *param = strdup("");
+
+    sc.startTest();
+    take_e(sc.getCore(), sc.getClient(), param);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ko\n");
+
+    free(param);
+}
+
+TEST(TestTakeCast, Error2)
+{
+    char *param = strdup(" food");
+
+    sc.startTest();
+    take_e(sc.getCore(), sc.getClient(), param);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ko\n");
+
+    free(param);
+}
+
+TEST(TestSetCast, Basic)
+{
+    char *param = strdup(" food");
+
+    GET_CELL(sc.getCore()->game->map, sc.getClient()->trantorian->pos.x, sc.getClient()->trantorian->pos.y)->food = 1;
+
+    sc.startTest();
+    take_e(sc.getCore(), sc.getClient(), param);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+
+    free(param);
+}
+
+TEST(TestSetCast, Error1)
+{
+    char *param = strdup("");
+
+    sc.startTest();
+    take_e(sc.getCore(), sc.getClient(), param);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ko\n");
+
+    free(param);
+}
+
+TEST(TestSetCast, Error2)
+{
+    char *param = strdup(" food");
+
+    sc.startTest();
+    take_e(sc.getCore(), sc.getClient(), param);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ko\n");
+
+    free(param);
+}

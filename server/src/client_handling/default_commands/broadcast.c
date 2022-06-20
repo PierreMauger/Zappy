@@ -12,7 +12,7 @@ static char *get_msg(char *command)
 {
     for (size_t i = 0; i < strlen(command); i++) {
         if (command[i] != ' ') {
-            return &command[i + 1];
+            return &command[i];
         }
     }
     return NULL;
