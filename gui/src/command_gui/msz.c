@@ -12,12 +12,12 @@ static bool split_create_map(map_t *map, size_t x)
     size_t i = 0;
 
     for (i = 0; i != x; i++) {
-        map[i].player = malloc(sizeof(player_t));
-        map[i].inv = malloc(sizeof(inventory_t));
+        map[i].player = calloc(1, sizeof(player_t));
+        map[i].inv = calloc(1, sizeof(inventory_t));
         if (!map[i].inv || !map[i].player)
             return false;
         map[i].player->uuid = NULL;
-        map[i].player->inv = malloc(sizeof(inventory_t));
+        map[i].player->inv = calloc(1, sizeof(inventory_t));
         if (!map[i].player->inv)
             return false;
     }
@@ -29,12 +29,12 @@ static bool split_create_map(map_t *map, size_t x)
 static bool create_map(client_t *client)
 {
     int h = 0;
-    client->map = malloc(sizeof(map_t *) * (client->size_map.y + 1));
+    client->map = calloc(1, sizeof(map_t *) * (client->size_map.y + 1));
 
     if (!client->map)
         return false;
     for (h = 0; h != client->size_map.y; h++) {
-        client->map[h] = malloc(sizeof(map_t) * (client->size_map.x + 1));
+        client->map[h] = calloc(1, sizeof(map_t) * (client->size_map.x + 1));
         if (!client->map[h])
             return false;
         if (!split_create_map(client->map[h], client->size_map.x))

@@ -45,6 +45,7 @@ static void split_create_client(client_t *client, arg_t *arg)
     client->socket->addr->sin_addr.s_addr = inet_addr(arg->machine);
     client->init = false;
     client->map = NULL;
+    client->init = true;
     client->client_connected = false;
     client->size_map.x = -1;
     client->size_map.y = -1;

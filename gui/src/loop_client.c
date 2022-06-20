@@ -23,20 +23,21 @@ void sig_handler(__attribute__((unused)) int signum)
 static bool check_fd_isset(client_t *client)
 {
     char *temp = NULL;
+    char *save = NULL;
 
-    if (FD_ISSET(STDIN_FILENO, &client->readfds)) {
-        read_stdin(client);
-        return false;
-    }
     if (FD_ISSET(client->socket->fd, &client->readfds)) {
         temp = nlib_read_socket(client->socket);
         if (temp == NULL) {
             fprintf(stderr, "%s[ERROR]%s can't read socket\n", R, W);
             return true;
         }
-        if (!parse_return(client, temp)) {
-            free(temp);
-            return true;
+        save = temp;
+        for (char *comm = NULL; save[0] != '\0'; free(comm)) {
+            if ((comm = get_one_command(save)) && !parse_return(client, comm)) {
+                free(temp);
+                return true;
+            }
+            save = go_next_char(save, '\n');
         }
         free(temp);
     }
@@ -58,6 +59,8 @@ static bool loop_client(client_t *client)
             break;
         if (check_fd_isset(client))
             break;
+        if (client->time_unit != 0 && clock_update(client->time_unit))
+            loop_command(client);
         nlib_commands_update(client->command, &client->writefds);
 
     }

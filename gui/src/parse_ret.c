@@ -9,8 +9,19 @@
 
 static bool init_header(client_t *client)
 {
-    return (send_message(NULL,
-        client->command, client->socket, client->uuid));
+    char *uuid_new_line = malloc(sizeof(char) * (UUID_STR_LEN + 10));
+
+    if (!uuid_new_line)
+        return false;
+    strcpy(uuid_new_line, client->uuid);
+    strcat(uuid_new_line, "\n");
+    strcat(uuid_new_line, "msz\n");
+    strcat(uuid_new_line, "sgt\n");
+    if (!send_message(NULL,
+        client->command, client->socket, uuid_new_line))
+        return false;
+    free(uuid_new_line);
+    return true;
 }
 
 static char *get_command_arg(char *str)
@@ -61,12 +72,13 @@ bool parse_return(client_t *client, char *str)
     char *arg = NULL;
 
     printf("response [%s]\n", str);
-    if (strcmp(str, "WELCOME\n") == 0)
+    if (strcmp(str, "WELCOME") == 0)
         return (init_header(client));
     if (!(command_name = get_command_name(str)))
         return false;
     arg = (strcmp(command_name, "suc") == 0 || strcmp(command_name, "sbp") == 0)
         ? strdup(str) : get_command_arg(str);
+    printf("[%s]\n", command_name);
     for (int i = 0; com[i].cmd != NULL; i++) {
         if (strcmp(com[i].cmd, command_name) == 0) {
             com[i].func_ptr(client, arg);

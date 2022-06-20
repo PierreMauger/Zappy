@@ -52,6 +52,11 @@ typedef struct arg_s {
     char *machine;
 } arg_t;
 
+typedef struct pps_s {
+    int *x;
+    int *y;
+} pps_t;
+
 typedef struct pos_s {
     int x;
     int y;
@@ -71,6 +76,7 @@ typedef struct player_s {
     char *team_name;
     char *uuid;
     size_t level;
+    size_t number;
     inventory_t *inv;
     pos_t pos;
     direction_e dir;
@@ -114,14 +120,22 @@ int read_stdin(client_t *client);
 
 bool parse_return(client_t *client, char *str);
 bool loop_parse_return(client_t *client, char *temp);
-void client_push_exec_command(client_t *client, char *buffer);
+bool client_push_exec_command(client_t *client, char *buffer);
 
 void sig_handler(int signum);
 
 bool ai(client_t *client);
+bool path_finding_object(client_t *client, char *object);
+bool go_to_next_object(client_t *client, int dest_x, int dest_y);
+
+int round_map(client_t *client, int pos, bool is_x);
+void find_closest_round(client_t *client, int *dest_x, int *dest_y);
 
 bool create_map(client_t *client);
+map_t **copy_double_tab(map_t **map, size_t x, size_t y);
 void free_map(client_t *client);
+void free_map_copy(map_t **map, size_t x, size_t y);
+int string_to_number_object(map_t map, char *object_name);
 
 char *go_next_chr(char *str, char chr);
 char *get_one_word(char *str);

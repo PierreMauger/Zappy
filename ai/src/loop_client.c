@@ -34,11 +34,6 @@ static bool check_fd_isset(client_t *client)
             fprintf(stderr, "%s[ERROR]%s can't read socket\n", R, W);
             return true;
         }
-        if (strcmp(temp, "dead\n") == 0) {
-            printf("%s[INFO]%s Player dead\n", G, W);
-            free(temp);
-            return true;
-        }
         if (!loop_parse_return(client, temp))
             return true;
     }
