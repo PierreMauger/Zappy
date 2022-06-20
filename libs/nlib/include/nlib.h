@@ -62,6 +62,7 @@ typedef struct {
 command_t *nlib_command_create(char *buffer);
 void nlib_command_destroy(command_t *command);
 
+void nlib_remove_socket_command_list(list_t *command, socket_t *sock);
 void nlib_commands_update(list_t *commands, fd_set *writefds);
 
 bool nlib_send_message(list_t *list, socket_t *socket, char *message);
