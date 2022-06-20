@@ -90,6 +90,8 @@ add_executable(unit-tests
   ../server/src/game_handling/game_update_handler.c
   ../server/src/game_handling/game_update_trantorians.c
   ../server/src/game_handling/game_utils/game_calc_sound_dir.c
+  ../server/src/game_handling/game_update_map.c
+  ../server/src/game_handling/game_utils/game_map_utils.c
 )
 
 target_include_directories(unit-tests PRIVATE
