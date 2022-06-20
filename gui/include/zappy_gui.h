@@ -38,6 +38,7 @@
 
     #include "list.h"
     #include "nlib.h"
+    #include "raylib.h"
 
 typedef enum {
     North,
@@ -155,5 +156,7 @@ void print_player(player_t *player);
 void print_inventory(inventory_t *inv);
 void print_inventory_map(client_t *client);
 void print_team(list_t *team);
+
+void draw_map(client_t *client);
 
 #endif // ZAPPY_AI_H

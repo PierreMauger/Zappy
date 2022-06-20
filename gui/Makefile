@@ -22,6 +22,7 @@ SRC				=	./src/stdin.c				\
 					./src/command_gui/ppo.c		\
 					./src/command_gui/pin.c		\
 					./src/command_gui/tna.c		\
+					./src/graphics/draw.c		\
 
 SRC				+=	./src/main.c
 
@@ -34,7 +35,7 @@ OBJ				=	$(SRC:.c=.o)
 ##################### FLAGS #####################
 INCLUDES		=	-I include -I ../include
 
-LIBS			=	-L ../libs -llist -lnlib -luuid							\
+LIBS			=	-L ../libs -llist -lnlib -luuid	-l:libraylib.so.4.0.0				\
 					-Wl,-rpath=$(shell readlink -f "../libs/")				\
 
 CFLAGS			=	$(INCLUDES) $(LIBS) -Wall -Wextra -W -fPIC
