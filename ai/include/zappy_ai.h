@@ -76,6 +76,7 @@ typedef struct player_s {
     char *team_name;
     char *uuid;
     size_t level;
+    size_t number;
     inventory_t *inv;
     pos_t pos;
     direction_e dir;
