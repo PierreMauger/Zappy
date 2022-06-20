@@ -15,6 +15,8 @@ SRC				=	./src/stdin.c				\
 					./src/loop_command.c 		\
 					./src/print_info.c 			\
 					./src/free_player.c 		\
+					./src/get_command.c 		\
+					./src/handle_clock.c 		\
 					./src/command_gui/bct.c		\
 					./src/command_gui/mct.c		\
 					./src/command_gui/msz.c		\
@@ -22,6 +24,7 @@ SRC				=	./src/stdin.c				\
 					./src/command_gui/ppo.c		\
 					./src/command_gui/pin.c		\
 					./src/command_gui/tna.c		\
+					./src/command_gui/sgt.c 	\
 					./src/graphics/draw.c		\
 
 SRC				+=	./src/main.c

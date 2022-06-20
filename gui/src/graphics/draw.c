@@ -7,22 +7,19 @@
 
 #include "zappy_gui.h"
 
+void parse_map(client_t *client)
+{
+    for (int i = 0; i < client->size_map.y; i++) {
+        for (int j = 0; j < client->size_map.x; j++) {
+
+        }
+    }
+}
+
 void draw_map(client_t *client)
 {
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-    SetTargetFPS(60);
-    while (!WindowShouldClose())    // Detect window close button or ESC key
-    {
-        BeginDrawing();
-            ClearBackground(RAYWHITE);
-            for (int i = 0; i < client->size_map.y; i++) {
-                for (int j = 0; j < client->size_map.x; j++) {
-                }
-            }
-        EndDrawing();
-    }
-    CloseWindow();
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    parse_map(client);
+    EndDrawing();
 }

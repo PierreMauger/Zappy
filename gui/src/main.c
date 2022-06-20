@@ -78,7 +78,11 @@ int main(int ac, char **av)
     if (!arg || !get_arg(arg, ac, av))
         return (ERROR_EXIT);
     signal(SIGINT, sig_handler);
+    SetTraceLogLevel(LOG_NONE);
+    InitWindow(1280, 720, "Zappy");
+    SetTargetFPS(60);
     ret = init_client(arg);
+    CloseWindow();
     free(arg);
     if (!ret)
         return (ERROR_EXIT);

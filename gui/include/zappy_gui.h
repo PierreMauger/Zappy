@@ -85,6 +85,7 @@ typedef struct client_s {
     socket_t *socket;
     char *machine;
     char *uuid;
+    size_t time_unit;
     pos_t size_map;
     fd_set readfds;
     fd_set writefds;
@@ -103,6 +104,7 @@ int pin(client_t *client, char *str);
 int pnw(client_t *client, char *str);
 int plv(client_t *client, char *str);
 int tna(client_t *client, char *str);
+int sgt(client_t *client, char *str);
 
 typedef struct com_s {
     const char *cmd;
@@ -119,6 +121,7 @@ static const com_t com[] =
     {"pin\0", &pin},
     {"pnw\0", &pnw},
     {"tna\0", &tna},
+    {"sgt\0", &sgt},
     {NULL, NULL}
 };
 
@@ -145,12 +148,15 @@ void free_player(void *data);
 
 bool first_command(client_t *client);
 bool loop_command(client_t *client);
+bool clock_update(size_t freq);
 
 char *create_uuid();
 char *get_one_word(char *str);
 char *move_str(char *str);
 char *go_next_command(char *save, char *research);
 char *go_next_space(char *str);
+char *get_one_command(char *save);
+char *go_next_char(char *str, char chr);
 
 void print_player(player_t *player);
 void print_inventory(inventory_t *inv);
