@@ -108,23 +108,21 @@ bool go_to_next_object(client_t *client, int dest_x, int dest_y)
     find_closest_round(client, &dest_x, &dest_y);
     if (!go_to_good_direction_x(client, dest_x, client->player->pos.x))
         return false;
-    for (int srx_x = (int)client->player->pos.x; srx_x != dest_x;) {
+    for (int srx_x = (int)client->player->pos.x; srx_x != dest_x;
+        (srx_x > dest_x ? srx_x-- : srx_x++))
         if (!send_message(client->pending_commands,
             client->command, client->socket, "Forward\n")) {
             fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
             return false;
         }
-        srx_x > dest_x ? srx_x-- : srx_x++;
-    }
     if (!go_to_good_direction_y(client, dest_y, client->player->pos.y))
         return false;
-    for (int srx_y = (int)client->player->pos.y; srx_y != dest_y;) {
+    for (int srx_y = (int)client->player->pos.y; srx_y != dest_y;
+        (srx_y > dest_y ? srx_y-- : srx_y++))
         if (!send_message(client->pending_commands,
             client->command, client->socket, "Forward\n")) {
             fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
             return false;
         }
-        srx_y > dest_y ? srx_y-- : srx_y++;
-    }
     return true;
 }
