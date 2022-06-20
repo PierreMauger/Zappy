@@ -9,7 +9,7 @@
 
 void client_exec_command(core_t *core, client_t *client)
 {
-    char *command = list_pop_last(client->command_list);
+    char *command = list_pop_head(client->command_list);
 
     if (command == NULL) {
         fprintf(stderr, "[ERROR] Cannot get command\n");
