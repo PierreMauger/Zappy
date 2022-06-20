@@ -9,9 +9,16 @@
 
 static bool init_header(client_t *client)
 {
-    if (!send_message(NULL,
-        client->command, client->socket, client->uuid))
+    char *uuid_new_line = malloc(sizeof(char) * (UUID_STR_LEN + 2));
+
+    if (!uuid_new_line)
         return NULL;
+    strcpy(uuid_new_line, client->uuid);
+    strcat(uuid_new_line, "\n");
+    if (!send_message(NULL,
+        client->command, client->socket, uuid_new_line))
+        return NULL;
+    free(uuid_new_line);
     if (!send_message(NULL, client->command, client->socket, "msz\n"))
         return NULL;
     return (send_message(NULL, client->command, client->socket, "sgt\n"));
