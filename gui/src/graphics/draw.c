@@ -8,24 +8,24 @@
 #include "zappy_gui.h"
 
 static const char *paths[] = {
-    "deraumer.png",
-    "grass.png",
-    "linemate.png",
-    "mendiane.png",
-    "phiras.png",
-    "sibur.png",
-    "thystame.png",
-    "1.png",
-    "2.png",
-    "3.png",
-    "4.png",
-    "5.png",
-    "6.png",
-    "7.png",
+    "gui/resources/grass.png",
+    "gui/resources/linemate.png",
+    "gui/resources/deraumer.png",
+    "gui/resources/sibur.png",
+    "gui/resources/mendiane.png",
+    "gui/resources/phiras.png",
+    "gui/resources/thystame.png",
+    "gui/resources/1.png",
+    "gui/resources/2.png",
+    "gui/resources/3.png",
+    "gui/resources/4.png",
+    "gui/resources/5.png",
+    "gui/resources/6.png",
+    "gui/resources/7.png",
     NULL
 };
 
-Texture *getTextures()
+Texture *get_textures()
 {
     static Texture *textures = NULL;
     size_t length = 0;
@@ -39,7 +39,7 @@ Texture *getTextures()
     return textures;
 }
 
-void unloadTextures(Texture *textures)
+void unload_textures(Texture *textures)
 {
     for (size_t i = 0; paths[i]; i++)
         UnloadTexture(textures[i]);
@@ -54,16 +54,11 @@ void parse_map(client_t *client)
     int ratio_y = height / client->size_map.y;
     int ratio = ratio_x < ratio_y ? ratio_x : ratio_y;
 
-    printf("%s%d %d%s\n", R, client->size_map.y, client->size_map.x, W);
     for (int i = 0; i < client->size_map.y; i++) {
         for (int j = 0; j < client->size_map.x; j++) {
-            DrawRectangle(i * ratio, j * ratio, ratio, ratio, RED);
-            DrawTexturePro(getTextures()[0],
-            (Rectangle){0, 0, 16, 16},
+            DrawTexturePro(get_textures()[0], (Rectangle){0, 0, 16, 16},
             (Rectangle){i * ratio, j * ratio, ratio, ratio},
-            // (Rectangle){0, 0, 16, 16},
-            (Vector2){0, 0}, 0, WHITE);
-            // DrawTexture(getTextures()[0], i * ratio, j * ratio, WHITE);
+            (Vector2){0, 0}, 0, RAYWHITE);
         }
     }
 }
@@ -72,8 +67,6 @@ void draw_map(client_t *client)
 {
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
     parse_map(client);
-    unloadTextures(getTextures());
     EndDrawing();
 }

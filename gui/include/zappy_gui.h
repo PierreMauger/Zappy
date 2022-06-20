@@ -164,5 +164,7 @@ void print_inventory_map(client_t *client);
 void print_team(list_t *team);
 
 void draw_map(client_t *client);
+Texture *get_textures();
+void unload_textures(Texture *textures);
 
 #endif // ZAPPY_AI_H

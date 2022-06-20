@@ -82,6 +82,7 @@ int main(int ac, char **av)
     InitWindow(1280, 720, "Zappy");
     SetTargetFPS(60);
     ret = init_client(arg);
+    unload_textures(get_textures());
     CloseWindow();
     free(arg);
     if (!ret)
