@@ -72,6 +72,8 @@ void clients_update(core_t *core, fd_set *readfds)
                 client_get_command(client) == EXIT) {
             list_destroy_data_node(core->game->trantorians, client->trantorian,
                 (void (*)(void *))trantorian_destroy);
+            nlib_remove_socket_command_list(client->command_list,
+                client->sock);
             list_remove_node(core->server->clients, node);
             list_destroy_node(node, (void (*)(void *))client_destroy);
             printf("[INFO] Client disconnected\n");
