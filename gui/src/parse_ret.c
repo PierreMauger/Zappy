@@ -9,8 +9,11 @@
 
 static bool init_header(client_t *client)
 {
+    if (!send_message(NULL,
+        client->command, client->socket, client->uuid))
+        return NULL;
     return (send_message(NULL,
-        client->command, client->socket, client->uuid));
+        client->command, client->socket, "msz\n"));
 }
 
 static char *get_command_arg(char *str)
