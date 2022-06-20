@@ -44,7 +44,6 @@ static bool split_create_map(map_t *map, size_t x)
 
     for (i = 0; i != x; i++) {
         map[i].inv = calloc(1, sizeof(inventory_t));
-        memset(map[i].inv, -1, sizeof(inventory_t));
         map[i].player = NULL;
         if (!map[i].inv)
             return false;
@@ -57,12 +56,12 @@ static bool split_create_map(map_t *map, size_t x)
 bool create_map(client_t *client)
 {
     int h = 0;
-    client->map = malloc(sizeof(map_t *) * (client->size_map.y + 1));
+    client->map = calloc(1, sizeof(map_t *) * (client->size_map.y + 1));
 
     if (!client->map)
         return false;
     for (h = 0; h != client->size_map.y; h++) {
-        client->map[h] = malloc(sizeof(map_t) * (client->size_map.x + 1));
+        client->map[h] = calloc(1, sizeof(map_t) * (client->size_map.x + 1));
         if (!client->map[h])
             return false;
         if (!split_create_map(client->map[h], client->size_map.x))
