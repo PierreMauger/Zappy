@@ -9,7 +9,7 @@
 
 void client_exec_command(core_t *core, client_t *client)
 {
-    char *command = list_pop_last(client->command_list);
+    char *command = list_pop_head(client->command_list);
 
     if (command == NULL) {
         fprintf(stderr, "[ERROR] Cannot get command\n");
@@ -70,6 +70,8 @@ void clients_update(core_t *core, fd_set *readfds)
         client = (client_t *)node->data;
         if (FD_ISSET(client->sock->fd, readfds) &&
                 client_get_command(client) == EXIT) {
+            nlib_remove_socket_command_list(core->server->commands_to_send,
+                client->sock);
             list_destroy_data_node(core->game->trantorians, client->trantorian,
                 (void (*)(void *))trantorian_destroy);
             list_remove_node(core->server->clients, node);

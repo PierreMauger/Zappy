@@ -9,19 +9,19 @@
 
 static bool init_header(client_t *client)
 {
-    char *uuid_new_line = malloc(sizeof(char) * (UUID_STR_LEN + 2));
+    char *uuid_new_line = malloc(sizeof(char) * (UUID_STR_LEN + 10));
 
     if (!uuid_new_line)
-        return NULL;
+        return false;
     strcpy(uuid_new_line, client->uuid);
     strcat(uuid_new_line, "\n");
+    strcat(uuid_new_line, "msz\n");
+    strcat(uuid_new_line, "sgt\n");
     if (!send_message(NULL,
         client->command, client->socket, uuid_new_line))
-        return NULL;
+        return false;
     free(uuid_new_line);
-    if (!send_message(NULL, client->command, client->socket, "msz\n"))
-        return NULL;
-    return (send_message(NULL, client->command, client->socket, "sgt\n"));
+    return true;
 }
 
 static char *get_command_arg(char *str)
