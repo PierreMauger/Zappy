@@ -49,4 +49,4 @@ install-raylib:
 	./utils/install_raylib.sh
 
 clean-raylib:
-	rm -rf include/raylib.h
+	@(rm -rf include/raylib.h) > /dev/null
