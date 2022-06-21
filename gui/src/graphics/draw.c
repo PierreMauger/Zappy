@@ -23,14 +23,14 @@ void draw_player(map_t tile, int ratio, pos_t pos)
     Rectangle tmp;
 
     for (node_t *i = tile.player->head; i; i = i->next) {
-        if (((player_t *)i->data)->dir = North)
+        if (((player_t *)i->data)->dir == North)
             tmp = (Rectangle){0 + (int)(GetTime() * 10) % 3 * 32,
                 0 + ((int)(GetTime() * 10) % 3 == 1 ? 95 : 0), 25, 30};
-        if (((player_t *)i->data)->dir = East)
+        if (((player_t *)i->data)->dir == East)
             tmp = (Rectangle){32, 0 + (int)(GetTime() * 10) % 3 * 31, 25, 30};
-        if (((player_t *)i->data)->dir = South)
+        if (((player_t *)i->data)->dir == South)
             tmp = (Rectangle){64, 32 + (int)(GetTime() * 10) % 3 * 31, 25, 30};
-        if (((player_t *)i->data)->dir = West)
+        if (((player_t *)i->data)->dir == West)
             tmp = (Rectangle){4, 32 + (int)(GetTime() * 10) % 3 * 31, 25, 30};
         DrawTexturePro(get_textures()[7 + ((player_t *)i->data)->level], tmp,
         (Rectangle){pos.x, pos.y, ratio, ratio}, (Vector2){0, 0}, 0, RAYWHITE);
