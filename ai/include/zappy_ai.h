@@ -129,6 +129,7 @@ bool ai(client_t *client);
 bool path_finding_object(client_t *client, char *object);
 bool go_to_next_object(client_t *client, int dest_x, int dest_y);
 bool get_food_in_cell(client_t *client, size_t x, size_t y);
+bool get_nb_object(client_t *client, size_t nb, size_t needed, char *object);
 
 int round_map(client_t *client, int pos, bool is_x);
 void find_closest_round(client_t *client, int *dest_x, int *dest_y);
@@ -145,6 +146,11 @@ char *get_cell(char *tab);
 char *add_newline(char *str);
 size_t change_pos(client_t *client, size_t v, size_t change_v, bool is_x);
 int my_getnbr(char *str);
+
+bool level_1(client_t *client);
+bool level_2(client_t *client);
+bool level_3(client_t *client);
+bool level_4(client_t *client);
 
 void print_inventory(inventory_t *inv);
 void print_inventory_map(client_t *client);
