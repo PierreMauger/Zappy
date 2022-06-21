@@ -38,7 +38,7 @@ OBJ				=	$(SRC:.c=.o)
 ##################### FLAGS #####################
 INCLUDES		=	-I include -I ../include
 
-LIBS			=	-L ../libs -llist -lnlib -luuid	-l:libraylib.so.4.0.0				\
+LIBS			=	-L ../libs -llist -lnlib -luuid	-l:libraylib.so.4.0.0	\
 					-Wl,-rpath=$(shell readlink -f "../libs/")				\
 
 CFLAGS			=	$(INCLUDES) $(LIBS) -Wall -Wextra -W -fPIC

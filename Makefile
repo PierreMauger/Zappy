@@ -41,3 +41,9 @@ debug:
 	@(make debug -C $(PATH_AI)) > /dev/null
 	@(make debug -C $(PATH_SERVER)) > /dev/null
 	@(make debug -C $(PATH_GUI)) > /dev/null
+
+unit-tests: all
+	./utils/run_tests.sh
+
+install-raylib:
+	./utils/install_raylib.sh
