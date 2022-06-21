@@ -26,7 +26,6 @@ static bool split_ppo(node_t *node, char *save, char *uuid)
         return false;
     ((player_t *)node->data)->dir = atoi(temp);
     free(temp);
-    free(save);
     free(uuid);
     return true;
 }
