@@ -32,7 +32,7 @@ static void set_coord(client_t *client, map_t *map, pos_t **to_look,
     ssize_t y = 0;
     size_t act_tile = 0;
 
-    for (size_t i = 0; i < client->trantorian->level; i++) {
+    for (size_t i = 0; i < client->trantorian->level + 1; i++) {
         for (size_t j = 0; j < ((2 * i) + 1); j++, act_tile++) {
             x = dir_to_coef[idx_coef].invert == true ?
                 (POS_X(client) + i * (dir_to_coef[idx_coef].coef_2)) :
@@ -49,11 +49,13 @@ static void set_coord(client_t *client, map_t *map, pos_t **to_look,
 }
 
 static char *game_look_browse_inventory(core_t *core, client_t *client,
-    inventory_t *inventory, char *buff)
+    pos_t pos, char *buff)
 {
+    inventory_t *inv = GET_CELL(core->game->map, pos.x, pos.y);
+
     for (size_t j = 0; j < RESSOURCES_NBR; j++) {
         buff = game_get_look_ressource_str(ressources_tab[j],
-            ((size_t *)inventory)[j], buff);
+            ((size_t *)inv)[j], buff);
         if (buff == NULL) {
             fprintf(stderr, "[ERROR] Malloc failed\n");
             client_push_command(core->server, client, strdup("ko\n"));
@@ -68,22 +70,21 @@ static void game_print_look_ret(core_t *core, client_t *client,
 {
     char *buff = strdup("[");
     char *temp = NULL;
-    inventory_t *invent = NULL;
 
-    if (buff == NULL) {
-        fprintf(stderr, "[ERROR] Malloc failed\n");
-        return client_push_command(core->server, client, strdup("ko\n"));
-    }
+    if (buff == NULL)
+        return game_return_error_malloc(core, client);
     for (size_t i = 0; i < nbr; i++) {
-        invent = GET_CELL(core->game->map, to_look[i]->x, to_look[i]->y);
-        buff = game_look_browse_inventory(core, client, invent, buff);
+        buff = game_get_players_on_tile(core, client,
+            (pos_t){to_look[i]->x, to_look[i]->y}, buff);
+        if (buff == NULL)
+            return;
+        buff = game_look_browse_inventory(core, client,
+            (pos_t){to_look[i]->x, to_look[i]->y}, buff);
         if (buff == NULL)
             return;
         temp = buff;
-        if (asprintf(&buff, "%s%s", buff, (i == nbr - 1) ? "]" : ", ") == -1) {
-            fprintf(stderr, "[ERROR] Malloc failed\n");
-            return client_push_command(core->server, client, strdup("ko\n"));
-        }
+        if (asprintf(&buff, "%s%s", buff, (i == nbr - 1) ? "]\n" : ", ") == -1)
+            return game_return_error_malloc(core, client);
         free(temp);
     }
     client_push_command(core->server, client, buff);
@@ -91,7 +92,7 @@ static void game_print_look_ret(core_t *core, client_t *client,
 
 void look_e(core_t *core, client_t *client, UNUSED char *command)
 {
-    size_t tile_nbr = game_get_tile_nbr(client->trantorian->level);
+    size_t tile_nbr = game_get_tile_nbr(client->trantorian->level + 1);
     pos_t **to_look = game_init_pos_to_look(tile_nbr);
 
     if (to_look == NULL) {

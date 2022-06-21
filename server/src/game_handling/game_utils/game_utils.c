@@ -28,3 +28,9 @@ team_t *team_get_obj(list_t *teams, const char *to_comp)
     }
     return NULL;
 }
+
+void game_return_error_malloc(core_t *core, client_t *client)
+{
+    fprintf(stderr, "[ERROR] Malloc failed\n");
+    client_push_command(core->server, client, strdup("ko\n"));
+}

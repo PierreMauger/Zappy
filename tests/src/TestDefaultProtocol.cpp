@@ -318,9 +318,122 @@ TEST(TestCommandLook, Basic)
     POS_X(sc.getClient()) = 0;
     POS_Y(sc.getClient()) = 0;
 
-    sc.getClient()->trantorian->level = 3;
+    sc.getClient()->trantorian->level = 1;
     sc.getClient()->trantorian->direction = DIR_UP;
 
+    sc.startTest();
+    look_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "[player , , , ]\n");
+}
+
+TEST(TestCommandLook, WithMapElem1)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->level = 1;
+    sc.getClient()->trantorian->direction = DIR_UP;
+
+    GET_CELL(sc.getCore()->game->map, 0, 0)->food = 1;
+
+    sc.startTest();
+    look_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "[player food , , , ]\n");
+
+    GET_CELL(sc.getCore()->game->map, 0, 0)->food = 0;
+}
+
+TEST(TestCommandLook, WithMapElem2)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->level = 1;
+    sc.getClient()->trantorian->direction = DIR_UP;
+
+    GET_CELL(sc.getCore()->game->map, 0, 1)->food = 1;
+
+    sc.startTest();
+    look_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "[player , , food , ]\n");
+}
+
+TEST(TestCommandLook, WithMapElem3)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->level = 1;
+    sc.getClient()->trantorian->direction = DIR_RIGHT;
+
+    GET_CELL(sc.getCore()->game->map, 1, 0)->food = 1;
+
+    sc.startTest();
+    look_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "[player , , food , ]\n");
+}
+
+TEST(TestCommandLook, WithMapElem4)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->level = 1;
+    sc.getClient()->trantorian->direction = DIR_DOWN;
+
+    GET_CELL(sc.getCore()->game->map, 0, 2)->food = 1;
+
+    sc.startTest();
+    look_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "[player , , food , player ]\n"); // self
+}
+
+TEST(TestCommandLook, WithMapElem5)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->level = 1;
+    sc.getClient()->trantorian->direction = DIR_LEFT;
+
+    GET_CELL(sc.getCore()->game->map, 2, 0)->food = 1;
+
+    sc.startTest();
+    look_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "[player , player , food , ]\n"); // other player
+}
+
+TEST(TestCommandLook, WithMapElems)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->level = 1;
+    sc.getClient()->trantorian->direction = DIR_UP;
+
+    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->map);
     game_dispatch_ressources(sc.getCore()->game->map);
     game_dispatch_ressources(sc.getCore()->game->map);
 
@@ -328,5 +441,5 @@ TEST(TestCommandLook, Basic)
     look_e(sc.getCore(), sc.getClient(), NULL);
     sc.endTest();
 
-    // std::cout << sc.getRes() << std::endl;
+    EXPECT_TRUE(sc.getRes() != "[player , , , ]\n");
 }
