@@ -10,8 +10,4 @@
 void free_player(void *data)
 {
     player_t *player = data;
-
-    if (player->uuid)
-        free(player->uuid);
-    free(player);
 }
