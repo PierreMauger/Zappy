@@ -15,8 +15,6 @@ static void free_map(client_t *client)
     for (size_t y = 0; y < max_y; y++) {
         for (size_t x = 0; x < max_x; x++) {
             free(client->map[y][x].inv);
-            list_destroy(client->map[y][x].player,
-                (void (*)(void *))free_player);
         }
         free(client->map[y]);
     }

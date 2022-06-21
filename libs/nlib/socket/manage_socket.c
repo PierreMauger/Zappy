@@ -30,7 +30,6 @@ void nlib_destroy_socket(socket_t *sock)
     }
     if (sock->fd != -1) {
         close(sock->fd);
-        shutdown(sock->fd, SHUT_RDWR);
     }
     free(sock);
 }
