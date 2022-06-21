@@ -38,6 +38,7 @@
 
     #include "list.h"
     #include "nlib.h"
+    #include "raylib.h"
 
 typedef enum {
     North,
@@ -77,7 +78,8 @@ typedef struct player_s {
 
 typedef struct map_s {
     inventory_t *inv;
-    player_t *player;
+    list_t *player;
+    bool clicked;
 } map_t;
 
 typedef struct client_s {
@@ -161,5 +163,9 @@ void print_player(player_t *player);
 void print_inventory(inventory_t *inv);
 void print_inventory_map(client_t *client);
 void print_team(list_t *team);
+
+void draw_all(client_t *client);
+Texture *get_textures();
+void unload_textures(Texture *textures);
 
 #endif // ZAPPY_AI_H
