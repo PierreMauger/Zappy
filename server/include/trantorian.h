@@ -74,4 +74,11 @@ trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y,
     bool rand_pos);
 void trantorian_destroy(trantorian_t *trantorian);
 
+typedef struct {
+    direction_e direction;
+    int coef_1;
+    int coef_2;
+    bool invert;
+} dir_to_coef_t;
+
 #endif // TRANTORIAN_H

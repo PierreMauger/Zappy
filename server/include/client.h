@@ -8,6 +8,9 @@
 #ifndef CLIENT_H
     #define CLIENT_H
 
+    #define POS_X(client) (client->trantorian->pos.x)
+    #define POS_Y(client) (client->trantorian->pos.y)
+
     #include <uuid/uuid.h>
 
     #include <stdio.h>

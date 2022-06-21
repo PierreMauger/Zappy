@@ -21,8 +21,8 @@ TEST(TestGameCalcDirSound, Basic1)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
         TILE_EIGHT);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, Basic2)
@@ -37,8 +37,8 @@ TEST(TestGameCalcDirSound, Basic2)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_RIGHT, &pos_b, &pos_a),
         TILE_TWO);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, Basic3)
@@ -53,8 +53,8 @@ TEST(TestGameCalcDirSound, Basic3)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_DOWN, &pos_b, &pos_a),
         TILE_FOUR);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, Basic4)
@@ -69,8 +69,8 @@ TEST(TestGameCalcDirSound, Basic4)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_LEFT, &pos_b, &pos_a),
         TILE_SIX);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, Basic5)
@@ -85,8 +85,8 @@ TEST(TestGameCalcDirSound, Basic5)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
         TILE_THREE);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, Basic6)
@@ -101,8 +101,8 @@ TEST(TestGameCalcDirSound, Basic6)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
         TILE_THREE);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, Basic7)
@@ -117,8 +117,8 @@ TEST(TestGameCalcDirSound, Basic7)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_DOWN, &pos_b, &pos_a),
         TILE_SEVEN);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, Basic8)
@@ -133,8 +133,8 @@ TEST(TestGameCalcDirSound, Basic8)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
         TILE_FIVE);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, Basic9)
@@ -149,8 +149,8 @@ TEST(TestGameCalcDirSound, Basic9)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
         TILE_ONE);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, SameAxe1)
@@ -165,8 +165,8 @@ TEST(TestGameCalcDirSound, SameAxe1)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
         TILE_FIVE);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, SameAxe2)
@@ -181,8 +181,8 @@ TEST(TestGameCalcDirSound, SameAxe2)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
         TILE_ONE);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, SameAxe3)
@@ -197,8 +197,8 @@ TEST(TestGameCalcDirSound, SameAxe3)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
         TILE_SEVEN);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestGameCalcDirSound, SameAxe4)
@@ -213,8 +213,8 @@ TEST(TestGameCalcDirSound, SameAxe4)
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
         TILE_THREE);
 
-    core->game->map->width = 0;
-    core->game->map->height = 0;
+    core->game->map->width = 3;
+    core->game->map->height = 3;
 }
 
 TEST(TestCommandBroadCast, Basic)
@@ -311,4 +311,22 @@ TEST(TestSetCast, Error2)
     EXPECT_EQ(sc.getRes(), "ko\n");
 
     free(param);
+}
+
+TEST(TestCommandLook, Basic)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->level = 3;
+    sc.getClient()->trantorian->direction = DIR_UP;
+
+    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->map);
+
+    sc.startTest();
+    look_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    // std::cout << sc.getRes() << std::endl;
 }

@@ -181,4 +181,12 @@ void game_map_dup_delete_idx(pos_t **map_dup, int idx, size_t remaining_tiles);
 void game_destroy_map_dup(map_t *map, pos_t **map_dup);
 pos_t **game_init_map_dup(map_t *map);
 
+size_t game_get_tile_nbr(size_t level);
+
+void game_destroy_pos_to_look(pos_t **to_look);
+pos_t **game_init_pos_to_look(size_t amount);
+char *game_get_look_ressource_str(const char *ressource, size_t amount,
+    char *str);
+size_t game_look_filter_coord(ssize_t coord, size_t max_pos);
+
 #endif // CORE_H

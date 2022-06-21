@@ -92,6 +92,7 @@ add_executable(unit-tests
   ../server/src/game_handling/game_utils/game_calc_sound_dir.c
   ../server/src/game_handling/game_update_map.c
   ../server/src/game_handling/game_utils/game_map_utils.c
+  ../server/src/game_handling/game_utils/game_look_utils.c
 )
 
 target_include_directories(unit-tests PRIVATE

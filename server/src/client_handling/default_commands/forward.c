@@ -34,7 +34,7 @@ void forward_e(core_t *core, client_t *client, UNUSED char *command)
                 core->game->map->width, false);
             break;
         default:
-            return;
+            return client_push_command(core->server, client, strdup("ko\n"));
     }
     client_push_command(core->server, client, strdup("ok\n"));
 }

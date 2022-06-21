@@ -42,14 +42,19 @@ void inventory_e(core_t *core, client_t *client, UNUSED char *command)
     char *inventory = strdup("[");
     char *temp = NULL;
 
-    if (inventory == NULL)
+    if (inventory == NULL) {
+        client_push_command(core->server, client, strdup("ko\n"));
         return;
+    }
     inventory = get_inv_elem(client, inventory);
-    if (inventory == NULL)
+    if (inventory == NULL) {
+        client_push_command(core->server, client, strdup("ko\n"));
         return;
+    }
     temp = inventory;
     if (asprintf(&inventory, "%s]\n", temp) == -1) {
         free(temp);
+        client_push_command(core->server, client, strdup("ko\n"));
         return;
     }
     free(temp);
