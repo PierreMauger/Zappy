@@ -35,6 +35,8 @@ int take_object(client_t *client, char *str)
 
     if (strcmp(str, "ko") == 0) {
         printf("%s[INFO]%s This object isn't in this case\n", M, W);
+        printf("nb food %d\n", client->map[y][x].inv->food);
+        printf("y = %ld x = %ld\n", y, x);
         return 1;
     }
     if (strcmp(str, "food\n") == 0) {

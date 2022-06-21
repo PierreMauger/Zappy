@@ -128,6 +128,7 @@ void sig_handler(int signum);
 bool ai(client_t *client);
 bool path_finding_object(client_t *client, char *object);
 bool go_to_next_object(client_t *client, int dest_x, int dest_y);
+bool get_food_in_cell(client_t *client, size_t x, size_t y);
 
 int round_map(client_t *client, int pos, bool is_x);
 void find_closest_round(client_t *client, int *dest_x, int *dest_y);
@@ -147,5 +148,6 @@ int my_getnbr(char *str);
 
 void print_inventory(inventory_t *inv);
 void print_inventory_map(client_t *client);
+void print_dir(direction_e dir);
 
 #endif // ZAPPY_AI_H

@@ -9,12 +9,12 @@
 
 static void change_dir(client_t *client)
 {
-    if (client->player->dir == North) {
+    if (client->player->dir == South) {
         client->player->pos.y += 1;
         if (client->player->pos.y >= client->size_map.y)
             client->player->pos.y = 0;
     }
-    if (client->player->dir == South) {
+    if (client->player->dir == North) {
         client->player->pos.y -= 1;
         if (client->player->pos.y < 0)
             client->player->pos.y = client->size_map.y - 1;
@@ -26,28 +26,39 @@ static void change_dir(client_t *client)
     }
     if (client->player->dir == West) {
         client->player->pos.x -= 1;
-        if (client->player->pos.x < client->size_map.x)
+        if (client->player->pos.x < 0)
             client->player->pos.x = client->size_map.x - 1;
     }
 }
 
 static void find_right_dir(client_t *client, bool right)
 {
-    if (client->player->dir == North)
+    if (client->player->dir == North) {
         client->player->dir = (right ? East : West);
-    if (client->player->dir == South)
+        return;
+    }
+    if (client->player->dir == South) {
         client->player->dir = (right ? West : East);
-    if (client->player->dir == East)
+        return;
+    }
+    if (client->player->dir == East) {
         client->player->dir = (right ? South : North);
-    if (client->player->dir == West)
+        return;
+    }
+    if (client->player->dir == West) {
         client->player->dir = (right ? North : South);
+        return;
+    }
 }
 
 int forward_movement(client_t *client, char *str)
 {
-    if (strcmp(str, "ok\n") == 0) {
+    if (strcmp(str, "ok") == 0) {
+        printf("y %d x %d\n", client->player->pos.y, client->player->pos.x);
         change_dir(client);
-        printf("%s[COMMAND]%s Forward\n", G, W);
+        printf("%s[COMMAND]%s Forward\n", B, W);
+        printf("y %d x %d\n", client->player->pos.y, client->player->pos.x);
+        printf("command_pending left %ld\n", client->pending_commands->lenght);
         return 0;
     }
     return 1;
@@ -55,9 +66,14 @@ int forward_movement(client_t *client, char *str)
 
 int right_movement(client_t *client, char *str)
 {
-    if (strcmp(str, "ok\n") == 0) {
+    if (strcmp(str, "ok") == 0) {
+        printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
+        print_dir(client->player->dir);
         find_right_dir(client, true);
-        printf("%s[COMMAND]%s Right\n", G, W);
+        printf("%s[COMMAND]%s Right\n", B, W);
+        printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
+        print_dir(client->player->dir);
+        printf("command_pending left %ld\n", client->pending_commands->lenght);
         return 0;
     }
     return 1;
@@ -65,9 +81,14 @@ int right_movement(client_t *client, char *str)
 
 int left_movement(client_t *client, char *str)
 {
-    if (strcmp(str, "ok\n") == 0) {
+    if (strcmp(str, "ok") == 0) {
+        printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
+        print_dir(client->player->dir);
         find_right_dir(client, false);
-        printf("%s[COMMAND]%s Left\n", G, W);
+        printf("%s[COMMAND]%s Left\n", B, W);
+        printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
+        print_dir(client->player->dir);
+        printf("command_pending left %ld\n", client->pending_commands->lenght);
         return 0;
     }
     return 1;

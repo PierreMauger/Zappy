@@ -105,26 +105,28 @@ static bool go_to_good_direction_x(client_t *client, int dest, int src)
 
 bool go_to_next_object(client_t *client, int dest_x, int dest_y)
 {
+    printf("start src_y %d src_x %d dest_y %d dest_x %d ", client->player->pos.y, client->player->pos.x, dest_y, dest_x);
+    print_dir(client->player->dir);
     find_closest_round(client, &dest_x, &dest_y);
-    if (!go_to_good_direction_x(client, dest_x, client->player->pos.x))
-        return false;
-    for (int srx_x = (int)client->player->pos.x; srx_x != dest_x;) {
-        if (!send_message(client->pending_commands,
-            client->command, client->socket, "Forward\n")) {
-            fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
-            return false;
-        }
-        srx_x > dest_x ? srx_x-- : srx_x++;
-    }
+    printf("end src_y %d src_x %d dest_y %d dest_x %d ", client->player->pos.y, client->player->pos.x, dest_y, dest_x);
+    print_dir(client->player->dir);
     if (!go_to_good_direction_y(client, dest_y, client->player->pos.y))
         return false;
-    for (int srx_y = (int)client->player->pos.y; srx_y != dest_y;) {
+    for (int srx_y = (int)client->player->pos.y; srx_y != dest_y && client->
+        pending_commands->lenght < 10; (srx_y > dest_y ? srx_y-- : srx_y++))
         if (!send_message(client->pending_commands,
             client->command, client->socket, "Forward\n")) {
             fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
             return false;
         }
-        srx_y > dest_y ? srx_y-- : srx_y++;
-    }
+    if (!go_to_good_direction_x(client, dest_x, client->player->pos.x))
+        return false;
+    for (int srx_x = (int)client->player->pos.x; srx_x != dest_x && client->
+        pending_commands->lenght < 10; (srx_x > dest_x ? srx_x-- : srx_x++))
+        if (!send_message(client->pending_commands,
+            client->command, client->socket, "Forward\n")) {
+            fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
+            return false;
+        }
     return true;
 }

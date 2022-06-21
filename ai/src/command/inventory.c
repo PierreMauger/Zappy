@@ -7,23 +7,36 @@
 
 #include "zappy_ai.h"
 
+char *go_to_next_num(char *str)
+{
+    size_t i = 0;
+
+    if (!str)
+        return "";
+    for (i = 0; (str[i] < '0' || str[i] > '9') && str[i] != '\0'; i++);
+    if (str[i] == '\0')
+        return "";
+    return &str[i];
+}
+
 void fill_inventory_player(player_t *player, char *content)
 {
+    printf("content inv = %s\n", content);
     for (char *stone; (stone = get_cell(content)); free(stone)) {
         if (strstr(stone, "food") != NULL)
-            player->inv->food = my_getnbr(stone);
+            player->inv->food = atoi(go_to_next_num(stone));
         if (strstr(stone, "deraumere") != NULL)
-            player->inv->deraumere = my_getnbr(stone);
+            player->inv->deraumere = atoi(go_to_next_num(stone));
         if (strstr(stone, "linemate") != NULL)
-            player->inv->linemate = my_getnbr(stone);
+            player->inv->linemate = atoi(go_to_next_num(stone));
         if (strstr(stone, "mendiane") != NULL)
-            player->inv->mendiane = my_getnbr(stone);
+            player->inv->mendiane = atoi(go_to_next_num(stone));
         if (strstr(stone, "phiras") != NULL)
-            player->inv->phiras = my_getnbr(stone);
+            player->inv->phiras = atoi(go_to_next_num(stone));
         if (strstr(stone, "sibur") != NULL)
-            player->inv->sibur = my_getnbr(stone);
+            player->inv->sibur = atoi(go_to_next_num(stone));
         if (strstr(stone, "thystame") != NULL)
-            player->inv->thystame = my_getnbr(stone);
+            player->inv->thystame = atoi(go_to_next_num(stone));
         if ((content = go_next_chr(content, ',')))
             (char *)((size_t)content++);
     }

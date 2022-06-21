@@ -99,10 +99,13 @@ int look_around(client_t *client, char *str)
     size_t save_y = client->player->pos.y;
 
     client->player->level = 1;
-    for (int count_x = -1; (content = get_cell(save)) != NULL;) {
+    for (int count_x = -1; (content = get_cell(save)) != NULL; free(content)) {
         fill_cell_map(&client->map[save_y][save_x], content);
         big_loop_look(client, &save_x, &save_y, &count_x);
-        free(content);
+        if (save[0] == ',') {
+            (char *)((size_t)save++);
+            continue;
+        }
         save = go_next_chr(save, ',');
         if (save)
             (char *)((size_t)save++);
