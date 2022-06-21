@@ -157,6 +157,7 @@ void clients_update(core_t *core, fd_set *readfds);
 int server_start(args_t *args);
 int server_loop(core_t *core);
 
+trantorian_t *game_get_trantorian(core_t *core, char *uuid);
 void game_remove_trantorian(core_t *core, trantorian_t *trantorian);
 
 void game_update_map(map_t *map);

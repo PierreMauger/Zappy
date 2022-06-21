@@ -25,17 +25,31 @@ static char *command_pin_get_buff(core_t *core, client_t *client, char *uuid)
     return buff;
 }
 
+static trantorian_t *verif_trant(core_t *core, char *command)
+{
+    char *uuid = strtok(command, " \t#");
+    trantorian_t *trantorian = NULL;
+
+    if (uuid == NULL) {
+        fprintf(stderr, "[ERROR] GUI unknown parameter\n");
+        return NULL;
+    }
+    trantorian = game_get_trantorian(core, uuid);
+    if (trantorian == NULL) {
+        fprintf(stderr, "[ERROR] GUI unknown trantorian\n");
+        return NULL;
+    }
+    return trantorian;
+}
+
 void command_pin(core_t *core, client_t *client, char *command)
 {
-    char *uuid = strtok(command, " \t");
+    trantorian_t *trantorian = verif_trant(core, command);
     char *buff = NULL;
 
-    if (uuid == NULL || strcmp(uuid, client->trantorian->uuid) != 0) {
-        fprintf(stderr, "[ERROR] GUI unknown parameter\n");
-        command_sbp(core, client);
-        return;
-    }
-    buff = command_pin_get_buff(core, client, uuid);
+    if (trantorian == NULL)
+        return command_sbp(core, client);
+    buff = command_pin_get_buff(core, client, trantorian->uuid);
     if (buff == NULL) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
         command_suc(core, client);
