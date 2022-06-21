@@ -147,5 +147,6 @@ int my_getnbr(char *str);
 
 void print_inventory(inventory_t *inv);
 void print_inventory_map(client_t *client);
+void print_dir(direction_e dir);
 
 #endif // ZAPPY_AI_H

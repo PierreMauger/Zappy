@@ -7,6 +7,18 @@
 
 #include "zappy_ai.h"
 
+void print_dir(direction_e dir)
+{
+    if (dir == North)
+        printf("Direction = North\n");
+    if (dir == South)
+        printf("Direction = South\n");
+    if (dir == East)
+        printf("Direction = East\n");
+    if (dir == West)
+        printf("Direction = West\n");
+}
+
 void print_inventory(inventory_t *inv)
 {
     printf("food = %d linemate = %d deraumere = %d sibur = %d mendiane"

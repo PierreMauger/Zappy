@@ -40,9 +40,8 @@ char *get_one_word(char *str)
 
 char *go_next_chr(char *str, char chr)
 {
-    while (str[0] == chr) {
+    if (str[0] == chr)
         (char *)((size_t)(str)++);
-    }
     str = strchr(str, chr);
     return str;
 }
@@ -56,7 +55,7 @@ char *get_cell(char *tab)
 
     if (!tab)
         return NULL;
-    for (; tab[i] == ' ' && tab[i] == '[' && tab[i] != '\0'; i++);
+    for (; tab[i] == ',' && tab[i] == '[' && tab[i] != '\0'; i++);
     for (j = i; tab[j] != ',' && tab[j] != ']' && tab[j] != '\0'; n++, j++);
     if (!(content = malloc(sizeof(char) * (n + 1)))) {
         fprintf(stderr, "%s[ERROR]%s can't malloc", R, W);

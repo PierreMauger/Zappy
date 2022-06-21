@@ -32,7 +32,7 @@ static player_t *crt_play(arg_t *arg)
     player->team_name = arg->name;
     player->pos.x = 0;
     player->pos.y = 0;
-    player->dir = South;
+    player->dir = North;
     player->level = 1;
     player->inv = NULL;
     return player;
