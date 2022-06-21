@@ -23,9 +23,10 @@ void handler_clear(command_handler_t *handler)
 {
     if (handler == NULL)
         return;
-    if (handler->params)
+    if (handler->params != NULL)
         free(handler->params);
     handler->command = NULL;
+    handler->params = NULL;
     handler->command_it = 0;
 }
 
