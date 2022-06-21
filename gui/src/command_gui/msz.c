@@ -12,16 +12,11 @@ static bool split_create_map(map_t *map, size_t x)
     size_t i = 0;
 
     for (i = 0; i != x; i++) {
-        map[i].player = calloc(1, sizeof(player_t));
+        map[i].player = list_create();
         map[i].inv = calloc(1, sizeof(inventory_t));
         if (!map[i].inv || !map[i].player)
             return false;
-        map[i].player->uuid = NULL;
-        map[i].player->inv = calloc(1, sizeof(inventory_t));
-        if (!map[i].player->inv)
-            return false;
     }
-    map[i].player = NULL;
     map[i].inv = NULL;
     return true;
 }
