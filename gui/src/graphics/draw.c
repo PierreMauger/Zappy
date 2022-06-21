@@ -26,6 +26,25 @@ static const char *paths[] = {
     NULL
 };
 
+int string_to_number_object(map_t map, const char *object_name)
+{
+    if (strcmp(object_name, "food") == 0)
+        return map.inv->food;
+    if (strcmp(object_name, "deraumere") == 0)
+        return map.inv->deraumere;
+    if (strcmp(object_name, "linemate") == 0)
+        return map.inv->linemate;
+    if (strcmp(object_name, "mendiane") == 0)
+        return map.inv->mendiane;
+    if (strcmp(object_name, "phiras") == 0)
+        return map.inv->phiras;
+    if (strcmp(object_name, "sibur") == 0)
+        return map.inv->sibur;
+    if (strcmp(object_name, "thystame") == 0)
+        return map.inv->thystame;
+    return 0;
+}
+
 Texture *get_textures()
 {
     static Texture *textures = NULL;
@@ -92,7 +111,7 @@ void draw_inventory(client_t *client, pos_t size, pos_t edge)
                     (Rectangle){0, 0, 16, 16},
                     (Rectangle){edge.x + size.x, item * 16 * 4, 16 * 4, 16 * 4},
                     (Vector2){0, 0}, 0, RAYWHITE);
-                    DrawText(TextFormat("x%d", client->map[y][x].inv[item - 1]),
+                    DrawText(TextFormat("x%d", string_to_number_object(client->map[y][x], paths[item])),
                     edge.x + size.x + 16 * 4, item * 16 * 4, 30, BLACK);
                 }
                 return;
