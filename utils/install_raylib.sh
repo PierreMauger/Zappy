@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# init
+source /etc/os-release
+
 # install dependencies for computer os
-if [[ "$OSTYPE" == "fedora"* ]]; then
+if [[ "$PRETTY_NAME" == "Fedora"* ]]; then
     sudo dnf install alsa-lib-devel mesa-libGL-devel libX11-devel libXrandr-devel libXi-devel libXcursor-devel libXinerama-devel
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+elif [[ "$PRETTY_NAME" == "Ubuntu"* ]]; then
     sudo apt install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev
 fi
 
