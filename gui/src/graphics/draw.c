@@ -49,13 +49,12 @@ void unload_textures(Texture *textures)
 
 void draw_player(map_t tile, int ratio, pos_t position)
 {
-    if (tile.player->lenght > 0) {
-        DrawTexturePro(get_textures()[8 +
-            ((player_t *)tile.player->head->data)->level],
+    for (node_t *i = tile.player->head; i; i = i->next) {
+        DrawTexturePro(get_textures()[7 +
+            ((player_t *)i->data)->level],
         (Rectangle){0, 0, 25, 30},
         (Rectangle){position.x, position.y, ratio, ratio},
-        (Vector2){0, 0},
-        0, WHITE);
+        (Vector2){0, 0}, 0, RAYWHITE);
     }
 }
 
@@ -78,9 +77,24 @@ void draw_inventory(client_t *client, pos_t size, pos_t edge)
             if (client->map[y][x].clicked) {
                 DrawText(TextFormat("Tile [%d;%d]", y, x), 0, 0, 30, BLACK);
                 DrawText(TextFormat("Tile [%d;%d]", y, x), edge.x + size.x, 0, 30, BLACK);
-                // for (int level = 1; level <= 7; level++) {
-                //     DrawTexturePro(get_textures()[8 + level], )
-                // }
+                for (int level = 1, tmp = 0; level <= 7; level++, tmp = 0) {
+                    DrawTexturePro(get_textures()[7 + level],
+                    (Rectangle){64, 32 + (int)(GetTime() * 10) % 3 * 31, 25, 30},
+                    (Rectangle){0, level * 30 * 3, 25 * 3, 30 * 3},
+                    (Vector2){0, 0}, 0, RAYWHITE);
+                    for (node_t *k = client->map[y][x].player->head; k; k = k->next)
+                        if (((player_t *)k->data)->level == level)
+                            tmp++;
+                    DrawText(TextFormat("x%d", tmp), 25 * 3, level * 30 * 3, 30, BLACK);
+                }
+                for (int item = 1; item <= 7; item++) {
+                    DrawTexturePro(get_textures()[item],
+                    (Rectangle){0, 0, 16, 16},
+                    (Rectangle){edge.x + size.x, item * 16 * 4, 16 * 4, 16 * 4},
+                    (Vector2){0, 0}, 0, RAYWHITE);
+                    DrawText(TextFormat("x%d", client->map[y][x].inv[item - 1]),
+                    edge.x + size.x + 16 * 4, item * 16 * 4, 30, BLACK);
+                }
                 return;
             }
 }
