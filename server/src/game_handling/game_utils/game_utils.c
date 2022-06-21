@@ -28,3 +28,20 @@ team_t *team_get_obj(list_t *teams, const char *to_comp)
     }
     return NULL;
 }
+
+void game_return_error_malloc(core_t *core, client_t *client)
+{
+    fprintf(stderr, "[ERROR] Malloc failed\n");
+    client_push_command(core->server, client, strdup("ko\n"));
+}
+
+trantorian_t *game_get_trantorian(core_t *core, char *uuid)
+{
+    node_t *node = NULL;
+
+    foreach(core->game->trantorians->head, node) {
+        if (strcmp(((trantorian_t *)node->data)->uuid, uuid) == 0)
+            return (trantorian_t *)node->data;
+    }
+    return NULL;
+}

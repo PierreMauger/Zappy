@@ -48,7 +48,7 @@ static bool loop_client(client_t *client)
 {
     int sel = 0;
 
-    while (1) {
+    while (!WindowShouldClose()) {
         FD_ZERO(&client->readfds);
         FD_ZERO(&client->writefds);
         FD_SET(STDIN_FILENO, &client->readfds);
@@ -61,8 +61,8 @@ static bool loop_client(client_t *client)
             break;
         if (client->time_unit != 0 && clock_update(client->time_unit))
             loop_command(client);
+        draw_all(client);
         nlib_commands_update(client->command, &client->writefds);
-
     }
     return true;
 }

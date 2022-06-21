@@ -18,3 +18,4 @@ build
 ref_bin
 NormEZ.rb
 tester
+raylib.h

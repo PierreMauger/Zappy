@@ -18,9 +18,10 @@ bool loop_command(client_t *client)
         return false;
     }
     foreach (client->player->head, node) {
-        pl = malloc(sizeof(char) * (UUID_STR_LEN + 6));
-        strcat(strcat(pl, "ppo #"), ((player_t *)node->data)->uuid);
-        strcat(pl, "\n");
+        pl = calloc(1, sizeof(char) *
+            (strlen(((player_t *)node->data)->uuid) + 10));
+        strcat(pl, "ppo #");
+        strcat(strcat(pl, ((player_t *)node->data)->uuid), "\n");
         if (!send_message(
             client->pending_commands, client->command, client->socket, pl)) {
             fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);

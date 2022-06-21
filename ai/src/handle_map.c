@@ -48,9 +48,11 @@ static bool split_create_map(map_t *map, size_t x)
         map[i].player = NULL;
         if (!map[i].inv)
             return false;
+        map[i].clicked = false;
     }
     map[i].player = NULL;
     map[i].inv = NULL;
+    map[i].clicked = false;
     return true;
 }
 

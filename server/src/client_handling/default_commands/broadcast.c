@@ -12,7 +12,7 @@ static char *get_msg(char *command)
 {
     for (size_t i = 0; i < strlen(command); i++) {
         if (command[i] != ' ') {
-            return &command[i + 1];
+            return &command[i];
         }
     }
     return NULL;
@@ -46,6 +46,7 @@ void broadcast_e(core_t *core, client_t *client, char *command)
 
     if (msg == NULL) {
         fprintf(stderr, "[ERROR] Invalid broadcast text\n");
+        client_push_command(core->server, client, strdup("ko\n"));
         return;
     }
     client->type = CLI_UNKNOWN;
