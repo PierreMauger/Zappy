@@ -79,6 +79,7 @@ typedef struct player_s {
 typedef struct map_s {
     inventory_t *inv;
     player_t *player;
+    bool clicked;
 } map_t;
 
 typedef struct client_s {
