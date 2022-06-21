@@ -44,6 +44,7 @@ static bool split_create_map(map_t *map, size_t x)
 
     for (i = 0; i != x; i++) {
         map[i].inv = calloc(1, sizeof(inventory_t));
+        memset(map[i].inv, -1, sizeof(inventory_t));
         map[i].player = NULL;
         if (!map[i].inv)
             return false;
