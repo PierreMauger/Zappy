@@ -25,14 +25,9 @@ static void change_dir(client_t *client)
             client->player->pos.x = 0;
     }
     if (client->player->dir == West) {
-        printf("la west %d\n", client->player->pos.x);
         client->player->pos.x -= 1;
-        if (client->player->pos.x < client->size_map.x) {
+        if (client->player->pos.x < 0)
             client->player->pos.x = client->size_map.x - 1;
-            return;
-        }
-        printf("la west %d\n", client->player->pos.x);
-        exit(0);
     }
 }
 

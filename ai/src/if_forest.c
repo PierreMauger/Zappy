@@ -22,19 +22,15 @@ bool get_food_in_cell(client_t *client, size_t x, size_t y)
     return true;
 }
 
-bool find_path_object(client_t *client)
+bool try_evoluate(client_t *client)
 {
-    size_t y = client->player->pos.y;
-    size_t x = client->player->pos.x;
-    size_t nb_food = client->map[y][x].inv->food;
-
-    if (!path_finding_object(client, "food"))
-        return false;
     return true;
 }
 
-bool try_evoluate(client_t *client)
+bool remove_surplus_command(client_t *client)
 {
+    while (client->pending_commands->lenght > 10)
+        free(list_pop_last(client->pending_commands));
     return true;
 }
 
@@ -51,13 +47,13 @@ bool ai(client_t *client)
         return false;
     }
     if (client->player->inv && client->player->inv->food < 5) {
-        if (!find_path_object(client) && !send_message(client->pending_commands,
-            client->command, client->socket, "Forward\n")) {
+        if (!path_finding_object(client, "food") && !send_message(client->
+            pending_commands, client->command, client->socket, "Forward\n")) {
             fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
             return false;
         }
     }
     else
         try_evoluate(client);
-    return true;
+    return remove_surplus_command(client);
 }

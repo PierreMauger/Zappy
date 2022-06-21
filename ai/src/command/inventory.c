@@ -12,15 +12,16 @@ char *go_to_next_num(char *str)
     size_t i = 0;
 
     if (!str)
-        return NULL;
+        return "";
     for (i = 0; (str[i] < '0' || str[i] > '9') && str[i] != '\0'; i++);
     if (str[i] == '\0')
-        return NULL;
+        return "";
     return &str[i];
 }
 
 void fill_inventory_player(player_t *player, char *content)
 {
+    printf("content inv = %s\n", content);
     for (char *stone; (stone = get_cell(content)); free(stone)) {
         if (strstr(stone, "food") != NULL)
             player->inv->food = atoi(go_to_next_num(stone));
