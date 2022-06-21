@@ -165,9 +165,11 @@ void print_inventory(inventory_t *inv);
 void print_inventory_map(client_t *client);
 void print_team(list_t *team);
 
-void draw_all(client_t *client);
+void display(client_t *client);
 Texture *get_textures();
 void unload_textures(Texture *textures);
-int string_to_number_object(map_t map, const char *object_name);
+int get_item(map_t map, const char *object_name);
+int levels_nb(client_t *client, pos_t pos, int level);
+void unclick_rest(client_t *client, pos_t tile);
 
 #endif // ZAPPY_AI_H
