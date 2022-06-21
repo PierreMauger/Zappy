@@ -41,7 +41,7 @@ INCLUDES		=	-I include -I ../include
 LIBS			=	-L ../libs -llist -lnlib -luuid	-l:libraylib.so.4.0.0	\
 					-Wl,-rpath=$(shell readlink -f "../libs/")				\
 
-CFLAGS			=	$(INCLUDES) $(LIBS) -Wall -Wextra -W -fPIC
+CFLAGS			=	$(INCLUDES) $(LIBS) -Wall -Wextra -W -fPIC -lm
 
 CFLAGS_DEBUG	=	-g
 

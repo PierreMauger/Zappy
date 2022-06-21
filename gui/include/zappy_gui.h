@@ -35,6 +35,7 @@
     #include <fcntl.h>
     #include <signal.h>
     #include <uuid/uuid.h>
+    #include <math.h>
 
     #include "list.h"
     #include "nlib.h"

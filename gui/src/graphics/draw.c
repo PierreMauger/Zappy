@@ -11,7 +11,7 @@ static const char *paths[] = {
     "gui/resources/grass.png",
     "gui/resources/chicken.png",
     "gui/resources/linemate.png",
-    "gui/resources/deraumer.png",
+    "gui/resources/deraumere.png",
     "gui/resources/sibur.png",
     "gui/resources/mendiane.png",
     "gui/resources/phiras.png",
@@ -26,20 +26,31 @@ static const char *paths[] = {
     NULL
 };
 
+static const char *items[] = {
+    "food",
+    "linemate",
+    "deraumere",
+    "sibur",
+    "mendiane",
+    "phiras",
+    "thystame",
+    NULL
+};
+
 int string_to_number_object(map_t map, const char *object_name)
 {
     if (strcmp(object_name, "food") == 0)
         return map.inv->food;
-    if (strcmp(object_name, "deraumere") == 0)
-        return map.inv->deraumere;
     if (strcmp(object_name, "linemate") == 0)
         return map.inv->linemate;
+    if (strcmp(object_name, "deraumere") == 0)
+        return map.inv->deraumere;
+    if (strcmp(object_name, "sibur") == 0)
+        return map.inv->sibur;
     if (strcmp(object_name, "mendiane") == 0)
         return map.inv->mendiane;
     if (strcmp(object_name, "phiras") == 0)
         return map.inv->phiras;
-    if (strcmp(object_name, "sibur") == 0)
-        return map.inv->sibur;
     if (strcmp(object_name, "thystame") == 0)
         return map.inv->thystame;
     return 0;
@@ -80,12 +91,13 @@ void draw_player(map_t tile, int ratio, pos_t position)
 void draw_inventory(client_t *client, pos_t size, pos_t edge)
 {
     Vector2 pos = GetMousePosition();
-    pos_t tile = {(pos.x - edge.x) * client->size_map.x / size.x,
-        (pos.y - edge.y) * client->size_map.y / size.y};
+    pos_t tile = {floorf((pos.x - edge.x) * client->size_map.x / size.x),
+        floorf((pos.y - edge.y) * client->size_map.y / size.y)};
 
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && 0 <= tile.x && tile.x <
-        client->size_map.x && 0 <= tile.y && tile.y < client->size_map.y) {
-        client->map[tile.y][tile.x].clicked = !client->map[tile.y][tile.x].clicked;
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        if (0 <= tile.x && tile.x < client->size_map.x &&
+            0 <= tile.y && tile.y < client->size_map.y)
+            client->map[tile.y][tile.x].clicked = !client->map[tile.y][tile.x].clicked;
         for (int y = 0; y < client->size_map.y; y++)
             for (int x = 0; x < client->size_map.x; x++)
                 if (!(y == tile.y && x == tile.x))
@@ -111,7 +123,7 @@ void draw_inventory(client_t *client, pos_t size, pos_t edge)
                     (Rectangle){0, 0, 16, 16},
                     (Rectangle){edge.x + size.x, item * 16 * 4, 16 * 4, 16 * 4},
                     (Vector2){0, 0}, 0, RAYWHITE);
-                    DrawText(TextFormat("x%d", string_to_number_object(client->map[y][x], paths[item])),
+                    DrawText(TextFormat("x%d", string_to_number_object(client->map[y][x], items[item - 1])),
                     edge.x + size.x + 16 * 4, item * 16 * 4, 30, BLACK);
                 }
                 return;
