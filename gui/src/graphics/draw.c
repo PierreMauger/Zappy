@@ -49,8 +49,9 @@ void unload_textures(Texture *textures)
 
 void draw_player(map_t tile, int ratio, pos_t position)
 {
-    if (tile.player) {
-        DrawTexturePro(get_textures()[8 + tile.player->level],
+    if (tile.player->lenght > 0) {
+        DrawTexturePro(get_textures()[8 +
+            ((player_t *)tile.player->head->data)->level],
         (Rectangle){0, 0, 25, 30},
         (Rectangle){position.x, position.y, ratio, ratio},
         (Vector2){0, 0},
