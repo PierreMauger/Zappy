@@ -4,7 +4,10 @@
 source /etc/os-release
 
 # install dependencies for computer os
-if [[ "$PRETTY_NAME" == "Fedora"* ]]; then
+
+if [ "$EUID" -ne 0 ]
+  then echo -e "\033[1;31mPlease run as root to install dependencies\033[1;0m"
+elif [[ "$PRETTY_NAME" == "Fedora"* ]]; then
     sudo dnf install alsa-lib-devel mesa-libGL-devel libX11-devel libXrandr-devel libXi-devel libXcursor-devel libXinerama-devel
 elif [[ "$PRETTY_NAME" == "Ubuntu"* ]]; then
     sudo apt install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev
