@@ -35,6 +35,7 @@ int take_object(client_t *client, char *str)
 
     if (strcmp(str, "ko") == 0) {
         printf("%s[INFO]%s This object isn't in this case\n", M, W);
+        exit(0);
         return 1;
     }
     if (strcmp(str, "food\n") == 0) {
