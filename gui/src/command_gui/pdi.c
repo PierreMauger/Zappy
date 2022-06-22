@@ -15,8 +15,6 @@ int pdi(client_t *client, char *str)
 
     if (!uuid)
         return 1;
-    printf("uuid %s\n", uuid);
-    exit(0);
     foreach_safe(client->player->head, node, save) {
         if (strcmp(((player_t *)node->data)->uuid, uuid) == 0) {
             list_destroy_node(node, free_player);
