@@ -32,7 +32,7 @@ static void game_update_live(core_t *core, trantorian_t *trantorian)
     } else {
         command_pdi(core, trantorian);
         command_death(core, trantorian->client, NULL);
-        client_disconnect(core, trantorian->client, NULL);
+        trantorian->client->to_delete = true;
     }
 }
 

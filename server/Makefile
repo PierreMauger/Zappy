@@ -75,6 +75,7 @@ SRC				=	src/manage_struct/manage_client.c						\
 					src/game_handling/game_utils/game_look_utils.c			\
 					src/game_handling/game_utils/game_look_utils_2.c		\
 					src/game_handling/game_utils/trantorian_utils.c			\
+					src/client_handling/clients_update_delete.c				\
 
 SRC				+=	./src/main.c
 

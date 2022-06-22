@@ -55,6 +55,7 @@ int server_loop(core_t *core)
         nlib_select_fds(&readfds, &writefds);
         clients_update(core, &readfds);
         nlib_commands_update(core->server->commands_to_send, &writefds);
+        clients_update_delete(core);
         if (FD_ISSET(core->server->socket->fd, &readfds) == 0)
             continue;
         server_accept_connection(core->server);

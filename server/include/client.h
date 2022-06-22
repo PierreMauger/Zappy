@@ -37,6 +37,7 @@ typedef struct client_s {
     list_t *command_list;
     client_type_e type;
     struct trantorian_s *trantorian;
+    bool to_delete;
 } client_t;
 
 void client_destroy_command(char *command);

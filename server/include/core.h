@@ -155,7 +155,7 @@ void client_exec_command(core_t *core, client_t *client);
 void client_push_exec_command(client_t *client, char *buffer);
 int client_get_command(client_t *client);
 void clients_update(core_t *core, fd_set *readfds);
-
+void clients_update_delete(core_t *core);
 void client_disconnect(core_t *core, client_t *client, node_t *node);
 
 int server_start(args_t *args);
