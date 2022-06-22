@@ -13,6 +13,8 @@
 
     #define MAP_REFRESH (20)
 
+    #define UNIT_MAX (200)
+
     #define RESSOURCES_NBR (7)
 
     #include <stdio.h>
