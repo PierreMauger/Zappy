@@ -30,8 +30,10 @@ static bool get_number_client(client_t *client, char *str)
         fprintf(stderr, "%s[ERROR]%s too many clients in this team\n", R, W);
         return false;
     }
-    if (atoi(str) >= 1 && !client->client_connected)
+    if (atoi(str) >= 1 && !client->client_connected) {
         client->client_connected = true;
+        client->unused_slot = atoi(str);
+    }
     if (client->size_map.x != -1)
         client->init = false;
     return true;

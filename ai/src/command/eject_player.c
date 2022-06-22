@@ -7,7 +7,11 @@
 
 #include "zappy_ai.h"
 
-int eject_player(UNUSED client_t *client, UNUSED char *str)
+int eject_player(UNUSED client_t *client, char *str)
 {
-    return 0;
+    if (strcmp(str, "ok") == 0) {
+        printf("%s[COMMAND]%s Eject done\n", B, W);
+        return 0;
+    }
+    return 1;
 }

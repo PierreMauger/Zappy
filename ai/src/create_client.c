@@ -46,6 +46,7 @@ static void split_create_client(client_t *client, arg_t *arg)
     client->init = false;
     client->map = NULL;
     client->init = true;
+    client->unused_slot = 0;
     client->client_connected = false;
     client->size_map.x = -1;
     client->size_map.y = -1;

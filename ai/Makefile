@@ -21,6 +21,8 @@ SRC				=	./src/loop_client.c				\
 					./src/map_utils.c 				\
 					./src/my_getnbr.c 				\
 					./src/evoluate.c 				\
+					./src/evoluate2.c 				\
+					./src/evoluate3.c 				\
 					./src/round_pos_map.c 			\
 					./src/command/movement.c 		\
 					./src/command/look_around.c 	\

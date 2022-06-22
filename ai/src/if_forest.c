@@ -7,7 +7,7 @@
 
 #include "zappy_ai.h"
 
-bool get_nb_object(client_t *client, size_t nb, size_t needed, char *object)
+bool get_object(client_t *client, size_t nb, size_t needed, char *object)
 {
     int nb_food = needed - nb;
     char *name = calloc(1, sizeof(char) * (7 + strlen(object)));
@@ -58,6 +58,12 @@ bool try_evoluate(client_t *client)
         return (level_3(client));
     if (client->player->level == 4)
         return (level_4(client));
+    if (client->player->level == 4)
+        return (level_5(client));
+    if (client->player->level == 4)
+        return (level_6(client));
+    if (client->player->level == 4)
+        return (level_7(client));
     return true;
 }
 
