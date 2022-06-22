@@ -23,7 +23,8 @@ int remove_false_player(client_t *client)
     size_t x = client->player->pos.x;
     size_t y = client->player->pos.y;
 
-    free(list_pop_last(client->map[y][x].player));
+    if (client->map[y][x].player->lenght > 0)
+        free(list_pop_last(client->map[y][x].player));
     print_inventory_map(client);
     return 0;
 }
