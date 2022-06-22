@@ -19,7 +19,7 @@ static char *get_str_ejection(direction_e cli_dir, direction_e pushed_dir)
 {
     char *buff = NULL;
     direction_e from = (cli_dir + DIR_SIZE / 2) % DIR_SIZE;
-    dir_tile_e tile = dir_tile[from + (int)pushed_dir];
+    dir_tile_e tile = dir_tile[(from + (int)pushed_dir) % DIR_SIZE];
 
     if (asprintf(&buff, "eject: %d\n", (int)tile) == -1) {
         fprintf(stderr, "[ERROR] Could not allocate memory\n");
@@ -52,7 +52,8 @@ static bool find_trantorians(core_t *core, client_t *client)
 
     foreach(core->server->clients->head, node) {
         tmp = (client_t *)node->data;
-        if (tmp->trantorian->state == TRANT_DEAD ||
+        if (tmp->trantorian->state != TRANT_LIVING ||
+                tmp->trantorian == client->trantorian ||
                 (tmp->trantorian->pos.x != client->trantorian->pos.x ||
                 tmp->trantorian->pos.y != client->trantorian->pos.y))
             continue;

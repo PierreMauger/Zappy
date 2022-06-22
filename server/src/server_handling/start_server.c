@@ -45,13 +45,11 @@ int core_init(core_t *core, args_t *args)
     core->game = game_create(args->teams, args->width, args->height,
         args->cli_per_team);
     if (core->game == NULL) {
-        core_destroy(core);
         return ERROR;
     }
     core->game->freq = args->freq;
     core->server = server_create(args->port, args->cli_per_team, args->freq);
     if (core->server == NULL) {
-        core_destroy(core);
         return ERROR;
     }
     return SUCCESS;
