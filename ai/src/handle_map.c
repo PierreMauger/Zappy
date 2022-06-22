@@ -31,8 +31,10 @@ void free_map(client_t *client)
     size_t max_y = client->size_map.y;
 
     for (size_t y = 0; y < max_y; y++) {
-        for (size_t x = 0; x < max_x; x++)
+        for (size_t x = 0; x < max_x; x++) {
             free(client->map[y][x].inv);
+            list_destroy(client->map[y][x].player, (void *)free_player);
+        }
         free(client->map[y]);
     }
     free(client->map);
@@ -45,8 +47,8 @@ static bool split_create_map(map_t *map, size_t x)
     for (i = 0; i != x; i++) {
         map[i].inv = calloc(1, sizeof(inventory_t));
         memset(map[i].inv, -1, sizeof(inventory_t));
-        map[i].player = NULL;
-        if (!map[i].inv)
+        map[i].player = list_create();
+        if (!map[i].inv || !map[i].player)
             return false;
         map[i].clicked = false;
     }

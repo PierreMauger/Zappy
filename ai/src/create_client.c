@@ -7,6 +7,12 @@
 
 #include "zappy_ai.h"
 
+void free_player(player_t *player)
+{
+    free(player->inv);
+    free(player);
+}
+
 void free_client(client_t *client)
 {
     close(client->socket->fd);
@@ -18,8 +24,7 @@ void free_client(client_t *client)
     list_destroy(client->received_commands, free);
     if (client->map)
         free_map(client);
-    free(client->player->inv);
-    free(client->player);
+    free_player(client->player);
     free(client);
 }
 

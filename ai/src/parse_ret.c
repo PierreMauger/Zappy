@@ -91,6 +91,8 @@ bool parse_return(client_t *client, char *str)
     printf("command received : [%s]\n", str);
     if (strcmp(str, "WELCOME") == 0 || client->init)
         return (init_header(client, str));
+    if (strlen(str) > 8 && strncmp(str, "message ", 8) == 0)
+        return (message_broadcast(client, str));
     if (!(command = list_pop_head(client->pending_commands)))
         return true;
     arg = get_arg(command, str);

@@ -77,6 +77,7 @@ typedef struct player_s {
     char *uuid;
     size_t level;
     size_t number;
+    size_t broadcast_direction;
     inventory_t *inv;
     pos_t pos;
     direction_e dir;
@@ -84,7 +85,7 @@ typedef struct player_s {
 
 typedef struct map_s {
     inventory_t *inv;
-    player_t *player;
+    list_t *player;
     bool clicked;
 } map_t;
 
@@ -123,6 +124,7 @@ int read_stdin(client_t *client);
 bool parse_return(client_t *client, char *str);
 bool loop_parse_return(client_t *client, char *temp);
 bool client_push_exec_command(client_t *client, char *buffer);
+bool message_broadcast(client_t *client, char *str);
 
 void sig_handler(int signum);
 
@@ -137,6 +139,7 @@ void find_closest_round(client_t *client, int *dest_x, int *dest_y);
 
 bool create_map(client_t *client);
 map_t **copy_double_tab(map_t **map, size_t x, size_t y);
+void free_player(player_t *player);
 void free_map(client_t *client);
 void free_map_copy(map_t **map, size_t x, size_t y);
 int string_to_number_object(map_t map, char *object_name);

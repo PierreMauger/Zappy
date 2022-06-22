@@ -9,10 +9,8 @@
 
 void fill_cell_map(map_t *map, char *content)
 {
-    char *stone = NULL;
-
     memset(map->inv, 0, sizeof(inventory_t));
-    while ((stone = get_one_word(content))) {
+    for (char *stone = NULL; (stone = get_one_word(content)); free(stone)) {
         if (strcmp(stone, "food") == 0)
             map->inv->food++;
         if (strcmp(stone, "deraumere") == 0)
@@ -28,7 +26,6 @@ void fill_cell_map(map_t *map, char *content)
         if (strcmp(stone, "thystame") == 0)
             map->inv->thystame++;
         content = go_next_chr(content, ' ');
-        free(stone);
     }
 }
 
