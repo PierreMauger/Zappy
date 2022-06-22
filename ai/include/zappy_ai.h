@@ -151,6 +151,8 @@ char *add_newline(char *str);
 size_t change_pos(client_t *client, size_t v, size_t change_v, bool is_x);
 int my_getnbr(char *str);
 
+bool ask_player(client_t *client, size_t nb_need, char level);
+size_t get_player_same_level(client_t *client, int level);
 bool level_1(client_t *client);
 bool level_2(client_t *client);
 bool level_3(client_t *client);
