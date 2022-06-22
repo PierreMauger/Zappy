@@ -137,6 +137,9 @@ bool get_object(client_t *client, size_t nb, size_t needed, char *object);
 int round_map(client_t *client, int pos, bool is_x);
 void find_closest_round(client_t *client, int *dest_x, int *dest_y);
 
+player_t *create_player();
+int remove_false_player(client_t *client);
+
 bool create_map(client_t *client);
 map_t **copy_double_tab(map_t **map, size_t x, size_t y);
 void free_player(player_t *player);

@@ -11,6 +11,8 @@ void fill_cell_map(map_t *map, char *content)
 {
     memset(map->inv, 0, sizeof(inventory_t));
     for (char *stone = NULL; (stone = get_one_word(content)); free(stone)) {
+        if (strcmp(stone, "player") == 0)
+            list_push_data(map->player, (create_player()));
         if (strcmp(stone, "food") == 0)
             map->inv->food++;
         if (strcmp(stone, "deraumere") == 0)
@@ -108,6 +110,5 @@ int look_around(client_t *client, char *str)
             (char *)((size_t)save++);
     }
     client->player->level = save_level;
-    print_inventory_map(client);
-    return 0;
+    return remove_false_player(client);
 }

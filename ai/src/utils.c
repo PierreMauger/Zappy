@@ -55,6 +55,7 @@ char *get_cell(char *tab)
 
     if (!tab)
         return NULL;
+    tab[0] == '[' ? (char *)((size_t)tab++) : tab;
     for (; tab[i] == ',' && tab[i] == '[' && tab[i] != '\0'; i++);
     for (j = i; tab[j] != ',' && tab[j] != ']' && tab[j] != '\0'; n++, j++);
     if (!(content = malloc(sizeof(char) * (n + 1)))) {
