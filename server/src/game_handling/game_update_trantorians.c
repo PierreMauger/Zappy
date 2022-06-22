@@ -19,6 +19,8 @@ static void game_update_live(core_t *core, trantorian_t *trantorian)
     } else {
         command_pdi(core, trantorian);
         command_death(core, trantorian->client, NULL);
+        trantorian->client->trantorian = NULL;
+        trantorian_replace(core, trantorian->team, trantorian);
     }
 }
 

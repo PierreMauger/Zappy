@@ -52,6 +52,7 @@ typedef enum {
 
 typedef enum {
     TRANT_HATCHING,
+    TRANT_READY,
     TRANT_LIVING,
     TRANT_DEAD,
 } trant_state_e;
@@ -80,5 +81,7 @@ typedef struct {
     int coef_2;
     bool invert;
 } dir_to_coef_t;
+
+trantorian_t *trantorian_find_free(list_t *trantorians, team_t *team);
 
 #endif // TRANTORIAN_H

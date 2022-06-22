@@ -47,6 +47,8 @@ void core_destroy(core_t *core);
 
 int core_init(core_t *core, args_t *args);
 
+int trantorian_init(core_t *core);
+
 typedef struct command_handler_s {
     char *params;
     void (*command)(core_t *core, client_t *client, char *command);
@@ -194,5 +196,7 @@ size_t game_look_filter_coord(ssize_t coord, size_t max_pos);
 void game_incr_trant_pos(map_t *map, trantorian_t *trant,
     direction_e direction);
 void game_return_error_malloc(core_t *core, client_t *client);
+
+int trantorian_replace(core_t *core, team_t *team, trantorian_t *trantorian);
 
 #endif // CORE_H
