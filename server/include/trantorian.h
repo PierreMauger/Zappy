@@ -13,6 +13,8 @@
 
     #define TRANT_ANGLE 37
 
+    #define TRANT_HATCHING_IT 600
+
     #define IDX 1
 
     #include <uuid/uuid.h>
@@ -65,6 +67,7 @@ typedef struct trantorian_s {
     struct client_s *client;
     trant_state_e state;
     size_t live_it;
+    size_t hatching_time;
     inventory_t *inventory;
     size_t level;
     pos_t pos;

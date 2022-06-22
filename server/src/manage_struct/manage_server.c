@@ -7,7 +7,7 @@
 
 #include "server.h"
 
-server_t *server_create(int port, size_t cli_per_team, size_t team_nbr)
+server_t *server_create(int port)
 {
     server_t *server = calloc(1, sizeof(server_t));
 
@@ -16,8 +16,7 @@ server_t *server_create(int port, size_t cli_per_team, size_t team_nbr)
     server->port = port;
     server->socket = nlib_create_socket();
     if (server->socket == NULL ||
-        nlib_init_socket(server->socket, port,
-            cli_per_team * team_nbr) == NULL) {
+        nlib_init_socket(server->socket, port, MAX_CLI) == NULL) {
         server_destroy(server);
         return NULL;
     }

@@ -9,7 +9,7 @@
 
 TEST(TestServerAlloc, Test1)
 {
-    server_t *server = server_create(3000, 4, 5);
+    server_t *server = server_create(3000);
 
     ASSERT_TRUE(server != nullptr);
     EXPECT_TRUE(server->port == 3000);

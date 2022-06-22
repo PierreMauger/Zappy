@@ -22,7 +22,7 @@ game_t *game_create(char **teams, size_t width, size_t height,
         game_destroy(game);
         return NULL;
     }
-    if (team_init(game->teams, teams) == ERROR) {
+    if (team_init(game->teams, teams, cli_per_team) == ERROR) {
         game_destroy(game);
         return NULL;
     }

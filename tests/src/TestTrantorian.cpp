@@ -9,7 +9,7 @@
 
 TEST(TestTrantorianAlloc, Test1)
 {
-    team_t *team = team_create("team1");
+    team_t *team = team_create("team1", 5);
 
     ASSERT_TRUE(team != nullptr);
 

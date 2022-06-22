@@ -8,10 +8,10 @@
 #include "utils.h"
 #include "core.h"
 
-static char *get_client_num(core_t *core, team_t *team)
+static char *get_client_num(team_t *team)
 {
     char *buffer = NULL;
-    int nb = (core->game->cli_per_team - team->cli_sub) + 1;
+    int nb = (team->cli_max - team->cli_sub) + 1;
 
     if (asprintf(&buffer, "%d\n", nb) == -1)
         return NULL;
@@ -59,7 +59,7 @@ static void client_define_default(core_t *core, client_t *client,
             (void (*)(void *))client_destroy);
         return;
     }
-    client_push_command(core->server, client, get_client_num(core, team));
+    client_push_command(core->server, client, get_client_num(team));
     client_push_command(core->server, client, get_map_size(core->game->map));
     printf("[INFO] Default client detected\n");
     command_pnw(core, client->trantorian);

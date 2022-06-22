@@ -48,7 +48,7 @@ int core_init(core_t *core, args_t *args)
         return ERROR;
     }
     core->game->freq = args->freq;
-    core->server = server_create(args->port, args->cli_per_team, args->freq);
+    core->server = server_create(args->port);
     if (core->server == NULL) {
         return ERROR;
     }

@@ -24,7 +24,7 @@ typedef struct {
     list_t *commands_to_send;
 } server_t;
 
-server_t *server_create(int port, size_t cli_per_team, size_t team_nbr);
+server_t *server_create(int port);
 void server_destroy(server_t *server);
 
 void command_add_client(command_t *command, client_t *client);

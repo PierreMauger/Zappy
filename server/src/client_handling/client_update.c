@@ -60,6 +60,24 @@ int client_get_command(client_t *client)
     return SUCCESS;
 }
 
+void client_disconnect(core_t *core, client_t *client, node_t *node)
+{
+    if (client->trantorian && client->trantorian->team) {
+        client->trantorian->team->cli_sub--;
+        trantorian_replace(core, client->trantorian->team, client->trantorian);
+    }
+    nlib_remove_socket_command_list(core->server->commands_to_send,
+        client->sock);
+    if (node != NULL) {
+        list_remove_node(core->server->clients, node);
+        list_destroy_node(node, (void (*)(void *))client_destroy);
+    } else {
+        list_destroy_data_node(core->server->clients, client,
+            (void (*)(void *))client_destroy);
+    }
+    printf("[INFO] Client disconnected\n");
+}
+
 void clients_update(core_t *core, fd_set *readfds)
 {
     node_t *node = NULL;
@@ -70,13 +88,7 @@ void clients_update(core_t *core, fd_set *readfds)
         client = (client_t *)node->data;
         if (FD_ISSET(client->sock->fd, readfds) &&
                 client_get_command(client) == EXIT) {
-            nlib_remove_socket_command_list(core->server->commands_to_send,
-                client->sock);
-            list_destroy_data_node(core->game->trantorians, client->trantorian,
-                (void (*)(void *))trantorian_destroy);
-            list_remove_node(core->server->clients, node);
-            list_destroy_node(node, (void (*)(void *))client_destroy);
-            printf("[INFO] Client disconnected\n");
+            client_disconnect(core, client, node);
         } else if (client->handler->command == NULL &&
                 client->command_list->lenght > 0) {
             client_exec_command(core, client);

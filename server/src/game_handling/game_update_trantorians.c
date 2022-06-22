@@ -7,6 +7,19 @@
 
 #include "core.h"
 
+static void game_update_hatching(trantorian_t *trantorian)
+{
+    if (trantorian->state != TRANT_HATCHING)
+        return;
+    if (trantorian->hatching_time == 0) {
+        trantorian->state = TRANT_READY;
+        trantorian->team->cli_sub--;
+        printf("[INFO] Trantorian %s has hatched\n", trantorian->uuid);
+    } else {
+        trantorian->hatching_time--;
+    }
+}
+
 static void game_update_live(core_t *core, trantorian_t *trantorian)
 {
     if (trantorian->state != TRANT_LIVING)
@@ -19,9 +32,7 @@ static void game_update_live(core_t *core, trantorian_t *trantorian)
     } else {
         command_pdi(core, trantorian);
         command_death(core, trantorian->client, NULL);
-        trantorian->client->trantorian = NULL;
-        trantorian->team->cli_sub--;
-        trantorian_replace(core, trantorian->team, trantorian);
+        client_disconnect(core, trantorian->client, NULL);
     }
 }
 
@@ -33,6 +44,7 @@ void game_update_trantorians(core_t *core)
 
     foreach_safe(core->game->trantorians->head, node, safe) {
         trantorian = (trantorian_t *)node->data;
+        game_update_hatching(trantorian);
         game_update_live(core, trantorian);
     }
 }

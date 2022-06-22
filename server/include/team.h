@@ -19,12 +19,13 @@
 
 typedef struct {
     char *name;
+    size_t cli_max;
     size_t cli_sub;
 } team_t;
 
-team_t *team_create(const char *name);
+team_t *team_create(const char *name, size_t cli_max);
 void team_destroy(team_t *team);
 
-int team_init(list_t *teams_list, char **teams);
+int team_init(list_t *teams_list, char **teams, size_t cli_max);
 
 #endif // TEAM_H

@@ -31,14 +31,14 @@ static int team_compare(char **teams)
     return SUCCESS;
 }
 
-int team_init(list_t *teams_list, char **teams)
+int team_init(list_t *teams_list, char **teams, size_t cli_max)
 {
     team_t *team = NULL;
 
     if (team_compare(teams) == ERROR)
         return ERROR;
     for (size_t i = 0; teams && teams[i]; i++) {
-        team = team_create(teams[i]);
+        team = team_create(teams[i], cli_max);
         if (team == NULL)
             return ERROR;
         if (list_push_data(teams_list, team) == LIST_FAILURE)
@@ -47,7 +47,7 @@ int team_init(list_t *teams_list, char **teams)
     return SUCCESS;
 }
 
-team_t *team_create(const char *name)
+team_t *team_create(const char *name, size_t cli_max)
 {
     team_t *team = calloc(1, sizeof(team_t));
 
@@ -56,6 +56,7 @@ team_t *team_create(const char *name)
     team->name = strdup(name);
     if (team->name == NULL)
         return NULL;
+    team->cli_max = cli_max;
     return team;
 }
 
