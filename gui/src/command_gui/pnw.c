@@ -7,6 +7,14 @@
 
 #include "zappy_gui.h"
 
+static player_t *malloc_inv(player_t *player)
+{
+    player->inv = calloc(1, sizeof(inventory_t));
+    if (!player->inv)
+        return NULL;
+    return player;
+}
+
 static player_t *split_create_play(client_t *cli, player_t *player, char *save)
 {
     char *temp = NULL;
@@ -28,7 +36,7 @@ static player_t *split_create_play(client_t *cli, player_t *player, char *save)
     if (!node)
         player->team_name = "null";
     free(team_name);
-    return player;
+    return malloc_inv(player);
 }
 
 static player_t *create_player(client_t *client, char *str)

@@ -9,6 +9,8 @@
 
 static void fill_inv_player(node_t *node, char *save)
 {
+    char *copy = save;
+
     save = go_next_space(save);
     save = go_next_space(save);
     save = go_next_space(save);
@@ -25,7 +27,7 @@ static void fill_inv_player(node_t *node, char *save)
     ((player_t *)node->data)->inv->phiras = atoi(save);
     save = go_next_space(save);
     ((player_t *)node->data)->inv->thystame = atoi(save);
-    free(save);
+    free(copy);
 }
 
 int pin(client_t *client, char *str)
@@ -33,6 +35,7 @@ int pin(client_t *client, char *str)
     node_t *node = NULL;
     char *uuid = NULL;
     char *save = strdup(str);
+    char *copy = strdup(str);
 
     if (strcmp(str, "suc\n") == 0) {
         fprintf(stderr, "%s[ERROR]%s suc command received", R, W);
@@ -47,6 +50,6 @@ int pin(client_t *client, char *str)
         if (strcmp(((player_t *)node->data)->uuid, uuid) == 0)
             break;
     }
-    fill_inv_player(node, save);
+    fill_inv_player(node, copy);
     return 0;
 }

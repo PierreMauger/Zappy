@@ -22,6 +22,7 @@ SRC				=	./src/stdin.c				\
 					./src/command_gui/msz.c		\
 					./src/command_gui/pnw.c		\
 					./src/command_gui/ppo.c		\
+					./src/command_gui/pdi.c		\
 					./src/command_gui/pin.c		\
 					./src/command_gui/tna.c		\
 					./src/command_gui/sgt.c 	\

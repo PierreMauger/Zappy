@@ -8,19 +8,20 @@
 #include "utils.h"
 #include "core.h"
 
-static char *command_pin_get_buff(core_t *core, client_t *client, char *uuid)
+static char *command_pin_get_buff(core_t *core, trantorian_t *trantorian)
 {
     char *buff = NULL;
 
-    if (asprintf(&buff, "pin %s %ld %ld %ld %ld %ld %ld %ld %ld %ld\n", uuid,
+    if (asprintf(&buff, "pin %s %ld %ld %ld %ld %ld %ld %ld %ld %ld\n",
+            trantorian->uuid,
             core->game->map->width, core->game->map->height,
-            client->trantorian->inventory->food,
-            client->trantorian->inventory->linemate,
-            client->trantorian->inventory->deraumere,
-            client->trantorian->inventory->sibur,
-            client->trantorian->inventory->mendiane,
-            client->trantorian->inventory->phiras,
-            client->trantorian->inventory->thystame) == -1)
+            trantorian->inventory->food,
+            trantorian->inventory->linemate,
+            trantorian->inventory->deraumere,
+            trantorian->inventory->sibur,
+            trantorian->inventory->mendiane,
+            trantorian->inventory->phiras,
+            trantorian->inventory->thystame) == -1)
         return NULL;
     return buff;
 }
@@ -49,7 +50,7 @@ void command_pin(core_t *core, client_t *client, char *command)
 
     if (trantorian == NULL)
         return command_sbp(core, client);
-    buff = command_pin_get_buff(core, client, trantorian->uuid);
+    buff = command_pin_get_buff(core, trantorian);
     if (buff == NULL) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
         command_suc(core, client);

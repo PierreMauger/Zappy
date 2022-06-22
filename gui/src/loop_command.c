@@ -7,26 +7,47 @@
 
 #include "zappy_gui.h"
 
-bool loop_command(client_t *client)
+static bool send_message_comm(client_t *client, char *com)
+{
+    if (!send_message(
+        client->pending_commands, client->command, client->socket, com)) {
+        fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
+        return false;
+    }
+    return true;
+}
+
+static bool players_command(client_t *client)
 {
     node_t *node = NULL;
     char *pl = NULL;
+    char *pin = NULL;
+    char *uuid = NULL;
 
+    foreach (client->player->head, node) {
+        uuid = ((player_t *)node->data)->uuid;
+        pl = calloc(1, sizeof(char) * (strlen(uuid) + 10));
+        pin = calloc(1, sizeof(char) * (strlen(uuid) + 10));
+        strcat(strcat(strcat(pl, "ppo #"), uuid), "\n");
+        strcat(strcat(strcat(pin, "pin #"), uuid), "\n");
+        if (!send_message_comm(client, pl))
+            return false;
+        if (!send_message_comm(client, pin))
+            return false;
+        free(pl);
+        free(pin);
+    }
+    return true;
+}
+
+bool loop_command(client_t *client)
+{
     if (!send_message(
         client->pending_commands, client->command, client->socket, "mct\n")) {
         fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
         return false;
     }
-    foreach (client->player->head, node) {
-        pl = calloc(1, sizeof(char) *
-            (strlen(((player_t *)node->data)->uuid) + 10));
-        strcat(pl, "ppo #");
-        strcat(strcat(pl, ((player_t *)node->data)->uuid), "\n");
-        if (!send_message(
-            client->pending_commands, client->command, client->socket, pl)) {
-            fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
-            return false;
-        }
-    }
+    if (!players_command(client))
+        return false;
     return true;
 }
