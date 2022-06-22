@@ -94,6 +94,7 @@ add_executable(unit-tests
   ../server/src/game_handling/game_utils/game_map_utils.c
   ../server/src/game_handling/game_utils/game_look_utils.c
   ../server/src/game_handling/game_utils/game_look_utils_2.c
+  ../server/src/game_handling/game_utils/trantorian_utils.c
 )
 
 target_include_directories(unit-tests PRIVATE

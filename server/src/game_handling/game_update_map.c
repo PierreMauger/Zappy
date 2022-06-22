@@ -26,7 +26,8 @@ static void game_init_map_content(map_t *map, inventory_t *map_content)
 
 static void game_map_add_ressource(map_t *map, size_t ressource, size_t tile)
 {
-    ((size_t *)(map->map[tile]))[ressource]++;
+    if (((size_t *)(map->map[tile]))[ressource] < UNIT_MAX)
+        ((size_t *)(map->map[tile]))[ressource]++;
 }
 
 static void game_dispatch(map_t *map, pos_t **map_content,

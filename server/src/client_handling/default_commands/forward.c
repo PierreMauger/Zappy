@@ -14,28 +14,35 @@ static size_t control_dir(size_t last_pos, size_t max_pos, bool incr)
     return (last_pos + max_pos - 1) % max_pos;
 }
 
-void forward_e(core_t *core, client_t *client, UNUSED char *command)
+void game_incr_trant_pos(map_t *map, trantorian_t *trant,
+    direction_e direction)
 {
-    switch (client->trantorian->direction) {
+    switch (direction) {
         case DIR_UP:
-            client->trantorian->pos.y = control_dir(client->trantorian->pos.y,
-                core->game->map->height, false);
+            trant->pos.y = control_dir(trant->pos.y,
+                map->height, false);
             break;
         case DIR_RIGHT:
-            client->trantorian->pos.x = control_dir(client->trantorian->pos.x,
-                core->game->map->width, true);
+            trant->pos.x = control_dir(trant->pos.x,
+                map->width, true);
             break;
         case DIR_DOWN:
-            client->trantorian->pos.y = control_dir(client->trantorian->pos.y,
-                core->game->map->height, true);
+            trant->pos.y = control_dir(trant->pos.y,
+                map->height, true);
             break;
         case DIR_LEFT:
-            client->trantorian->pos.x = control_dir(client->trantorian->pos.x,
-                core->game->map->width, false);
+            trant->pos.x = control_dir(trant->pos.x,
+                map->width, false);
             break;
         default:
-            return client_push_command(core->server, client, strdup("ko\n"));
+            return;
     }
+}
+
+void forward_e(core_t *core, client_t *client, UNUSED char *command)
+{
+    game_incr_trant_pos(core->game->map, client->trantorian,
+        client->trantorian->direction);
     client_push_command(core->server, client, strdup("ok\n"));
 }
 

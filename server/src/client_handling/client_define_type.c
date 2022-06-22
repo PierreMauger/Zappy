@@ -27,15 +27,15 @@ static char *get_map_size(map_t *map)
     return buffer;
 }
 
-static int client_create_new_trantorian(core_t *core, client_t *client,
+static int client_assign_trantorian(core_t *core, client_t *client,
     team_t *team)
 {
     client->type = CLI_DEFAULT;
-    client->trantorian = trantorian_create(team,
-        core->game->map->width, core->game->map->height, true);
+    client->trantorian = trantorian_find_free(core->game->trantorians, team);
     if (client->trantorian == NULL)
         return ERROR;
-    list_push_data(core->game->trantorians, client->trantorian);
+    team->cli_sub++;
+    client->trantorian->state = TRANT_LIVING;
     client->trantorian->client = client;
     return SUCCESS;
 }
@@ -52,14 +52,13 @@ static void client_define_default(core_t *core, client_t *client,
             (void (*)(void *))client_destroy);
         return;
     }
-    if (client_create_new_trantorian(core, client, team) == ERROR) {
-        fprintf(stderr, "[ERROR] Can't create trantorian\n");
+    if (client_assign_trantorian(core, client, team) == ERROR) {
+        fprintf(stderr, "[ERROR] Can't assign trantorian\n");
         printf("[INFO] Client connection closed\n");
         list_destroy_data_node(core->server->clients, client,
             (void (*)(void *))client_destroy);
         return;
     }
-    client->trantorian->state = TRANT_LIVING;
     client_push_command(core->server, client, get_client_num(core, team));
     client_push_command(core->server, client, get_map_size(core->game->map));
     printf("[INFO] Default client detected\n");

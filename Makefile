@@ -36,7 +36,7 @@ fclean:	clean clean-raylib
 	@(make fclean -C $(PATH_SERVER)) > /dev/null
 	@(make fclean -C $(PATH_GUI)) > /dev/null
 
-debug:
+debug: install-raylib
 	@(make -C $(PATH_LIBS)) > /dev/null
 	@(make debug -C $(PATH_AI)) > /dev/null
 	@(make debug -C $(PATH_SERVER)) > /dev/null
@@ -49,4 +49,4 @@ install-raylib:
 	./utils/install_raylib.sh
 
 clean-raylib:
-	rm -rf include/raylib.h
+	@(rm -rf include/raylib.h) > /dev/null

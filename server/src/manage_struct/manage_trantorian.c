@@ -41,7 +41,6 @@ trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y,
         return NULL;
     trantorian->uuid = trantorian_get_uuid();
     trantorian->team = team;
-    trantorian->team->cli_sub++;
     trantorian_set_pos(trantorian, map_x, map_y, rand_pos);
     trantorian->inventory = inventory_create();
     if (trantorian->inventory == NULL || trantorian->uuid == NULL) {
@@ -63,8 +62,6 @@ void trantorian_destroy(trantorian_t *trantorian)
         printf("[INFO] Trantorian %s destroyed\n", trantorian->uuid);
         free(trantorian->uuid);
     }
-    if (trantorian->team != NULL)
-        trantorian->team->cli_sub--;
     if (trantorian->inventory)
         inventory_destroy(trantorian->inventory);
     free(trantorian);
