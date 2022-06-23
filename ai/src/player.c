@@ -27,7 +27,7 @@ bool send_message_comm(client_t *client, char *com)
     return true;
 }
 
-player_t *create_player()
+player_t *create_player(void)
 {
     player_t *player = calloc(1, sizeof(player_t));
 

@@ -133,6 +133,7 @@ void sig_handler(int signum);
 
 bool ai(client_t *client);
 bool basic_command(client_t *client);
+bool get_food_basic(client_t *client);
 bool go_to_broadcast_direction(client_t *client);
 bool path_finding_object(client_t *client, char *object);
 bool go_to_next_object(client_t *client, int dest_x, int dest_y);

@@ -48,21 +48,21 @@ bool get_food_in_cell(client_t *client, size_t x, size_t y)
 
 bool try_evoluate(client_t *client)
 {
-    if (!client->player->inv)
+    if (!client->player->inv || client->player->incantation)
         return true;
-    if (client->player->level == 1 && !client->player->incantation)
+    if (client->player->level == 1)
         return (level_1(client));
-    if (client->player->level == 2 && !client->player->incantation)
+    if (client->player->level == 2)
         return (level_2(client));
-    if (client->player->level == 3 && !client->player->incantation)
+    if (client->player->level == 3)
         return (level_3(client));
-    if (client->player->level == 4 && !client->player->incantation)
+    if (client->player->level == 4)
         return (level_4(client));
-    if (client->player->level == 4 && !client->player->incantation)
+    if (client->player->level == 4)
         return (level_5(client));
-    if (client->player->level == 4 && !client->player->incantation)
+    if (client->player->level == 4)
         return (level_6(client));
-    if (client->player->level == 4 && !client->player->incantation)
+    if (client->player->level == 4)
         return (level_7(client));
     return true;
 }
@@ -80,12 +80,15 @@ bool ai(client_t *client)
         return false;
     if (!client->player->inv)
         return true;
-    if (client->player->inv && client->player->inv->food < 5) {
-        if (!path_finding_object(client, "food") && !send_message(client->
-            pending_commands, client->command, client->socket, "Forward\n")) {
-            fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
+    if (client->player->inv && client->player->inv->food < 1) {
+        if (!get_food_basic(client))
             return false;
-        }
+        return true;
+    }
+    if (client->player->inv && client->player->inv->food < 5
+        && client->player->incantation == false) {
+        if (!get_food_basic(client))
+            return false;
     }
     else if (client->player->broadcast_direction != 0)
         go_to_broadcast_direction(client);
