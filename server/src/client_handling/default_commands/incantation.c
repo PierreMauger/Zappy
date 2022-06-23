@@ -7,9 +7,23 @@
 
 #include "core.h"
 
-void incantation_e(UNUSED core_t *core, UNUSED client_t *client, UNUSED char *command)
+static const inventory_t stones_needed[] = {
+    {0, 1, 0, 0, 0, 0, 0},
+    {0, 1, 1, 1, 0, 0, 0},
+    {0, 2, 0, 1, 0, 2, 0},
+    {0, 1, 1, 2, 0, 1, 0},
+    {0, 1, 2, 1, 3, 0, 0},
+    {0, 1, 2, 3, 0, 1, 0},
+    {0, 2, 2, 2, 2, 2, 1},
+};
+
+static const int player_needed[] = {
+    1, 2, 2, 4, 4, 6, 6
+};
+
+void incantation_e(core_t *core, client_t *client, UNUSED char *command)
 {
-    // TODO
+
 }
 
 void command_incantation(core_t *core, client_t *client, UNUSED char *command)
