@@ -907,3 +907,162 @@ TEST(TestIncantation, NotEnoughLevel)
 
     ASSERT_EQ(sc.getRes(), "ko\n");
 }
+
+TEST(TestInventory, Basic1)
+{
+    char *expected = NULL;
+
+    sc.getClient()->trantorian->inventory->food = 0;
+    sc.getClient()->trantorian->inventory->linemate = 1;
+    sc.getClient()->trantorian->inventory->deraumere = 2;
+    sc.getClient()->trantorian->inventory->sibur = 3;
+    sc.getClient()->trantorian->inventory->mendiane = 4;
+    sc.getClient()->trantorian->inventory->phiras = 5;
+    sc.getClient()->trantorian->inventory->thystame = 6;
+
+    ASSERT_TRUE(asprintf(&expected, "[food %ld, linemate %ld, deraumere %ld, sibur %ld, mendiane %ld, phiras %ld, thystame %ld]\n",
+        sc.getClient()->trantorian->inventory->food,
+        sc.getClient()->trantorian->inventory->linemate,
+        sc.getClient()->trantorian->inventory->deraumere,
+        sc.getClient()->trantorian->inventory->sibur,
+        sc.getClient()->trantorian->inventory->mendiane,
+        sc.getClient()->trantorian->inventory->phiras,
+        sc.getClient()->trantorian->inventory->thystame
+    ) != -1);
+
+    sc.startTest();
+    inventory_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), expected);
+
+    free(expected);
+}
+
+TEST(TestLeft, Basic1)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->direction = DIR_UP;
+
+    sc.startTest();
+    left_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+
+    EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_LEFT);
+}
+
+TEST(TestLeft, Basic2)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->direction = DIR_LEFT;
+
+    sc.startTest();
+    left_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+
+    EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_DOWN);
+}
+
+TEST(TestLeft, Basic3)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->direction = DIR_DOWN;
+
+    sc.startTest();
+    left_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+
+    EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_RIGHT);
+}
+
+TEST(TestLeft, Basic4)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->direction = DIR_RIGHT;
+
+    sc.startTest();
+    left_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+
+    EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_UP);
+}
+
+TEST(TestRight, Basic1)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->direction = DIR_UP;
+
+    sc.startTest();
+    right_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+
+    EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_RIGHT);
+}
+
+TEST(TestRight, Basic2)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->direction = DIR_RIGHT;
+
+    sc.startTest();
+    right_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+
+    EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_DOWN);
+}
+
+TEST(TestRight, Basic3)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->direction = DIR_DOWN;
+
+    sc.startTest();
+    right_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+
+    EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_LEFT);
+}
+
+TEST(TestRight, Basic4)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->direction = DIR_LEFT;
+
+    sc.startTest();
+    right_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+
+    EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_UP);
+}

@@ -10,7 +10,7 @@
 void left_e(core_t *core, client_t *client, UNUSED char *command)
 {
     client->trantorian->direction--;
-    if (client->trantorian->direction < 0)
+    if (client->trantorian->direction < 0 || client->trantorian->direction > 3)
         client->trantorian->direction = 3;
     client_push_command(core->server, client, strdup("ok\n"));
 }
