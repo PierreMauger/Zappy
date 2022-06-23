@@ -58,6 +58,5 @@ int msz(client_t *client, char *str)
         fprintf(stderr, "%s[ERROR]%s can't create map (malloc error)", R, W);
         return 1;
     }
-    //printf("%d %d\n", client->size_map.x, client->size_map.y);
     return 0;
 }

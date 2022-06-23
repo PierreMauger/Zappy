@@ -79,21 +79,26 @@ int take_everything(client_t *client, inventory_t inv, inventory_t cell_inv)
 bool check_level_1(client_t *client)
 {
     inventory_t inventory = {0, 1, 0, 0, 0, 0, 0};
-    inventory_t cell_inv =
-        (*(client->map[client->player->pos.y][client->player->pos.x].inv));
+    inventory_t *cell_inv =
+        client->map[client->player->pos.y][client->player->pos.x].inv;
 
     if (client->player->inv->linemate < 1)
         return false;
-    if (!take_everything(client, inventory, cell_inv))
+    if (!take_everything(client, inventory, *cell_inv))
         return false;
-    return (drop_stone_needed(client, inventory, cell_inv));
+    return (drop_stone_needed(client, inventory, *cell_inv));
 }
 
 bool check_level_2(client_t *client)
 {
     inventory_t *inv = client->player->inv;
+    inventory_t inventory = {0, 1, 1, 1, 0, 0, 0};
+    inventory_t *cell_inv =
+        client->map[client->player->pos.y][client->player->pos.x].inv;
 
     if (inv->linemate < 1 || inv->deraumere < 1 || inv->sibur < 1)
         return false;
-    return true;
+    if (!take_everything(client, inventory, *cell_inv))
+        return false;
+    return (drop_stone_needed(client, inventory, *cell_inv));
 }

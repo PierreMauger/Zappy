@@ -7,30 +7,31 @@
 
 #include "zappy_ai.h"
 
-void interpret_message(client_t *client, char *message, size_t direction)
+void interpret_message(
+    client_t *client, char *team_name, size_t direction, size_t level)
 {
-    char *team_name = get_one_word(message);
-    size_t level = atoi(go_next_chr(message, ' '));
-
     if (level == 0)
         return;
     if (level == client->player->level &&
         strcmp(team_name, client->player->team_name) == 0)
         client->player->broadcast_direction = direction;
-    free(team_name);
 }
 
 bool message_broadcast(client_t *client, char *str)
 {
     char *message = NULL;
     size_t direction = atoi(go_next_chr(str, ' '));
+    char *save = go_next_chr(str, ',');
+    size_t level = 0;
 
-    message = get_one_word(go_next_chr(str, ','));
+    (char *)((size_t)(save += 2));
+    message = get_one_word(save);
+    level = atoi(go_next_chr(save, ' '));
     if (!message) {
         fprintf(stderr, "%s[ERROR]%s Malloc error get_one_word\n", R, W);
         return false;
     }
-    interpret_message(client, message, direction);
+    interpret_message(client, message, direction, level);
     free(message);
     return true;
 }

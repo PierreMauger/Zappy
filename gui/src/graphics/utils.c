@@ -63,7 +63,7 @@ int get_item(map_t tile, const char *name)
     return 0;
 }
 
-Texture *get_textures()
+Texture *get_textures(void)
 {
     static Texture *textures = NULL;
     size_t length = 0;

@@ -23,20 +23,24 @@ static bool split_client_push_exec(client_t *client, char *comm)
 
 bool client_push_exec_command(client_t *client, char *buffer)
 {
-    char *command = strtok(buffer, "\n");
+    char *com = strtok(buffer, "\n");
 
-    if (command == NULL) {
+    if (com == NULL) {
         fprintf(stderr, "[ERROR] Command is not valid\n");
         return true;
     }
-    for (; command != NULL; command = strtok(NULL, "\n")) {
-        if (strcmp(command, "dead\n") == 0 || strcmp(command, "dead") == 0) {
+    for (; com != NULL; com = strtok(NULL, "\n")) {
+        if (strcmp(com, "dead\n") == 0 || strcmp(com, "dead") == 0) {
             printf("%s[INFO]%s Player dead\n", G, W);
             return false;
         }
-        if (split_client_push_exec(client, command))
+        if (strlen(com) >= 14 && strncmp(com, "Current level:", 14) == 0) {
+            incantation(client, com);
+            continue;
+        }
+        if (split_client_push_exec(client, com))
             return true;
-        printf("%s[INFO]%s Command \"%s\" pushed in list\n", G, W, command);
+        printf("%s[INFO]%s Command \"%s\" pushed in list\n", G, W, com);
     }
     return true;
 }

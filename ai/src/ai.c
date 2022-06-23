@@ -48,7 +48,7 @@ bool get_food_in_cell(client_t *client, size_t x, size_t y)
 
 bool try_evoluate(client_t *client)
 {
-    if (!client->player->inv)
+    if (!client->player->inv || client->player->incantation)
         return true;
     if (client->player->level == 1)
         return (level_1(client));
@@ -78,12 +78,17 @@ bool ai(client_t *client)
 {
     if (!basic_command(client))
         return false;
-    if (client->player->inv && client->player->inv->food < 5) {
-        if (!path_finding_object(client, "food") && !send_message(client->
-            pending_commands, client->command, client->socket, "Forward\n")) {
-            fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
+    if (!client->player->inv)
+        return true;
+    if (client->player->inv && client->player->inv->food < 1) {
+        if (!get_food_basic(client))
             return false;
-        }
+        return true;
+    }
+    if (client->player->inv && client->player->inv->food < 5
+        && client->player->incantation == false) {
+        if (!get_food_basic(client))
+            return false;
     }
     else if (client->player->broadcast_direction != 0)
         go_to_broadcast_direction(client);

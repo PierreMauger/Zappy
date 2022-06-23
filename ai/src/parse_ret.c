@@ -96,7 +96,6 @@ bool parse_return(client_t *client, char *str)
     if (!(command = list_pop_head(client->pending_commands)))
         return true;
     arg = get_arg(command, str);
-    printf("command = <%s> arg = <%s>\n", command, arg);
     for (int i = 0; com[i].cmd != NULL; i++) {
         if (strcmp(com[i].cmd, command) == 0) {
             com[i].func_ptr(client, ((arg) ? arg : str));

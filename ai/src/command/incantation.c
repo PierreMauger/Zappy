@@ -9,12 +9,18 @@
 
 int incantation(client_t *client, char *str)
 {
-    if (strcmp(str, "ok") == 0) {
-        printf("%s[COMMAND]%s Incantation done\n", B, W);
-        client->player->level++;
+    if (strcmp(str, "Elevation underway") == 0) {
+        printf("%s[COMMAND]%s Incantation start\n", B, W);
         return 0;
     }
-    printf("<%s>\n", str);
-    exit(8);
+    else if (strlen(str) >= 14 && strncmp(str, "Current level:", 14) == 0) {
+        printf("%s[COMMAND]%s Incantation done\n", G, W);
+        client->player->incantation = false;
+        client->player->level++;
+        if (client->player->level == 3)
+            exit(0);
+        return 0;
+    }
+    printf("%s[COMMAND]%s Incantation fail\n", R, W);
     return 1;
 }

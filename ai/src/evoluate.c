@@ -39,6 +39,7 @@ bool ask_player(client_t *client, size_t nb_need, char level)
     else if (client->pending_commands->lenght < 10 && !send_message(client->
         pending_commands, client->command, client->socket, "Incantation\n")) {
         fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
+        client->player->incantation = true;
         return false;
     }
     return true;
@@ -48,9 +49,10 @@ bool level_1(client_t *client)
 {
     if (client->player->inv->linemate < 1) {
         if (!path_finding_object(client, "linemate"))
-            return send_message_comm_false(client, "Forward");
+            return send_message_comm_false(client, "Forward\n");
         if (!get_object(client, client->player->inv->linemate, 1, "linemate"))
             return false;
+        return true;
     }
     return (check_level_1(client) ?
         ask_player(client, 1, (client->player->level + '0')) : 1);
@@ -60,19 +62,19 @@ bool level_2(client_t *client)
 {
     if (client->player->inv->linemate < 1) {
         if (!path_finding_object(client, "linemate"))
-            return send_message_comm_false(client, "Forward");
+            return send_message_comm_false(client, "Forward\n");
         if (!get_object(client, client->player->inv->linemate, 1, "linemate"))
             return false;
     }
     if (client->player->inv->deraumere < 1) {
         if (!path_finding_object(client, "deraumere"))
-            return send_message_comm_false(client, "Forward");
+            return send_message_comm_false(client, "Forward\n");
         if (!get_object(client, client->player->inv->deraumere, 1, "deraumere"))
             return false;
     }
     if (client->player->inv->sibur < 1) {
         if (!path_finding_object(client, "sibur"))
-            return send_message_comm_false(client, "Forward");
+            return send_message_comm_false(client, "Forward\n");
         if (!get_object(client, client->player->inv->sibur, 1, "sibur"))
             return false;
     }
