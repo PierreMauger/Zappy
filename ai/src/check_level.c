@@ -55,6 +55,8 @@ bool drop_stone_needed(client_t *client, inventory_t inv, inventory_t cell_inv)
 
 int take_everything(client_t *client, inventory_t inv, inventory_t cell_inv)
 {
+    printf("cell inv = ");
+    print_inventory(&cell_inv);
     if (cell_inv.linemate > inv.linemate
         && !change_stone_in_cell(client, "Take", "linemate", inv))
         return false;
@@ -79,14 +81,14 @@ int take_everything(client_t *client, inventory_t inv, inventory_t cell_inv)
 bool check_level_1(client_t *client)
 {
     inventory_t inventory = {0, 1, 0, 0, 0, 0, 0};
-    inventory_t cell_inv =
-        (*(client->map[client->player->pos.y][client->player->pos.x].inv));
+    printf("y = %d x = %d\n", client->player->pos.y, client->player->pos.x);
+    inventory_t *cell_inv = client->map[client->player->pos.y][client->player->pos.x].inv;
 
     if (client->player->inv->linemate < 1)
         return false;
-    if (!take_everything(client, inventory, cell_inv))
+    if (!take_everything(client, inventory, *cell_inv))
         return false;
-    return (drop_stone_needed(client, inventory, cell_inv));
+    return (drop_stone_needed(client, inventory, *cell_inv));
 }
 
 bool check_level_2(client_t *client)

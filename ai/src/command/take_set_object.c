@@ -56,19 +56,19 @@ int take_object(client_t *client, char *str)
 
 static int split_set_object(client_t *client, char *str, size_t x, size_t y)
 {
-    if (strcmp(str, "linemate") == 0) {
+    if (strcmp(str, "linemate\n") == 0) {
         client->map[y][x].inv->linemate++;
         client->player->inv->linemate--;
     }
-    if (strcmp(str, "mendiane") == 0) {
+    if (strcmp(str, "mendiane\n") == 0) {
         client->map[y][x].inv->mendiane++;
         client->player->inv->mendiane--;
     }
-    if (strcmp(str, "sibur") == 0) {
+    if (strcmp(str, "sibur\n") == 0) {
         client->map[y][x].inv->sibur++;
         client->player->inv->sibur--;
     }
-    if (strcmp(str, "thystame") == 0) {
+    if (strcmp(str, "thystame\n") == 0) {
         client->map[y][x].inv->thystame++;
         client->player->inv->thystame--;
     }
@@ -84,15 +84,15 @@ int set_object(client_t *client, char *str)
         printf("%s[INFO]%s Player don't have this object\n", M, W);
         return 1;
     }
-    if (strcmp(str, "food") == 0) {
+    if (strcmp(str, "food\n") == 0) {
         client->map[y][x].inv->food++;
         client->player->inv->food--;
     }
-    if (strcmp(str, "phiras") == 0) {
+    if (strcmp(str, "phiras\n") == 0) {
         client->map[y][x].inv->phiras++;
         client->player->inv->phiras--;
     }
-    if (strcmp(str, "deraumere") == 0) {
+    if (strcmp(str, "deraumere\n") == 0) {
         client->map[y][x].inv->deraumere++;
         client->player->inv->deraumere--;
     }

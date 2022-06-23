@@ -50,19 +50,19 @@ bool try_evoluate(client_t *client)
 {
     if (!client->player->inv)
         return true;
-    if (client->player->level == 1)
+    if (client->player->level == 1 && !client->player->incantation)
         return (level_1(client));
-    if (client->player->level == 2)
+    if (client->player->level == 2 && !client->player->incantation)
         return (level_2(client));
-    if (client->player->level == 3)
+    if (client->player->level == 3 && !client->player->incantation)
         return (level_3(client));
-    if (client->player->level == 4)
+    if (client->player->level == 4 && !client->player->incantation)
         return (level_4(client));
-    if (client->player->level == 4)
+    if (client->player->level == 4 && !client->player->incantation)
         return (level_5(client));
-    if (client->player->level == 4)
+    if (client->player->level == 4 && !client->player->incantation)
         return (level_6(client));
-    if (client->player->level == 4)
+    if (client->player->level == 4 && !client->player->incantation)
         return (level_7(client));
     return true;
 }
@@ -78,6 +78,8 @@ bool ai(client_t *client)
 {
     if (!basic_command(client))
         return false;
+    if (!client->player->inv)
+        return true;
     if (client->player->inv && client->player->inv->food < 5) {
         if (!path_finding_object(client, "food") && !send_message(client->
             pending_commands, client->command, client->socket, "Forward\n")) {

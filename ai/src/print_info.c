@@ -28,6 +28,7 @@ void print_inventory(inventory_t *inv)
 
 void print_inventory_map(client_t *client)
 {
+    printf("IAM HERE %d %d\n", client->player->pos.y, client->player->pos.x);
     for (int y = 0; y != client->size_map.y; y++) {
         for (int x = 0; x != client->size_map.x; x++) {
             if (client->map[y][x].inv->food != -1) {
