@@ -20,11 +20,22 @@
     #include "utils.h"
 
 typedef struct {
+    list_t *trantorians;
+    size_t level;
+    pos_t pos;
+    size_t it_rem;
+} incantation_t;
+
+incantation_t *incantation_create(size_t level, pos_t pos);
+void incantation_destroy(incantation_t *incantation);
+
+typedef struct {
     size_t cli_per_team;
     size_t freq;
     list_t *teams;
     list_t *trantorians;
     map_t *map;
+    list_t *incantations;
 } game_t;
 
 game_t *game_create(char **teams, size_t width, size_t height,

@@ -142,6 +142,7 @@ void set_e(core_t *core, client_t *client, char *command);
 
 void command_incantation(core_t *core, client_t *client, char *command);
 void incantation_e(core_t *core, client_t *client, char *command);
+bool incantation_check_tile(map_t *map, pos_t *pos, size_t level);
 
 void command_death(core_t *core, client_t *client, char *command);
 
@@ -170,6 +171,7 @@ void game_update_handler(core_t *core, client_t *client);
 void game_update_handlers(core_t *core);
 void game_update_trantorians(core_t *core);
 bool game_clock_update(size_t freq);
+void game_update_invocations(core_t *core);
 void game_update(core_t *core);
 
 vector_t *game_calc_vector(size_t map_x, size_t map_y, pos_t *a, pos_t *b);

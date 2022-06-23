@@ -14,6 +14,8 @@ void game_update_handler(core_t *core, client_t *client)
     } else if (client->handler->command != NULL) {
         client->handler->command(core, client, client->handler->params);
         handler_clear(client->handler);
+    } else {
+        handler_clear(client->handler);
     }
 }
 

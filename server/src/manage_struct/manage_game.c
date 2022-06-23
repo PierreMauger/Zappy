@@ -17,8 +17,10 @@ game_t *game_create(char **teams, size_t width, size_t height,
     game->cli_per_team = cli_per_team;
     game->teams = list_create();
     game->trantorians = list_create();
+    game->incantations = list_create();
     game->map = map_create(width, height);
-    if (!game->teams || !game->trantorians || !game->map) {
+    if (!game->teams || !game->trantorians || !game->map ||
+            !game->incantations) {
         game_destroy(game);
         return NULL;
     }

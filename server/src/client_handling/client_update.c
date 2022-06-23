@@ -89,7 +89,8 @@ void clients_update(core_t *core, fd_set *readfds)
         if (FD_ISSET(client->sock->fd, readfds) &&
                 client_get_command(client) == EXIT) {
             client_disconnect(core, client, node);
-        } else if (client->handler->command == NULL &&
+        } else if ((client->handler->command == NULL &&
+                client->handler->command_it == 0) &&
                 client->command_list->lenght > 0) {
             client_exec_command(core, client);
         }
