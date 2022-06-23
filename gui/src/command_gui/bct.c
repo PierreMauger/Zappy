@@ -46,6 +46,5 @@ int bct(client_t *client, char *str)
     do {
         save = fill_inventory(client, save);
     } while (save);
-    print_inventory_map(client);
     return 0;
 }

@@ -129,6 +129,7 @@ bool message_broadcast(client_t *client, char *str);
 void sig_handler(int signum);
 
 bool ai(client_t *client);
+bool basic_command(client_t *client);
 bool path_finding_object(client_t *client, char *object);
 bool go_to_next_object(client_t *client, int dest_x, int dest_y);
 bool get_food_in_cell(client_t *client, size_t x, size_t y);
