@@ -91,7 +91,7 @@ void command_sst(core_t *core, client_t *client, char *command);
 void command_pnw(core_t *core, trantorian_t *trantorian);
 void command_pex(core_t *core, trantorian_t *trantorian);
 void command_pbc(core_t *core, trantorian_t *trantorian, char *message);
-void command_pic(core_t *core, trantorian_t *trantorian, list_t *uuids);
+void command_pic(core_t *core, trantorian_t *trantorian, list_t *trant);
 void command_pie(core_t *core, trantorian_t *trantorian);
 void command_pfk(core_t *core, trantorian_t *trantorian);
 void command_pdr(core_t *core, trantorian_t *trantorian, size_t nb_drop);

@@ -23,6 +23,7 @@ void fork_e(core_t *core, client_t *client, UNUSED char *command)
     trantorian->hatching_time = TRANT_HATCHING_IT;
     list_push_data(core->game->trantorians, trantorian);
     client_push_command(core->server, client, strdup("ok\n"));
+    command_pfk(core, client->trantorian);
 }
 
 void command_fork(core_t *core, client_t *client, UNUSED char *command)

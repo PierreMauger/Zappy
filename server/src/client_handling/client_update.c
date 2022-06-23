@@ -62,6 +62,8 @@ int client_get_command(client_t *client)
 
 void client_disconnect(core_t *core, client_t *client, node_t *node)
 {
+    if (client->trantorian)
+        command_pdi(core, client->trantorian);
     if (client->trantorian && client->trantorian->team) {
         client->trantorian->team->cli_sub--;
         trantorian_replace(core, client->trantorian->team, client->trantorian);

@@ -92,6 +92,7 @@ void incantation_e(core_t *core, client_t *client, UNUSED char *command)
         client_push_command(core->server, trant->client,
             strdup("Elevation underway\n"));
     }
+    command_pic(core, client->trantorian, incantation->trantorians);
 }
 
 void command_incantation(core_t *core, client_t *client, UNUSED char *command)

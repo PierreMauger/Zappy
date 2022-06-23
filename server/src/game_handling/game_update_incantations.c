@@ -61,6 +61,8 @@ static void game_increase_trantorians_level(core_t *core,
         }
         client_push_command(core->server, trant->client, temp);
     }
+    if (incantation->trantorians->head)
+        command_pie(core, incantation->trantorians->head->data);
 }
 
 static bool game_update_invocation(core_t *core, incantation_t *incantation)

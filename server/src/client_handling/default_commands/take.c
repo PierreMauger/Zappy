@@ -61,6 +61,7 @@ void take_e(core_t *core, client_t *client, char *command)
     inv = client->trantorian->inventory;
     ((size_t *)inv)[obj_idx]++;
     client_push_command(core->server, client, strdup("ok\n"));
+    command_pdr(core, client->trantorian, obj_idx + 1);
 }
 
 void command_take(core_t *core, client_t *client, char *command)
