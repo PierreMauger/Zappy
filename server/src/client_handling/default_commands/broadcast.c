@@ -57,6 +57,7 @@ void broadcast_e(core_t *core, client_t *client, char *command)
     }
     client->type = CLI_DEFAULT;
     client_push_command(core->server, client, strdup("ok\n"));
+    command_pbc(core, client->trantorian, command);
 }
 
 void command_broadcast(core_t *core, client_t *client, char *command)

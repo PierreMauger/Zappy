@@ -34,6 +34,7 @@ static bool eject_trantorian(core_t *core, client_t *client, client_t *tmp)
 
     game_incr_trant_pos(core->game->map, tmp->trantorian,
         client->trantorian->direction);
+    command_pex(core, client->trantorian);
     buff = get_str_ejection(client->trantorian->direction,
         tmp->trantorian->direction);
     if (buff == NULL)

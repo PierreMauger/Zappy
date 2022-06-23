@@ -91,7 +91,7 @@ void command_sst(core_t *core, client_t *client, char *command);
 void command_pnw(core_t *core, trantorian_t *trantorian);
 void command_pex(core_t *core, trantorian_t *trantorian);
 void command_pbc(core_t *core, trantorian_t *trantorian, char *message);
-void command_pic(core_t *core, trantorian_t *trantorian, list_t *uuids);
+void command_pic(core_t *core, trantorian_t *trantorian, list_t *trant);
 void command_pie(core_t *core, trantorian_t *trantorian);
 void command_pfk(core_t *core, trantorian_t *trantorian);
 void command_pdr(core_t *core, trantorian_t *trantorian, size_t nb_drop);
@@ -171,7 +171,7 @@ void game_update_handler(core_t *core, client_t *client);
 void game_update_handlers(core_t *core);
 void game_update_trantorians(core_t *core);
 bool game_clock_update(size_t freq);
-void game_update_invocations(core_t *core);
+void game_update_incantations(core_t *core);
 void game_update(core_t *core);
 
 vector_t *game_calc_vector(size_t map_x, size_t map_y, pos_t *a, pos_t *b);

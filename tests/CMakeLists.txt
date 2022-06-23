@@ -97,7 +97,7 @@ add_executable(unit-tests
   ../server/src/game_handling/game_utils/trantorian_utils.c
   ../server/src/client_handling/clients_update_delete.c
   ../server/src/manage_struct/manage_incantation.c
-  ../server/src/game_handling/game_update_invocations.c
+  ../server/src/game_handling/game_update_incantations.c
   )
 
 target_include_directories(unit-tests PRIVATE

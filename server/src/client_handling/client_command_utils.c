@@ -13,11 +13,15 @@ void client_push_command(server_t *serv, client_t *client, char *buff)
 
     if (buff == NULL || serv == NULL || client == NULL) {
         fprintf(stderr, "[ERROR] Cannot create command\n");
+        if (buff)
+            free(buff);
         return;
     }
     command = nlib_command_create(buff);
     if (command == NULL) {
         fprintf(stderr, "[ERROR] Cannot create command\n");
+        if (buff)
+            free(buff);
         return;
     }
     command_add_client(command, client);
@@ -30,11 +34,15 @@ void client_def_broadcast_command(server_t *serv, char *buff)
 
     if (buff == NULL || serv == NULL) {
         fprintf(stderr, "[ERROR] Cannot create command\n");
+        if (buff)
+            free(buff);
         return;
     }
     command = nlib_command_create(buff);
     if (command == NULL) {
         fprintf(stderr, "[ERROR] Cannot create command\n");
+        if (buff)
+            free(buff);
         return;
     }
     command_add_def_clients(command, serv->clients);
@@ -47,11 +55,15 @@ void client_gui_broadcast_command(server_t *serv, char *buff)
 
     if (buff == NULL || serv == NULL) {
         fprintf(stderr, "[ERROR] Cannot create command\n");
+        if (buff)
+            free(buff);
         return;
     }
     command = nlib_command_create(buff);
     if (command == NULL) {
         fprintf(stderr, "[ERROR] Cannot create command\n");
+        if (buff)
+            free(buff);
         return;
     }
     command_add_gui_clients(command, serv->clients);

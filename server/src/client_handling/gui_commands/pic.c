@@ -8,16 +8,16 @@
 #include "utils.h"
 #include "core.h"
 
-static char *put_uuid_in_buff(list_t *uuids, char *buff)
+static char *put_uuid_in_buff(list_t *trant, char *buff)
 {
     node_t *node = NULL;
-    char *uuid = NULL;
+    trantorian_t *trantorian = NULL;
     char *temp = NULL;
 
-    foreach(uuids->head, node) {
-        uuid = (char *)node->data;
+    foreach(trant->head, node) {
+        trantorian = (trantorian_t *)node->data;
         temp = buff;
-        if (asprintf(&buff, "%s %s", buff, uuid) == -1) {
+        if (asprintf(&buff, "%s %s", buff, trantorian->uuid) == -1) {
             fprintf(stderr, "[ERROR] GUI Can't malloc\n");
             return NULL;
         }
@@ -32,19 +32,18 @@ static char *put_uuid_in_buff(list_t *uuids, char *buff)
     return buff;
 }
 
-void command_pic(core_t *core, trantorian_t *trantorian, list_t *uuids)
+void command_pic(core_t *core, trantorian_t *trantorian, list_t *trant)
 {
     char *buff = NULL;
 
-    if (asprintf(&buff, "pic %ld %ld %ld %s",
+    if (asprintf(&buff, "pic %ld %ld %ld",
             trantorian->pos.x,
             trantorian->pos.y,
-            trantorian->level,
-            trantorian->uuid) == -1) {
+            trantorian->level) == -1) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
         return;
     }
-    buff = put_uuid_in_buff(uuids, buff);
+    buff = put_uuid_in_buff(trant, buff);
     if (buff == NULL)
         return;
     client_gui_broadcast_command(core->server, buff);

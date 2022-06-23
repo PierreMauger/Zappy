@@ -74,15 +74,19 @@ TEST(TestGUIEvent, pic)
 
     ASSERT_TRUE(list != nullptr);
 
+    list_push_data(list, (trantorian_t *)sc.getClient()->trantorian);
+    list_push_data(list, (trantorian_t *)sc.getOtherCli()->trantorian);
+
     sc.startTest();
     command_pic(sc.getCore(), sc.getClient()->trantorian, list);
     sc.endTest();
 
-    ASSERT_TRUE(asprintf(&buff, "pic %ld %ld %ld %s\n",
+    ASSERT_TRUE(asprintf(&buff, "pic %ld %ld %ld %s %s\n",
         sc.getClient()->trantorian->pos.x,
         sc.getClient()->trantorian->pos.y,
         sc.getClient()->trantorian->level,
-        sc.getClient()->trantorian->uuid) != -1);
+        sc.getClient()->trantorian->uuid,
+        sc.getOtherCli()->trantorian->uuid) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
 

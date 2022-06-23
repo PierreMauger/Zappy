@@ -58,6 +58,7 @@ void set_e(core_t *core, client_t *client, char *command)
         client->trantorian->pos.y);
     ((size_t *)inv)[obj_idx]++;
     client_push_command(core->server, client, strdup("ok\n"));
+    command_pdr(core, client->trantorian, obj_idx + 1);
 }
 
 void command_set(core_t *core, client_t *client, char *command)

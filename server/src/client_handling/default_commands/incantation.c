@@ -70,6 +70,7 @@ static incantation_t *can_incant(core_t *core, trantorian_t *trant)
         return NULL;
     }
     incantation->it_rem = 300;
+    incantation->needed = &stones_needed[trant->level - IDX];
     list_push_data(core->game->incantations, incantation);
     return incantation;
 }
@@ -91,6 +92,7 @@ void incantation_e(core_t *core, client_t *client, UNUSED char *command)
         client_push_command(core->server, trant->client,
             strdup("Elevation underway\n"));
     }
+    command_pic(core, client->trantorian, incantation->trantorians);
 }
 
 void command_incantation(core_t *core, client_t *client, UNUSED char *command)
