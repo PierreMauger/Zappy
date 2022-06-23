@@ -30,11 +30,8 @@ bool change_stone_in_cell(
     return (cell_object != inv_object ? false : true);
 }
 
-bool drop_stone_needed(client_t *client, inventory_t inv)
+bool drop_stone_needed(client_t *client, inventory_t inv, inventory_t cell_inv)
 {
-    inventory_t cell_inv =
-        *(client->map[client->player->pos.y][client->player->pos.y].inv);
-
     if (cell_inv.linemate > inv.linemate
         && !change_stone_in_cell(client, "Set", "linemate", inv))
         return false;
@@ -50,15 +47,15 @@ bool drop_stone_needed(client_t *client, inventory_t inv)
     if (cell_inv.phiras > inv.phiras
         && !change_stone_in_cell(client, "Set", "phiras", inv))
         return false;
+    if (cell_inv.thystame > inv.thystame
+        && !change_stone_in_cell(client, "Set", "thystame", inv))
+        return false;
     return true;
 }
 
-int take_everything_on_this_case(client_t *client, inventory_t inv)
+int take_everything(client_t *client, inventory_t inv, inventory_t cell_inv)
 {
-    inventory_t cell_inv =
-        *(client->map[client->player->pos.y][client->player->pos.y].inv);
-
-    if (cell_inv.linemate > inv.linemate
+    if (cel.linemate > inv.linemate
         && !change_stone_in_cell(client, "Take", "linemate", inv))
         return false;
     if (cell_inv.deraumere > inv.deraumere
@@ -73,18 +70,23 @@ int take_everything_on_this_case(client_t *client, inventory_t inv)
     if (cell_inv.phiras > inv.phiras
         && !change_stone_in_cell(client, "Take", "phiras", inv))
         return false;
+    if (cell_inv.thystame > inv.thystame
+        && !change_stone_in_cell(client, "Take", "thystame", inv))
+        return false;
     return true;
 }
 
 bool check_level_1(client_t *client)
 {
     inventory_t inventory = {0, 1, 0, 0, 0, 0, 0};
+    inventory_t cell_inv =
+        (*(client->map[client->player->pos.y][client->player->pos.x].inv));
 
     if (client->player->inv->linemate < 1)
         return false;
-    if (!take_everything_on_this_case(client, inventory))
+    if (!take_everything_on_this_case(client, inventory, cell_inv))
         return false;
-    return (drop_stone_needed(client, inventory));
+    return (drop_stone_needed(client, inventory, cell_inv));
 }
 
 bool check_level_2(client_t *client)
