@@ -599,7 +599,6 @@ TEST(TestFork, Basic)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(sc.getCore()->game->trantorians->lenght, 3);
 
     trantorian_destroy((trantorian_t *)list_pop_last(sc.getCore()->game->trantorians));
@@ -617,7 +616,6 @@ TEST(TestForward, Basic1)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(POS_X(sc.getClient()), 1);
     EXPECT_EQ(POS_Y(sc.getClient()), 2);
 }
@@ -634,7 +632,6 @@ TEST(TestForward, Basic2)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(POS_X(sc.getClient()), 2);
     EXPECT_EQ(POS_Y(sc.getClient()), 1);
 }
@@ -651,7 +648,6 @@ TEST(TestForward, Basic3)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(POS_X(sc.getClient()), 1);
     EXPECT_EQ(POS_Y(sc.getClient()), 0);
 }
@@ -668,7 +664,6 @@ TEST(TestForward, Basic4)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(POS_X(sc.getClient()), 0);
     EXPECT_EQ(POS_Y(sc.getClient()), 1);
 }
@@ -685,7 +680,6 @@ TEST(TestForward, Advanced1)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(POS_X(sc.getClient()), 0);
     EXPECT_EQ(POS_Y(sc.getClient()), 0);
 }
@@ -702,7 +696,6 @@ TEST(TestForward, Advanced2)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(POS_X(sc.getClient()), 0);
     EXPECT_EQ(POS_Y(sc.getClient()), 0);
 }
@@ -719,7 +712,6 @@ TEST(TestForward, Advanced3)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(POS_X(sc.getClient()), 0);
     EXPECT_EQ(POS_Y(sc.getClient()), 2);
 }
@@ -736,7 +728,6 @@ TEST(TestForward, Advanced4)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(POS_X(sc.getClient()), 2);
     EXPECT_EQ(POS_Y(sc.getClient()), 0);
 }
@@ -951,7 +942,6 @@ TEST(TestLeft, Basic1)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_LEFT);
 }
 
@@ -967,7 +957,6 @@ TEST(TestLeft, Basic2)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_DOWN);
 }
 
@@ -983,7 +972,6 @@ TEST(TestLeft, Basic3)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_RIGHT);
 }
 
@@ -999,7 +987,6 @@ TEST(TestLeft, Basic4)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_UP);
 }
 
@@ -1015,7 +1002,6 @@ TEST(TestRight, Basic1)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_RIGHT);
 }
 
@@ -1031,7 +1017,6 @@ TEST(TestRight, Basic2)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_DOWN);
 }
 
@@ -1047,7 +1032,6 @@ TEST(TestRight, Basic3)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_LEFT);
 }
 
@@ -1063,6 +1047,219 @@ TEST(TestRight, Basic4)
     sc.endTest();
 
     EXPECT_EQ(sc.getRes(), "ok\n");
-
     EXPECT_EQ(sc.getClient()->trantorian->direction, DIR_UP);
+}
+
+TEST(TestSet, Basic1)
+{
+    char *buff = NULL;
+
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->inventory->linemate = 2;
+    GET_CELL(sc.getCore()->game->map, 0, 0)->linemate = 0;
+
+    buff = strdup("linemate");
+
+    ASSERT_TRUE(buff != nullptr);
+
+    sc.startTest();
+    set_e(sc.getCore(), sc.getClient(), buff);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+    EXPECT_EQ(GET_CELL(sc.getCore()->game->map, 0, 0)->linemate, 1);
+
+    free(buff);
+}
+
+TEST(TestSet, Basic2)
+{
+    char *buff = NULL;
+
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->inventory->thystame = 2;
+    GET_CELL(sc.getCore()->game->map, 0, 0)->thystame = 0;
+
+    buff = strdup("thystame");
+
+    ASSERT_TRUE(buff != nullptr);
+
+    sc.startTest();
+    set_e(sc.getCore(), sc.getClient(), buff);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+    EXPECT_EQ(GET_CELL(sc.getCore()->game->map, 0, 0)->thystame, 1);
+
+    free(buff);
+}
+
+TEST(TestSet, Error1)
+{
+    char *buff = NULL;
+
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->inventory->thystame = 0;
+
+    buff = strdup("thystame");
+
+    ASSERT_TRUE(buff != nullptr);
+
+    sc.startTest();
+    set_e(sc.getCore(), sc.getClient(), buff);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ko\n");
+
+    free(buff);
+}
+
+TEST(TestSet, Error2)
+{
+    char *buff = NULL;
+
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->inventory->linemate = 0;
+
+    buff = strdup("linemate");
+
+    ASSERT_TRUE(buff != nullptr);
+
+    sc.startTest();
+    set_e(sc.getCore(), sc.getClient(), buff);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ko\n");
+
+    free(buff);
+}
+
+TEST(TestSet, Error3)
+{
+    char *buff = strdup("jdkqjsdqksj");
+
+    ASSERT_TRUE(buff != nullptr);
+
+    sc.startTest();
+    set_e(sc.getCore(), sc.getClient(), buff);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ko\n");
+
+    free(buff);
+}
+
+TEST(TestTake, Basic1)
+{
+    char *buff = NULL;
+
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->inventory->linemate = 0;
+    GET_CELL(sc.getCore()->game->map, 0, 0)->linemate = 2;
+
+    buff = strdup("linemate");
+
+    ASSERT_TRUE(buff != nullptr);
+
+    sc.startTest();
+    take_e(sc.getCore(), sc.getClient(), buff);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+    EXPECT_EQ(sc.getClient()->trantorian->inventory->linemate, 1);
+
+    free(buff);
+}
+
+TEST(TestTake, Basic2)
+{
+    char *buff = NULL;
+
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->inventory->thystame = 0;
+    GET_CELL(sc.getCore()->game->map, 0, 0)->thystame = 2;
+
+    buff = strdup("thystame");
+
+    ASSERT_TRUE(buff != nullptr);
+
+    sc.startTest();
+    take_e(sc.getCore(), sc.getClient(), buff);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+    EXPECT_EQ(sc.getClient()->trantorian->inventory->thystame, 1);
+
+    free(buff);
+}
+
+TEST(TestTake, Error1)
+{
+    char *buff = NULL;
+
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    GET_CELL(sc.getCore()->game->map, 0, 0)->thystame = 0;
+
+    buff = strdup("thystame");
+
+    ASSERT_TRUE(buff != nullptr);
+
+    sc.startTest();
+    take_e(sc.getCore(), sc.getClient(), buff);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ko\n");
+
+    free(buff);
+}
+
+TEST(TestTake, Error2)
+{
+    char *buff = NULL;
+
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    GET_CELL(sc.getCore()->game->map, 0, 0)->linemate = 0;
+
+    buff = strdup("linemate");
+
+    ASSERT_TRUE(buff != nullptr);
+
+    sc.startTest();
+    take_e(sc.getCore(), sc.getClient(), buff);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ko\n");
+
+    free(buff);
+}
+
+TEST(TestTake, Error3)
+{
+    char *buff = strdup("jdkqjsdqksj");
+
+    ASSERT_TRUE(buff != nullptr);
+
+    sc.startTest();
+    take_e(sc.getCore(), sc.getClient(), buff);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ko\n");
+
+    free(buff);
 }
