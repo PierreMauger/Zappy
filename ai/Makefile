@@ -24,6 +24,8 @@ SRC				=	./src/loop_client.c				\
 					./src/evoluate.c 				\
 					./src/evoluate2.c 				\
 					./src/evoluate3.c 				\
+					./src/check_level.c 			\
+					./src/check_level2.c 			\
 					./src/round_pos_map.c 			\
 					./src/broadcast_message.c 		\
 					./src/player.c 					\

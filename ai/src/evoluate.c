@@ -52,7 +52,8 @@ bool level_1(client_t *client)
         if (!get_object(client, client->player->inv->linemate, 1, "linemate"))
             return false;
     }
-    return ask_player(client, 1, (client->player->level + '0'));
+    return (check_level_1(client) ?
+        ask_player(client, 1, (client->player->level + '0')) : 1);
 }
 
 bool level_2(client_t *client)
@@ -75,5 +76,6 @@ bool level_2(client_t *client)
         if (!get_object(client, client->player->inv->sibur, 1, "sibur"))
             return false;
     }
-    return ask_player(client, 2, (client->player->level + '0'));
+    return (check_level_2(client) ?
+        ask_player(client, 2, (client->player->level + '0')) : 1);
 }

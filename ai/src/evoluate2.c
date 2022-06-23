@@ -27,7 +27,8 @@ bool level_3(client_t *client)
         if (!get_object(client, client->player->inv->phiras, 1, "phiras"))
             return false;
     }
-    return ask_player(client, 2, (client->player->level + '0'));
+    return (check_level_3(client) ?
+        ask_player(client, 2, (client->player->level + '0')) : 1);
 }
 
 static bool split_level_4(client_t *client)
@@ -44,7 +45,8 @@ static bool split_level_4(client_t *client)
         if (!get_object(client, client->player->inv->deraumere, 1, "deraumere"))
             return false;
     }
-    return ask_player(client, 4, (client->player->level + '0'));
+    return (check_level_4(client) ?
+        ask_player(client, 4, (client->player->level + '0')) : 1);
 }
 
 bool level_4(client_t *client)
@@ -72,7 +74,8 @@ static bool split_level_5(client_t *client)
         if (!get_object(client, client->player->inv->mendiane, 3, "mendiane"))
             return false;
     }
-    return ask_player(client, 4, (client->player->level + '0'));
+    return (check_level_5(client) ?
+        ask_player(client, 4, (client->player->level + '0')) : 1);
 }
 
 bool level_5(client_t *client)

@@ -15,7 +15,8 @@ bool split_level_6(client_t *client)
         if (!get_object(client, client->player->inv->phiras, 1, "phiras"))
             return false;
     }
-    return ask_player(client, 6, (client->player->level + '0'));
+    return (check_level_6(client) ?
+        ask_player(client, 6, (client->player->level + '0')) : 1);
 }
 
 bool level_6(client_t *client)
@@ -61,7 +62,8 @@ static bool split_level_7(client_t *client)
         if (!get_object(client, client->player->inv->thystame, 1, "thystame"))
             return false;
     }
-    return ask_player(client, 6, (client->player->level + '0'));
+    return (check_level_7(client) ?
+        ask_player(client, 6, (client->player->level + '0')) : 1);
 }
 
 bool level_7(client_t *client)

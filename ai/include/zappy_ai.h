@@ -168,6 +168,14 @@ bool level_5(client_t *client);
 bool level_6(client_t *client);
 bool level_7(client_t *client);
 
+bool check_level_1(client_t *client);
+bool check_level_2(client_t *client);
+bool check_level_3(client_t *client);
+bool check_level_4(client_t *client);
+bool check_level_5(client_t *client);
+bool check_level_6(client_t *client);
+bool check_level_7(client_t *client);
+
 void print_inventory(inventory_t *inv);
 void print_inventory_map(client_t *client);
 void print_dir(direction_e dir);
