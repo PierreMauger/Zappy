@@ -24,6 +24,7 @@ CommandFixture::CommandFixture(void)
     this->client = client_create(0);
     this->client->trantorian = (trantorian_t *)this->core->game->trantorians->head->data;
     this->client->type = CLI_GUI;
+    this->client->trantorian->client = this->client;
 
     list_push_data(core->server->clients, this->client);
 
@@ -134,4 +135,5 @@ void CommandFixture::addClient(void)
 
     list_push_data(this->core->server->clients, new_cli);
     this->otherPlayer = new_cli;
+    this->otherPlayer->trantorian->client = new_cli;
 }

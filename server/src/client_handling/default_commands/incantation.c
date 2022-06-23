@@ -70,6 +70,7 @@ static incantation_t *can_incant(core_t *core, trantorian_t *trant)
         return NULL;
     }
     incantation->it_rem = 300;
+    incantation->needed = &stones_needed[trant->level - IDX];
     list_push_data(core->game->incantations, incantation);
     return incantation;
 }

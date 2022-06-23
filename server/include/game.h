@@ -24,6 +24,7 @@ typedef struct {
     size_t level;
     pos_t pos;
     size_t it_rem;
+    const inventory_t *needed;
 } incantation_t;
 
 incantation_t *incantation_create(size_t level, pos_t pos);

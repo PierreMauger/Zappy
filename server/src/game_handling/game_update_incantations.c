@@ -65,6 +65,8 @@ static void game_increase_trantorians_level(core_t *core,
 
 static bool game_update_invocation(core_t *core, incantation_t *incantation)
 {
+    inventory_t *invent = NULL;
+
     if (incantation->it_rem > 0) {
         incantation->it_rem--;
         return false;
@@ -74,10 +76,17 @@ static bool game_update_invocation(core_t *core, incantation_t *incantation)
             check_remove_bad_pos(incantation) == false)
         return false;
     game_increase_trantorians_level(core, incantation);
+    invent = GET_CELL(core->game->map, incantation->pos.x, incantation->pos.y);
+    invent->linemate -= incantation->needed->linemate;
+    invent->deraumere -= incantation->needed->deraumere;
+    invent->sibur -= incantation->needed->sibur;
+    invent->mendiane -= incantation->needed->mendiane;
+    invent->phiras -= incantation->needed->phiras;
+    invent->thystame -= incantation->needed->thystame;
     return true;
 }
 
-void game_update_invocations(core_t *core)
+void game_update_incantations(core_t *core)
 {
     node_t *node = NULL;
     node_t *safe = NULL;

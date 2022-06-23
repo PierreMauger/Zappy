@@ -601,6 +601,8 @@ TEST(TestFork, Basic)
     EXPECT_EQ(sc.getRes(), "ok\n");
 
     EXPECT_EQ(sc.getCore()->game->trantorians->lenght, 3);
+
+    trantorian_destroy((trantorian_t *)list_pop_last(sc.getCore()->game->trantorians));
 }
 
 TEST(TestForward, Basic1)
@@ -737,4 +739,171 @@ TEST(TestForward, Advanced4)
 
     EXPECT_EQ(POS_X(sc.getClient()), 2);
     EXPECT_EQ(POS_Y(sc.getClient()), 0);
+}
+
+TEST(TestIncantation, Level1)
+{
+    POS_X(sc.getClient()) = 1;
+    POS_Y(sc.getClient()) = 2;
+
+    POS_X(sc.getOtherCli()) = 0;
+    POS_Y(sc.getOtherCli()) = 0;
+
+    sc.getClient()->trantorian->level = 1;
+
+    GET_CELL(sc.getCore()->game->map, 1, 2)->linemate = 1;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->deraumere = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->sibur = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->mendiane = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->phiras = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->thystame = 0;
+
+    sc.startTest();
+    incantation_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    ASSERT_EQ(sc.getRes(), "Elevation underway\n");
+
+    ((incantation_t *)(sc.getCore()->game->incantations->head->data))->it_rem = 0;
+
+    sc.startTest();
+    game_update_incantations(sc.getCore());
+    sc.endTest();
+
+    EXPECT_EQ(GET_CELL(sc.getCore()->game->map, 1, 2)->linemate, 0);
+    EXPECT_EQ(sc.getRes(), "Current level: 2\n");
+}
+
+TEST(TestIncantation, Level2)
+{
+    POS_X(sc.getClient()) = 1;
+    POS_Y(sc.getClient()) = 2;
+
+    sc.getClient()->trantorian->level = 2;
+
+    POS_X(sc.getOtherCli()) = 1;
+    POS_Y(sc.getOtherCli()) = 2;
+
+    sc.getOtherCli()->trantorian->level = 2;
+
+    GET_CELL(sc.getCore()->game->map, 1, 2)->linemate = 1;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->deraumere = 1;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->sibur = 1;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->mendiane = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->phiras = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->thystame = 0;
+
+    sc.startTest();
+    incantation_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    ASSERT_EQ(sc.getRes(), "Elevation underway\n");
+    ASSERT_EQ(sc.getResOtherCli(), "Elevation underway\n");
+
+    ((incantation_t *)(sc.getCore()->game->incantations->head->data))->it_rem = 0;
+
+    sc.startTest();
+    game_update_incantations(sc.getCore());
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "Current level: 3\n");
+    EXPECT_EQ(sc.getResOtherCli(), "Current level: 3\n");
+}
+
+TEST(TestIncantation, NotEnoughTrant)
+{
+    POS_X(sc.getClient()) = 1;
+    POS_Y(sc.getClient()) = 2;
+
+    sc.getClient()->trantorian->level = 3;
+
+    POS_X(sc.getOtherCli()) = 0;
+    POS_Y(sc.getOtherCli()) = 0;
+
+    GET_CELL(sc.getCore()->game->map, 1, 2)->linemate = 2;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->deraumere = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->sibur = 1;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->mendiane = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->phiras = 2;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->thystame = 0;
+
+    sc.startTest();
+    incantation_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    ASSERT_EQ(sc.getRes(), "ko\n");
+}
+
+TEST(TestIncantation, NotEnoughRessources)
+{
+    POS_X(sc.getClient()) = 1;
+    POS_Y(sc.getClient()) = 2;
+
+    sc.getClient()->trantorian->level = 3;
+
+    POS_X(sc.getOtherCli()) = 0;
+    POS_Y(sc.getOtherCli()) = 0;
+
+    GET_CELL(sc.getCore()->game->map, 1, 2)->linemate = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->deraumere = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->sibur = 1;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->mendiane = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->phiras = 2;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->thystame = 0;
+
+    sc.startTest();
+    incantation_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    ASSERT_EQ(sc.getRes(), "ko\n");
+}
+
+TEST(TestIncantation, ToMuchRessources)
+{
+    POS_X(sc.getClient()) = 1;
+    POS_Y(sc.getClient()) = 2;
+
+    sc.getClient()->trantorian->level = 3;
+
+    POS_X(sc.getOtherCli()) = 0;
+    POS_Y(sc.getOtherCli()) = 0;
+
+    GET_CELL(sc.getCore()->game->map, 1, 2)->linemate = 9;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->deraumere = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->sibur = 1;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->mendiane = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->phiras = 2;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->thystame = 0;
+
+    sc.startTest();
+    incantation_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    ASSERT_EQ(sc.getRes(), "ko\n");
+}
+
+TEST(TestIncantation, NotEnoughLevel)
+{
+    POS_X(sc.getClient()) = 1;
+    POS_Y(sc.getClient()) = 2;
+
+    sc.getClient()->trantorian->level = 2;
+
+    POS_X(sc.getOtherCli()) = 1;
+    POS_Y(sc.getOtherCli()) = 2;
+
+    sc.getOtherCli()->trantorian->level = 3;
+
+    GET_CELL(sc.getCore()->game->map, 1, 2)->linemate = 1;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->deraumere = 1;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->sibur = 1;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->mendiane = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->phiras = 0;
+    GET_CELL(sc.getCore()->game->map, 1, 2)->thystame = 0;
+
+    sc.startTest();
+    incantation_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    ASSERT_EQ(sc.getRes(), "ko\n");
 }
