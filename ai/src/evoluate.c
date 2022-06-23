@@ -23,7 +23,7 @@ size_t get_player_same_level(client_t *client, int level)
 
 bool ask_player(client_t *client, size_t nb_need, char level)
 {
-    char *cm = NULL;
+    char *com = NULL;
 
     if (get_player_same_level(client, (level - '0')) != nb_need) {
         if (asprintf(&com, "Broadcast %s %c\n",
