@@ -36,10 +36,8 @@ static bool eject_trantorian(core_t *core, client_t *client, client_t *tmp)
         client->trantorian->direction);
     buff = get_str_ejection(client->trantorian->direction,
         tmp->trantorian->direction);
-    if (buff == NULL) {
-        client_push_command(core->server, tmp, strdup("ko\n"));
+    if (buff == NULL)
         return false;
-    }
     client_push_command(core->server, tmp, buff);
     return true;
 }
@@ -54,8 +52,8 @@ static bool find_trantorians(core_t *core, client_t *client)
         tmp = (client_t *)node->data;
         if (tmp->trantorian->state != TRANT_LIVING ||
                 tmp->trantorian == client->trantorian ||
-                (tmp->trantorian->pos.x != client->trantorian->pos.x ||
-                tmp->trantorian->pos.y != client->trantorian->pos.y))
+                tmp->trantorian->pos.x != client->trantorian->pos.x ||
+                tmp->trantorian->pos.y != client->trantorian->pos.y)
             continue;
         found = true;
         if (!eject_trantorian(core, client, tmp))

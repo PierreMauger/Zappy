@@ -20,7 +20,7 @@ void game_incr_trant_pos(map_t *map, trantorian_t *trant,
     switch (direction) {
         case DIR_UP:
             trant->pos.y = control_dir(trant->pos.y,
-                map->height, false);
+                map->height, true);
             break;
         case DIR_RIGHT:
             trant->pos.x = control_dir(trant->pos.x,
@@ -28,7 +28,7 @@ void game_incr_trant_pos(map_t *map, trantorian_t *trant,
             break;
         case DIR_DOWN:
             trant->pos.y = control_dir(trant->pos.y,
-                map->height, true);
+                map->height, false);
             break;
         case DIR_LEFT:
             trant->pos.x = control_dir(trant->pos.x,
