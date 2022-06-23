@@ -57,30 +57,3 @@ void free_map_copy(map_t **map, size_t x, size_t y)
     }
     free(map);
 }
-
-static void copy_inv_map(inventory_t *inventory, inventory_t *cp_inventory)
-{
-    cp_inventory->food = inventory->food;
-    cp_inventory->deraumere = inventory->deraumere;
-    cp_inventory->linemate = inventory->linemate;
-    cp_inventory->mendiane = inventory->mendiane;
-    cp_inventory->phiras = inventory->phiras;
-    cp_inventory->sibur = inventory->sibur;
-    cp_inventory->thystame = inventory->thystame;
-}
-
-static bool split_create_map(map_t *new_map, map_t *map, size_t x)
-{
-    size_t i = 0;
-
-    for (i = 0; i != x; i++) {
-        new_map[i].inv = calloc(1, sizeof(inventory_t));
-        if (!new_map[i].inv)
-            return false;
-        copy_inv_map(map[i].inv, new_map[i].inv);
-        new_map[i].player = map[i].player;
-    }
-    new_map[i].player = NULL;
-    new_map[i].inv = NULL;
-    return true;
-}
