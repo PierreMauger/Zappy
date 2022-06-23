@@ -7,6 +7,25 @@
 
 #include "zappy_ai.h"
 
+int string_to_number_object_in_inv(inventory_t inv, char *object_name)
+{
+    if (strcmp(object_name, "food") == 0)
+        return inv.food;
+    if (strcmp(object_name, "deraumere") == 0)
+        return inv.deraumere;
+    if (strcmp(object_name, "linemate") == 0)
+        return inv.linemate;
+    if (strcmp(object_name, "mendiane") == 0)
+        return inv.mendiane;
+    if (strcmp(object_name, "phiras") == 0)
+        return inv.phiras;
+    if (strcmp(object_name, "sibur") == 0)
+        return inv.sibur;
+    if (strcmp(object_name, "thystame") == 0)
+        return inv.thystame;
+    return 0;
+}
+
 int string_to_number_object(map_t map, char *object_name)
 {
     if (strcmp(object_name, "food") == 0)
@@ -64,22 +83,4 @@ static bool split_create_map(map_t *new_map, map_t *map, size_t x)
     new_map[i].player = NULL;
     new_map[i].inv = NULL;
     return true;
-}
-
-map_t **copy_double_tab(map_t **map, size_t x, size_t y)
-{
-    size_t h = 0;
-    map_t **new_map = malloc(sizeof(map_t *) * (y + 1));
-
-    if (!new_map)
-        return NULL;
-    for (h = 0; h != y; h++) {
-        new_map[h] = malloc(sizeof(map_t) * (x + 1));
-        if (!new_map[h])
-            return NULL;
-        if (!split_create_map(new_map[h], map[h], x))
-            return NULL;
-    }
-    new_map[h] = NULL;
-    return new_map;
 }
