@@ -443,3 +443,148 @@ TEST(TestCommandLook, WithMapElems)
 
     EXPECT_TRUE(sc.getRes() != "[player , , , ]\n");
 }
+
+TEST(TestConnectNbr, Basic)
+{
+    sc.startTest();
+    command_connect_nbr(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "0\n");
+}
+
+TEST(TestDeath, Basic)
+{
+    sc.startTest();
+    command_death(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "dead\n");
+}
+
+TEST(TestEject, Basic1)
+{
+    sc.getClient()->trantorian->state = TRANT_LIVING;
+    sc.getOtherCli()->trantorian->state = TRANT_LIVING;
+
+    sc.getClient()->trantorian->direction = DIR_UP;
+    sc.getOtherCli()->trantorian->direction = DIR_UP;
+
+    POS_X(sc.getClient()) = 1;
+    POS_Y(sc.getClient()) = 1;
+
+    POS_X(sc.getOtherCli()) = 1;
+    POS_Y(sc.getOtherCli()) = 1;
+
+    sc.startTest();
+    eject_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+    EXPECT_EQ(sc.getResOtherCli(), "eject: 5\n");
+
+    EXPECT_EQ(POS_X(sc.getClient()), 1);
+    EXPECT_EQ(POS_Y(sc.getClient()), 1);
+
+    EXPECT_EQ(POS_X(sc.getOtherCli()), 1);
+    EXPECT_EQ(POS_Y(sc.getOtherCli()), 2);
+}
+
+TEST(TestEject, Basic2)
+{
+    sc.getClient()->trantorian->state = TRANT_LIVING;
+    sc.getOtherCli()->trantorian->state = TRANT_LIVING;
+
+    sc.getClient()->trantorian->direction = DIR_RIGHT;
+    sc.getOtherCli()->trantorian->direction = DIR_UP;
+
+    POS_X(sc.getClient()) = 1;
+    POS_Y(sc.getClient()) = 1;
+
+    POS_X(sc.getOtherCli()) = 1;
+    POS_Y(sc.getOtherCli()) = 1;
+
+    sc.startTest();
+    eject_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+    EXPECT_EQ(sc.getResOtherCli(), "eject: 3\n");
+
+    EXPECT_EQ(POS_X(sc.getClient()), 1);
+    EXPECT_EQ(POS_Y(sc.getClient()), 1);
+
+    EXPECT_EQ(POS_X(sc.getOtherCli()), 2);
+    EXPECT_EQ(POS_Y(sc.getOtherCli()), 1);
+}
+
+TEST(TestEject, Basic3)
+{
+    sc.getClient()->trantorian->state = TRANT_LIVING;
+    sc.getOtherCli()->trantorian->state = TRANT_LIVING;
+
+    sc.getClient()->trantorian->direction = DIR_DOWN;
+    sc.getOtherCli()->trantorian->direction = DIR_UP;
+
+    POS_X(sc.getClient()) = 1;
+    POS_Y(sc.getClient()) = 1;
+
+    POS_X(sc.getOtherCli()) = 1;
+    POS_Y(sc.getOtherCli()) = 1;
+
+    sc.startTest();
+    eject_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+    EXPECT_EQ(sc.getResOtherCli(), "eject: 1\n");
+
+    EXPECT_EQ(POS_X(sc.getClient()), 1);
+    EXPECT_EQ(POS_Y(sc.getClient()), 1);
+
+    EXPECT_EQ(POS_X(sc.getOtherCli()), 1);
+    EXPECT_EQ(POS_Y(sc.getOtherCli()), 0);
+}
+
+TEST(TestEject, Basic4)
+{
+    sc.getClient()->trantorian->state = TRANT_LIVING;
+    sc.getOtherCli()->trantorian->state = TRANT_LIVING;
+
+    sc.getClient()->trantorian->direction = DIR_LEFT;
+    sc.getOtherCli()->trantorian->direction = DIR_UP;
+
+    POS_X(sc.getClient()) = 1;
+    POS_Y(sc.getClient()) = 1;
+
+    POS_X(sc.getOtherCli()) = 1;
+    POS_Y(sc.getOtherCli()) = 1;
+
+    sc.startTest();
+    eject_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+    EXPECT_EQ(sc.getResOtherCli(), "eject: 7\n");
+
+    EXPECT_EQ(POS_X(sc.getClient()), 1);
+    EXPECT_EQ(POS_Y(sc.getClient()), 1);
+
+    EXPECT_EQ(POS_X(sc.getOtherCli()), 0);
+    EXPECT_EQ(POS_Y(sc.getOtherCli()), 1);
+}
+
+TEST(TestEject, Failure)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    POS_X(sc.getOtherCli()) = 1;
+    POS_Y(sc.getOtherCli()) = 1;
+
+    sc.startTest();
+    eject_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ko\n");
+}
