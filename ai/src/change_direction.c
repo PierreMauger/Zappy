@@ -31,7 +31,7 @@ static bool go_to_good_direction_y_s(client_t *client, int dest, int src)
     return true;
 }
 
-static bool go_to_good_direction_y(client_t *client, int dest, int src)
+bool go_to_good_direction_y(client_t *client, int dest, int src)
 {
     if (src < dest && client->player->dir != South) {
         if (client->player->dir == East && !send_message(client->
@@ -79,7 +79,7 @@ static bool go_to_good_direction_x_s(client_t *client, int dest, int src)
     return true;
 }
 
-static bool go_to_good_direction_x(client_t *client, int dest, int src)
+bool go_to_good_direction_x(client_t *client, int dest, int src)
 {
     if (src < dest && client->player->dir != East) {
         if (client->player->dir == North && !send_message(client->

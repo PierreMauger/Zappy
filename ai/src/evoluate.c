@@ -26,8 +26,9 @@ bool ask_player(client_t *client, size_t nb_need, char level)
     char *com = NULL;
 
     if (get_player_same_level(client, (level - '0')) != nb_need) {
-        com = calloc(1, sizeof(char) * (13));
-        strcat(strncat(strcat(com, "Broadcast "), &level, 1), "\n");
+        if (asprintf(&com, "Broadcast %s %c\n",
+            client->player->team_name, level) == -1)
+            return false;
         if (client->pending_commands->lenght < 10 && !send_message(client->
             pending_commands, client->command, client->socket, com)) {
             fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);

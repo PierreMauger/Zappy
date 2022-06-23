@@ -9,12 +9,15 @@
 
 void interpret_message(client_t *client, char *message, size_t direction)
 {
-    size_t level = atoi(message);
+    char *team_name = get_one_word(message);
+    size_t level = atoi(go_next_chr(message, ' '));
 
     if (level == 0)
         return;
-    if (level == client->player->level)
+    if (level == client->player->level &&
+        strcmp(team_name, client->player->team_name) == 0)
         client->player->broadcast_direction = direction;
+    free(team_name);
 }
 
 bool message_broadcast(client_t *client, char *str)

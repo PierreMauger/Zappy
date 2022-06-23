@@ -129,10 +129,14 @@ bool message_broadcast(client_t *client, char *str);
 void sig_handler(int signum);
 
 bool ai(client_t *client);
+bool basic_command(client_t *client);
+bool go_to_broadcast_direction(client_t *client);
 bool path_finding_object(client_t *client, char *object);
 bool go_to_next_object(client_t *client, int dest_x, int dest_y);
 bool get_food_in_cell(client_t *client, size_t x, size_t y);
 bool get_object(client_t *client, size_t nb, size_t needed, char *object);
+bool go_to_good_direction_x(client_t *client, int dest, int src);
+bool go_to_good_direction_y(client_t *client, int dest, int src);
 
 int round_map(client_t *client, int pos, bool is_x);
 void find_closest_round(client_t *client, int *dest_x, int *dest_y);
