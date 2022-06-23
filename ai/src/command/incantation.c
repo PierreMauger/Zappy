@@ -14,5 +14,7 @@ int incantation(client_t *client, char *str)
         client->player->level++;
         return 0;
     }
+    printf("<%s>\n", str);
+    exit(8);
     return 1;
 }

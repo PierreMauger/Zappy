@@ -32,28 +32,24 @@ bool change_stone_in_cell(
 
 bool drop_stone_needed(client_t *client, inventory_t inv, inventory_t cell_inv)
 {
-    if (cell_inv.linemate > inv.linemate
+    if (cell_inv.linemate < inv.linemate
         && !change_stone_in_cell(client, "Set", "linemate", inv))
         return false;
-    if (cell_inv.deraumere > inv.deraumere
+    if (cell_inv.deraumere < inv.deraumere
         && !change_stone_in_cell(client, "Set", "deraumere", inv))
         return false;
-    if (cell_inv.sibur > inv.sibur
+    if (cell_inv.sibur < inv.sibur
         && !change_stone_in_cell(client, "Set", "sibur", inv))
         return false;
-    if (cell_inv.mendiane > inv.mendiane
+    if (cell_inv.mendiane < inv.mendiane
         && !change_stone_in_cell(client, "Set", "mendiane", inv))
         return false;
-    if (cell_inv.phiras > inv.phiras
+    if (cell_inv.phiras < inv.phiras
         && !change_stone_in_cell(client, "Set", "phiras", inv))
         return false;
-    if (cell_inv.thystame > inv.thystame
+    if (cell_inv.thystame < inv.thystame
         && !change_stone_in_cell(client, "Set", "thystame", inv))
         return false;
-    print_inventory(client->player->inv);
-    print_inventory(&cell_inv);
-    print_inventory(&inv);
-    exit(9);
     return true;
 }
 

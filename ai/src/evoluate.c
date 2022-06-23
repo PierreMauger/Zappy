@@ -11,7 +11,7 @@ size_t get_player_same_level(client_t *client, int level)
 {
     size_t y = client->player->pos.y;
     size_t x = client->player->pos.x;
-    size_t nb = 0;
+    size_t nb = 1;
     node_t *node;
 
     foreach (client->map[y][x].player->head, node) {
