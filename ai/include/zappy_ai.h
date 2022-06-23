@@ -118,6 +118,8 @@ void free_client(client_t *client);
 bool init_client(arg_t *arg);
 
 bool send_message(list_t *pending, list_t *list, socket_t *socket, char *mess);
+bool send_message_comm(client_t *client, char *com);
+bool send_message_comm_false(client_t *client, char *com);
 
 int read_stdin(client_t *client);
 

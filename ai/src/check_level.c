@@ -50,6 +50,10 @@ bool drop_stone_needed(client_t *client, inventory_t inv, inventory_t cell_inv)
     if (cell_inv.thystame > inv.thystame
         && !change_stone_in_cell(client, "Set", "thystame", inv))
         return false;
+    print_inventory(client->player->inv);
+    print_inventory(&cell_inv);
+    print_inventory(&inv);
+    exit(9);
     return true;
 }
 
@@ -84,8 +88,6 @@ bool check_level_1(client_t *client)
 
     if (client->player->inv->linemate < 1)
         return false;
-    printf("ici\n");
-    exit(0);
     if (!take_everything(client, inventory, cell_inv))
         return false;
     return (drop_stone_needed(client, inventory, cell_inv));

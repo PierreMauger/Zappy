@@ -97,8 +97,11 @@ bool path_finding_object(client_t *client, char *object)
     size_t y = client->player->pos.y;
     size_t save = client->player->number;
 
-    if (string_to_number_object(client->map[y][x], object) > 0)
-        return (get_food_in_cell(client, x, y));
+    if (string_to_number_object(client->map[y][x], object) > 0) {
+        if (strcmp(object, "food") == 0)
+            return (get_food_in_cell(client, x, y));
+        return true;
+    }
     client->player->number = 1;
     if (!scan_path_finding(client, &x, &y, object)) {
         client->player->number = save;
@@ -107,5 +110,7 @@ bool path_finding_object(client_t *client, char *object)
     client->player->number = save;
     if (!go_to_next_object(client, (int)x, (int)y))
         return false;
-    return (get_food_in_cell(client, x, y));
+    if (strcmp(object, "food") == 0)
+        return (get_food_in_cell(client, x, y));
+    return true;
 }

@@ -48,7 +48,7 @@ bool level_1(client_t *client)
 {
     if (client->player->inv->linemate < 1) {
         if (!path_finding_object(client, "linemate"))
-            return false;
+            return send_message_comm_false(client, "Forward");
         if (!get_object(client, client->player->inv->linemate, 1, "linemate"))
             return false;
     }
@@ -60,19 +60,19 @@ bool level_2(client_t *client)
 {
     if (client->player->inv->linemate < 1) {
         if (!path_finding_object(client, "linemate"))
-            return false;
+            return send_message_comm_false(client, "Forward");
         if (!get_object(client, client->player->inv->linemate, 1, "linemate"))
             return false;
     }
     if (client->player->inv->deraumere < 1) {
         if (!path_finding_object(client, "deraumere"))
-            return false;
+            return send_message_comm_false(client, "Forward");
         if (!get_object(client, client->player->inv->deraumere, 1, "deraumere"))
             return false;
     }
     if (client->player->inv->sibur < 1) {
         if (!path_finding_object(client, "sibur"))
-            return false;
+            return send_message_comm_false(client, "Forward");
         if (!get_object(client, client->player->inv->sibur, 1, "sibur"))
             return false;
     }

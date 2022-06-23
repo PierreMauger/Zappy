@@ -7,6 +7,26 @@
 
 #include "zappy_ai.h"
 
+bool send_message_comm_false(client_t *client, char *com)
+{
+    if (client->pending_commands->lenght < 10 && !send_message(
+        client->pending_commands, client->command, client->socket, com)) {
+        fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
+        return false;
+    }
+    return false;
+}
+
+bool send_message_comm(client_t *client, char *com)
+{
+    if (!send_message(
+        client->pending_commands, client->command, client->socket, com)) {
+        fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
+        return false;
+    }
+    return true;
+}
+
 player_t *create_player()
 {
     player_t *player = calloc(1, sizeof(player_t));
