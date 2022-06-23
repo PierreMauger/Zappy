@@ -85,6 +85,8 @@ bool ai(client_t *client)
             return false;
         }
     }
+    else if (client->player->broadcast_direction != 0)
+        go_to_broadcast_direction(client);
     else
         try_evoluate(client);
     return remove_surplus_command(client);

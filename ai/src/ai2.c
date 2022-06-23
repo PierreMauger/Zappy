@@ -7,6 +7,23 @@
 
 #include "zappy_ai.h"
 
+bool go_to_broadcast_direction(client_t *client)
+{
+    int x = client->player->pos.x;
+    int y = client->player->pos.y;
+    size_t d = client->player->broadcast_direction;
+
+    if (d == 1 || d == 2 || d == 8)
+        return(go_to_good_direction_y(client, y - 1, client->player->pos.y));
+    if (d == 4 || d == 5 || d == 6)
+        return(go_to_good_direction_y(client, y + 1, client->player->pos.y));
+    if (d == 3)
+        return(go_to_good_direction_x(client, x - 1, client->player->pos.x));
+    if (d == 7)
+        return(go_to_good_direction_x(client, x + 1, client->player->pos.x));
+    return true;
+}
+
 bool basic_command(client_t *client)
 {
     if (!send_message(client->pending_commands,
