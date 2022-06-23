@@ -72,6 +72,7 @@ typedef struct trantorian_s {
     size_t level;
     pos_t pos;
     direction_e direction;
+    bool lvl_up;
 } trantorian_t;
 
 trantorian_t *trantorian_create(team_t *team, size_t map_x, size_t map_y,

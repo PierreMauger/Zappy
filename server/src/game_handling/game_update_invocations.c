@@ -8,6 +8,10 @@
 #include "utils.h"
 #include "core.h"
 
+static const size_t player_needed[] = {
+    1, 2, 2, 4, 4, 6, 6
+};
+
 static char *get_level_str(size_t new_lvl)
 {
     char *buff = NULL;
@@ -15,6 +19,28 @@ static char *get_level_str(size_t new_lvl)
     if (asprintf(&buff, "Current level: %ld\n", new_lvl) == -1)
         return NULL;
     return buff;
+}
+
+static bool check_remove_bad_pos(incantation_t *incantation)
+{
+    node_t *node = NULL;
+    node_t *safe = NULL;
+    trantorian_t *temp = NULL;
+    size_t available = 0;
+
+    foreach_safe(incantation->trantorians->head, node, safe) {
+        temp = (trantorian_t *)node->data;
+        if (temp->pos.x == incantation->pos.x &&
+                temp->pos.y == incantation->pos.y) {
+            available++;
+            temp->lvl_up = true;
+        } else {
+            temp->lvl_up = true;
+        }
+    }
+    if (available < player_needed[incantation->level - IDX])
+        return false;
+    return true;
 }
 
 static void game_increase_trantorians_level(core_t *core,
@@ -26,7 +52,8 @@ static void game_increase_trantorians_level(core_t *core,
 
     foreach(incantation->trantorians->head, node) {
         trant = (trantorian_t *)node->data;
-        trant->level++;
+        if (trant->lvl_up == true)
+            trant->level++;
         temp = get_level_str(trant->level);
         if (temp == NULL) {
             fprintf(stderr, "[ERROR] Malloc failed\n");
@@ -42,6 +69,10 @@ static bool game_update_invocation(core_t *core, incantation_t *incantation)
         incantation->it_rem--;
         return false;
     }
+    if (incantation_check_tile(core->game->map,
+            &incantation->pos, incantation->level) == false ||
+            check_remove_bad_pos(incantation) == false)
+        return false;
     game_increase_trantorians_level(core, incantation);
     return true;
 }
