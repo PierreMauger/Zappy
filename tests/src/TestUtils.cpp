@@ -7,6 +7,38 @@
 
 #include "tests.hpp"
 
+TEST(TestGameCalcAngle, Basic1)
+{
+    pos_t pos_a = {0, 0};
+    pos_t pos_b = {3, 4};
+
+    EXPECT_EQ(game_calc_angle_degrees(&pos_a, &pos_b), 323);
+}
+
+TEST(TestGameCalcAngle, Basic2)
+{
+    pos_t pos_a = {0, 0};
+    pos_t pos_b = {3, -4};
+
+    EXPECT_EQ(game_calc_angle_degrees(&pos_a, &pos_b), 216);
+}
+
+TEST(TestGameCalcAngle, Basic3)
+{
+    pos_t pos_a = {0, 0};
+    pos_t pos_b = {-3, -4};
+
+    EXPECT_EQ(game_calc_angle_degrees(&pos_a, &pos_b), 143);
+}
+
+TEST(TestGameCalcAngle, Basic4)
+{
+    pos_t pos_a = {0, 0};
+    pos_t pos_b = {-3, 4};
+
+    EXPECT_EQ(game_calc_angle_degrees(&pos_a, &pos_b), 36);
+}
+
 TEST(TestGameCalcVectorCoord, SimpleTest)
 {
     pos_t map_size = {10, 10};
@@ -20,15 +52,6 @@ TEST(TestGameCalcVectorCoord, SimpleTest)
     EXPECT_EQ(res->y, 2);
 
     free(res);
-}
-
-TEST(TestGameCalcAngle, Basic)
-{
-    vector_t vect = {-5, 1};
-
-    size_t res = game_calc_angle_degrees(&vect);
-
-    EXPECT_EQ(res, 11);
 }
 
 TEST(TestGameCalcVectorCoord, DifferentPathTest)
@@ -89,40 +112,4 @@ TEST(TestGameCalcVectorCoord, SameAxe)
     EXPECT_EQ(res->y, -4);
 
     free(res);
-}
-
-TEST(TestGameCalcAngle, RightUp)
-{
-    vector_t vect = {2, 1};
-
-    size_t res = game_calc_angle_degrees(&vect);
-
-    EXPECT_EQ(res, 26);
-}
-
-TEST(TestGameCalcAngle, RightDown)
-{
-    vector_t vect = {2, -1};
-
-    size_t res = game_calc_angle_degrees(&vect);
-
-    EXPECT_EQ(res, 26);
-}
-
-TEST(TestGameCalcAngle, LeftDown)
-{
-    vector_t vect = {-2, -1};
-
-    size_t res = game_calc_angle_degrees(&vect);
-
-    EXPECT_EQ(res, 26);
-}
-
-TEST(TestGameCalcAngle, LeftUp)
-{
-    vector_t vect = {-2, 1};
-
-    size_t res = game_calc_angle_degrees(&vect);
-
-    EXPECT_EQ(res, 26);
 }

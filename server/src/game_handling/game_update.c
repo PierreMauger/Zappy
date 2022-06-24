@@ -34,6 +34,6 @@ void game_update(core_t *core)
         game_update_incantations(core);
         game_update_handlers(core);
         game_update_trantorians(core);
-        game_update_map(core->game->map);
+        game_update_map(core->game->trantorians, core->game->map);
     }
 }

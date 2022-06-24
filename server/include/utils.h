@@ -28,8 +28,8 @@
     #define UNUSED __attribute__((unused))
 
 typedef struct {
-    size_t x;
-    size_t y;
+    ssize_t x;
+    ssize_t y;
 } pos_t;
 
 typedef struct {

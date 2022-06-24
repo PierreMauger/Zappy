@@ -38,18 +38,18 @@ typedef enum {
 } direction_e;
 
 typedef enum {
-    TILE_ONE = 1,
-    TILE_THREE = 3,
-    TILE_FIVE = 5,
-    TILE_SEVEN = 7,
-
-    TILE_TWO = 2,
-    TILE_FOUR = 4,
-    TILE_SIX = 6,
-    TILE_EIGHT = 8,
-
     TILE_ZERO,
-    TILE_NONE = 0,
+
+    TILE_ONE,
+    TILE_TWO,
+    TILE_THREE,
+    TILE_FOUR,
+    TILE_FIVE,
+    TILE_SIX,
+    TILE_SEVEN,
+    TILE_EIGHT,
+
+    TILE_NONE,
 } dir_tile_e;
 
 typedef enum {

@@ -43,3 +43,18 @@ int trantorian_replace(core_t *core, team_t *team, trantorian_t *trantorian)
     }
     return ERROR;
 }
+
+bool game_is_trant_on_tile(list_t *trantorians, map_t *map, size_t tile)
+{
+    node_t *node = NULL;
+    trantorian_t *trant = NULL;
+
+    if (trantorians == NULL)
+        return false;
+    foreach(trantorians->head, node) {
+        trant = (trantorian_t *)node->data;
+        if (GET_COORD(map, trant->pos.x, trant->pos.y) == tile)
+            return true;
+    }
+    return false;
+}
