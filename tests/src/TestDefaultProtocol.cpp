@@ -19,7 +19,7 @@ TEST(TestGameCalcDirSound, Basic1)
     core->game->map->height = 10;
 
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
-        TILE_EIGHT);
+        TILE_SIX);
 
     core->game->map->width = 3;
     core->game->map->height = 3;
@@ -35,7 +35,7 @@ TEST(TestGameCalcDirSound, Basic2)
     core->game->map->height = 10;
 
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_RIGHT, &pos_b, &pos_a),
-        TILE_TWO);
+        TILE_EIGHT);
 
     core->game->map->width = 3;
     core->game->map->height = 3;
@@ -51,7 +51,7 @@ TEST(TestGameCalcDirSound, Basic3)
     core->game->map->height = 10;
 
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_DOWN, &pos_b, &pos_a),
-        TILE_FOUR);
+        TILE_TWO);
 
     core->game->map->width = 3;
     core->game->map->height = 3;
@@ -67,7 +67,7 @@ TEST(TestGameCalcDirSound, Basic4)
     core->game->map->height = 10;
 
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_LEFT, &pos_b, &pos_a),
-        TILE_SIX);
+        TILE_FOUR);
 
     core->game->map->width = 3;
     core->game->map->height = 3;
@@ -83,7 +83,7 @@ TEST(TestGameCalcDirSound, Basic5)
     core->game->map->height = 10;
 
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
-        TILE_THREE);
+        TILE_TWO);
 
     core->game->map->width = 3;
     core->game->map->height = 3;
@@ -98,8 +98,8 @@ TEST(TestGameCalcDirSound, Basic6)
     core->game->map->width = 10;
     core->game->map->height = 10;
 
-    EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
-        TILE_THREE);
+    EXPECT_EQ(game_calc_direction(core->game->map, DIR_RIGHT, &pos_b, &pos_a),
+        TILE_FIVE);
 
     core->game->map->width = 3;
     core->game->map->height = 3;
@@ -124,6 +124,22 @@ TEST(TestGameCalcDirSound, Basic7)
 TEST(TestGameCalcDirSound, Basic8)
 {
     core_t *core = sc.getCore();
+    pos_t pos_a = {3, 6};
+    pos_t pos_b = {8, 5};
+
+    core->game->map->width = 10;
+    core->game->map->height = 10;
+
+    EXPECT_EQ(game_calc_direction(core->game->map, DIR_LEFT, &pos_b, &pos_a),
+        TILE_ONE);
+
+    core->game->map->width = 3;
+    core->game->map->height = 3;
+}
+
+TEST(TestGameCalcDirSound, Basic9)
+{
+    core_t *core = sc.getCore();
     pos_t pos_a = {5, 8};
     pos_t pos_b = {6, 3};
 
@@ -131,13 +147,13 @@ TEST(TestGameCalcDirSound, Basic8)
     core->game->map->height = 10;
 
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
-        TILE_FIVE);
+        TILE_EIGHT);
 
     core->game->map->width = 3;
     core->game->map->height = 3;
 }
 
-TEST(TestGameCalcDirSound, Basic9)
+TEST(TestGameCalcDirSound, Basic10)
 {
     core_t *core = sc.getCore();
     pos_t pos_a = {6, 3};
@@ -147,7 +163,7 @@ TEST(TestGameCalcDirSound, Basic9)
     core->game->map->height = 10;
 
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
-        TILE_ONE);
+        TILE_FOUR);
 
     core->game->map->width = 3;
     core->game->map->height = 3;
@@ -217,9 +233,19 @@ TEST(TestGameCalcDirSound, SameAxe4)
     core->game->map->height = 3;
 }
 
-TEST(TestCommandBroadCast, Basic)
+TEST(TestCommandBroadCast, Basic1)
 {
     char *msg = strdup("MESSAGE");
+
+    sc.getClient()->trantorian->pos.x = 1;
+    sc.getClient()->trantorian->pos.y = 1;
+
+    sc.getClient()->trantorian->direction = DIR_UP;
+
+    sc.getOtherCli()->trantorian->pos.x = 2;
+    sc.getOtherCli()->trantorian->pos.y = 2;
+
+    sc.getOtherCli()->trantorian->direction = DIR_UP;
 
     sc.startTest();
     broadcast_e(sc.getCore(), sc.getClient(), msg);
@@ -230,6 +256,8 @@ TEST(TestCommandBroadCast, Basic)
 
     free(msg);
 }
+
+// add more tests
 
 TEST(TestTakeCast, Basic)
 {
@@ -333,6 +361,12 @@ TEST(TestCommandLook, WithMapElem1)
     POS_X(sc.getClient()) = 0;
     POS_Y(sc.getClient()) = 0;
 
+    sc.getClient()->trantorian->pos.x = 0;
+    sc.getClient()->trantorian->pos.y = 0;
+
+    sc.getOtherCli()->trantorian->pos.x = 2;
+    sc.getOtherCli()->trantorian->pos.y = 2;
+
     sc.getClient()->trantorian->level = 1;
     sc.getClient()->trantorian->direction = DIR_UP;
 
@@ -352,6 +386,12 @@ TEST(TestCommandLook, WithMapElem2)
     POS_X(sc.getClient()) = 0;
     POS_Y(sc.getClient()) = 0;
 
+    sc.getClient()->trantorian->pos.x = 0;
+    sc.getClient()->trantorian->pos.y = 0;
+
+    sc.getOtherCli()->trantorian->pos.x = 2;
+    sc.getOtherCli()->trantorian->pos.y = 2;
+
     sc.getClient()->trantorian->level = 1;
     sc.getClient()->trantorian->direction = DIR_UP;
 
@@ -368,6 +408,12 @@ TEST(TestCommandLook, WithMapElem3)
 {
     POS_X(sc.getClient()) = 0;
     POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->pos.x = 0;
+    sc.getClient()->trantorian->pos.y = 0;
+
+    sc.getOtherCli()->trantorian->pos.x = 2;
+    sc.getOtherCli()->trantorian->pos.y = 2;
 
     sc.getClient()->trantorian->level = 1;
     sc.getClient()->trantorian->direction = DIR_RIGHT;
@@ -386,6 +432,12 @@ TEST(TestCommandLook, WithMapElem4)
     POS_X(sc.getClient()) = 0;
     POS_Y(sc.getClient()) = 0;
 
+    sc.getClient()->trantorian->pos.x = 0;
+    sc.getClient()->trantorian->pos.y = 0;
+
+    sc.getOtherCli()->trantorian->pos.x = 2;
+    sc.getOtherCli()->trantorian->pos.y = 2;
+
     sc.getClient()->trantorian->level = 1;
     sc.getClient()->trantorian->direction = DIR_DOWN;
 
@@ -403,6 +455,12 @@ TEST(TestCommandLook, WithMapElem5)
     POS_X(sc.getClient()) = 0;
     POS_Y(sc.getClient()) = 0;
 
+    sc.getClient()->trantorian->pos.x = 0;
+    sc.getClient()->trantorian->pos.y = 0;
+
+    sc.getOtherCli()->trantorian->pos.x = 2;
+    sc.getOtherCli()->trantorian->pos.y = 2;
+
     sc.getClient()->trantorian->level = 1;
     sc.getClient()->trantorian->direction = DIR_LEFT;
 
@@ -419,6 +477,12 @@ TEST(TestCommandLook, WithMapElems)
 {
     POS_X(sc.getClient()) = 0;
     POS_Y(sc.getClient()) = 0;
+
+    sc.getClient()->trantorian->pos.x = 0;
+    sc.getClient()->trantorian->pos.y = 0;
+
+    sc.getOtherCli()->trantorian->pos.x = 2;
+    sc.getOtherCli()->trantorian->pos.y = 2;
 
     sc.getClient()->trantorian->level = 1;
     sc.getClient()->trantorian->direction = DIR_UP;

@@ -38,13 +38,16 @@ vector_t *game_calc_vector(size_t map_x, size_t map_y,
     return res;
 }
 
-size_t game_calc_angle_degrees(vector_t *vector)
+size_t game_calc_angle_degrees(pos_t *a, pos_t *b)
 {
-    long double res = 0;
+    double tan_a = atan2((double)a->y, (double)a->x);
+    double tan_b = atan2((double)b->y, (double)b->x);
+    double res = (tan_b - tan_a) * (180.0 / M_PI);
 
-    res = atanl((long double)llabs(vector->y) / (long double)llabs(vector->x));
-    res /= (M_PI * 2);
-    res *= 360;
+    if (res < 0)
+        res += 360.0;
+    res -= 90.0;
+    if (res < 0)
+        res += 360.0;
     return (size_t)res;
 }
-    // return 180 - ((size_t)res + 90);
