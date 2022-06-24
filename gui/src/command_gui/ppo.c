@@ -7,7 +7,7 @@
 
 #include "zappy_gui.h"
 
-static bool split_ppo(node_t *node, char *save, char *uuid)
+static bool split_ppo(client_t *client, node_t *node, char *save, char *uuid)
 {
     char *temp = NULL;
 
@@ -19,7 +19,7 @@ static bool split_ppo(node_t *node, char *save, char *uuid)
     save = move_str(save);
     if (!(temp = get_one_word(save)))
         return false;
-    ((player_t *)node->data)->pos.y = atoi(temp);
+    ((player_t *)node->data)->pos.y = (client->size_map.x - 1) - atoi(temp);
     free(temp);
     save = move_str(save);
     if (!(temp = get_one_word(save)))
@@ -49,7 +49,7 @@ int ppo(client_t *client, char *str)
         if (strcmp(((player_t *)node->data)->uuid, uuid) == 0)
             break;
     }
-    if (!split_ppo(node, save, uuid))
+    if (!split_ppo(client, node, save, uuid))
         fprintf(stderr, "%s[ERROR]%s can't malloc ppo", R, W);
     return 0;
 }

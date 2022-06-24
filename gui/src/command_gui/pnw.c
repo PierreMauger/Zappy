@@ -54,7 +54,7 @@ static player_t *create_player(client_t *client, char *str)
     free(temp);
     save = move_str(save);
     temp = get_one_word(save);
-    player->pos.y = atoi(temp);
+    player->pos.y = (client->size_map.x - 1) - atoi(temp);
     free(temp);
     save = move_str(save);
     temp = get_one_word(save);

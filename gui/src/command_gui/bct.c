@@ -11,7 +11,7 @@ static char *fill_inventory(client_t *client, char *str)
 {
     size_t x = atoi(str);
     char *save = go_next_space(str);
-    size_t y = atoi(save);
+    size_t y = (client->size_map.x - 1) - atoi(save);
 
     save = go_next_space(save);
     client->map[y][x].inv->food = atoi(save);
