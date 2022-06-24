@@ -196,7 +196,7 @@ void game_destroy_pos_to_look(pos_t **to_look);
 pos_t **game_init_pos_to_look(size_t amount);
 char *game_get_look_ressource_str(const char *ressource, size_t amount,
     char *str);
-char *game_get_players_on_tile(core_t *core, client_t *client, pos_t pos,
+char *game_get_players_on_tile(core_t *core, client_t *client, pos_t *pos,
     char *buff);
 size_t game_look_filter_coord(ssize_t coord, size_t max_pos);
 void game_incr_trant_pos(map_t *map, trantorian_t *trant,

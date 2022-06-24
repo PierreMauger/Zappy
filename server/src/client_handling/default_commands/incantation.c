@@ -25,8 +25,6 @@ bool incantation_check_tile(map_t *map, pos_t *pos, size_t level)
 {
     inventory_t *inventory = GET_CELL(map, pos->x, pos->y);
 
-     printf("%ld %ld %ld %ld %ld %ld %ld\n",
-        inventory->food, inventory->linemate, inventory->deraumere, inventory->sibur, inventory->mendiane, inventory->phiras, inventory->thystame);
     for (size_t i = 1; i < RESSOURCES_NBR; i++) {
         if (((size_t *)inventory)[i] !=
             ((size_t *)(&stones_needed[level - IDX]))[i])

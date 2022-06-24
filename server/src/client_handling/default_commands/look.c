@@ -74,8 +74,7 @@ static void game_print_look_ret(core_t *core, client_t *client,
     if (buff == NULL)
         return game_return_error_malloc(core, client);
     for (size_t i = 0; i < nbr; i++) {
-        buff = game_get_players_on_tile(core, client,
-            (pos_t){to_look[i]->x, to_look[i]->y}, buff);
+        buff = game_get_players_on_tile(core, client, to_look[i], buff);
         if (buff == NULL)
             return;
         buff = game_look_browse_inventory(core, client,
