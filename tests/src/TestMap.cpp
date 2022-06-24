@@ -23,17 +23,17 @@ TEST(TestMapDispatch, Basic)
     EXPECT_TRUE(map != nullptr);
     EXPECT_TRUE(map->map != nullptr);
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 25; i++) {
         EXPECT_TRUE(map->map[i]->food == 0 || map->map[i]->food == 1);
     }
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 25; i++) {
         EXPECT_TRUE(map->map[i]->food == 0 || map->map[i]->food == 1);
     }
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 25; i++) {
         EXPECT_TRUE(map->map[i]->food == 1 || map->map[i]->food == 2);
     }
@@ -48,17 +48,17 @@ TEST(TestMapDispatch, LittleMap)
     EXPECT_TRUE(map != nullptr);
     EXPECT_TRUE(map->map != nullptr);
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 4; i++) {
         EXPECT_TRUE(map->map[i]->food == 0 || map->map[i]->food == 1);
     }
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 4; i++) {
         EXPECT_EQ(map->map[i]->food, 1);
     }
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 4; i++) {
         EXPECT_TRUE(map->map[i]->food == 1 || map->map[i]->food == 2);
     }
@@ -73,17 +73,17 @@ TEST(TestMapDispatch, BigMap)
     EXPECT_TRUE(map != nullptr);
     EXPECT_TRUE(map->map != nullptr);
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 25000; i++) {
         EXPECT_TRUE(map->map[i]->food == 0 || map->map[i]->food == 1);
     }
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 25000; i++) {
         EXPECT_EQ(map->map[i]->food, 1);
     }
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 25000; i++) {
         EXPECT_TRUE(map->map[i]->food == 1 || map->map[i]->food == 2);
     }
@@ -98,17 +98,17 @@ TEST(TestMapDispatch, RectangleMap)
     EXPECT_TRUE(map != nullptr);
     EXPECT_TRUE(map->map != nullptr);
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 3000; i++) {
         EXPECT_TRUE(map->map[i]->food == 0 || map->map[i]->food == 1);
     }
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 3000; i++) {
         EXPECT_EQ(map->map[i]->food, 1);
     }
 
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(NULL, map);
     for (size_t i = 0; i < 3000; i++) {
         EXPECT_TRUE(map->map[i]->food == 1 || map->map[i]->food == 2);
     }

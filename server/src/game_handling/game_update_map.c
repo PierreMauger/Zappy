@@ -24,13 +24,16 @@ static void game_init_map_content(map_t *map, inventory_t *map_content)
             (size_t)((double)(map->width * map->height) * density[i]);
 }
 
-static void game_map_add_ressource(map_t *map, size_t ressource, size_t tile)
+static void game_map_add_ressource(list_t *trantorians, map_t *map,
+    size_t ressource, size_t tile)
 {
+    if (game_is_trant_on_tile(trantorians, map, tile) == true)
+        return;
     if (((size_t *)(map->map[tile]))[ressource] < UNIT_MAX)
         ((size_t *)(map->map[tile]))[ressource]++;
 }
 
-static void game_dispatch(map_t *map, pos_t **map_content,
+static void game_dispatch(list_t *trantorians, map_t *map, pos_t **map_content,
     inventory_t *nb_ressources)
 {
     size_t total = 0;
@@ -44,7 +47,7 @@ static void game_dispatch(map_t *map, pos_t **map_content,
             if (cells_rem == 0)
                 cells_rem = game_fill_map_dup(map, map_content);
             random_idx = rand() % cells_rem;
-            game_map_add_ressource(map, ressource, GET_COORD(map,
+            game_map_add_ressource(trantorians, map, ressource, GET_COORD(map,
                 map_content[random_idx]->x, map_content[random_idx]->y));
             game_map_dup_delete_idx(map_content, random_idx, cells_rem);
             cells_rem--;
@@ -53,7 +56,7 @@ static void game_dispatch(map_t *map, pos_t **map_content,
     }
 }
 
-void game_dispatch_ressources(map_t *map)
+void game_dispatch_ressources(list_t *trantorians, map_t *map)
 {
     pos_t **map_content = game_init_map_dup(map);
     inventory_t nb_ressources = {0};
@@ -63,11 +66,11 @@ void game_dispatch_ressources(map_t *map)
         return;
     }
     game_init_map_content(map, &nb_ressources);
-    game_dispatch(map, map_content, &nb_ressources);
+    game_dispatch(trantorians, map, map_content, &nb_ressources);
     game_destroy_map_dup(map, map_content);
 }
 
-void game_update_map(map_t *map)
+void game_update_map(list_t *trantorians, map_t *map)
 {
     static size_t refresh = 1;
 
@@ -75,5 +78,5 @@ void game_update_map(map_t *map)
     if (refresh > 0)
         return;
     refresh = MAP_REFRESH;
-    game_dispatch_ressources(map);
+    game_dispatch_ressources(trantorians, map);
 }

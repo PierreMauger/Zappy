@@ -166,7 +166,7 @@ int server_loop(core_t *core);
 trantorian_t *game_get_trantorian(core_t *core, char *uuid);
 void game_remove_trantorian(core_t *core, trantorian_t *trantorian);
 
-void game_update_map(map_t *map);
+void game_update_map(list_t *trantorians, map_t *map);
 void game_update_handler(core_t *core, client_t *client);
 void game_update_handlers(core_t *core);
 void game_update_trantorians(core_t *core);
@@ -180,7 +180,7 @@ size_t game_calc_angle_degrees(pos_t *a, pos_t *b);
 dir_tile_e game_calc_direction(map_t *map, direction_e dir, pos_t *a,
     pos_t *b);
 
-void game_dispatch_ressources(map_t *map);
+void game_dispatch_ressources(list_t *trantorians, map_t *map);
 
 size_t game_fill_map_dup(map_t *map, pos_t **pos);
 size_t game_fill_map_dup_remaining(map_t *map, pos_t **pos,
@@ -190,6 +190,7 @@ void game_destroy_map_dup(map_t *map, pos_t **map_dup);
 pos_t **game_init_map_dup(map_t *map);
 
 size_t game_get_tile_nbr(size_t level);
+bool game_is_trant_on_tile(list_t *trantorians, map_t *map, size_t tile);
 
 void game_destroy_pos_to_look(pos_t **to_look);
 pos_t **game_init_pos_to_look(size_t amount);

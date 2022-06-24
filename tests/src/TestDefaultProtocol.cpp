@@ -363,10 +363,13 @@ TEST(TestSetCast, Error2)
     free(param);
 }
 
-TEST(TestCommandLook, Basic)
+TEST(TestCommandLook, Basic1)
 {
     POS_X(sc.getClient()) = 0;
     POS_Y(sc.getClient()) = 0;
+
+    POS_X(sc.getOtherCli()) = 1;
+    POS_Y(sc.getOtherCli()) = 1;
 
     sc.getClient()->trantorian->level = 1;
     sc.getClient()->trantorian->direction = DIR_UP;
@@ -375,7 +378,61 @@ TEST(TestCommandLook, Basic)
     look_e(sc.getCore(), sc.getClient(), NULL);
     sc.endTest();
 
-    EXPECT_EQ(sc.getRes(), "[player , , , ]\n");
+    EXPECT_EQ(sc.getRes(), "[player , , , player ]\n");
+}
+
+TEST(TestCommandLook, Basic2)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    POS_X(sc.getOtherCli()) = 1;
+    POS_Y(sc.getOtherCli()) = 1;
+
+    sc.getClient()->trantorian->level = 1;
+    sc.getClient()->trantorian->direction = DIR_RIGHT;
+
+    sc.startTest();
+    look_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "[player , player , , ]\n");
+}
+
+TEST(TestCommandLook, Basic3)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    POS_X(sc.getOtherCli()) = 1;
+    POS_Y(sc.getOtherCli()) = 1;
+
+    sc.getClient()->trantorian->level = 2;
+    sc.getClient()->trantorian->direction = DIR_DOWN;
+
+    sc.startTest();
+    look_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "[player , , , , , player , , , player ]\n");
+}
+
+TEST(TestCommandLook, Basic4)
+{
+    POS_X(sc.getClient()) = 0;
+    POS_Y(sc.getClient()) = 0;
+
+    POS_X(sc.getOtherCli()) = 2;
+    POS_Y(sc.getOtherCli()) = 2;
+
+    sc.getClient()->trantorian->level = 1;
+    sc.getClient()->trantorian->direction = DIR_DOWN;
+
+    sc.startTest();
+    look_e(sc.getCore(), sc.getClient(), NULL);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "[player , , , player ]\n");
 }
 
 TEST(TestCommandLook, WithMapElem1)
@@ -495,13 +552,18 @@ TEST(TestCommandLook, WithMapElem5)
     EXPECT_EQ(sc.getRes(), "[player , player , food , ]\n"); // other player
 }
 
-TEST(TestCommandLook, WithMapElems)
+TEST(TestCommandLook, WithMapMuchElems)
 {
-    POS_X(sc.getClient()) = 0;
-    POS_Y(sc.getClient()) = 0;
-
     sc.getClient()->trantorian->pos.x = 0;
     sc.getClient()->trantorian->pos.y = 0;
+
+    GET_CELL(sc.getCore()->game->map, 0, 0)->food = 0;
+    GET_CELL(sc.getCore()->game->map, 0, 0)->linemate = 0;
+    GET_CELL(sc.getCore()->game->map, 0, 0)->deraumere = 0;
+    GET_CELL(sc.getCore()->game->map, 0, 0)->sibur = 0;
+    GET_CELL(sc.getCore()->game->map, 0, 0)->mendiane = 0;
+    GET_CELL(sc.getCore()->game->map, 0, 0)->phiras = 0;
+    GET_CELL(sc.getCore()->game->map, 0, 0)->thystame = 0;
 
     sc.getOtherCli()->trantorian->pos.x = 2;
     sc.getOtherCli()->trantorian->pos.y = 2;
@@ -509,25 +571,25 @@ TEST(TestCommandLook, WithMapElems)
     sc.getClient()->trantorian->level = 1;
     sc.getClient()->trantorian->direction = DIR_UP;
 
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
-    game_dispatch_ressources(sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
 
     sc.startTest();
     look_e(sc.getCore(), sc.getClient(), NULL);
     sc.endTest();
 
-    EXPECT_TRUE(sc.getRes() != "[player , , , ]\n");
+    EXPECT_TRUE(strncmp(sc.getRes().c_str(), "[player ,", strlen("[player ,")) == 0);
 }
 
 TEST(TestConnectNbr, Basic)
@@ -842,6 +904,10 @@ TEST(TestIncantation, Level1)
     ASSERT_EQ(sc.getRes(), "Elevation underway\n");
 
     ((incantation_t *)(sc.getCore()->game->incantations->head->data))->it_rem = 0;
+
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
+    game_dispatch_ressources(sc.getCore()->game->trantorians, sc.getCore()->game->map);
 
     sc.startTest();
     game_update_incantations(sc.getCore());
