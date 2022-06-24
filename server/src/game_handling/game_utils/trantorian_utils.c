@@ -53,7 +53,8 @@ bool game_is_trant_on_tile(list_t *trantorians, map_t *map, size_t tile)
         return false;
     foreach(trantorians->head, node) {
         trant = (trantorian_t *)node->data;
-        if (GET_COORD(map, trant->pos.x, trant->pos.y) == tile)
+        if (trant->state == TRANT_LIVING &&
+                GET_COORD(map, trant->pos.x, trant->pos.y) == tile)
             return true;
     }
     return false;
