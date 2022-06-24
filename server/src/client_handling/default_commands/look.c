@@ -36,10 +36,10 @@ static void set_coord(client_t *client, map_t *map, pos_t **to_look,
         for (size_t j = 0; j < ((2 * i) + 1); j++, act_tile++) {
             x = dir_to_coef[idx_coef].invert == true ?
                 (POS_X(client) + i * (dir_to_coef[idx_coef].coef_2)) :
-                ((POS_X(client) + j) * (dir_to_coef[idx_coef].coef_1) - i *
+                ((POS_X(client)) + j * (dir_to_coef[idx_coef].coef_1) - i *
                     (dir_to_coef[idx_coef].coef_1));
             y = dir_to_coef[idx_coef].invert == true ?
-                ((POS_Y(client) + j) * (dir_to_coef[idx_coef].coef_1) - i *
+                ((POS_Y(client)) + j * (dir_to_coef[idx_coef].coef_1) - i *
                     (dir_to_coef[idx_coef].coef_1)) :
                 (POS_Y(client) + i * (dir_to_coef[idx_coef].coef_2));
             to_look[act_tile]->x = game_look_filter_coord(x, map->width);
@@ -73,7 +73,14 @@ static void game_print_look_ret(core_t *core, client_t *client,
 
     if (buff == NULL)
         return game_return_error_malloc(core, client);
+
+    printf("[DEBUG] pos: %ld %ld\n", client->trantorian->pos.x, client->trantorian->pos.y);
+    printf("[DEBUG] dir: %d\n", client->trantorian->direction);
+
     for (size_t i = 0; i < nbr; i++) {
+
+        printf("[DEBUG] look: %ld %ld\n", to_look[i]->x, to_look[i]->y);
+
         buff = game_get_players_on_tile(core, client,
             to_look[i], buff);
         if (buff == NULL)
