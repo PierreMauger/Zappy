@@ -73,14 +73,7 @@ static void game_print_look_ret(core_t *core, client_t *client,
 
     if (buff == NULL)
         return game_return_error_malloc(core, client);
-
-    printf("[DEBUG] pos: %ld %ld\n", client->trantorian->pos.x, client->trantorian->pos.y);
-    printf("[DEBUG] dir: %d\n", client->trantorian->direction);
-
     for (size_t i = 0; i < nbr; i++) {
-
-        printf("[DEBUG] look: %ld %ld\n", to_look[i]->x, to_look[i]->y);
-
         buff = game_get_players_on_tile(core, client,
             to_look[i], buff);
         if (buff == NULL)
