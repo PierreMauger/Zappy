@@ -23,6 +23,7 @@ CommandFixture::CommandFixture(void)
 
     this->client = client_create(0);
     this->client->trantorian = (trantorian_t *)this->core->game->trantorians->head->data;
+    this->client->trantorian->state = TRANT_LIVING;
     this->client->type = CLI_GUI;
     this->client->trantorian->client = this->client;
 
@@ -131,6 +132,8 @@ void CommandFixture::addClient(void)
     list_push_data(this->core->game->trantorians, trantorian);
 
     new_cli->trantorian = trantorian;
+
+    new_cli->trantorian->state = TRANT_LIVING;
     new_cli->type = CLI_DEFAULT;
 
     list_push_data(this->core->server->clients, new_cli);
