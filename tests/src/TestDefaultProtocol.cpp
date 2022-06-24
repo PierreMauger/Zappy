@@ -83,7 +83,7 @@ TEST(TestGameCalcDirSound, Basic5)
     core->game->map->height = 10;
 
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
-        TILE_TWO);
+        TILE_THREE);
 
     core->game->map->width = 3;
     core->game->map->height = 3;
@@ -147,7 +147,7 @@ TEST(TestGameCalcDirSound, Basic9)
     core->game->map->height = 10;
 
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
-        TILE_EIGHT);
+        TILE_ONE);
 
     core->game->map->width = 3;
     core->game->map->height = 3;
@@ -163,7 +163,7 @@ TEST(TestGameCalcDirSound, Basic10)
     core->game->map->height = 10;
 
     EXPECT_EQ(game_calc_direction(core->game->map, DIR_UP, &pos_b, &pos_a),
-        TILE_FOUR);
+        TILE_FIVE);
 
     core->game->map->width = 3;
     core->game->map->height = 3;
@@ -257,7 +257,29 @@ TEST(TestCommandBroadCast, Basic1)
     free(msg);
 }
 
-// add more tests
+TEST(TestCommandBroadCast, Basic2)
+{
+    char *msg = strdup("MESSAGE");
+
+    sc.getClient()->trantorian->pos.x = 0;
+    sc.getClient()->trantorian->pos.y = 0;
+
+    sc.getClient()->trantorian->direction = DIR_UP;
+
+    sc.getOtherCli()->trantorian->pos.x = 0;
+    sc.getOtherCli()->trantorian->pos.y = 0;
+
+    sc.getOtherCli()->trantorian->direction = DIR_UP;
+
+    sc.startTest();
+    broadcast_e(sc.getCore(), sc.getClient(), msg);
+    sc.endTest();
+
+    EXPECT_EQ(sc.getRes(), "ok\n");
+    EXPECT_EQ(sc.getResOtherCli(), "message 0, MESSAGE\n");
+
+    free(msg);
+}
 
 TEST(TestTakeCast, Basic)
 {

@@ -8,29 +8,27 @@
 #include "utils.h"
 #include "core.h"
 
-static const dir_tile_e dir_tiles[] = {
-    TILE_ONE,
-    TILE_TWO,
-    TILE_THREE,
-    TILE_FOUR,
-    TILE_FIVE,
-    TILE_SIX,
-    TILE_SEVEN,
-    TILE_EIGHT,
+static const size_t dir_tiles[][3] = {
+    {TILE_ONE, 342, 18},
+    {TILE_TWO, 18, 72},
+    {TILE_THREE, 72, 108},
+    {TILE_FOUR, 108, 162},
+    {TILE_FIVE, 162, 198},
+    {TILE_SIX, 198, 252},
+    {TILE_SEVEN, 252, 288},
+    {TILE_EIGHT, 288, 342},
 };
 
 static dir_tile_e game_angle_to_tile(size_t angle, direction_e dir)
 {
-    size_t nb_tiles = sizeof(dir_tiles) / sizeof(dir_tile_e);
-    size_t tile_angle = 360 / nb_tiles;
-    size_t tile_index = (angle / tile_angle) + dir * 2;
-    dir_tile_e tile;
-
-    if (tile_index >= nb_tiles) {
-        tile_index %= nb_tiles;
+    for (size_t i = 0; i < sizeof(dir_tiles) / sizeof(dir_tiles[0]); i++) {
+        if (i == 0 && (angle > dir_tiles[i][1] || angle <= dir_tiles[i][2])) {
+            return (dir_tile_e)dir_tiles[(i + (dir * 2)) % 8][0];
+        } else if (angle > dir_tiles[i][1] && angle <= dir_tiles[i][2]) {
+            return (dir_tile_e)dir_tiles[(i + (dir * 2)) % 8][0];
+        }
     }
-    tile = dir_tiles[tile_index];
-    return tile;
+    return TILE_NONE;
 }
 
 dir_tile_e game_calc_direction(map_t *map, direction_e dir, pos_t *a,
