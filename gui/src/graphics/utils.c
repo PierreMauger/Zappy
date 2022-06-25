@@ -31,8 +31,8 @@ void unclick_rest(client_t *client, pos_t tile)
 {
     for (int y = 0; y < client->size_map.y; y++)
         for (int x = 0; x < client->size_map.x; x++)
-            if (!(y == tile.y && x == tile.x))
-                client->map[y][x].clicked = false;
+            (!(y == tile.y && x == tile.x)) ?
+                client->map[y][x].clicked = false : 0;
 }
 
 int levels_nb(client_t *client, pos_t pos, int level)

@@ -11,7 +11,7 @@ static bool split_create_map(map_t *map, size_t x)
 {
     size_t i = 0;
 
-    for (i = 0; i != x; i++) {
+    for (i = 0; i < x; i++) {
         map[i].player = list_create();
         map[i].inv = calloc(1, sizeof(inventory_t));
         if (!map[i].inv || !map[i].player)
@@ -28,7 +28,7 @@ static bool create_map(client_t *client)
 
     if (!client->map)
         return false;
-    for (h = 0; h != client->size_map.y; h++) {
+    for (h = 0; h < client->size_map.y; h++) {
         client->map[h] = calloc(1, sizeof(map_t) * (client->size_map.x + 1));
         if (!client->map[h])
             return false;

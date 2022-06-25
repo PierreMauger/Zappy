@@ -20,10 +20,26 @@ void sig_handler(__attribute__((unused)) int signum)
     (*is_end) = true;
 }
 
+static bool find_command(client_t *client, char *temp)
+{
+    char *save = temp;
+
+    for (char *comm = NULL; save[0] != '\0'; free(comm)) {
+        if (!(comm = get_one_command(save)))
+            return false;
+        if (!parse_return(client, comm)) {
+            free(temp);
+            return true;
+        }
+        save = go_next_char(save, '\n');
+    }
+    free(temp);
+    return true;
+}
+
 static bool check_fd_isset(client_t *client)
 {
     char *temp = NULL;
-    char *save = NULL;
 
     if (FD_ISSET(client->socket->fd, &client->readfds)) {
         temp = nlib_read_socket(client->socket);
@@ -31,15 +47,8 @@ static bool check_fd_isset(client_t *client)
             fprintf(stderr, "%s[ERROR]%s can't read socket\n", R, W);
             return true;
         }
-        save = temp;
-        for (char *comm = NULL; save[0] != '\0'; (comm ? free(comm) : 0)) {
-            if ((comm = get_one_command(save)) && !parse_return(client, comm)) {
-                free(temp);
-                return true;
-            }
-            save = go_next_char(save, '\n');
-        }
-        free(temp);
+        if (!find_command(client, temp))
+            return false;
     }
     return false;
 }
