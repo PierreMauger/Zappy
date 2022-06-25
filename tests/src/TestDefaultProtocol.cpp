@@ -598,7 +598,7 @@ TEST(TestConnectNbr, Basic)
     command_connect_nbr(sc.getCore(), sc.getClient(), NULL);
     sc.endTest();
 
-    EXPECT_EQ(sc.getRes(), "0\n");
+    EXPECT_EQ(sc.getRes(), "1\n");
 }
 
 TEST(TestDeath, Basic)
