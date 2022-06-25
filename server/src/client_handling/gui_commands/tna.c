@@ -21,26 +21,35 @@ static char *command_tna_write_team_name(core_t *core, client_t *client,
     return buff;
 }
 
+static char *get_buffer(char *buffer, char *tmp)
+{
+    char *save_buff = NULL;
+
+    save_buff = buffer;
+    if (asprintf(&buffer, "%s%s", buffer ? buffer : "", tmp) == -1) {
+        fprintf(stderr, "[ERROR] GUI Can't malloc\n");
+        free(tmp);
+        return NULL;
+    }
+    if (save_buff)
+        free(save_buff);
+    return buffer;
+}
+
 void command_tna(core_t *core, client_t *client, UNUSED char *command)
 {
     node_t *node = NULL;
     char *buffer = NULL;
     char *tmp = NULL;
-    char *save_buff = NULL;
 
     foreach(core->game->teams->head, node) {
         tmp = command_tna_write_team_name(core, client,
             ((team_t *)node->data)->name);
         if (tmp == NULL)
             continue;
-        save_buff = buffer;
-        if (asprintf(&buffer, "%s%s", buffer ? buffer : "", tmp) == -1) {
-            fprintf(stderr, "[ERROR] GUI Can't malloc\n");
-            free(tmp);
+        buffer = get_buffer(buffer, tmp);
+        if (buffer == NULL)
             continue;
-        }
-        if (save_buff)
-            free(save_buff);
         free(tmp);
     }
     client_push_command(core->server, client, buffer);

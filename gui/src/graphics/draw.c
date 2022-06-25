@@ -81,7 +81,11 @@ void draw_all(client_t *client, int ratio, pos_t map, pos_t edge)
 {
     for (int y = 0; y < client->size_map.y; y++) {
         for (int x = 0; x < client->size_map.x; x++) {
-            DrawTexturePro(get_textures()[0], (Rectangle){0, 0, 16, 16},
+            client->map[y][x].clicked == true ?
+                DrawTexturePro(get_textures()[0], (Rectangle){0, 0, 16, 16},
+            (Rectangle){edge.x + x * ratio, edge.y + y * ratio, ratio, ratio},
+            (Vector2){0, 0}, 0, GRAY) :
+                DrawTexturePro(get_textures()[0], (Rectangle){0, 0, 16, 16},
             (Rectangle){edge.x + x * ratio, edge.y + y * ratio, ratio, ratio},
             (Vector2){0, 0}, 0, RAYWHITE);
             draw_player(client->map[y][x], ratio, (pos_t){edge.x + x * ratio,
@@ -100,6 +104,7 @@ void display(client_t *client)
     pos_t edge = {(size.x - map.x) / 2, (size.y - map.y) / 2};
 
     BeginDrawing();
+    DrawTexture(get_textures()[15], 0, 0, WHITE);
     ClearBackground(RAYWHITE);
     check_click(client, map, edge);
     draw_all(client, ratio, map, edge);
