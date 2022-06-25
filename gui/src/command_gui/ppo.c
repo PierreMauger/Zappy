@@ -7,7 +7,25 @@
 
 #include "zappy_gui.h"
 
-static bool split_ppo(client_t *client, node_t *node, char *save, char *uuid)
+static void change_player_pos_in_map(client_t *client, node_t *node, pos_t pos)
+{
+    node_t *temp = NULL;
+    node_t *save = NULL;
+    pos_t new_pos = {((player_t *)node->data)->pos.x,
+        ((player_t *)node->data)->pos.y};
+
+    foreach_safe (client->map[pos.y][pos.x].player->head, temp, save) {
+        if (strcmp(((player_t *)node->data)->uuid,
+            ((player_t *)temp->data)->uuid) == 0) {
+            list_destroy(client->map[pos.y][pos.x].player, NULL);
+            client->map[pos.y][pos.x].player = list_create();
+            break;
+        }
+    }
+    list_push_data(client->map[new_pos.y][new_pos.x].player, node->data);
+}
+
+static bool split_ppo(client_t *client, node_t *node, char *save, pos_t pos)
 {
     char *temp = NULL;
 
@@ -21,12 +39,14 @@ static bool split_ppo(client_t *client, node_t *node, char *save, char *uuid)
         return false;
     ((player_t *)node->data)->pos.y = (client->size_map.x - 1) - atoi(temp);
     free(temp);
+    if (pos.x != ((player_t *)node->data)->pos.x
+        || pos.y != ((player_t *)node->data)->pos.y)
+        change_player_pos_in_map(client, node, pos);
     save = move_str(save);
     if (!(temp = get_one_word(save)))
         return false;
     ((player_t *)node->data)->dir = atoi(temp);
     free(temp);
-    free(uuid);
     return true;
 }
 
@@ -42,13 +62,13 @@ int ppo(client_t *client, char *str)
         return 1;
     }
     uuid = get_one_word(save);
-    foreach (client->player->head, node) {
+    foreach (client->player->head, node)
         if (strcmp(((player_t *)node->data)->uuid, uuid) == 0)
             break;
-    }
-    if (!split_ppo(client, node, save, uuid))
+    if (!split_ppo(client, node, save, ((player_t *)node->data)->pos))
         fprintf(stderr, "%s[ERROR]%s can't malloc ppo", R, W);
     free(copy);
+    free(uuid);
     return 0;
 }
 
