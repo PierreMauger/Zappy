@@ -161,6 +161,7 @@ void free_player(void *data);
 
 bool first_command(client_t *client);
 bool loop_command(client_t *client);
+bool find_command(client_t *client, char *temp);
 bool clock_update(size_t freq);
 
 char *create_uuid();

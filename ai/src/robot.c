@@ -97,8 +97,7 @@ bool robot(client_t *client)
         && client->player->incantation == false) {
         if (!get_food_basic(client))
             return false;
-    }
-    else if (client->player->broadcast_direction != 0)
+    } else if (client->player->broadcast_direction != 0)
         go_to_broadcast_direction(client);
     else
         try_evoluate(client);

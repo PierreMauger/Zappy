@@ -20,23 +20,6 @@ void sig_handler(__attribute__((unused)) int signum)
     (*is_end) = true;
 }
 
-static bool find_command(client_t *client, char *temp)
-{
-    char *save = temp;
-
-    for (char *comm = NULL; save[0] != '\0'; free(comm)) {
-        if (!(comm = get_one_command(save)))
-            return false;
-        if (!parse_return(client, comm)) {
-            free(temp);
-            return true;
-        }
-        save = go_next_char(save, '\n');
-    }
-    free(temp);
-    return true;
-}
-
 static bool check_fd_isset(client_t *client)
 {
     char *temp = NULL;

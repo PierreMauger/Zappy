@@ -17,6 +17,30 @@ static bool send_message_comm(client_t *client, char *com)
     return true;
 }
 
+bool find_command(client_t *client, char *temp)
+{
+    char *save = temp;
+
+    for (char *comm = NULL; save[0] != '\0'; free(comm)) {
+        if (!(comm = get_one_command(save)))
+            return false;
+        if (!parse_return(client, comm)) {
+            free(temp);
+            return true;
+        }
+        save = go_next_char(save, '\n');
+    }
+    free(temp);
+    return true;
+}
+
+void free_string(char *pin, char *plv, char *pl)
+{
+    free(pl);
+    free(pin);
+    free(plv);
+}
+
 static bool players_command(client_t *client)
 {
     node_t *node = NULL;
@@ -36,9 +60,7 @@ static bool players_command(client_t *client)
         if (!send_message_comm(client, pl) || !send_message_comm(client, pin)
             || !send_message_comm(client, plv))
             return false;
-        free(pl);
-        free(pin);
-        free(plv);
+        free_string(pl, pin, plv);
     }
     return true;
 }
