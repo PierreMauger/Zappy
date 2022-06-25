@@ -79,7 +79,7 @@ bool remove_surplus_command(client_t *client)
     if (!basic_command(client))
         return false;
     if (client->unused_slot == 0)
-        if (!send_message_comm(client, "Fork\n"));
+        if (!send_message_comm(client, "Fork\n"))
             return false;
     return true;
 }

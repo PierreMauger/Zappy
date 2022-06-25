@@ -32,7 +32,7 @@ static bool check_fd_isset(client_t *client)
             return true;
         }
         save = temp;
-        for (char *comm = NULL; save[0] != '\0'; free(comm)) {
+        for (char *comm = NULL; save[0] != '\0'; (comm ? free(comm) : 0)) {
             if ((comm = get_one_command(save)) && !parse_return(client, comm)) {
                 free(temp);
                 return true;
@@ -51,7 +51,6 @@ static bool loop_client(client_t *client)
     while (!WindowShouldClose()) {
         FD_ZERO(&client->readfds);
         FD_ZERO(&client->writefds);
-        FD_SET(STDIN_FILENO, &client->readfds);
         FD_SET(client->socket->fd, &client->readfds);
         FD_SET(client->socket->fd, &client->writefds);
         sel = nlib_select_fds(&client->readfds, &client->writefds);

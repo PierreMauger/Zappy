@@ -26,7 +26,7 @@ void print_inventory(inventory_t *inv)
         inv->deraumere, inv->sibur, inv->mendiane, inv->phiras, inv->thystame);
 }
 
-static void split_print_map_inv(int x, int y, client_t *client)
+static void split_print_inv_map(int x, int y, client_t *client)
 {
     if (client->map[y][x].inv->food != -1) {
         printf("y = %d x = %d : ", y, x);
