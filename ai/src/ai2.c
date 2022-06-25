@@ -88,5 +88,10 @@ bool basic_command(client_t *client)
         fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
         return false;
     }
+    if (client->pending_commands->lenght < 10 && !send_message(client->
+        pending_commands, client->command, client->socket, "Connect_nbr\n")) {
+        fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
+        return false;
+    }
     return true;
 }
