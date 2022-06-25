@@ -46,12 +46,6 @@ static void server_accept_connection(server_t *serv)
 
 static void server_catch_sigpipe(void)
 {
-    // struct sigaction sig = {0};
-
-    // sig.sa_handler = SIG_IGN;
-    // sigemptyset(&sig.sa_mask);
-    // sigaction(SIGPIPE, &sig, NULL);
-
     struct sigaction new_actn = {0};
     struct sigaction old_actn = {0};
 

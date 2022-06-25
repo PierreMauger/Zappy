@@ -90,7 +90,7 @@ void draw_all(client_t *client, int ratio, pos_t map, pos_t edge)
             (Rectangle){edge.x + x * ratio, edge.y + y * ratio, ratio, ratio},
             (Vector2){0, 0}, 0, RAYWHITE);
             draw_items(client->map[y][x], (pos_t){edge.x + x * ratio,
-            edge.y + y * ratio});
+            edge.y + y * ratio}, ratio);
             draw_player(client->map[y][x], ratio, (pos_t){edge.x + x * ratio,
             edge.y + y * ratio});
             draw_inventory(client, (pos_t){x, y}, map, edge);
