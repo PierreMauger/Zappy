@@ -54,11 +54,11 @@ static void find_right_dir(client_t *client, bool right)
 int forward_movement(client_t *client, char *str)
 {
     if (strcmp(str, "ok") == 0) {
-        printf("y %d x %d\n", client->player->pos.y, client->player->pos.x);
+        // printf("y %d x %d\n", client->player->pos.y, client->player->pos.x);
         change_dir(client);
-        printf("%s[COMMAND]%s Forward\n", B, W);
-        printf("y %d x %d\n", client->player->pos.y, client->player->pos.x);
-        printf("command_pending left %ld\n", client->pending_commands->lenght);
+        // printf("%s[COMMAND]%s Forward\n", B, W);
+        // printf("y %d x %d\n", client->player->pos.y, client->player->pos.x);
+        // printf("command_pending left %ld\n", client->pending_commands->lenght);
         return 0;
     }
     return 1;
@@ -67,13 +67,13 @@ int forward_movement(client_t *client, char *str)
 int right_movement(client_t *client, char *str)
 {
     if (strcmp(str, "ok") == 0) {
-        printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
+        // printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
         print_dir(client->player->dir);
         find_right_dir(client, true);
-        printf("%s[COMMAND]%s Right\n", B, W);
-        printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
+        // printf("%s[COMMAND]%s Right\n", B, W);
+        // printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
         print_dir(client->player->dir);
-        printf("command_pending left %ld\n", client->pending_commands->lenght);
+        // printf("command_pending left %ld\n", client->pending_commands->lenght);
         return 0;
     }
     return 1;
@@ -82,13 +82,13 @@ int right_movement(client_t *client, char *str)
 int left_movement(client_t *client, char *str)
 {
     if (strcmp(str, "ok") == 0) {
-        printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
+        // printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
         print_dir(client->player->dir);
         find_right_dir(client, false);
-        printf("%s[COMMAND]%s Left\n", B, W);
-        printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
+        // printf("%s[COMMAND]%s Left\n", B, W);
+        // printf("y %d x %d ", client->player->pos.y, client->player->pos.x);
         print_dir(client->player->dir);
-        printf("command_pending left %ld\n", client->pending_commands->lenght);
+        // printf("command_pending left %ld\n", client->pending_commands->lenght);
         return 0;
     }
     return 1;

@@ -17,6 +17,9 @@
 
     #define RESSOURCES_NBR (7)
 
+    #define MAX_MAP_WIDTH (100)
+    #define MAX_MAP_HEIGHT (100)
+
     #include <stdio.h>
 
     #include "inventory.h"

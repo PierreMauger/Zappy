@@ -67,7 +67,7 @@ client_t *create_client(arg_t *arg)
         return NULL;
     client->socket->addr = calloc(1, sizeof(sockaddr_in_t));
     if ((client->socket->fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        fprintf(stderr, "%s[ERROR]%s socket creation failed\n", R, W);
+        // fprintf(stderr, "%s[ERROR]%s socket creation failed\n", R, W);
         exit(ERROR_EXIT);
     }
     if (!(client->command = list_create()) ||

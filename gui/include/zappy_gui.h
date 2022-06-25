@@ -9,6 +9,7 @@
     #define ZAPPY_AI_H
 
     #define RESSOURCE_NBR 7
+    #define MAP_REFRESH 10
 
     #ifndef _GNU_SOURCE
         #define _GNU_SOURCE

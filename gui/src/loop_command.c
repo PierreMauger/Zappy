@@ -71,10 +71,17 @@ static bool players_command(client_t *client)
 
 bool loop_command(client_t *client)
 {
-    if (!send_message(
+    static size_t remaining = 0;
+
+    if (remaining > 0) {
+        remaining--;
+    } else if (!send_message(
         client->pending_commands, client->command, client->socket, "mct\n")) {
         fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
         return false;
+    } else {
+        remaining = MAP_REFRESH + client->size_map.x / 6 +
+            client->size_map.y / 6;
     }
     if (!players_command(client))
         return false;

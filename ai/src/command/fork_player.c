@@ -9,6 +9,6 @@
 
 int fork_player(UNUSED client_t *client, UNUSED char *str)
 {
-    printf("%s[COMMAND]%s Fork done\n", B, W);
+    // printf("%s[COMMAND]%s Fork done\n", B, W);
     return 0;
 }

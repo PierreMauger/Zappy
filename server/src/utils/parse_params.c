@@ -71,28 +71,3 @@ int parse_params(int argc, char **argv, args_t *args)
     };
     return SUCCESS;
 }
-
-int verif_params(args_t *args)
-{
-    if (args->port <= 0) {
-        fprintf(stderr, "[ERROR] Invalid port\n");
-        return ERROR;
-    }
-    if (args->width <= 0 || args->height <= 0) {
-        fprintf(stderr, "[ERROR] Invalid size\n");
-        return ERROR;
-    }
-    if (args->cli_per_team <= 0) {
-        fprintf(stderr, "[ERROR] Invalid number of clients per team\n");
-        return ERROR;
-    }
-    if (args->freq <= 0) {
-        fprintf(stderr, "[ERROR] Invalid frequency\n");
-        return ERROR;
-    }
-    if (args->teams == NULL) {
-        fprintf(stderr, "[ERROR] No team name\n");
-        return ERROR;
-    }
-    return SUCCESS;
-}

@@ -34,7 +34,7 @@ int take_object(client_t *client, char *str)
     size_t x = client->player->pos.x;
 
     if (strcmp(str, "ko") == 0) {
-        printf("%s[INFO]%s This object isn't in this case\n", M, W);
+        // printf("%s[INFO]%s This object isn't in this case\n", M, W);
         return 1;
     }
     if (strcmp(str, "food\n") == 0) {
@@ -79,7 +79,7 @@ int set_object(client_t *client, char *str)
     size_t x = client->player->pos.x;
 
     if (strcmp(str, "ko") == 0) {
-        printf("%s[INFO]%s Player don't have this object\n", M, W);
+        // printf("%s[INFO]%s Player don't have this object\n", M, W);
         return 1;
     }
     if (strcmp(str, "food\n") == 0) {

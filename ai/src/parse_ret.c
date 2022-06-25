@@ -12,11 +12,11 @@ static bool get_size_map(client_t *client, char *str)
     client->size_map.x = atoi(str);
     client->size_map.y = atoi(strchr(str, ' '));
     if (client->size_map.x <= 0 || client->size_map.y <= 0) {
-        fprintf(stderr, "%s[ERROR]%s bad size map", R, W);
+        // fprintf(stderr, "%s[ERROR]%s bad size map", R, W);
         return false;
     }
     if (!create_map(client)) {
-        fprintf(stderr, "%s[ERROR]%s can't malloc map\n", R, W);
+        // fprintf(stderr, "%s[ERROR]%s can't malloc map\n", R, W);
         return false;
     }
     if (client->client_connected) {
@@ -30,7 +30,7 @@ static bool get_size_map(client_t *client, char *str)
 static bool get_number_client(client_t *client, char *str)
 {
     if (atoi(str) < 1 && !client->client_connected) {
-        fprintf(stderr, "%s[ERROR]%s too many clients in this team\n", R, W);
+        // fprintf(stderr, "%s[ERROR]%s too many clients in this team\n", R, W);
         return false;
     }
     if (atoi(str) >= 1 && !client->client_connected) {

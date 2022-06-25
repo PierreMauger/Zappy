@@ -10,7 +10,7 @@
 int eject_player(UNUSED client_t *client, char *str)
 {
     if (strcmp(str, "ok") == 0) {
-        printf("%s[COMMAND]%s Eject done\n", B, W);
+        // printf("%s[COMMAND]%s Eject done\n", B, W);
         return 0;
     }
     return 1;

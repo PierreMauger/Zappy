@@ -59,7 +59,7 @@ char *get_cell(char *tab)
     for (; tab[i] == ',' && tab[i] == '[' && tab[i] != '\0'; i++);
     for (j = i; tab[j] != ',' && tab[j] != ']' && tab[j] != '\0'; n++, j++);
     if (!(content = malloc(sizeof(char) * (n + 1)))) {
-        fprintf(stderr, "%s[ERROR]%s can't malloc", R, W);
+        // fprintf(stderr, "%s[ERROR]%s can't malloc", R, W);
         return NULL;
     }
     for (j = i, n = 0; tab[j] != ',' && tab[j] != ']' && tab[j] != '\0'; j++) {
