@@ -44,8 +44,8 @@ static void game_dispatch(list_t *trantorians, map_t *map, pos_t **map_content,
         total = ((size_t *)(nb_ressources))[ressource];
         cells_rem = game_fill_map_dup_remaining(map, map_content, ressource);
         for (size_t to_dispatch = 0; to_dispatch < total; to_dispatch++) {
-            if (cells_rem == 0)
-                cells_rem = game_fill_map_dup(map, map_content);
+            cells_rem == 0 ?
+                cells_rem = game_fill_map_dup(map, map_content) : 0;
             random_idx = rand() % cells_rem;
             game_map_add_ressource(trantorians, map, ressource, GET_COORD(map,
                 map_content[random_idx]->x, map_content[random_idx]->y));
