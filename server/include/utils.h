@@ -12,6 +12,10 @@
         #define _GNU_SOURCE
     #endif
 
+    #ifndef _XOPEN_SOURCE
+        #define _XOPEN_SOURCE 700
+    #endif
+
     #include <math.h>
     #include <stdio.h>
 

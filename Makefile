@@ -16,13 +16,15 @@ PATH_GUI		=	./gui/
 
 
 ################# COMPILATION #################
-all: install-raylib
+all:
 	make -C	$(PATH_LIBS)
 	make -C	$(PATH_AI)
 	make -C	$(PATH_SERVER)
-	make -C	$(PATH_GUI)
 
 re:	fclean all
+
+graphic: install-raylib
+	make -C	$(PATH_GUI)
 
 clean:
 	@(make clean -C $(PATH_LIBS)) > /dev/null

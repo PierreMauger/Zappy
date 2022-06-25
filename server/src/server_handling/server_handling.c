@@ -5,6 +5,7 @@
 ** main server
 */
 
+#include "utils.h"
 #include "core.h"
 
 static client_t *setup_new_client(server_t *serv, int fd)
@@ -43,21 +44,31 @@ static void server_accept_connection(server_t *serv)
     }
 }
 
+static void server_catch_sigpipe(void)
+{
+    struct sigaction sig = {0};
+
+    sig.sa_handler = SIG_IGN;
+    sigemptyset(&sig.sa_mask);
+    sigaction(SIGPIPE, &sig, NULL);
+}
+
 int server_loop(core_t *core)
 {
     fd_set readfds = {0};
     fd_set writefds = {0};
 
+    server_catch_sigpipe();
     while (1) {
         game_update(core);
         set_read_fds(core->server, &readfds);
         set_write_fds(core->server, &writefds);
         nlib_select_fds(&readfds, &writefds);
-        clients_update(core, &readfds);
         nlib_commands_update(core->server->commands_to_send, &writefds);
         clients_update_delete(core);
-        if (FD_ISSET(core->server->socket->fd, &readfds) == 0)
-            continue;
-        server_accept_connection(core->server);
+        clients_update(core, &readfds);
+        if (FD_ISSET(core->server->socket->fd, &readfds))
+            server_accept_connection(core->server);
     }
+    return SUCCESS;
 }
