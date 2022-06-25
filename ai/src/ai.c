@@ -69,15 +69,20 @@ bool try_evoluate(client_t *client)
 
 bool remove_surplus_command(client_t *client)
 {
-    while (client->pending_commands->lenght > 10)
-        free(list_pop_last(client->pending_commands));
+    char *command = NULL;
+
+    while (client->pending_commands->lenght > 10) {
+        command = list_pop_last(client->pending_commands);
+        printf("%s[INFO]%s remove command : %s\n", M, W, command);
+        free(command);
+    }
+    if (!basic_command(client))
+        return false;
     return true;
 }
 
 bool ai(client_t *client)
 {
-    if (!basic_command(client))
-        return false;
     if (!client->player->inv)
         return true;
     if (client->player->inv && client->player->inv->food < 1) {

@@ -19,8 +19,11 @@ static bool get_size_map(client_t *client, char *str)
         fprintf(stderr, "%s[ERROR]%s can't malloc map\n", R, W);
         return false;
     }
-    if (client->client_connected)
+    if (client->client_connected) {
         client->init = false;
+        if (!basic_command(client))
+            return false;
+    }
     return true;
 }
 
@@ -34,8 +37,11 @@ static bool get_number_client(client_t *client, char *str)
         client->client_connected = true;
         client->unused_slot = atoi(str);
     }
-    if (client->size_map.x != -1)
+    if (client->size_map.x != -1) {
         client->init = false;
+        if (!basic_command(client))
+            return false;
+    }
     return true;
 }
 
