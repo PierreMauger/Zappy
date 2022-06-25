@@ -27,6 +27,7 @@ bool change_stone_in_cell(
         }
         (strcmp(take_set, "Take") == 0 ? cell_object-- : cell_object++);
     }
+    free(command);
     return (cell_object != inv_object ? false : true);
 }
 

@@ -94,7 +94,6 @@ bool parse_return(client_t *client, char *str)
     char *command = NULL;
     char *arg = NULL;
 
-    printf("command received : [%s]\n", str);
     if (strcmp(str, "WELCOME") == 0 || client->init)
         return (init_header(client, str));
     if (strlen(str) > 8 && strncmp(str, "message ", 8) == 0)
