@@ -22,20 +22,23 @@ static bool players_command(client_t *client)
     node_t *node = NULL;
     char *pl = NULL;
     char *pin = NULL;
+    char *plv = NULL;
     char *uuid = NULL;
 
     foreach (client->player->head, node) {
         uuid = ((player_t *)node->data)->uuid;
         pl = calloc(1, sizeof(char) * (strlen(uuid) + 10));
         pin = calloc(1, sizeof(char) * (strlen(uuid) + 10));
+        plv = calloc(1, sizeof(char) * (strlen(uuid) + 10));
         strcat(strcat(strcat(pl, "ppo #"), uuid), "\n");
         strcat(strcat(strcat(pin, "pin #"), uuid), "\n");
-        if (!send_message_comm(client, pl))
-            return false;
-        if (!send_message_comm(client, pin))
+        strcat(strcat(strcat(plv, "plv #"), uuid), "\n");
+        if (!send_message_comm(client, pl) || !send_message_comm(client, pin)
+            || !send_message_comm(client, plv))
             return false;
         free(pl);
         free(pin);
+        free(plv);
     }
     return true;
 }

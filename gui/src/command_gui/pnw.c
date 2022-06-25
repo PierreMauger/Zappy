@@ -80,7 +80,7 @@ int pnw(client_t *client, char *str)
         fprintf(stderr, "%s[ERROR]%s can't malloc player", R, W);
         return 1;
     }
-    list_push_data(client->map[player->pos.y][player->pos.x].player, player);
     list_push_data(client->player, player);
+    list_push_data(client->map[player->pos.y][player->pos.x].player, player);
     return 0;
 }

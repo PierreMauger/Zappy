@@ -9,6 +9,11 @@
 
 void free_player(void *data)
 {
-    if (data)
-        free(data);
+    player_t *player = data;
+
+    if (player) {
+        free(player->uuid);
+        free(player);
+        player = NULL;
+    }
 }

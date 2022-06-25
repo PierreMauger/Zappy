@@ -35,13 +35,10 @@ int ppo(client_t *client, char *str)
     node_t *node = NULL;
     char *uuid = NULL;
     char *save = strdup(str);
+    char *copy = save;
 
-    if (strcmp(str, "suc\n") == 0) {
-        fprintf(stderr, "%s[ERROR]%s suc command received", R, W);
-        return 1;
-    }
-    if (strcmp(str, "sbp\n") == 0) {
-        fprintf(stderr, "%s[ERROR]%s bad arguments", R, W);
+    if (strcmp(str, "suc\n") == 0 || strcmp(str, "sbp\n") == 0) {
+        fprintf(stderr, "%s[ERROR]%s suc/sbp command received", R, W);
         return 1;
     }
     uuid = get_one_word(save);
@@ -51,6 +48,7 @@ int ppo(client_t *client, char *str)
     }
     if (!split_ppo(client, node, save, uuid))
         fprintf(stderr, "%s[ERROR]%s can't malloc ppo", R, W);
+    free(copy);
     return 0;
 }
 
@@ -63,7 +61,6 @@ static bool split_plv(node_t *node, char *save, char *uuid)
         return false;
     ((player_t *)node->data)->level = atoi(temp);
     free(temp);
-    free(save);
     free(uuid);
     return true;
 }
@@ -73,13 +70,10 @@ int plv(client_t *client, char *str)
     node_t *node = NULL;
     char *uuid = NULL;
     char *save = strdup(str);
+    char *copy = save;
 
-    if (strcmp(str, "suc\n") == 0) {
-        fprintf(stderr, "%s[ERROR]%s suc command received", R, W);
-        return 1;
-    }
-    if (strcmp(str, "sbp\n") == 0) {
-        fprintf(stderr, "%s[ERROR]%s bad arguments", R, W);
+    if (strcmp(str, "suc\n") == 0 || strcmp(str, "sbp\n") == 0) {
+        fprintf(stderr, "%s[ERROR]%s suc/sbp command received", R, W);
         return 1;
     }
     uuid = get_one_word(save);
@@ -89,5 +83,6 @@ int plv(client_t *client, char *str)
     }
     if (!split_plv(node, save, uuid))
         fprintf(stderr, "%s[ERROR]%s can't malloc plv", R, W);
+    free(copy);
     return 0;
 }
