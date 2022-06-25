@@ -9,6 +9,7 @@
 
 int incantation(client_t *client, char *str)
 {
+    print_inventory(client->map[client->player->pos.y][client->player->pos.x].inv);
     if (strcmp(str, "Elevation underway") == 0) {
         printf("%s[COMMAND]%s Incantation start\n", B, W);
         return 0;

@@ -15,6 +15,7 @@ static void free_map(client_t *client)
     for (size_t y = 0; y < max_y; y++) {
         for (size_t x = 0; x < max_x; x++) {
             free(client->map[y][x].inv);
+            list_destroy(client->map[y][x].player, NULL);
         }
         free(client->map[y]);
     }
@@ -31,7 +32,7 @@ void free_client(client_t *client)
         free_map(client);
     list_destroy(client->command, (void (*)(void *))nlib_command_destroy);
     list_destroy(client->pending_commands, free);
-    list_destroy(client->player, (void (*)(void *))free_player);
+    list_destroy(client->player, NULL);
     list_destroy(client->team, free);
     free(client->uuid);
     free(client);
