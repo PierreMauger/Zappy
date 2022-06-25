@@ -47,7 +47,7 @@ static incantation_t *get_incantation(core_t *core, trantorian_t *trant)
             continue;
         if (temp->pos.x != trant->pos.x || temp->pos.y != trant->pos.y)
             continue;
-        if (temp->level != trant->level)
+        if (temp->level != trant->level && trant->state != TRANT_LIVING)
             continue;
         list_push_data(incantation->trantorians, temp);
     }
