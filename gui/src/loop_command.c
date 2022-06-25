@@ -20,8 +20,9 @@ static bool send_message_comm(client_t *client, char *com)
 bool find_command(client_t *client, char *temp)
 {
     char *save = temp;
+    char *comm = NULL;
 
-    for (char *comm = NULL; save[0] != '\0'; free(comm)) {
+    while (save[0] != '\0') {
         if (!(comm = get_one_command(save)))
             return false;
         if (!parse_return(client, comm)) {
@@ -29,6 +30,9 @@ bool find_command(client_t *client, char *temp)
             return true;
         }
         save = go_next_char(save, '\n');
+        free(comm);
+        if (!save)
+            break;
     }
     free(temp);
     return true;

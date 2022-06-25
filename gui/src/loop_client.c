@@ -17,6 +17,7 @@ bool *get_value(void)
 void sig_handler(__attribute__((unused)) int signum)
 {
     bool *is_end = get_value();
+
     (*is_end) = true;
 }
 

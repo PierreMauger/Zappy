@@ -13,7 +13,8 @@ char *go_next_char(char *str, char chr)
         (char *)((size_t)(str)++);
     }
     str = strchr(str, chr);
-    (char *)((size_t)(str)++);
+    if (str && str[0] != '\0')
+        (char *)((size_t)(str)++);
     return str;
 }
 
