@@ -21,7 +21,7 @@ all:
 	make -C	$(PATH_AI)
 	make -C	$(PATH_SERVER)
 
-re:	fclean all
+re:	fclean all graphic
 
 graphic:
 	make -C	$(PATH_GUI)
