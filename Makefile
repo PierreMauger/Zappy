@@ -23,7 +23,7 @@ all:
 
 re:	fclean all
 
-graphic: install-raylib
+graphic:
 	make -C	$(PATH_GUI)
 
 clean:

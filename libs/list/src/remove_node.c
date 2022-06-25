@@ -29,10 +29,11 @@ void list_remove_node(list_t *list, node_t *node)
 void *list_pop_last(list_t *list)
 {
     node_t *node = list->tail;
-    void *data = node->data;
+    void *data = NULL;
 
-    if (!list)
+    if (list->tail == NULL)
         return (NULL);
+    data = node->data;
     list_remove_node(list, node);
     list_destroy_node(node, NULL);
     return data;
@@ -41,10 +42,11 @@ void *list_pop_last(list_t *list)
 void *list_pop_head(list_t *list)
 {
     node_t *node = list->head;
-    void *data = node->data;
+    void *data = NULL;
 
-    if (!list)
+    if (list->head == NULL)
         return (NULL);
+    data = node->data;
     list_remove_node(list, node);
     list_destroy_node(node, NULL);
     return data;

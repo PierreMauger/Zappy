@@ -8,6 +8,8 @@
 #ifndef ZAPPY_AI_H
     #define ZAPPY_AI_H
 
+    #define RESSOURCE_NBR 7
+
     #ifndef _GNU_SOURCE
         #define _GNU_SOURCE
     #endif
@@ -66,6 +68,13 @@ typedef struct {
     size_t mendiane;
     size_t phiras;
     size_t thystame;
+    pos_t food_pos;
+    pos_t linemate_pos;
+    pos_t deraumere_pos;
+    pos_t sibur_pos;
+    pos_t mendiane_pos;
+    pos_t phiras_pos;
+    pos_t thystame_pos;
 } inventory_t;
 
 typedef struct player_s {
@@ -174,9 +183,10 @@ int get_item(map_t map, const char *object_name);
 int levels_nb(client_t *client, pos_t pos, int level);
 void unclick_rest(client_t *client, pos_t tile);
 
-void draw_all(client_t *client, int ratio, pos_t map, pos_t edge);
+void draw_items(map_t tile, pos_t pos);;
 void draw_inventory(client_t *client, pos_t pos, pos_t map, pos_t edge);
 void check_click(client_t *client, pos_t map, pos_t edge);
 void draw_player(map_t tile, int ratio, pos_t pos);
+void draw_all(client_t *client, int ratio, pos_t map, pos_t edge);
 
 #endif // ZAPPY_AI_H

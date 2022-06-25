@@ -46,11 +46,18 @@ static void server_accept_connection(server_t *serv)
 
 static void server_catch_sigpipe(void)
 {
-    struct sigaction sig = {0};
+    // struct sigaction sig = {0};
 
-    sig.sa_handler = SIG_IGN;
-    sigemptyset(&sig.sa_mask);
-    sigaction(SIGPIPE, &sig, NULL);
+    // sig.sa_handler = SIG_IGN;
+    // sigemptyset(&sig.sa_mask);
+    // sigaction(SIGPIPE, &sig, NULL);
+
+    struct sigaction new_actn = {0};
+    struct sigaction old_actn = {0};
+
+    new_actn.sa_handler = SIG_IGN;
+    sigemptyset (&new_actn.sa_mask);
+    sigaction (SIGPIPE, &new_actn, &old_actn);
 }
 
 int server_loop(core_t *core)
