@@ -9,7 +9,8 @@
 
 int incantation(client_t *client, char *str)
 {
-    print_inventory(client->map[client->player->pos.y][client->player->pos.x].inv);
+    print_inventory(client->map[client->player->pos.y]
+        [client->player->pos.x].inv);
     if (strcmp(str, "Elevation underway") == 0) {
         printf("%s[COMMAND]%s Incantation start\n", B, W);
         return 0;
@@ -18,8 +19,6 @@ int incantation(client_t *client, char *str)
         printf("%s[COMMAND]%s Incantation done\n", G, W);
         client->player->incantation = false;
         client->player->level++;
-        if (client->player->level == 3)
-            exit(0);
         return 0;
     }
     printf("%s[COMMAND]%s Incantation fail\n", R, W);

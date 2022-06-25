@@ -11,8 +11,8 @@ SRC				=	./src/loop_client.c				\
 					./src/parse_ret.c				\
 					./src/stdin.c 					\
 					./src/send_message.c 			\
-					./src/ai.c 						\
-					./src/ai2.c 					\
+					./src/robot.c 					\
+					./src/robot_2.c 				\
 					./src/client_push_command.c 	\
 					./src/utils.c 					\
 					./src/handle_map.c 				\
@@ -20,7 +20,6 @@ SRC				=	./src/loop_client.c				\
 					./src/change_direction.c 		\
 					./src/print_info.c 				\
 					./src/map_utils.c 				\
-					./src/my_getnbr.c 				\
 					./src/evoluate.c 				\
 					./src/evoluate2.c 				\
 					./src/evoluate3.c 				\

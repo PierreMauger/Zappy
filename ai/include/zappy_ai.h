@@ -131,7 +131,7 @@ bool message_broadcast(client_t *client, char *str);
 
 void sig_handler(int signum);
 
-bool ai(client_t *client);
+bool robot(client_t *client);
 bool basic_command(client_t *client);
 bool get_food_basic(client_t *client);
 bool go_to_broadcast_direction(client_t *client);

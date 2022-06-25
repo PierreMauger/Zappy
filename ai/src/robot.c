@@ -79,11 +79,12 @@ bool remove_surplus_command(client_t *client)
     if (!basic_command(client))
         return false;
     if (client->unused_slot == 0)
-        send_message_comm(client, "Fork\n");
+        if (!send_message_comm(client, "Fork\n"));
+            return false;
     return true;
 }
 
-bool ai(client_t *client)
+bool robot(client_t *client)
 {
     if (!client->player->inv)
         return true;

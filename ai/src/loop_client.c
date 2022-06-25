@@ -24,10 +24,6 @@ static bool check_fd_isset(client_t *client)
 {
     char *temp = NULL;
 
-    if (FD_ISSET(STDIN_FILENO, &client->readfds)) {
-        read_stdin(client);
-        return false;
-    }
     if (FD_ISSET(client->socket->fd, &client->readfds)) {
         temp = nlib_read_socket(client->socket);
         if (temp == NULL) {
@@ -47,7 +43,6 @@ static bool loop_client(client_t *client)
     while (1) {
         FD_ZERO(&client->readfds);
         FD_ZERO(&client->writefds);
-        FD_SET(STDIN_FILENO, &client->readfds);
         FD_SET(client->socket->fd, &client->readfds);
         FD_SET(client->socket->fd, &client->writefds);
         sel = nlib_select_fds(&client->readfds, &client->writefds);
@@ -55,9 +50,9 @@ static bool loop_client(client_t *client)
             break;
         if (check_fd_isset(client))
             break;
-        if (client->pending_commands->lenght == 0 && !client->init)
-            if (!ai(client))
-                break;
+        if ((client->pending_commands->lenght == 0 && !client->init)
+            && !robot(client))
+            break;
         nlib_commands_update(client->command, &client->writefds);
     }
     return true;
