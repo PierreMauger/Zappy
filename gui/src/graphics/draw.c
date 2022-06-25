@@ -104,6 +104,7 @@ void display(client_t *client)
     pos_t edge = {(size.x - map.x) / 2, (size.y - map.y) / 2};
 
     BeginDrawing();
+    DrawTexture(get_textures()[15], 0, 0, WHITE);
     ClearBackground(RAYWHITE);
     check_click(client, map, edge);
     draw_all(client, ratio, map, edge);
