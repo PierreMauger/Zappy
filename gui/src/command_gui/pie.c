@@ -24,9 +24,11 @@ static void set_params(client_t *client, pos_t pos, int res)
     if (res == 0) {
         client->map[pos.y][pos.x].incantation = STATE_FAILED;
         client->map[pos.y][pos.x].color = BLACK;
+        client->map[pos.y][pos.x].it = 500;
     } else {
         client->map[pos.y][pos.x].incantation = STATE_SUCCESS;
         client->map[pos.y][pos.x].color = RAYWHITE;
+        client->map[pos.y][pos.x].it = 500;
     }
     client->map[pos.y][pos.x].frame_x = 5;
     client->map[pos.y][pos.x].frame_y = 4;

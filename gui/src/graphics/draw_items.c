@@ -59,11 +59,14 @@ void draw_incantation(map_t *tile, pos_t pos, int ratio)
     int time_act = (int)(GetTime() * 10);
 
     if (tile->incantation == STATE_INCANT) {
+        tile->it--;
         tmp = (Rectangle){0 + time_act % 4 * 233, 210 * 2,
             233, 210};
         DrawTexturePro(get_textures()[16], tmp,
             (Rectangle){pos.x, pos.y, ratio * 2, ratio * 2},
             (Vector2){ratio / 2, ratio / 2}, 0, RAYWHITE);
+        if (tile->it <= 0)
+            tile->incantation = STATE_SUCCESS;
     } else if (tile->incantation == STATE_SUCCESS ||
             tile->incantation == STATE_FAILED) {
         update_frame(tile, pos, ratio);

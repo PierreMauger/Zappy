@@ -99,6 +99,7 @@ typedef struct map_s {
     inventory_t *inv;
     list_t *player;
     bool clicked;
+    size_t it;
     state_inc_e incantation;
     size_t act_frame_x;
     size_t act_frame_y;
