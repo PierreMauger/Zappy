@@ -24,6 +24,8 @@ void draw_player(map_t tile, int ratio, pos_t pos)
     node_t *node;
 
     foreach (tile.player->head, node) {
+        if (node->data == NULL)
+            continue;
         if (((player_t *)node->data)->dir == North)
             tmp = (Rectangle){0 + (int)(GetTime() * 10) % 3 * 32,
                 0 + ((int)(GetTime() * 10) % 3 == 1 ? 95 : 0), 25, 30};
