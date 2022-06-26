@@ -17,8 +17,7 @@ static void change_player_pos_in_map(client_t *client, node_t *node, pos_t pos)
     foreach_safe (client->map[pos.y][pos.x].player->head, temp, save) {
         if (strcmp(((player_t *)node->data)->uuid,
             ((player_t *)temp->data)->uuid) == 0) {
-            list_destroy(client->map[pos.y][pos.x].player, NULL);
-            client->map[pos.y][pos.x].player = list_create();
+            list_remove_node(client->map[pos.y][pos.x].player, temp);
             break;
         }
     }
