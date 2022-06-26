@@ -70,3 +70,23 @@ void find_closest_round(client_t *client, int *dest_x, int *dest_y)
     }
     split_find_closest_round(client, dest_x, dest_y);
 }
+
+bool get_size_map(client_t *client, char *str)
+{
+    client->size_map.x = atoi(str);
+    client->size_map.y = atoi(strchr(str, ' '));
+    if (client->size_map.x <= 0 || client->size_map.y <= 0) {
+        fprintf(stderr, "%s[ERROR]%s bad size map", R, W);
+        return false;
+    }
+    if (!create_map(client)) {
+        fprintf(stderr, "%s[ERROR]%s can't malloc map\n", R, W);
+        return false;
+    }
+    if (client->client_connected) {
+        client->init = false;
+        if (!basic_command(client))
+            return false;
+    }
+    return true;
+}

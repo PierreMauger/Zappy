@@ -127,6 +127,7 @@ bool send_message_comm_false(client_t *client, char *com);
 int read_stdin(client_t *client);
 
 bool parse_return(client_t *client, char *str);
+bool get_size_map(client_t *client, char *str);
 bool loop_parse_return(client_t *client, char *temp);
 bool client_push_exec_command(client_t *client, char *buffer);
 bool message_broadcast(client_t *client, char *str);

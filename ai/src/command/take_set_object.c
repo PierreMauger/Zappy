@@ -7,16 +7,8 @@
 
 #include "zappy_ai.h"
 
-static int split_take_object(client_t *client, char *str, size_t x, size_t y)
+static int split_againt_obj(client_t *client, char *str, size_t x, size_t y)
 {
-    if (strcmp(str, "linemate\n") == 0) {
-        client->map[y][x].inv->linemate--;
-        client->player->inv->linemate++;
-    }
-    if (strcmp(str, "mendiane\n") == 0) {
-        client->map[y][x].inv->mendiane--;
-        client->player->inv->mendiane++;
-    }
     if (strcmp(str, "sibur\n") == 0) {
         client->map[y][x].inv->sibur--;
         client->player->inv->sibur++;
@@ -28,6 +20,23 @@ static int split_take_object(client_t *client, char *str, size_t x, size_t y)
     return 0;
 }
 
+static int split_take_object(client_t *client, char *str, size_t x, size_t y)
+{
+    if (strcmp(str, "deraumere\n") == 0) {
+        client->map[y][x].inv->deraumere--;
+        client->player->inv->deraumere++;
+    }
+    if (strcmp(str, "linemate\n") == 0) {
+        client->map[y][x].inv->linemate--;
+        client->player->inv->linemate++;
+    }
+    if (strcmp(str, "mendiane\n") == 0) {
+        client->map[y][x].inv->mendiane--;
+        client->player->inv->mendiane++;
+    }
+    return (split_againt_obj(client, str, x, y));
+}
+
 int take_object(client_t *client, char *str)
 {
     size_t y = client->player->pos.y;
@@ -35,6 +44,7 @@ int take_object(client_t *client, char *str)
 
     if (strcmp(str, "ko") == 0) {
         printf("%s[INFO]%s This object isn't in this case\n", M, W);
+        send_message_comm(client, "Forward\n");
         return 1;
     }
     if (strcmp(str, "food\n") == 0) {
@@ -44,10 +54,6 @@ int take_object(client_t *client, char *str)
     if (strcmp(str, "phiras\n") == 0) {
         client->map[y][x].inv->phiras--;
         client->player->inv->phiras++;
-    }
-    if (strcmp(str, "deraumere\n") == 0) {
-        client->map[y][x].inv->deraumere--;
-        client->player->inv->deraumere++;
     }
     return (split_take_object(client, str, x, y));
 }

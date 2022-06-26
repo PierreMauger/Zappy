@@ -11,9 +11,8 @@ int incantation(client_t *client, char *str)
 {
     char *save = str;
 
-    if (client->player->incantation)
-        return 0;
     if (strcmp(str, "Elevation underway") == 0) {
+        client->player->incantation = true;
         client->player->broadcast_direction = -1;
         printf("%s[COMMAND]%s Incantation start\n", B, W);
         return 0;
@@ -25,6 +24,7 @@ int incantation(client_t *client, char *str)
             (char *)((size_t)(save++));
             client->player->level = atoi(save);
         }
+        send_message_comm(client, "Forward\n");
         return 0;
     }
     printf("%s[COMMAND]%s Incantation fail\n", R, W);

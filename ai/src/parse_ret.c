@@ -14,7 +14,7 @@ static const com_t com[] =
     {"Left\n\0", &left_movement},
     {"Look\n\0", &look_around},
     {"Inventory\n\0", &inventory},
-    {"Broadcast text\n\0", &broadcast},
+    {"Broadcast\n\0", &broadcast},
     {"Connect_nbr\n\0", &connect_nbr},
     {"Fork\n\0", &fork_player},
     {"Eject\n\0", &eject_player},
@@ -23,26 +23,6 @@ static const com_t com[] =
     {"Incantation\n\0", &incantation},
     {NULL, NULL}
 };
-
-static bool get_size_map(client_t *client, char *str)
-{
-    client->size_map.x = atoi(str);
-    client->size_map.y = atoi(strchr(str, ' '));
-    if (client->size_map.x <= 0 || client->size_map.y <= 0) {
-        fprintf(stderr, "%s[ERROR]%s bad size map", R, W);
-        return false;
-    }
-    if (!create_map(client)) {
-        fprintf(stderr, "%s[ERROR]%s can't malloc map\n", R, W);
-        return false;
-    }
-    if (client->client_connected) {
-        client->init = false;
-        if (!basic_command(client))
-            return false;
-    }
-    return true;
-}
 
 static bool get_number_client(client_t *client, char *str)
 {
@@ -106,6 +86,25 @@ static char *get_arg(char *command, char *str)
     return arg;
 }
 
+bool split_parse_ret(client_t *client, char *str, char *command)
+{
+    if (strlen(str) >= 18 && strncmp(str, "Elevation underway", 18) == 0) {
+        incantation(client, str);
+        free(command);
+        return false;
+    }
+    if (strlen(str) >= 14 && strncmp(str, "Current level:", 14) == 0) {
+        incantation(client, str);
+        free(command);
+        return false;
+    }
+    if (client->player->incantation) {
+        free(command);
+        return false;
+    }
+    return true;
+}
+
 bool parse_return(client_t *client, char *str)
 {
     char *command = NULL;
@@ -115,7 +114,8 @@ bool parse_return(client_t *client, char *str)
         return (init_header(client, str));
     if (strlen(str) > 8 && strncmp(str, "message ", 8) == 0)
         return (message_broadcast(client, str));
-    if (!(command = list_pop_head(client->pending_commands)))
+    if (!(command = list_pop_head(client->pending_commands))
+        || (!split_parse_ret(client, str, command)))
         return true;
     arg = get_arg(command, str);
     for (int i = 0; com[i].cmd != NULL; i++) {

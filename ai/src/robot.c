@@ -79,8 +79,7 @@ bool remove_surplus_command(client_t *client)
     if (!basic_command(client))
         return false;
     if (client->unused_slot == 0 && client->player->fork == false) {
-        if (client->pending_commands->lenght > 10)
-            client->player->fork = true;
+        client->player->fork = true;
         if (!send_message_comm(client, "Fork\n"))
             return false;
     }
@@ -89,15 +88,16 @@ bool remove_surplus_command(client_t *client)
 
 bool robot(client_t *client)
 {
-    if (!client->player->inv || client->player->incantation)
+    if (!client->player->inv)
         return true;
     if (client->player->inv && client->player->inv->food < 1) {
         if (!get_food_basic(client))
             return false;
         return true;
     }
-    if (client->player->inv && client->player->inv->food < 5
-        && client->player->incantation == false) {
+    if (client->player->incantation)
+        return true;
+    if (client->player->inv && client->player->inv->food < 5) {
         if (!get_food_basic(client))
             return false;
     } else if (client->player->broadcast_direction != -1) {
