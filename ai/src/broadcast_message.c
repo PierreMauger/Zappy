@@ -14,7 +14,7 @@ void interpret_message(
         return;
     if (level == client->player->level &&
         strcmp(team_name, client->player->team_name) == 0)
-        client->player->broadcast_direction = direction;
+        client->player->broadcast_direction = (int)direction;
 }
 
 bool message_broadcast(client_t *client, char *str)

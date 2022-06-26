@@ -79,7 +79,7 @@ typedef struct player_s {
     bool fork;
     size_t level;
     size_t number;
-    size_t broadcast_direction;
+    int broadcast_direction;
     inventory_t *inv;
     pos_t pos;
     direction_e dir;
@@ -133,6 +133,10 @@ bool message_broadcast(client_t *client, char *str);
 void sig_handler(int signum);
 
 bool robot(client_t *client);
+int take_everything(client_t *client, inventory_t inv, inventory_t cell_inv);
+bool drop_stone_needed(client_t *client, inventory_t inv, inventory_t cell_inv);
+bool change_stone_in_cell(
+    client_t *client, char *take_set, char *object, inventory_t inv);
 bool basic_command(client_t *client);
 bool get_food_basic(client_t *client);
 bool go_to_broadcast_direction(client_t *client);

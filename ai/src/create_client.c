@@ -42,7 +42,7 @@ static player_t *crt_play(arg_t *arg)
     player->inv = NULL;
     player->fork = false;
     player->incantation = false;
-    player->broadcast_direction = 0;
+    player->broadcast_direction = -1;
     return player;
 }
 

@@ -21,7 +21,6 @@ char *go_to_next_num(char *str)
 
 void fill_inventory_player(player_t *player, char *content)
 {
-    printf("content inv = %s\n", content);
     for (char *stone; (stone = get_cell(content)); free(stone)) {
         if (strstr(stone, "food") != NULL)
             player->inv->food = atoi(go_to_next_num(stone));
@@ -53,6 +52,5 @@ int inventory(client_t *client, char *str)
         return 1;
     }
     fill_inventory_player(client->player, save);
-    print_inventory(client->player->inv);
     return 0;
 }

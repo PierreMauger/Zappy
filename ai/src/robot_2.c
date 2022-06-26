@@ -63,8 +63,11 @@ bool go_to_broadcast_direction(client_t *client)
     size_t d = client->player->broadcast_direction;
 
     printf("%s[BROADCAST]%s broadcast capt %ld\n", Y, W, d);
-    if (d == 0)
+    if (d == 0) {
+        printf("good\n");
+        exit(0);
         return true;
+    }
     if (d == 1 || d == 2 || d == 8) {
         if (!go_to_good_direction_y(client, y - 1, client->player->pos.y))
             return false;

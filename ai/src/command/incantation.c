@@ -11,11 +11,10 @@ int incantation(client_t *client, char *str)
 {
     char *save = str;
 
-    print_inventory(client->map[client->player->pos.y]
-        [client->player->pos.x].inv);
     if (client->player->incantation)
         return 0;
     if (strcmp(str, "Elevation underway") == 0) {
+        client->player->broadcast_direction = -1;
         printf("%s[COMMAND]%s Incantation start\n", B, W);
         return 0;
     } else if (strlen(str) >= 14 && strncmp(str, "Current level:", 14) == 0) {
