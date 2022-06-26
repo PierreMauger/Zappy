@@ -62,7 +62,9 @@ bool go_to_broadcast_direction(client_t *client)
     int y = client->player->pos.y;
     size_t d = client->player->broadcast_direction;
 
-    printf("braodcast capte\n");
+    printf("%s[BROADCAST]%s broadcast capt %ld\n", Y, W, d);
+    if (d == 0)
+        return true;
     if (d == 1 || d == 2 || d == 8) {
         if (!go_to_good_direction_y(client, y - 1, client->player->pos.y))
             return false;
@@ -88,7 +90,8 @@ bool basic_command(client_t *client)
         fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
         return false;
     }
-    if (client->pending_commands->lenght < 10 && !send_message(client->
+    if (client->player->fork == false && client->pending_commands->lenght < 10
+        && !send_message(client->
         pending_commands, client->command, client->socket, "Connect_nbr\n")) {
         fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
         return false;

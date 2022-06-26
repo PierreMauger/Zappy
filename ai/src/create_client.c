@@ -40,6 +40,7 @@ static player_t *crt_play(arg_t *arg)
     player->dir = North;
     player->level = 1;
     player->inv = NULL;
+    player->fork = false;
     player->incantation = false;
     player->broadcast_direction = 0;
     return player;

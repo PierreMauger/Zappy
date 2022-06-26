@@ -9,22 +9,17 @@
 
 int pdi(client_t *client, char *str)
 {
-    node_t *nd = NULL;
     node_t *other = NULL;
     node_t *save = NULL;
     char *uuid = get_one_word(str);
-    player_t *head = ((player_t *)client->player->head->data);
 
     !uuid ? (uuid = strdup("0")) : 0;
     foreach_safe(client->player->head, other, save)
         if (strcmp(((player_t *)other->data)->uuid, uuid) == 0) {
             list_remove_node(client->player, other);
-            break;
-        }
-    foreach_safe(client->map[head->pos.y][head->pos.x].player->head, nd, save)
-        if (strcmp(((player_t *)nd->data)->uuid, uuid) == 0) {
-            list_remove_node(client->map[head->pos.y][head->pos.x].player, nd);
-            list_destroy_node(nd, NULL);
+            list_remove_node(client->map[((player_t *)other->data)->pos.y]
+                [((player_t *)other->data)->pos.x].player, other);
+            list_destroy_node(other, free_player);
             break;
         }
     free(uuid);

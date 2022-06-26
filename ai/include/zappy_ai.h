@@ -76,6 +76,7 @@ typedef struct player_s {
     char *team_name;
     char *uuid;
     bool incantation;
+    bool fork;
     size_t level;
     size_t number;
     size_t broadcast_direction;

@@ -78,14 +78,18 @@ bool remove_surplus_command(client_t *client)
     }
     if (!basic_command(client))
         return false;
-    if (client->unused_slot == 0)
+    if (client->unused_slot == 0 && client->player->fork == false) {
+        if (client->pending_commands->lenght > 10)
+            client->player->fork = true;
         if (!send_message_comm(client, "Fork\n"))
             return false;
+    }
     return true;
 }
 
 bool robot(client_t *client)
 {
+    printf("%s[INFO]%s pos y = %d x = %d\n", R, W, client->player->pos.y, client->player->pos.x);
     if (!client->player->inv)
         return true;
     if (client->player->inv && client->player->inv->food < 1) {

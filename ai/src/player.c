@@ -45,6 +45,5 @@ int remove_false_player(client_t *client)
 
     if (client->map[y][x].player->lenght > 0)
         free(list_pop_last(client->map[y][x].player));
-    print_inventory_map(client);
     return 0;
 }
