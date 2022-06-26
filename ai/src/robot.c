@@ -58,11 +58,11 @@ bool try_evoluate(client_t *client)
         return (level_3(client));
     if (client->player->level == 4)
         return (level_4(client));
-    if (client->player->level == 4)
+    if (client->player->level == 5)
         return (level_5(client));
-    if (client->player->level == 4)
+    if (client->player->level == 6)
         return (level_6(client));
-    if (client->player->level == 4)
+    if (client->player->level == 7)
         return (level_7(client));
     return true;
 }
