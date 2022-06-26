@@ -89,7 +89,7 @@ bool remove_surplus_command(client_t *client)
 
 bool robot(client_t *client)
 {
-    if (!client->player->inv)
+    if (!client->player->inv || client->player->incantation)
         return true;
     if (client->player->inv && client->player->inv->food < 1) {
         if (!get_food_basic(client))
