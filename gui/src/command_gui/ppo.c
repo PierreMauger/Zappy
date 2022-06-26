@@ -38,9 +38,8 @@ static bool split_ppo(client_t *client, node_t *node, char *save, pos_t pos)
         return false;
     ((player_t *)node->data)->pos.y = (client->size_map.y - 1) - atoi(temp);
     free(temp);
-    if (pos.x != ((player_t *)node->data)->pos.x
-        || pos.y != ((player_t *)node->data)->pos.y)
-        change_player_pos_in_map(client, node, pos);
+    ((pos.x != ((player_t *)node->data)->pos.x || pos.y != ((player_t *)node->
+        data)->pos.y) ? change_player_pos_in_map(client, node, pos) : 0);
     save = move_str(save);
     if (!(temp = get_one_word(save)))
         return false;
