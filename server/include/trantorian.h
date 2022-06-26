@@ -15,6 +15,9 @@
 
     #define TRANT_HATCHING_IT 600
 
+    #define TRANT_LVL_MAX 8
+    #define TRANT_NEEDED 6
+
     #define IDX 1
 
     #include <uuid/uuid.h>

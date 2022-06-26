@@ -136,7 +136,8 @@ void sig_handler(int signum);
 
 bool robot(client_t *client);
 int take_everything(client_t *client, inventory_t inv, inventory_t cell_inv);
-bool drop_stone_needed(client_t *client, inventory_t inv, inventory_t cell_inv);
+bool drop_stone_needed(client_t *client, inventory_t inv,
+    inventory_t cell_inv);
 bool change_stone_in_cell(
     client_t *client, char *take_set, char *object, inventory_t inv);
 bool basic_command(client_t *client);

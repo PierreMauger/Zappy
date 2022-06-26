@@ -35,5 +35,6 @@ void game_update(core_t *core)
         game_update_handlers(core);
         game_update_trantorians(core);
         game_update_map(core->game->trantorians, core->game->map);
+        game_check_wining_team(core);
     }
 }

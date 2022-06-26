@@ -204,5 +204,6 @@ void game_incr_trant_pos(map_t *map, trantorian_t *trant,
 void game_return_error_malloc(core_t *core, client_t *client);
 
 int trantorian_replace(core_t *core, team_t *team, trantorian_t *trantorian);
+void game_check_wining_team(core_t *core);
 
 #endif // CORE_H

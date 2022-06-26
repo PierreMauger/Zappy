@@ -59,3 +59,33 @@ bool game_is_trant_on_tile(list_t *trantorians, map_t *map, size_t tile)
     }
     return false;
 }
+
+static void game_check_team(core_t *core, team_t *team)
+{
+    node_t *node = NULL;
+    trantorian_t *trant = NULL;
+    size_t lvl_max = 0;
+
+    foreach(core->game->trantorians->head, node) {
+        trant = (trantorian_t *)node->data;
+        if (trant->state != TRANT_LIVING)
+            continue;
+        if (trant->team == team && trant->level == TRANT_LVL_MAX)
+            lvl_max++;
+    }
+    if (lvl_max >= TRANT_NEEDED) {
+        printf("[INFO] Team %s won the game\n", team->name);
+        command_seg(core, team);
+    }
+}
+
+void game_check_wining_team(core_t *core)
+{
+    node_t *node = NULL;
+    team_t *team = NULL;
+
+    foreach(core->game->teams->head, node) {
+        team = (team_t *)node->data;
+        game_check_team(core, team);
+    }
+}
