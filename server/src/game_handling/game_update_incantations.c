@@ -35,7 +35,7 @@ static bool check_remove_bad_pos(incantation_t *incantation)
             available++;
             temp->lvl_up = true;
         } else {
-            temp->lvl_up = true;
+            temp->lvl_up = false;
         }
     }
     if (available < player_needed[incantation->level - IDX])

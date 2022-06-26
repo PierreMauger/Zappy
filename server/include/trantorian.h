@@ -53,6 +53,8 @@ typedef enum {
 } dir_tile_e;
 
 typedef enum {
+    TRANT_STATE_UNKNOWN,
+
     TRANT_HATCHING,
     TRANT_READY,
     TRANT_LIVING,

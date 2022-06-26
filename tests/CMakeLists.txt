@@ -99,7 +99,7 @@ add_executable(unit-tests
   ../server/src/manage_struct/manage_incantation.c
   ../server/src/game_handling/game_update_incantations.c
   ../server/src/utils/parse_params_2.c
-  )
+)
 
 target_include_directories(unit-tests PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/include/

@@ -12,7 +12,8 @@ void client_push_command(server_t *serv, client_t *client, char *buff)
     command_t *command = NULL;
 
     if (buff == NULL || serv == NULL || client == NULL) {
-        fprintf(stderr, "[ERROR] Cannot create command\n");
+        fprintf(stderr,
+            "[ERROR] Null params received on push default client\n");
         if (buff)
             free(buff);
         return;
@@ -33,7 +34,8 @@ void client_def_broadcast_command(server_t *serv, char *buff)
     command_t *command = NULL;
 
     if (buff == NULL || serv == NULL) {
-        fprintf(stderr, "[ERROR] Cannot create command\n");
+        fprintf(stderr,
+            "[ERROR] Null params received on broadcast default client\n");
         if (buff)
             free(buff);
         return;
@@ -54,7 +56,8 @@ void client_gui_broadcast_command(server_t *serv, char *buff)
     command_t *command = NULL;
 
     if (buff == NULL || serv == NULL) {
-        fprintf(stderr, "[ERROR] Cannot create command\n");
+        fprintf(stderr,
+            "[ERROR] Null params received on broadcast GUI client\n");
         if (buff)
             free(buff);
         return;
