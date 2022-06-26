@@ -26,7 +26,7 @@ static int command(client_t *client, char *str)
     if (get_pos(client, &pos, str) != 0)
         return 1;
     client->map[pos.y][pos.x].incantation = STATE_INCANT;
-    client->map[pos.y][pos.x].it = 500;
+    client->map[pos.y][pos.x].it = 300;
     return 0;
 }
 
