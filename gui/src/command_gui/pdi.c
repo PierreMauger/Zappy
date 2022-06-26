@@ -9,8 +9,8 @@
 
 int pdi(client_t *client, char *str)
 {
-    node_t *nd;
-    node_t *save;
+    node_t *nd = NULL;
+    node_t *save = NULL;
     char *uuid = get_one_word(str);
     player_t *head = ((player_t *)client->player->head->data);
 

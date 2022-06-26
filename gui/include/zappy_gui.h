@@ -43,6 +43,7 @@
     #include "list.h"
     #include "nlib.h"
     #include "raylib.h"
+    #include "command.h"
 
 typedef enum {
     North,
@@ -107,37 +108,6 @@ typedef struct client_s {
     list_t *team;
     map_t **map;
 } client_t;
-
-int bct(client_t *client, char *str);
-int mct(client_t *client, char *str);
-int msz(client_t *client, char *str);
-int ppo(client_t *client, char *str);
-int pdi(client_t *client, char *str);
-int pin(client_t *client, char *str);
-int pnw(client_t *client, char *str);
-int plv(client_t *client, char *str);
-int tna(client_t *client, char *str);
-int sgt(client_t *client, char *str);
-
-typedef struct com_s {
-    const char *cmd;
-    int (*func_ptr)(client_t *client, char *str);
-} com_t;
-
-static const com_t com[] =
-{
-    {"bct\0", &bct},
-    {"mct\0", &mct},
-    {"msz\0", &msz},
-    {"ppo\0", &ppo},
-    {"plv\0", &plv},
-    {"pin\0", &pin},
-    {"pdi\0", &pdi},
-    {"pnw\0", &pnw},
-    {"tna\0", &tna},
-    {"sgt\0", &sgt},
-    {NULL, NULL}
-};
 
     #define R "\033[1;31m"
     #define G "\033[1;32m"
