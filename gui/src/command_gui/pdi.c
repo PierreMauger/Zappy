@@ -24,7 +24,7 @@ int pdi(client_t *client, char *str)
     foreach_safe(client->map[head->pos.y][head->pos.x].player->head, nd, save)
         if (strcmp(((player_t *)nd->data)->uuid, uuid) == 0) {
             list_remove_node(client->map[head->pos.y][head->pos.x].player, nd);
-            list_destroy_node(nd, NULL);
+            list_destroy_node(nd, free_player);
             break;
         }
     free(uuid);
