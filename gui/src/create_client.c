@@ -34,6 +34,8 @@ void free_client(client_t *client)
     list_destroy(client->pending_commands, free);
     list_destroy(client->player, NULL);
     list_destroy(client->team, free);
+    if (client->win_team)
+        free(client->win_team);
     free(client->uuid);
     free(client);
 }

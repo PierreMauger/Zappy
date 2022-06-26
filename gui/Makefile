@@ -28,9 +28,11 @@ SRC				=	./src/stdin.c				\
 					./src/command_gui/sgt.c 	\
 					./src/command_gui/pic.c		\
 					./src/command_gui/pie.c		\
+					./src/command_gui/seg.c		\
 					./src/graphics/draw.c		\
 					./src/graphics/utils.c		\
 					./src/graphics/draw_items.c	\
+					./src/graphics/utils_font.c	\
 
 SRC				+=	./src/main.c
 

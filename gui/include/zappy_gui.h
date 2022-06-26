@@ -120,6 +120,7 @@ typedef struct client_s {
     list_t *player;
     list_t *team;
     map_t **map;
+    char *win_team;
 } client_t;
 
     #define R "\033[1;31m"
@@ -176,5 +177,8 @@ void draw_player(map_t tile, int ratio, pos_t pos);
 void draw_map(client_t *client, int ratio, pos_t edge);
 
 void draw_misc(client_t *client, int ratio, pos_t map, pos_t edge);
+
+Font *get_font(void);
+void unload_fonts(Font *fonts);
 
 #endif // ZAPPY_AI_H
