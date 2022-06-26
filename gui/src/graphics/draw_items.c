@@ -30,7 +30,7 @@ void draw_items(map_t tile, pos_t pos, int ratio)
     }
 }
 
-static void update_frame(map_t *tile, pos_t pos, int time_act, int ratio)
+static void update_frame(map_t *tile, pos_t pos, int ratio)
 {
     Rectangle tmp = {0};
 
@@ -66,7 +66,7 @@ void draw_incantation(map_t *tile, pos_t pos, int ratio)
             (Vector2){ratio / 2, ratio / 2}, 0, RAYWHITE);
     } else if (tile->incantation == STATE_SUCCESS ||
             tile->incantation == STATE_FAILED) {
-        update_frame(tile, pos, time_act, ratio);
+        update_frame(tile, pos, ratio);
     }
 }
 
