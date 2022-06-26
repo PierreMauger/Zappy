@@ -50,8 +50,8 @@ static void server_catch_sigpipe(void)
     struct sigaction old_actn = {0};
 
     new_actn.sa_handler = SIG_IGN;
-    sigemptyset (&new_actn.sa_mask);
-    sigaction (SIGPIPE, &new_actn, &old_actn);
+    sigemptyset(&new_actn.sa_mask);
+    sigaction(SIGPIPE, &new_actn, &old_actn);
 }
 
 int server_loop(core_t *core)
