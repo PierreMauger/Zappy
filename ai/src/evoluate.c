@@ -25,7 +25,7 @@ bool ask_player(client_t *client, size_t nb_need, char level)
 {
     char *com = NULL;
 
-    if (get_player_same_level(client, (level - '0')) != nb_need) {
+    if (get_player_same_level(client, (level - '0')) <= nb_need) {
         if (client->player->broadcast_direction != -1)
             return true;
         if (asprintf(&com, "Broadcast %s %c\n",
@@ -37,6 +37,7 @@ bool ask_player(client_t *client, size_t nb_need, char level)
         free(com);
     } else if (client->pending_commands->lenght < 10 && send_message(client->
         pending_commands, client->command, client->socket, "Incantation\n")) {
+        client->player->incantation = true;
         return true;
     }
     return true;
