@@ -53,7 +53,7 @@ static void split_create_client(client_t *client, arg_t *arg)
 
 client_t *create_client(arg_t *arg)
 {
-    client_t *client = malloc(sizeof(client_t));
+    client_t *client = calloc(1, sizeof(client_t));
 
     if (!client || !(client->socket = malloc(sizeof(socket_t))))
         return NULL;
