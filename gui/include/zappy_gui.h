@@ -161,6 +161,8 @@ void draw_items(map_t tile, pos_t pos, int ratio);
 void draw_inventory(client_t *client, pos_t pos, pos_t map, pos_t edge);
 void check_click(client_t *client, pos_t map, pos_t edge);
 void draw_player(map_t tile, int ratio, pos_t pos);
-void draw_all(client_t *client, int ratio, pos_t map, pos_t edge);
+void draw_map(client_t *client, int ratio, pos_t edge);
+
+void draw_misc(client_t *client, int ratio, pos_t map, pos_t edge);
 
 #endif // ZAPPY_AI_H

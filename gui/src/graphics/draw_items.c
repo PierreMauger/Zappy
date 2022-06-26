@@ -38,5 +38,21 @@ void draw_incantation(map_t tile, pos_t pos, int ratio)
         return;
     tmp = (Rectangle){0 + (int)(GetTime() * 10) % 4 * 233, 210 * 2, 233, 210};
     DrawTexturePro(get_textures()[16], tmp,
-        (Rectangle){pos.x, pos.y, ratio, ratio}, (Vector2){0, 0}, 0, RAYWHITE);
+        (Rectangle){pos.x, pos.y, ratio * 2, ratio * 2},
+        (Vector2){ratio / 2, ratio / 2}, 0, RAYWHITE);
+}
+
+void draw_misc(client_t *client, int ratio, pos_t map, pos_t edge)
+{
+    for (int y = 0; y < client->size_map.y; y++) {
+        for (int x = 0; x < client->size_map.x; x++) {
+            draw_items(client->map[y][x], (pos_t){edge.x + x * ratio,
+                edge.y + y * ratio}, ratio);
+            draw_inventory(client, (pos_t){x, y}, map, edge);
+            draw_player(client->map[y][x], ratio, (pos_t){edge.x + x * ratio,
+                edge.y + y * ratio});
+            draw_incantation(client->map[y][x], (pos_t){edge.x + x * ratio,
+                edge.y + y * ratio}, ratio);
+        }
+    }
 }

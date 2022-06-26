@@ -80,7 +80,7 @@ void draw_inventory(client_t *client, pos_t pos, pos_t map, pos_t edge)
     }
 }
 
-void draw_all(client_t *client, int ratio, pos_t map, pos_t edge)
+void draw_map(client_t *client, int ratio, pos_t edge)
 {
     for (int y = 0; y < client->size_map.y; y++) {
         for (int x = 0; x < client->size_map.x; x++) {
@@ -91,13 +91,6 @@ void draw_all(client_t *client, int ratio, pos_t map, pos_t edge)
                 DrawTexturePro(get_textures()[0], (Rectangle){0, 0, 16, 16},
             (Rectangle){edge.x + x * ratio, edge.y + y * ratio, ratio, ratio},
             (Vector2){0, 0}, 0, RAYWHITE);
-            draw_items(client->map[y][x], (pos_t){edge.x + x * ratio,
-                edge.y + y * ratio}, ratio);
-            draw_player(client->map[y][x], ratio, (pos_t){edge.x + x * ratio,
-                edge.y + y * ratio});
-            draw_inventory(client, (pos_t){x, y}, map, edge);
-            draw_incantation(client->map[y][x], (pos_t){edge.x + x * ratio,
-                edge.y + y * ratio}, ratio);
         }
     }
 }
@@ -114,6 +107,7 @@ void display(client_t *client)
     DrawTexture(get_textures()[15], 0, 0, WHITE);
     ClearBackground(RAYWHITE);
     check_click(client, map, edge);
-    draw_all(client, ratio, map, edge);
+    draw_map(client, ratio, edge);
+    draw_misc(client, ratio, map, edge);
     EndDrawing();
 }
