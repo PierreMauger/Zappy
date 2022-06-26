@@ -86,6 +86,7 @@ bool remove_surplus_command(client_t *client)
 
 bool robot(client_t *client)
 {
+    printf("%s[INFO]%s pos y = %d x = %d\n", R, W, client->player->pos.y, client->player->pos.x);
     if (!client->player->inv)
         return true;
     if (client->player->inv && client->player->inv->food < 1) {

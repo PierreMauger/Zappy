@@ -40,7 +40,6 @@ bool client_push_exec_command(client_t *client, char *buffer)
         }
         if (split_client_push_exec(client, com))
             return true;
-        printf("%s[INFO]%s Command \"%s\" pushed in list\n", G, W, com);
     }
     return true;
 }
