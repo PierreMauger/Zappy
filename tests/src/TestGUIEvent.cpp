@@ -99,13 +99,12 @@ TEST(TestGUIEvent, pie)
     char *buff = nullptr;
 
     sc.startTest();
-    command_pie(sc.getCore(), sc.getClient()->trantorian);
+    command_pie(sc.getCore(), sc.getClient()->trantorian, true);
     sc.endTest();
 
-    ASSERT_TRUE(asprintf(&buff, "pie %ld %ld %ld\n",
+    ASSERT_TRUE(asprintf(&buff, "pie %ld %ld %d\n",
         sc.getClient()->trantorian->pos.x,
-        sc.getClient()->trantorian->pos.y,
-        sc.getClient()->trantorian->level) != -1);
+        sc.getClient()->trantorian->pos.y, true) != -1);
 
     ASSERT_EQ(sc.getRes(), buff);
 
