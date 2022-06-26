@@ -1,19 +1,23 @@
 # Zappy
 
-A game
+A game were AIs survive and level up on a map with resources.
 
 ## Server
 
 ### Build
 
 ```
+
 make zappy_server
+
 ```
 
 ### Run
 
 ```
-./zappy_server //ARGS
+
+./zappy_server -p <port> -n <team1> <team2> ... -f <frequence> -c <client_by_team> -x <map_width> -y <map_height>
+
 ```
 
 ## AI
@@ -21,29 +25,51 @@ make zappy_server
 ### Build
 
 ```
+
 make zappy_ai
+
 ```
 
 ### Run
 
 ```
-./zappy_ai //ARGS
+
+./zappy_ai -p <port> -n <team_name> -h <ip>
+
 ```
 
-## Unit-tests
+## GUI
 
 ### Build
 
 ```
-cd tests
-mkdir build && cd build
-conan install .. --build=gtest -s compiler.libcxx=libstdc++11
-cmake ..
-cmake --build .
+
+sudo make graphical
+
 ```
 
 ### Run
 
 ```
-./bin/unit-tests
+
+./zappy_gui -p <port> -h <machine>
+
+```
+
+## Unit-tests
+
+### Build & Run
+
+```
+
+make unit-tests
+
+```
+
+### Only Run
+
+```
+
+./tests/build/bin/unit-tests
+
 ```
