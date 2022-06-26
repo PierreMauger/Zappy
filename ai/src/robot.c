@@ -89,7 +89,6 @@ bool remove_surplus_command(client_t *client)
 
 bool robot(client_t *client)
 {
-    printf("%s[INFO]%s pos y = %d x = %d\n", R, W, client->player->pos.y, client->player->pos.x);
     if (!client->player->inv)
         return true;
     if (client->player->inv && client->player->inv->food < 1) {
@@ -101,9 +100,10 @@ bool robot(client_t *client)
         && client->player->incantation == false) {
         if (!get_food_basic(client))
             return false;
-    } else if (client->player->broadcast_direction != -1)
+    } else if (client->player->broadcast_direction != -1) {
         go_to_broadcast_direction(client);
-    else
+        client->player->broadcast_direction = -1;
+    } else
         try_evoluate(client);
     return remove_surplus_command(client);
 }

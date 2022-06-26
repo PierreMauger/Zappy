@@ -118,6 +118,7 @@ typedef struct client_s {
 client_t *create_client(arg_t *arg);
 void free_client(client_t *client);
 bool init_client(arg_t *arg);
+void reset_look_info(map_t *map);
 
 bool send_message(list_t *pending, list_t *list, socket_t *socket, char *mess);
 bool send_message_comm(client_t *client, char *com);

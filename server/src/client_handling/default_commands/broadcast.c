@@ -22,7 +22,7 @@ static void send_msg(core_t *core, client_t *client, client_t *to_send,
     char *msg)
 {
     dir_tile_e dir_tile = game_calc_direction(core->game->map,
-        client->trantorian->direction, &client->trantorian->pos,
+        to_send->trantorian->direction, &client->trantorian->pos,
         &to_send->trantorian->pos);
     char *broad = NULL;
 
