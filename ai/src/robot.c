@@ -78,9 +78,12 @@ bool remove_surplus_command(client_t *client)
     }
     if (!basic_command(client))
         return false;
-    if (client->unused_slot == 0)
+    if (client->unused_slot == 0 && client->player->fork == false) {
+        if (client->pending_commands->lenght > 10)
+            client->player->fork = true;
         if (!send_message_comm(client, "Fork\n"))
             return false;
+    }
     return true;
 }
 
