@@ -83,6 +83,7 @@ int main(int ac, char **av)
     SetTargetFPS(60);
     ret = init_client(arg);
     unload_textures(get_textures());
+    unload_fonts(get_font());
     CloseWindow();
     free(arg);
     if (!ret)

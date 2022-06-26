@@ -24,6 +24,7 @@ int tna(client_t *client, char *str);
 int sgt(client_t *client, char *str);
 int pic(client_t *client, char *str);
 int pie(client_t *client, char *str);
+int seg(client_t *client, char *str);
 
 typedef struct com_s {
     const char *cmd;

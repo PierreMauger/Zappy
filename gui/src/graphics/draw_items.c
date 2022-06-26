@@ -83,4 +83,12 @@ void draw_misc(client_t *client, int ratio, pos_t map, pos_t edge)
                 edge.y + y * ratio}, ratio);
         }
     }
+    if (client->win_team != NULL) {
+        DrawTextEx(get_font()[0], "Team ", (Vector2){GetRenderWidth() /
+            2 - 300, GetRenderHeight() / 2 - 50}, ratio / 2, 5, YELLOW);
+        DrawTextEx(get_font()[0], client->win_team, (Vector2){GetRenderWidth()
+            / 2 - 50, GetRenderHeight() / 2 - 50}, ratio / 2, 5, YELLOW);
+        DrawTextEx(get_font()[0], " win !", (Vector2){GetRenderWidth() /
+            2 + 200, GetRenderHeight() / 2 - 50}, ratio / 2, 5, YELLOW);
+    }
 }
