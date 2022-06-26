@@ -7,6 +7,21 @@
 
 #include "zappy_gui.h"
 
+static const com_t com[] =
+{
+    {"bct\0", &bct},
+    {"mct\0", &mct},
+    {"msz\0", &msz},
+    {"ppo\0", &ppo},
+    {"plv\0", &plv},
+    {"pin\0", &pin},
+    {"pdi\0", &pdi},
+    {"pnw\0", &pnw},
+    {"tna\0", &tna},
+    {"sgt\0", &sgt},
+    {NULL, NULL}
+};
+
 static bool init_header(client_t *client)
 {
     char *uuid_new_line = malloc(sizeof(char) * (UUID_STR_LEN + 10));

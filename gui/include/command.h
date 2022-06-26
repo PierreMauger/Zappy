@@ -28,19 +28,4 @@ typedef struct com_s {
     int (*func_ptr)(client_t *client, char *str);
 } com_t;
 
-static const com_t com[] =
-{
-    {"bct\0", &bct},
-    {"mct\0", &mct},
-    {"msz\0", &msz},
-    {"ppo\0", &ppo},
-    {"plv\0", &plv},
-    {"pin\0", &pin},
-    {"pdi\0", &pdi},
-    {"pnw\0", &pnw},
-    {"tna\0", &tna},
-    {"sgt\0", &sgt},
-    {NULL, NULL}
-};
-
 #endif
