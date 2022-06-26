@@ -36,8 +36,8 @@ void draw_player(map_t tile, int ratio, pos_t pos)
         if (((player_t *)node->data)->dir == West)
             tmp = (Rectangle){4, 32 + (int)(GetTime() * 10) % 3 * 31, 25, 30};
         DrawTexturePro(get_textures()[7 + ((player_t *)node->data)->level],
-        tmp, (Rectangle){pos.x, pos.y, ratio, ratio}, (Vector2){0, 0}, 0,
-            RAYWHITE);
+        tmp, (Rectangle){pos.x + ratio / 10, pos.y + ratio / 12, ratio, ratio},
+            (Vector2){0, 0}, 0, RAYWHITE);
     }
 }
 

@@ -19,6 +19,19 @@ static char *get_pos(client_t *client, pos_t *pos, char *str)
     return save;
 }
 
+static void set_params(client_t *client, pos_t pos, int res)
+{
+    if (res == 0) {
+        client->map[pos.y][pos.x].incantation = STATE_FAILED;
+        client->map[pos.y][pos.x].color = BLACK;
+    } else {
+        client->map[pos.y][pos.x].incantation = STATE_SUCCESS;
+        client->map[pos.y][pos.x].color = RAYWHITE;
+    }
+    client->map[pos.y][pos.x].frame_x = 5;
+    client->map[pos.y][pos.x].frame_y = 4;
+}
+
 static int command(client_t *client, char *str)
 {
     char *save = NULL;
@@ -32,15 +45,7 @@ static int command(client_t *client, char *str)
     if (!save)
         return 1;
     res = atoi(save);
-    if (res == 0) {
-        client->map[pos.y][pos.x].incantation = STATE_FAILED;
-        client->map[pos.y][pos.x].frame_x = 5;
-        client->map[pos.y][pos.x].frame_y = 4;
-    } else {
-        client->map[pos.y][pos.x].incantation = STATE_SUCCESS;
-        client->map[pos.y][pos.x].frame_x = 5;
-        client->map[pos.y][pos.x].frame_y = 4;
-    }
+    set_params(client, pos, res);
     return 0;
 }
 

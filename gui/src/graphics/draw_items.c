@@ -38,7 +38,7 @@ static void update_frame(map_t *tile, pos_t pos, int ratio)
         tile->act_frame_y % 4 * 192, 192, 192};
     DrawTexturePro(get_textures()[17], tmp,
         (Rectangle){pos.x, pos.y, ratio * 2, ratio * 2},
-        (Vector2){ratio / 2, ratio / 2}, 0, RAYWHITE);
+        (Vector2){ratio / 2, ratio / 2}, 0, tile->color);
     tile->act_frame_x++;
     if (tile->act_frame_x >= tile->frame_x) {
         tile->act_frame_x = 0;

@@ -104,6 +104,7 @@ typedef struct map_s {
     size_t act_frame_y;
     size_t frame_x;
     size_t frame_y;
+    Color color;
 } map_t;
 
 typedef struct client_s {
