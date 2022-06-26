@@ -37,7 +37,6 @@ bool ask_player(client_t *client, size_t nb_need, char level)
         free(com);
     } else if (client->pending_commands->lenght < 10 && send_message(client->
         pending_commands, client->command, client->socket, "Incantation\n")) {
-        client->player->incantation = true;
         return true;
     }
     return true;

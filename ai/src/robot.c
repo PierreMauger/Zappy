@@ -90,14 +90,14 @@ bool robot(client_t *client)
 {
     if (!client->player->inv)
         return true;
-    if (client->player->inv && client->player->inv->food < 1) {
+    if (client->player->inv->food < 2) {
         client->player->incantation = false;
         if (!get_food_basic(client))
             return false;
         return true;
     }
     if (client->player->incantation)
-        return send_message_comm(client, "Inventory\n");
+        return (send_message_comm(client, "Inventory\n"));
     if (client->player->inv && client->player->inv->food < 5) {
         if (!get_food_basic(client))
             return false;
