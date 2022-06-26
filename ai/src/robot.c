@@ -13,7 +13,7 @@ bool get_object(client_t *client, size_t nb, size_t needed, char *object)
     char *name = calloc(1, sizeof(char) * (7 + strlen(object)));
 
     if (!name) {
-        // fprintf(stderr, "%s[ERROR]%s Malloc error get_nb_object\n", R, W);
+        fprintf(stderr, "%s[ERROR]%s Malloc error get_nb_object\n", R, W);
         return false;
     }
     nb_food > 0 ? strcat(name, "Take ") : strcat(name, "Set ");
@@ -21,7 +21,7 @@ bool get_object(client_t *client, size_t nb, size_t needed, char *object)
     while (nb_food != 0 && client->pending_commands->lenght < 10) {
         if (!send_message(client->pending_commands,
             client->command, client->socket, name)) {
-            // fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
+            fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
             free(name);
             return false;
         }
@@ -38,7 +38,7 @@ bool get_food_in_cell(client_t *client, size_t x, size_t y)
     while (nb_food != 0 && client->pending_commands->lenght < 10) {
         if (!send_message(client->pending_commands,
             client->command, client->socket, "Take food\n")) {
-            // fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
+            fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
             return false;
         }
         nb_food--;
@@ -73,7 +73,7 @@ bool remove_surplus_command(client_t *client)
 
     while (client->pending_commands->lenght > 10) {
         command = list_pop_last(client->pending_commands);
-        // printf("%s[INFO]%s remove command : %s\n", M, W, command);
+        printf("%s[INFO]%s remove command : %s\n", M, W, command);
         free(command);
     }
     if (!basic_command(client))

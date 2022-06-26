@@ -21,7 +21,7 @@ char *go_to_next_num(char *str)
 
 void fill_inventory_player(player_t *player, char *content)
 {
-    // printf("content inv = %s\n", content);
+    printf("content inv = %s\n", content);
     for (char *stone; (stone = get_cell(content)); free(stone)) {
         if (strstr(stone, "food") != NULL)
             player->inv->food = atoi(go_to_next_num(stone));
@@ -49,7 +49,7 @@ int inventory(client_t *client, char *str)
     if (!client->player->inv)
         client->player->inv = malloc(sizeof(inventory_t));
     if (!client->player->inv) {
-        // fprintf(stderr, "%s[ERROR]%s Can't malloc player inv", R, W);
+        fprintf(stderr, "%s[ERROR]%s Can't malloc player inv", R, W);
         return 1;
     }
     fill_inventory_player(client->player, save);

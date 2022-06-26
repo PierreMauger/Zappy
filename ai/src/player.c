@@ -11,7 +11,7 @@ bool send_message_comm_false(client_t *client, char *com)
 {
     if (client->pending_commands->lenght < 10 && !send_message(
         client->pending_commands, client->command, client->socket, com)) {
-        // fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
+        fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
         return false;
     }
     return false;
@@ -21,7 +21,7 @@ bool send_message_comm(client_t *client, char *com)
 {
     if (client->pending_commands->lenght < 10 && !send_message(
         client->pending_commands, client->command, client->socket, com)) {
-        // fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
+        fprintf(stderr, "%s[ERROR]%s Malloc error send_message", R, W);
         return false;
     }
     return true;
@@ -32,7 +32,7 @@ player_t *create_player(void)
     player_t *player = calloc(1, sizeof(player_t));
 
     if (!player) {
-        // fprintf(stderr, "%s[ERROR]%s Malloc error create_player\n", R, W);
+        fprintf(stderr, "%s[ERROR]%s Malloc error create_player\n", R, W);
         return NULL;
     }
     return player;

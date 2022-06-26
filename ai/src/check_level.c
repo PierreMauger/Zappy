@@ -16,13 +16,13 @@ bool change_stone_in_cell(
     int inv_object = string_to_number_object_in_inv(inv, object);
 
     if (asprintf(&command, "%s %s\n", take_set, object) == -1) {
-        // fprintf(stderr, "%s[ERROR]%s Malloc error asprintf\n", R, W);
+        fprintf(stderr, "%s[ERROR]%s Malloc error asprintf\n", R, W);
             return false;
     }
     while (cell_object != inv_object && client->pending_commands->lenght < 10) {
         if (!send_message(client->pending_commands,
             client->command, client->socket, command)) {
-            // fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
+            fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
             return false;
         }
         (strcmp(take_set, "Take") == 0 ? cell_object-- : cell_object++);

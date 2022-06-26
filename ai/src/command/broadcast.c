@@ -9,6 +9,6 @@
 
 int broadcast(UNUSED client_t *client, UNUSED char *str)
 {
-    // printf("%s[COMMAND]%s broadcast done\n", B, W);
+    printf("%s[COMMAND]%s broadcast done\n", B, W);
     return 0;
 }

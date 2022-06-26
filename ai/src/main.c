@@ -9,9 +9,9 @@
 
 static void print_usage(void)
 {
-    // fprintf(stderr, "%sUSAGE: ./zappy_ai -p port -n name -h machine\n\t"
-        // "port is the port number\n\tname is the name of the team\n\t"
-        // "machine is the name of the machine; localhost by default\n%s", G, W);
+    fprintf(stderr, "%sUSAGE: ./zappy_ai -p port -n name -h machine\n\t"
+        "port is the port number\n\tname is the name of the team\n\t"
+        "machine is the name of the machine; localhost by default\n%s", G, W);
 }
 
 bool verif_arg(arg_t *arg)
@@ -20,17 +20,17 @@ bool verif_arg(arg_t *arg)
 
     if (arg->name == NULL || arg->port == -1) {
         if (arg->name == NULL)
-            // fprintf(stderr, "%s[ERROR]%s Miss name -n\n", R, W);
+            fprintf(stderr, "%s[ERROR]%s Miss name -n\n", R, W);
         if (arg->port == -1)
-            // fprintf(stderr, "%s[ERROR]%s Miss port -p\n", R, W);
+            fprintf(stderr, "%s[ERROR]%s Miss port -p\n", R, W);
         return false;
     }
     if ((inet_pton(AF_INET, arg->machine, &(sa.sin_addr))) == 0) {
-        // fprintf(stderr, "%s[ERROR]%s Invalid machine\n", R, W);
+        fprintf(stderr, "%s[ERROR]%s Invalid machine\n", R, W);
         return false;
     }
     if (arg->port == 0) {
-        // fprintf(stderr, "%s[ERROR]%s Invalid port\n", R, W);
+        fprintf(stderr, "%s[ERROR]%s Invalid port\n", R, W);
         return false;
     }
     return true;

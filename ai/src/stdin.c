@@ -13,11 +13,11 @@ char *get_inputs(void)
     int ret = read(0, buffer, 4096);
 
     if (ret <= 0) {
-        // fprintf(stderr, "%s[ERROR]%s can't read input\n", R, W);
+        fprintf(stderr, "%s[ERROR]%s can't read input\n", R, W);
         return NULL;
     }
     if (ret <= 1) {
-        // fprintf(stderr, "%s[WARNING]%s empty input\n", M, W);
+        fprintf(stderr, "%s[WARNING]%s empty input\n", M, W);
         return NULL;
     }
     buffer[ret] = '\0';
@@ -31,8 +31,8 @@ int read_stdin(client_t *client)
     if (!input)
         return 1;
     if (strcmp(input, "print\n") == 0) {
-        // printf("%s %d %d\n", (client->client_connected ? "true" : "false"),
-            // client->size_map.x, client->size_map.y);
+        printf("%s %d %d\n", (client->client_connected ? "true" : "false"),
+            client->size_map.x, client->size_map.y);
         return 0;
     }
     send_message(

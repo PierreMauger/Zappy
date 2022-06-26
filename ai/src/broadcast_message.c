@@ -28,7 +28,7 @@ bool message_broadcast(client_t *client, char *str)
     message = get_one_word(save);
     level = atoi(go_next_chr(save, ' '));
     if (!message) {
-        // fprintf(stderr, "%s[ERROR]%s Malloc error get_one_word\n", R, W);
+        fprintf(stderr, "%s[ERROR]%s Malloc error get_one_word\n", R, W);
         return false;
     }
     interpret_message(client, message, direction, level);
