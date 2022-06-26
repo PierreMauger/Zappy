@@ -98,7 +98,8 @@ bool split_parse_ret(client_t *client, char *str, char *command)
         free(command);
         return false;
     }
-    if (client->player->incantation) {
+    if (client->player->incantation
+        && (strlen(str) >= 9 && strncmp(command, "Inventory", 9) != 0)) {
         free(command);
         return false;
     }
@@ -115,7 +116,7 @@ bool parse_return(client_t *client, char *str)
     if (strlen(str) > 8 && strncmp(str, "message ", 8) == 0)
         return (message_broadcast(client, str));
     if (!(command = list_pop_head(client->pending_commands))
-        || (!split_parse_ret(client, str, command)))
+        || !split_parse_ret(client, str, command))
         return true;
     arg = get_arg(command, str);
     for (int i = 0; com[i].cmd != NULL; i++) {
