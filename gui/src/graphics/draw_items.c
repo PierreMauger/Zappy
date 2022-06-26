@@ -65,8 +65,10 @@ void draw_incantation(map_t *tile, pos_t pos, int ratio)
         DrawTexturePro(get_textures()[16], tmp,
             (Rectangle){pos.x, pos.y, ratio * 2, ratio * 2},
             (Vector2){ratio / 2, ratio / 2}, 0, RAYWHITE);
-        if (tile->it <= 0)
+        if (tile->it <= 0 || tile->it > 500) {
+            tile->it = 0;
             tile->incantation = STATE_SUCCESS;
+        }
     } else if (tile->incantation == STATE_SUCCESS ||
             tile->incantation == STATE_FAILED) {
         update_frame(tile, pos, ratio);
