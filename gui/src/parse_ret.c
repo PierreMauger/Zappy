@@ -19,6 +19,7 @@ static const com_t com[] =
     {"pnw\0", &pnw},
     {"tna\0", &tna},
     {"sgt\0", &sgt},
+    {"pic\0", &pic},
     {NULL, NULL}
 };
 
