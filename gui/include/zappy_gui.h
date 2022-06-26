@@ -92,6 +92,7 @@ typedef struct map_s {
     inventory_t *inv;
     list_t *player;
     bool clicked;
+    bool incantation;
 } map_t;
 
 typedef struct client_s {
