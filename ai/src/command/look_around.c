@@ -9,7 +9,7 @@
 
 void fill_cell_map(map_t *map, char *content)
 {
-    memset(map->inv, 0, sizeof(inventory_t));
+    reset_look_info(map);
     for (char *stone = NULL; (stone = get_one_word(content)); free(stone)) {
         if (strcmp(stone, "player") == 0)
             list_push_data(map->player, (create_player()));

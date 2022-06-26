@@ -7,6 +7,13 @@
 
 #include "zappy_ai.h"
 
+void reset_look_info(map_t *map)
+{
+    memset(map->inv, 0, sizeof(inventory_t));
+    list_destroy(map->player, free);
+    map->player = list_create();
+}
+
 bool send_message_comm_false(client_t *client, char *com)
 {
     if (client->pending_commands->lenght < 10 && !send_message(

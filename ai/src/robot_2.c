@@ -17,68 +17,43 @@ bool get_food_basic(client_t *client)
     return true;
 }
 
-static bool go_to_broadcast_dir3(client_t *client, int x, size_t d)
+static bool go_to_broadcast_dir3(client_t *client, size_t d)
 {
     if (d == 3) {
-        if (!go_to_good_direction_x(client, x - 1, client->player->pos.x))
+        if (!send_message_comm(client, "Left\n"))
             return false;
-        if (!send_message(client->pending_commands,
-            client->command, client->socket, "Forward\n")) {
-            fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
-            return false;
-        }
-        return true;
+        return (send_message_comm(client, "Forward\n"));
     } else {
-        if (!go_to_good_direction_x(client, x + 1, client->player->pos.x))
+        if (!send_message_comm(client, "Right\n"))
             return false;
-        if (!send_message(client->pending_commands,
-            client->command, client->socket, "Forward\n")) {
-            fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
-            return false;
-        }
-        return true;
+        return (send_message_comm(client, "Forward\n"));
     }
     return true;
 }
 
-static bool go_to_broadcast_dir2(client_t *client, int x, int y, size_t d)
+static bool go_to_broadcast_dir2(client_t *client, size_t d)
 {
     if (d == 4 || d == 5 || d == 6) {
-        if (!go_to_good_direction_y(client, y + 1, client->player->pos.y))
+        if (!send_message_comm(client, "Left\n"))
             return false;
-        if (!send_message(client->pending_commands,
-            client->command, client->socket, "Forward\n")) {
-            fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
+        if (!send_message_comm(client, "Left\n"))
             return false;
-        }
-        return true;
+        return (send_message_comm(client, "Forward\n"));
     }
-    return (go_to_broadcast_dir3(client, x, d));
+    return (go_to_broadcast_dir3(client, d));
 }
 
 bool go_to_broadcast_direction(client_t *client)
 {
-    int x = client->player->pos.x;
-    int y = client->player->pos.y;
     size_t d = client->player->broadcast_direction;
 
     printf("%s[BROADCAST]%s broadcast capt %ld\n", Y, W, d);
-    if (d == 0) {
-        printf("good\n");
-        exit(0);
+    if (d == 0)
         return true;
-    }
     if (d == 1 || d == 2 || d == 8) {
-        if (!go_to_good_direction_y(client, y - 1, client->player->pos.y))
-            return false;
-        if (!send_message(client->pending_commands,
-            client->command, client->socket, "Forward\n")) {
-            fprintf(stderr, "%s[ERROR]%s Malloc error send_message\n", R, W);
-            return false;
-        }
-        return true;
+        return (send_message_comm(client, "Forward\n"));
     }
-    return (go_to_broadcast_dir2(client, x, y, d));
+    return (go_to_broadcast_dir2(client, d));
 }
 
 bool basic_command(client_t *client)
