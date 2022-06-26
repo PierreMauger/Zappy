@@ -8,14 +8,14 @@
 #include "utils.h"
 #include "core.h"
 
-void command_pie(core_t *core, trantorian_t *trantorian)
+void command_pie(core_t *core, trantorian_t *trantorian, bool result)
 {
     char *buff = NULL;
 
-    if (asprintf(&buff, "pie %ld %ld %ld\n",
+    if (asprintf(&buff, "pie %ld %ld %d\n",
             trantorian->pos.x,
             trantorian->pos.y,
-            trantorian->level) == -1) {
+            (int)result) == -1) {
         fprintf(stderr, "[ERROR] GUI Can't malloc\n");
         return;
     }

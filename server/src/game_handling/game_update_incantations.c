@@ -48,12 +48,15 @@ static void game_increase_trantorians_level(core_t *core,
 {
     node_t *node = NULL;
     trantorian_t *trant = NULL;
+    bool lvl_up = false;
     char *temp = NULL;
 
     foreach(incantation->trantorians->head, node) {
         trant = (trantorian_t *)node->data;
-        if (trant->lvl_up == true)
+        if (trant->lvl_up == true) {
+            lvl_up = true;
             trant->level++;
+        }
         temp = get_level_str(trant->level);
         if (temp == NULL) {
             fprintf(stderr, "[ERROR] Malloc failed\n");
@@ -61,8 +64,7 @@ static void game_increase_trantorians_level(core_t *core,
         }
         client_push_command(core->server, trant->client, temp);
     }
-    if (incantation->trantorians->head)
-        command_pie(core, incantation->trantorians->head->data);
+    command_pie(core, incantation->trantorians->head->data, lvl_up);
 }
 
 static bool game_update_invocation(core_t *core, incantation_t *incantation)

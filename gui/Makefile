@@ -27,6 +27,7 @@ SRC				=	./src/stdin.c				\
 					./src/command_gui/tna.c		\
 					./src/command_gui/sgt.c 	\
 					./src/command_gui/pic.c		\
+					./src/command_gui/pie.c		\
 					./src/graphics/draw.c		\
 					./src/graphics/utils.c		\
 					./src/graphics/draw_items.c	\

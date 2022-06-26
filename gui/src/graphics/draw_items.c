@@ -29,3 +29,14 @@ void draw_items(map_t tile, pos_t pos, int ratio)
             ratio / 5}, (Vector2){0, 0}, 0, RAYWHITE);
     }
 }
+
+void draw_incantation(map_t tile, pos_t pos, int ratio)
+{
+    Rectangle tmp = {0};
+
+    if (tile.incantation == false)
+        return;
+    tmp = (Rectangle){0 + (int)(GetTime() * 10) % 4 * 233, 210 * 2, 233, 210};
+    DrawTexturePro(get_textures()[16], tmp,
+        (Rectangle){pos.x, pos.y, ratio, ratio}, (Vector2){0, 0}, 0, RAYWHITE);
+}

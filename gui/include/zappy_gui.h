@@ -156,6 +156,7 @@ int get_item(map_t map, const char *object_name);
 int levels_nb(client_t *client, pos_t pos, int level);
 void unclick_rest(client_t *client, pos_t tile);
 
+void draw_incantation(map_t tile, pos_t pos, int ratio);
 void draw_items(map_t tile, pos_t pos, int ratio);
 void draw_inventory(client_t *client, pos_t pos, pos_t map, pos_t edge);
 void check_click(client_t *client, pos_t map, pos_t edge);

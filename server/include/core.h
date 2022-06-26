@@ -92,7 +92,7 @@ void command_pnw(core_t *core, trantorian_t *trantorian);
 void command_pex(core_t *core, trantorian_t *trantorian);
 void command_pbc(core_t *core, trantorian_t *trantorian, char *message);
 void command_pic(core_t *core, trantorian_t *trantorian, list_t *trant);
-void command_pie(core_t *core, trantorian_t *trantorian);
+void command_pie(core_t *core, trantorian_t *trantorian, bool result);
 void command_pfk(core_t *core, trantorian_t *trantorian);
 void command_pdr(core_t *core, trantorian_t *trantorian, size_t nb_drop);
 void command_pgt(core_t *core, trantorian_t *trantorian, size_t nb_get);

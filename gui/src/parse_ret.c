@@ -20,6 +20,7 @@ static const com_t com[] =
     {"tna\0", &tna},
     {"sgt\0", &sgt},
     {"pic\0", &pic},
+    {"pie\0", &pie},
     {NULL, NULL}
 };
 
@@ -94,7 +95,7 @@ bool parse_return(client_t *client, char *str)
     arg = (strcmp(command_name, "suc") == 0 || strcmp(command_name, "sbp") == 0)
         ? strdup(str) : get_command_arg(str);
     for (int i = 0; com[i].cmd != NULL; i++) {
-        if (strcmp(com[i].cmd, command_name) == 0) {
+        if (strncmp(com[i].cmd, command_name, strlen(com[i].cmd)) == 0) {
             com[i].func_ptr(client, arg);
             break;
         }
