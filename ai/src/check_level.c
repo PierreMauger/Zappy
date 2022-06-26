@@ -56,8 +56,9 @@ bool drop_stone_needed(client_t *client, inventory_t inv, inventory_t cell_inv)
 
 int take_everything(client_t *client, inventory_t inv, inventory_t cell_inv)
 {
-    if (cell_inv.linemate > inv.linemate
-        && !change_stone_in_cell(client, "Take", "linemate", inv))
+    if (!send_message_comm(client, "Inventory\n")
+        || (cell_inv.linemate > inv.linemate
+        && !change_stone_in_cell(client, "Take", "linemate", inv)))
         return false;
     if (cell_inv.deraumere > inv.deraumere
         && !change_stone_in_cell(client, "Take", "deraumere", inv))

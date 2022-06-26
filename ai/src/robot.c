@@ -97,7 +97,7 @@ bool robot(client_t *client)
     }
     if (client->player->incantation)
         return true;
-    if (client->player->inv && client->player->inv->food < 5) {
+    if (client->player->inv && client->player->inv->food < 6) {
         if (!get_food_basic(client))
             return false;
     } else if (client->player->broadcast_direction != -1) {
