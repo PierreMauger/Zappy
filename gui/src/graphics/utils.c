@@ -25,6 +25,7 @@ static const char *paths[] = {
     "gui/resources/7.png",
     "gui/resources/sky.png",
     "gui/resources/incantation.png",
+    "gui/resources/explosion.png",
     NULL
 };
 

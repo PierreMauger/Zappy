@@ -7,25 +7,40 @@
 
 #include "zappy_gui.h"
 
-static int get_pos(client_t *client, pos_t *pos, char *str)
+static char *get_pos(client_t *client, pos_t *pos, char *str)
 {
     char *save = NULL;
 
     pos->x = atoi(str);
     save = go_next_space(str);
     if (!save)
-        return 1;
+        return NULL;
     pos->y = (client->size_map.y - 1) - atoi(save);
-    return 0;
+    return save;
 }
 
 static int command(client_t *client, char *str)
 {
+    char *save = NULL;
     pos_t pos = {0};
+    int res = 0;
 
-    if (get_pos(client, &pos, str) != 0)
+    save = get_pos(client, &pos, str);
+    if (save == NULL)
         return 1;
-    client->map[pos.y][pos.x].incantation = false;
+    save = go_next_space(save);
+    if (!save)
+        return 1;
+    res = atoi(save);
+    if (res == 0) {
+        client->map[pos.y][pos.x].incantation = STATE_FAILED;
+        client->map[pos.y][pos.x].frame_x = 5;
+        client->map[pos.y][pos.x].frame_y = 4;
+    } else {
+        client->map[pos.y][pos.x].incantation = STATE_SUCCESS;
+        client->map[pos.y][pos.x].frame_x = 5;
+        client->map[pos.y][pos.x].frame_y = 4;
+    }
     return 0;
 }
 

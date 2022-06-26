@@ -88,11 +88,22 @@ typedef struct player_s {
     char *uuid;
 } player_t;
 
+typedef enum {
+    STATE_NONE,
+    STATE_INCANT,
+    STATE_FAILED,
+    STATE_SUCCESS,
+} state_inc_e;
+
 typedef struct map_s {
     inventory_t *inv;
     list_t *player;
     bool clicked;
-    bool incantation;
+    state_inc_e incantation;
+    size_t act_frame_x;
+    size_t act_frame_y;
+    size_t frame_x;
+    size_t frame_y;
 } map_t;
 
 typedef struct client_s {
@@ -156,7 +167,7 @@ int get_item(map_t map, const char *object_name);
 int levels_nb(client_t *client, pos_t pos, int level);
 void unclick_rest(client_t *client, pos_t tile);
 
-void draw_incantation(map_t tile, pos_t pos, int ratio);
+void draw_incantation(map_t *tile, pos_t pos, int ratio);
 void draw_items(map_t tile, pos_t pos, int ratio);
 void draw_inventory(client_t *client, pos_t pos, pos_t map, pos_t edge);
 void check_click(client_t *client, pos_t map, pos_t edge);

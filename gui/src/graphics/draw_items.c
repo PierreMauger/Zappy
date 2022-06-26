@@ -30,16 +30,44 @@ void draw_items(map_t tile, pos_t pos, int ratio)
     }
 }
 
-void draw_incantation(map_t tile, pos_t pos, int ratio)
+static void update_frame(map_t *tile, pos_t pos, int time_act, int ratio)
 {
     Rectangle tmp = {0};
 
-    if (tile.incantation == false)
-        return;
-    tmp = (Rectangle){0 + (int)(GetTime() * 10) % 4 * 233, 210 * 2, 233, 210};
-    DrawTexturePro(get_textures()[16], tmp,
+    tmp = (Rectangle){0 + tile->act_frame_x % 5 * 192,
+        tile->act_frame_y % 4 * 192, 192, 192};
+    DrawTexturePro(get_textures()[17], tmp,
         (Rectangle){pos.x, pos.y, ratio * 2, ratio * 2},
         (Vector2){ratio / 2, ratio / 2}, 0, RAYWHITE);
+    tile->act_frame_x++;
+    if (tile->act_frame_x >= tile->frame_x) {
+        tile->act_frame_x = 0;
+        tile->act_frame_y++;
+    }
+    if (tile->act_frame_y >= tile->frame_y) {
+        tile->incantation = STATE_NONE;
+        tile->act_frame_x = 0;
+        tile->act_frame_y = 0;
+        tile->frame_x = 0;
+        tile->frame_y = 0;
+    }
+}
+
+void draw_incantation(map_t *tile, pos_t pos, int ratio)
+{
+    Rectangle tmp = {0};
+    int time_act = (int)(GetTime() * 10);
+
+    if (tile->incantation == STATE_INCANT) {
+        tmp = (Rectangle){0 + time_act % 4 * 233, 210 * 2,
+            233, 210};
+        DrawTexturePro(get_textures()[16], tmp,
+            (Rectangle){pos.x, pos.y, ratio * 2, ratio * 2},
+            (Vector2){ratio / 2, ratio / 2}, 0, RAYWHITE);
+    } else if (tile->incantation == STATE_SUCCESS ||
+            tile->incantation == STATE_FAILED) {
+        update_frame(tile, pos, time_act, ratio);
+    }
 }
 
 void draw_misc(client_t *client, int ratio, pos_t map, pos_t edge)
@@ -51,7 +79,7 @@ void draw_misc(client_t *client, int ratio, pos_t map, pos_t edge)
             draw_inventory(client, (pos_t){x, y}, map, edge);
             draw_player(client->map[y][x], ratio, (pos_t){edge.x + x * ratio,
                 edge.y + y * ratio});
-            draw_incantation(client->map[y][x], (pos_t){edge.x + x * ratio,
+            draw_incantation(&client->map[y][x], (pos_t){edge.x + x * ratio,
                 edge.y + y * ratio}, ratio);
         }
     }
